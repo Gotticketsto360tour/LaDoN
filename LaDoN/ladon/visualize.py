@@ -10,18 +10,31 @@ from bokeh.models import (
 from bokeh.palettes import Spectral11
 from bokeh.plotting import figure
 from bokeh.plotting import from_networkx
-from bokeh.palettes import Blues8, Reds8, Purples8, Oranges8, Viridis8, Spectral8, Set3
+from bokeh.palettes import (
+    Blues8,
+    Reds8,
+    Purples8,
+    Oranges8,
+    Viridis8,
+    Spectral8,
+    Category20_20,
+)
 from bokeh.transform import linear_cmap
 from bokeh.models import EdgesAndLinkedNodes, NodesAndLinkedEdges
 import pandas as pd
 import networkx
 import matplotlib.pyplot as plt
 import numpy as np
+import colorcet
+from colorcet import b_glasbey_bw_minc_20
+
+from ladon.network import Network
 
 output_notebook()
 
 
-def plot_graph(G):
+def plot_graph(network: Network, plot_type="community"):
+    G = network.graph
     degrees = dict(networkx.degree(G))
     networkx.set_node_attributes(G, name="degree", values=degrees)
     number_to_adjust_by = 5
@@ -31,26 +44,56 @@ def plot_graph(G):
     networkx.set_node_attributes(
         G, name="adjusted_node_size", values=adjusted_node_size
     )
-    communities = networkx.algorithms.community.greedy_modularity_communities(G)
-    # Create empty dictionaries
-    modularity_class = {}
-    modularity_color = {}
-    # Loop through each community in the network
-    for community_number, community in enumerate(communities):
-        # For each member of the community, add their community number and a distinct color
-        for name in community:
-            modularity_class[name] = community_number
-            modularity_color[name] = Spectral11[community_number]
+    if plot_type == "community":
+        communities = networkx.algorithms.community.greedy_modularity_communities(G)
+        # Create empty dictionaries
+        modularity_class = {}
+        modularity_color = {}
+        # Loop through each community in the network
+        for community_number, community in enumerate(communities):
+            # For each member of the community, add their community number and a distinct color
+            for name in community:
+                modularity_class[name] = community_number
+                modularity_color[name] = b_glasbey_bw_minc_20[community_number]
 
-    networkx.set_node_attributes(G, name="modularity_class", values=modularity_class)
-    networkx.set_node_attributes(G, name="modularity_color", values=modularity_color)
+        networkx.set_node_attributes(
+            G, name="modularity_class", values=modularity_class
+        )
+        networkx.set_node_attributes(
+            G, name="modularity_color", values=modularity_color
+        )
+        color_by_this_attribute = "modularity_color"
+        HOVER_TOOLTIPS = [
+            ("Character", "@index"),
+            ("Degree", "@degree"),
+            ("Modularity Class", "@modularity_class"),
+            ("Modularity Color", "$color[swatch]:modularity_color"),
+        ]
+    elif plot_type == "agent_type":
+        agent_types = {}
+        agent_types_color = {}
+        for agent in network.agents:
+            agent_type = network.agents[agent].type
+            agent_types[agent] = agent_type
+            agent_types_color[agent] = b_glasbey_bw_minc_20[agent_type]
+
+        networkx.set_node_attributes(G, name="agent_types", values=agent_types)
+        networkx.set_node_attributes(
+            G, name="agent_types_color", values=agent_types_color
+        )
+        color_by_this_attribute = "agent_types_color"
+        HOVER_TOOLTIPS = [
+            ("Character", "@index"),
+            ("Degree", "@degree"),
+            ("Agent Type", "@agent_types"),
+            ("Agent Type Color", "$color[swatch]:agent_types_color"),
+        ]
     # Choose colors for node and edge highlighting
     node_highlight_color = "white"
     edge_highlight_color = "black"
 
     # Choose attributes from G network to size and color by — setting manual size (e.g. 10) or color (e.g. 'skyblue') also allowed
     size_by_this_attribute = "adjusted_node_size"
-    color_by_this_attribute = "modularity_color"
 
     # Pick a color palette — Blues8, Reds8, Purples8, Oranges8, Viridis8
     color_palette = Blues8
@@ -59,12 +102,6 @@ def plot_graph(G):
     title = "LaDoN Network"
 
     # Establish which categories will appear when hovering over each node
-    HOVER_TOOLTIPS = [
-        ("Character", "@index"),
-        ("Degree", "@degree"),
-        ("Modularity Class", "@modularity_class"),
-        ("Modularity Color", "$color[swatch]:modularity_color"),
-    ]
 
     # Create a plot — set dimensions, toolbar, and title
     plot = figure(
