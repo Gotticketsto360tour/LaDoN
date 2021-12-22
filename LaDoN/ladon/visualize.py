@@ -7,9 +7,10 @@ from bokeh.models import (
     EdgesAndLinkedNodes,
     NodesAndLinkedEdges,
 )
+from bokeh.palettes import Spectral11
 from bokeh.plotting import figure
 from bokeh.plotting import from_networkx
-from bokeh.palettes import Blues8, Reds8, Purples8, Oranges8, Viridis8, Spectral8
+from bokeh.palettes import Blues8, Reds8, Purples8, Oranges8, Viridis8, Spectral8, Set3
 from bokeh.transform import linear_cmap
 from bokeh.models import EdgesAndLinkedNodes, NodesAndLinkedEdges
 import pandas as pd
