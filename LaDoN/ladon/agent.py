@@ -11,11 +11,6 @@ class Agent:
             agent_config.get("vector_size"),
         )
 
-    def compare_vectors(self, OtherAgent):
-        return np.square(np.subtract(self.inner_vector, OtherAgent.inner_vector)).mean()
-
 
 agent = Agent(AGENT_CONFIG)
 agent_2 = Agent(AGENT_CONFIG)
-
-agent.compare_vectors(agent_2)

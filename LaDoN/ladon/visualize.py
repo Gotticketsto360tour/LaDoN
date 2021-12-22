@@ -40,7 +40,7 @@ def plot_graph(G):
         # For each member of the community, add their community number and a distinct color
         for name in community:
             modularity_class[name] = community_number
-            modularity_color[name] = Spectral8[community_number]
+            modularity_color[name] = Spectral11[community_number]
 
     networkx.set_node_attributes(G, name="modularity_class", values=modularity_class)
     networkx.set_node_attributes(G, name="modularity_color", values=modularity_color)
