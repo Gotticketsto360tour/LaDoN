@@ -8,6 +8,7 @@ import numpy as np
 from ladon.agent import Agent
 from ladon.config import CONFIGS
 from random import sample
+from random import random
 from ladon.helpers import compare_vectors
 
 
@@ -31,18 +32,26 @@ class Network:
 
     def take_turn(self):
         sampled_agent = sample(self.graph.nodes, 1)[0]
-        sampled_agent_neighbors = list(self.graph.neighbors(sampled_agent))
-        for neighbor in sampled_agent_neighbors:
-            distance = compare_vectors(
-                self.agents.get(sampled_agent),
-                self.agents.get(neighbor),
-            )
-            if distance >= 1:
-                self.graph.remove_edge(sampled_agent, neighbor)
-            else:
-                neighbors_neighbor = list(self.graph.neighbors(neighbor))
-                self.graph.add_edge(sampled_agent, sample(neighbors_neighbor, 1)[0])
+        random_number = random()
+        if random_number < 0.1:
+            print("ENTERING RANDOMNESS")
+            random_agent = sample(self.graph.nodes, 1)[0]
+            while random_agent == sampled_agent:
+                random_agent = sample(self.graph.nodes, 1)[0]
+            self.graph.add_edge(sampled_agent, random_agent)
+        else:
+            sampled_agent_neighbors = list(self.graph.neighbors(sampled_agent))
+            for neighbor in sampled_agent_neighbors:
+                distance = compare_vectors(
+                    self.agents.get(sampled_agent),
+                    self.agents.get(neighbor),
+                )
+                if distance >= 1:
+                    self.graph.remove_edge(sampled_agent, neighbor)
+                else:
+                    neighbors_neighbor = list(self.graph.neighbors(neighbor))
+                    self.graph.add_edge(sampled_agent, sample(neighbors_neighbor, 1)[0])
 
     def run_simulation(self):
-        for turn in range(100):
+        for _ in range(10000):
             self.take_turn()

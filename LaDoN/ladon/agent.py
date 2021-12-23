@@ -11,7 +11,7 @@ class Agent:
             agent_config.get("sigma"),
             agent_config.get("vector_size"),
         )
-        self.inner_value = self.inner_vector.mean()
+        self.inner_mean = self.inner_vector.mean()
 
 
 agent = Agent(AGENT_CONFIG)
