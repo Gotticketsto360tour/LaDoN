@@ -56,6 +56,17 @@ def plot_graph(network: Network, plot_type="community"):
 
     networkx.set_node_attributes(G, name="inner_values", values=inner_values)
 
+    outer_means = {i: network.agents.get(i).outer_mean for i in network.agents}
+
+    networkx.set_node_attributes(G, name="outer_mean", values=outer_means)
+
+    outer_values = {
+        i: [round(num, 2) for num in network.agents.get(i).outer_vector]
+        for i in network.agents
+    }
+
+    networkx.set_node_attributes(G, name="outer_values", values=outer_values)
+
     if plot_type == "community":
         communities = networkx.algorithms.community.greedy_modularity_communities(G)
         # Create empty dictionaries
@@ -82,6 +93,8 @@ def plot_graph(network: Network, plot_type="community"):
             ("Modularity Color", "$color[swatch]:modularity_color"),
             ("Inner Mean", "@inner_mean"),
             ("Inner Values", "@inner_values"),
+            ("Outer Mean", "@outer_mean"),
+            ("Outer Values", "@outer_values"),
         ]
     elif plot_type == "agent_type":
         agent_types = {}
@@ -103,6 +116,8 @@ def plot_graph(network: Network, plot_type="community"):
             ("Agent Type Color", "$color[swatch]:agent_types_color"),
             ("Inner Mean", "@inner_mean"),
             ("Inner Values", "@inner_values"),
+            ("Outer Mean", "@outer_mean"),
+            ("Outer Values", "@outer_values"),
         ]
     # Choose colors for node and edge highlighting
     node_highlight_color = "white"

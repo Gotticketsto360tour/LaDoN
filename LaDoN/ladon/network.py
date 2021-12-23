@@ -14,14 +14,15 @@ from ladon.helpers import compare_vectors
 
 class Network:
     def __init__(self, graph: str = "smallworld"):
-        self.N_AGENTS = 100
+        self.THRESHOLD = 2
+        self.N_AGENTS = 1000
         self.N_GROUPS = len(CONFIGS)
         self.agents = {}
 
         if graph == "smallworld":
-            self.graph = watts_strogatz_graph(100, 4, 0.1)
+            self.graph = watts_strogatz_graph(self.N_AGENTS, 4, 0.1)
         elif graph == "scalefree":
-            self.graph = barabasi_albert_graph(100, 4)
+            self.graph = barabasi_albert_graph(self.N_AGENTS, 4)
 
         self.initialize_network(CONFIGS)
 
@@ -31,8 +32,7 @@ class Network:
             distance = compare_vectors(
                 self.agents.get(sampled_agent), self.agents.get(neighbor), neighbor
             )
-            print(distance)
-            if distance >= 2:
+            if distance >= self.THRESHOLD:
                 self.graph.remove_edge(sampled_agent, neighbor)
                 return False, neighbor
             else:
@@ -61,18 +61,21 @@ class Network:
             flag, neighbor = self.generate_and_sever_connections(sampled_agent)
             self.record_interactions(sampled_agent)
             if flag:
-                neighbors_neighbor = list(self.graph.neighbors(neighbor))
+                neighbors_neighbor = [
+                    neighbor
+                    for neighbor in self.graph.neighbors(neighbor)
+                    if neighbor != sampled_agent
+                ]
                 for new_neighbor in neighbors_neighbor:
                     distance = compare_vectors(
                         self.agents.get(sampled_agent),
                         self.agents.get(new_neighbor),
                         new_neighbor,
                     )
-                    print(distance)
-                    if distance <= 2:
+                    if distance <= self.THRESHOLD:
                         self.graph.add_edge(sampled_agent, new_neighbor)
                         break
 
     def run_simulation(self):
-        for _ in range(1000):
+        for _ in range(100000):
             self.take_turn()
