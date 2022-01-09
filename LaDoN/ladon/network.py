@@ -5,11 +5,11 @@ from networkx.generators.random_graphs import (
     barabasi_albert_graph,
 )
 import numpy as np
-from ladon.agent import Agent
-from ladon.config import CONFIGS
+from agent import Agent
+from config import CONFIGS
 from random import sample
 from random import random
-from ladon.helpers import compare_vectors
+from helpers import compare_vectors
 
 
 class Network:

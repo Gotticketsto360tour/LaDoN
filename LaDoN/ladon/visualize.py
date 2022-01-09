@@ -28,7 +28,7 @@ import numpy as np
 import colorcet
 from colorcet import b_glasbey_bw_minc_20
 
-from ladon.network import Network
+from network import Network
 
 output_notebook()
 

@@ -1,5 +1,5 @@
-from ladon.visualize import plot_graph
-from ladon.network import Network
+from visualize import plot_graph
+from network import Network
 import networkx
 import numpy as np
 

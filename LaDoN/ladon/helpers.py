@@ -1,5 +1,5 @@
 import numpy as np
-from ladon.agent import Agent
+from agent import Agent
 
 
 def compare_vectors(A: Agent, B: Agent, neigbor_number: int):

@@ -1,6 +1,6 @@
 import numpy as np
 from typing import Dict
-from ladon.config import AGENT_CONFIG
+from config import AGENT_CONFIG
 from collections import defaultdict
 
 
