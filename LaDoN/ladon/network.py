@@ -9,8 +9,8 @@ import numpy as np
 
 
 class Network:
-    def __init__(self, graph: str = "smallworld"):
-        self.THRESHOLD = 1.2
+    def __init__(self):
+        self.THRESHOLD = 3
         self.N_AGENTS = 0
         self.N_TARGET = 200
         self.RANDOMNESS = 0.1
