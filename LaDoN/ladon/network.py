@@ -1,107 +1,128 @@
 from typing import Dict
 import networkx as nx
-from networkx.generators.random_graphs import (
-    watts_strogatz_graph,
-    barabasi_albert_graph,
-)
-import numpy as np
 from agent import Agent
 from config import CONFIGS
 from random import sample
 from random import random
-from helpers import compare_vectors, compare_values
+from helpers import find_distance
+import numpy as np
 
 
 class Network:
     def __init__(self, graph: str = "smallworld"):
-        self.THRESHOLD = 0.1
-        self.N_AGENTS = 200
+        self.THRESHOLD = 1.2
+        self.N_AGENTS = 0
+        self.N_TARGET = 200
         self.RANDOMNESS = 0.1
         self.N_GROUPS = len(CONFIGS)
         self.N_TIMESTEPS = 10000
-        self.learning_rate = 0.1
+        self.POSITIVE_LEARNING_RATE = 0.2
+        self.NEGATIVE_LEARNING_RATE = 0.2
+        self.agent_number = 0
         self.agents = {}
+        self.graph = nx.Graph()
 
-        if graph == "smallworld":
-            self.graph = watts_strogatz_graph(self.N_AGENTS, 4, 0.1)
-        elif graph == "scalefree":
-            self.graph = barabasi_albert_graph(self.N_AGENTS, 4)
+    def get_opinion_distribution(self):
+        return np.array([self.agents.get(agent).opinion for agent in self.agents])
 
-        self.initialize_network(CONFIGS)
+    def update_values(self, sampled_agent, neigbor):
+        list_of_agents = [self.agents.get(sampled_agent), self.agents.get(neigbor)]
+        max_agent, min_agent = max(list_of_agents, key=lambda x: x.opinion), min(
+            list_of_agents, key=lambda x: x.opinion
+        )
+        V = find_distance(max_agent, min_agent)
 
-    def update_values(self, sampled_agent, neigbor, flag):
-        agent_vector = self.agents.get(sampled_agent).outer_vector
-        neigbor_vector = self.agents.get(neigbor).outer_vector
+        if V <= self.THRESHOLD:
+            V = V * self.POSITIVE_LEARNING_RATE
+            max_agent.opinion -= V
+            min_agent.opinion += V
+        else:
+            V = V * self.NEGATIVE_LEARNING_RATE
+            max_agent.opinion += V
+            min_agent.opinion -= V
 
-        if flag:
-            self.agents.get(sampled_agent).outer_vector = (
-                agent_vector + (neigbor_vector - agent_vector) * self.learning_rate
-            )
-            self.agents.get(neigbor).outer_vector = (
-                neigbor_vector + (agent_vector - neigbor_vector) * self.learning_rate
-            )
+    def add_new_connection_randomly(self, agent_on_turn):
+        nodes_without_new_agent = [
+            agent
+            for agent in self.graph.nodes
+            if agent != agent_on_turn
+            and agent not in self.graph.neighbors(agent_on_turn)
+        ]
+        sampled_agent = sample(nodes_without_new_agent, 1)[0]
+        self.graph.add_edge(agent_on_turn, sampled_agent)
 
-    def generate_and_sever_connections(self, sampled_agent):
-        sampled_agent_neighbors = list(self.graph.neighbors(sampled_agent))
-        for neighbor in sampled_agent_neighbors:
-            # distance = compare_vectors(
-            #     self.agents.get(sampled_agent), self.agents.get(neighbor), neighbor
-            # )
-            distance = compare_values(
-                self.agents.get(sampled_agent), self.agents.get(neighbor)
-            )
-            if distance >= self.THRESHOLD:
-                self.graph.remove_edge(sampled_agent, neighbor)
-                return False, neighbor
+    def add_new_connection_through_neighbors(self, agent_on_turn):
+
+        # NOTE: If a neighborhood is fully connected, this action will still be wasted
+
+        neighbors = list(self.graph.neighbors(agent_on_turn))
+
+        while neighbors:
+            sampled_neighbor = sample(neighbors, 1)[0]
+            # will ensure that no turn is "wasted" by making already existing edges
+            candidate_neighbors = [
+                agent
+                for agent in list(self.graph.neighbors(sampled_neighbor))
+                if agent not in neighbors and agent != agent_on_turn
+            ]
+            if candidate_neighbors:
+                new_neigbor = sample(candidate_neighbors, 1)[0]
+                self.graph.add_edge(agent_on_turn, new_neigbor)
+                break
             else:
-                return True, neighbor
-        return False, None
+                neighbors.remove(sampled_neighbor)
 
-    def initialize_network(self, CONFIGS: Dict):
-        for agent in range(self.N_AGENTS):
+    def generate_or_eliminate_agent(self, CONFIGS: Dict):
+        P_d = self.N_AGENTS / (2 * self.N_TARGET)
+        if random() >= P_d:
+            self.graph.add_node(self.agent_number)
             agent_type = sample(list(CONFIGS.keys()), 1)[0]
-            self.agents[agent] = Agent(CONFIGS[agent_type])
+            new_agent = self.agent_number
+            self.agents[self.agent_number] = Agent(CONFIGS[agent_type])
+            self.agent_number += 1
+            self.N_AGENTS += 1
+            if self.N_AGENTS > 2:
+                self.add_new_connection_randomly(new_agent)
 
-    def record_interactions(self, sampled_agent):
-        sampled_agent_neighbors = list(self.graph.neighbors(sampled_agent))
-        for neighbor in sampled_agent_neighbors:
-            self.agents.get(sampled_agent).social_memory[neighbor] += 1
+                # this probability could be a different probability than the other random process
+
+                if random() < self.RANDOMNESS:
+                    self.add_new_connection_randomly(new_agent)
+                else:
+                    self.add_new_connection_through_neighbors(new_agent)
+
+        else:
+            sampled_agent = sample(self.graph.nodes, 1)[0]
+            self.graph.remove_node(sampled_agent)
+            self.N_AGENTS -= 1
 
     def take_turn(self):
-        sampled_agent = sample(self.graph.nodes, 1)[0]
-        random_number = random()
-        if random_number < self.RANDOMNESS:
-            random_agent = sample(self.graph.nodes, 1)[0]
-            while random_agent == sampled_agent:
-                random_agent = sample(self.graph.nodes, 1)[0]
-            self.graph.add_edge(sampled_agent, random_agent)
-            flag, neighbor = self.generate_and_sever_connections(sampled_agent)
-            self.update_values(sampled_agent, neighbor, flag)
-            self.record_interactions(sampled_agent)
-        else:
-            flag, neighbor = self.generate_and_sever_connections(sampled_agent)
-            if neighbor:
-                self.update_values(sampled_agent, neighbor, flag)
-                self.record_interactions(sampled_agent)
-            if flag:
-                neighbors_neighbor = [
-                    neighbor
-                    for neighbor in self.graph.neighbors(neighbor)
-                    if neighbor != sampled_agent
-                ]
-                for new_neighbor in neighbors_neighbor:
-                    # distance = compare_vectors(
-                    #     self.agents.get(sampled_agent),
-                    #     self.agents.get(new_neighbor),
-                    #     new_neighbor,
-                    # )
-                    distance = compare_values(
-                        self.agents.get(sampled_agent), self.agents.get(new_neighbor)
-                    )
-                    if distance <= self.THRESHOLD:
-                        self.graph.add_edge(sampled_agent, new_neighbor)
-                        self.update_values(sampled_agent, new_neighbor, True)
-                        break
+        self.generate_or_eliminate_agent(CONFIGS)
+        if self.N_AGENTS > 2:
+            sampled_agent = sample(self.graph.nodes, 1)[0]
+            if random() < self.RANDOMNESS:
+                self.add_new_connection_randomly(sampled_agent)
+            else:
+                self.add_new_connection_through_neighbors(sampled_agent)
+
+            for neighbor in self.graph.neighbors(sampled_agent):
+                self.update_values(sampled_agent, neighbor)
+            # map(
+            #     lambda x: self.update_values(sampled_agent, x),
+            #     self.graph.neighbors(sampled_agent),
+            # )
+
+            negative_relations = [
+                neighbor
+                for neighbor in self.graph.neighbors(sampled_agent)
+                if find_distance(
+                    self.agents.get(sampled_agent), self.agents.get(neighbor)
+                )
+                > self.THRESHOLD
+            ]
+            for neighbor in negative_relations:
+                self.graph.remove_edge(sampled_agent, neighbor)
+            # map(lambda x: self.graph.remove_edge(sampled_agent, x), negative_relations)
 
     def run_simulation(self):
         for _ in range(self.N_TIMESTEPS):

@@ -1,7 +1,8 @@
 from visualize import plot_graph
 from network import Network
-import networkx
+import networkx as nx
 import numpy as np
+import seaborn as sns
 
 # NOTE:
 # A measure could be:
@@ -22,11 +23,15 @@ import numpy as np
 # they have seen the other agents.
 # Next step is also to combine inner and outer vectors
 
-my_network = Network(graph="smallworld")
-
-plot_graph(my_network, plot_type="agent_type")
+my_network = Network()
 
 my_network.run_simulation()
+
+opinions = my_network.get_opinion_distribution()
+
+sns.histplot(opinions, stat="percent", binwidth=1)
+
+nx.algorithms.cluster.average_clustering(my_network.graph)
 
 plot_graph(my_network, plot_type="agent_type")
 

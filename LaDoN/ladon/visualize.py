@@ -45,27 +45,9 @@ def plot_graph(network: Network, plot_type="community"):
         G, name="adjusted_node_size", values=adjusted_node_size
     )
 
-    inner_means = {i: network.agents.get(i).inner_mean for i in network.agents}
+    opinions = {i: network.agents.get(i).opinion for i in network.agents}
 
-    networkx.set_node_attributes(G, name="inner_mean", values=inner_means)
-
-    inner_values = {
-        i: [round(num, 2) for num in network.agents.get(i).inner_vector]
-        for i in network.agents
-    }
-
-    networkx.set_node_attributes(G, name="inner_values", values=inner_values)
-
-    outer_means = {i: network.agents.get(i).outer_mean for i in network.agents}
-
-    networkx.set_node_attributes(G, name="outer_mean", values=outer_means)
-
-    outer_values = {
-        i: [round(num, 2) for num in network.agents.get(i).outer_vector]
-        for i in network.agents
-    }
-
-    networkx.set_node_attributes(G, name="outer_values", values=outer_values)
+    networkx.set_node_attributes(G, name="opinions", values=opinions)
 
     if plot_type == "community":
         communities = networkx.algorithms.community.greedy_modularity_communities(G)
@@ -91,10 +73,7 @@ def plot_graph(network: Network, plot_type="community"):
             ("Degree", "@degree"),
             ("Modularity Class", "@modularity_class"),
             ("Modularity Color", "$color[swatch]:modularity_color"),
-            ("Inner Mean", "@inner_mean"),
-            ("Inner Values", "@inner_values"),
-            ("Outer Mean", "@outer_mean"),
-            ("Outer Values", "@outer_values"),
+            ("Opinion", "@opinions"),
         ]
     elif plot_type == "agent_type":
         agent_types = {}
@@ -114,10 +93,7 @@ def plot_graph(network: Network, plot_type="community"):
             ("Degree", "@degree"),
             ("Agent Type", "@agent_types"),
             ("Agent Type Color", "$color[swatch]:agent_types_color"),
-            ("Inner Mean", "@inner_mean"),
-            ("Inner Values", "@inner_values"),
-            ("Outer Mean", "@outer_mean"),
-            ("Outer Values", "@outer_values"),
+            ("Opinion", "@opinions"),
         ]
     # Choose colors for node and edge highlighting
     node_highlight_color = "white"

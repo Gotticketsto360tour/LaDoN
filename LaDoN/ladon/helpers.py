@@ -1,8 +1,14 @@
 import numpy as np
 from agent import Agent
 
+
+def find_distance(A: Agent, B: Agent):
+    return abs(A.opinion - (B.opinion))
+
+
 def compare_values(A: Agent, B: Agent):
-    return np.linalg.norm((A.outer_vector - B.outer_vector))
+    return np.linalg.norm((A.opinion - B.opinion))
+
 
 def compare_vectors(A: Agent, B: Agent, neigbor_number: int):
     weight = A.social_memory[neigbor_number] / (A.social_memory[neigbor_number] + 4)
