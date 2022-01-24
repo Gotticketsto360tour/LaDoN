@@ -10,14 +10,14 @@ import numpy as np
 
 class Network:
     def __init__(self):
-        self.THRESHOLD = 3
+        self.THRESHOLD = 2
         self.N_AGENTS = 0
         self.N_TARGET = 200
         self.RANDOMNESS = 0.1
         self.N_GROUPS = len(CONFIGS)
         self.N_TIMESTEPS = 10000
         self.POSITIVE_LEARNING_RATE = 0.2
-        self.NEGATIVE_LEARNING_RATE = 0.2
+        self.NEGATIVE_LEARNING_RATE = 0.3
         self.agent_number = 0
         self.agents = {}
         self.graph = nx.Graph()

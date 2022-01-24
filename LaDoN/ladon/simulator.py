@@ -28,8 +28,8 @@ my_network = Network()
 my_network.run_simulation()
 
 opinions = my_network.get_opinion_distribution()
-
-sns.histplot(opinions, stat="percent", binwidth=1)
+sns.set(rc={"figure.figsize": (11.7, 8.27)})
+sns.histplot(opinions, stat="percent", binwidth=0.2)
 
 nx.algorithms.cluster.average_clustering(my_network.graph)
 

@@ -4,13 +4,17 @@ from config import AGENT_CONFIG
 
 
 class Agent:
-    def __init__(self, agent_config: Dict):
-        self.type = agent_config.get("type")
-        self.opinion = np.random.normal(
-            agent_config.get("opinion").get("mu"),
-            agent_config.get("opinion").get("sigma"),
-            agent_config.get("opinion").get("vector_size"),
-        )
+    def __init__(self, agent_config: Dict, simulation_type: str = "uniform"):
+        if simulation_type == "normal":
+            self.type = agent_config.get("type")
+            self.opinion = np.random.normal(
+                agent_config.get("opinion").get("mu"),
+                agent_config.get("opinion").get("sigma"),
+                agent_config.get("opinion").get("vector_size"),
+            )
+        if simulation_type == "uniform":
+            self.type = 0
+            self.opinion = np.random.uniform(low=-1, high=1, size=None)
 
 
 agent = Agent(AGENT_CONFIG)
