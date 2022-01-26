@@ -4,32 +4,43 @@ import networkx as nx
 import numpy as np
 import seaborn as sns
 
-# NOTE:
-# A measure could be:
-# What percentage of a community consists of only one type of agent?
-
-# NOTE:
-# Shouldn't one of the measures be distribution of distances to
-# each neighbor?
-
-# NOTE:
-# For visualization purposes, wouldn't it
-# be much nicer to let everyone have either 1, 2 or
-# 3 values instead of 5? Why 5?
-
 # TODO:
-# Rethink how agents connect based on an agents expectations.
-# They need memory as well as a counter for how many times
-# they have seen the other agents.
-# Next step is also to combine inner and outer vectors
+# Have agents interact with a certain level of noise, centered around 0.
 
-my_network = Network()
+# Specification:
+# This could make relations asymmetric. It could be modelled as
+
+
+# NOTE:
+# One of the reasons why we are not seeing the tails of the distribution match
+# is because of two ceiling effects, which can be corrected by having upper and
+# lower limits for opinions in the model.
+
+dictionary = {
+    "THRESHOLD": 1.2,
+    "N_TARGET": 5000,
+    "RANDOMNESS": 0.2,
+    "N_TIMESTEPS": 15000,
+    "POSITIVE_LEARNING_RATE": 0.4,
+    "NEGATIVE_LEARNING_RATE": 0.2,
+}
+
+my_network = Network(dictionary=dictionary)
 
 my_network.run_simulation()
 
+plot_graph(my_network, plot_type="agent_type")
+
+degrees = my_network.get_degree_distribution()
+
 opinions = my_network.get_opinion_distribution()
+initial_opinions = my_network.get_initial_opinion_distribution()
 sns.set(rc={"figure.figsize": (11.7, 8.27)})
-sns.histplot(opinions, stat="percent", binwidth=0.2)
+sns.scatterplot(x=initial_opinions, y=degrees)
+sns.scatterplot(x=degrees, y=opinions)
+
+plotting = sns.histplot(opinions, stat="percent", binwidth=0.2, kde=True)
+plotting.set(xlim=(-10, 10))
 
 nx.algorithms.cluster.average_clustering(my_network.graph)
 

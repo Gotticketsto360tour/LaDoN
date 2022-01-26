@@ -5,25 +5,31 @@ from config import CONFIGS
 from random import sample
 from random import random
 from helpers import find_distance
+from tqdm import tqdm
 import numpy as np
 
 
 class Network:
-    def __init__(self):
-        self.THRESHOLD = 2
-        self.N_AGENTS = 0
-        self.N_TARGET = 200
-        self.RANDOMNESS = 0.1
+    def __init__(self, dictionary):
+        self.__dict__.update(dictionary)
         self.N_GROUPS = len(CONFIGS)
-        self.N_TIMESTEPS = 10000
-        self.POSITIVE_LEARNING_RATE = 0.2
-        self.NEGATIVE_LEARNING_RATE = 0.3
+        self.N_AGENTS = 0
         self.agent_number = 0
         self.agents = {}
         self.graph = nx.Graph()
 
     def get_opinion_distribution(self):
-        return np.array([self.agents.get(agent).opinion for agent in self.agents])
+        return np.array(
+            [float(self.agents.get(agent).opinion) for agent in self.agents]
+        )
+
+    def get_initial_opinion_distribution(self):
+        return np.array(
+            [float(self.agents.get(agent).initial_opinion) for agent in self.agents]
+        )
+
+    def get_degree_distribution(self):
+        return np.array([degree[1] for degree in list(self.graph.degree())])
 
     def update_values(self, sampled_agent, neigbor):
         list_of_agents = [self.agents.get(sampled_agent), self.agents.get(neigbor)]
@@ -48,8 +54,9 @@ class Network:
             if agent != agent_on_turn
             and agent not in self.graph.neighbors(agent_on_turn)
         ]
-        sampled_agent = sample(nodes_without_new_agent, 1)[0]
-        self.graph.add_edge(agent_on_turn, sampled_agent)
+        if nodes_without_new_agent:
+            sampled_agent = sample(nodes_without_new_agent, 1)[0]
+            self.graph.add_edge(agent_on_turn, sampled_agent)
 
     def add_new_connection_through_neighbors(self, agent_on_turn):
 
@@ -94,6 +101,7 @@ class Network:
         else:
             sampled_agent = sample(self.graph.nodes, 1)[0]
             self.graph.remove_node(sampled_agent)
+            del self.agents[sampled_agent]
             self.N_AGENTS -= 1
 
     def take_turn(self):
@@ -125,5 +133,5 @@ class Network:
             # map(lambda x: self.graph.remove_edge(sampled_agent, x), negative_relations)
 
     def run_simulation(self):
-        for _ in range(self.N_TIMESTEPS):
+        for _ in tqdm(range(self.N_TIMESTEPS)):
             self.take_turn()

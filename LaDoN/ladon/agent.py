@@ -15,6 +15,7 @@ class Agent:
         if simulation_type == "uniform":
             self.type = 0
             self.opinion = np.random.uniform(low=-1, high=1, size=None)
+        self.initial_opinion = self.opinion
 
 
 agent = Agent(AGENT_CONFIG)
