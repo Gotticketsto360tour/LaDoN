@@ -1,0 +1,124 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{apacite}
+\usepackage{graphicx}
+\usepackage{mathptmx}
+\usepackage[font = {small, it}]{caption}
+\DeclareCaptionLabelFormat{cont}{#1~#2\alph{ContinuedFloat}}
+\captionsetup[ContinuedFloat]{labelformat=cont}
+%\usepackage{subcaption}
+\usepackage{subfigure}
+\usepackage{float}
+\usepackage{fancyhdr}
+\usepackage{listings}
+
+\lstset{language=Python}
+
+%% CHANGE MARGINS
+
+\addtolength{\oddsidemargin}{-.875in}
+\addtolength{\evensidemargin}{-.875in}
+\addtolength{\textwidth}{1.75in}
+
+\addtolength{\topmargin}{-.875in}
+\addtolength{\textheight}{1.75in}
+
+%% make header
+
+\fancypagestyle{plain}{
+\fancyhf{}
+\rhead{Mikkel Werling (201706722)}
+\lhead{The Life and Death of Social Networks}
+\cfoot{\thepage}
+}
+\pagestyle{plain}
+
+\setlength{\parindent}{2em}
+\setlength{\parskip}{1em}
+\renewcommand{\baselinestretch}{1.5}
+
+\title{The Life and Death of Social Networks: A network formation model for opinion dynamics}
+\author{Mikkel Werling, (201706722)}
+\date{}
+\begin{document}
+\maketitle
+
+
+\section{Theory}
+
+\subsection{Network Formation}
+
+\subsubsection{Social Networks}
+Here the presentation of the important characteristics of social networks should be included and why they come about. 
+These include the high transitivity, clustering, communities, and exponential degree distributions.
+
+\subsubsection{Candidate Models}
+
+A special focus on the Herding Friends (animal model) as well as the how random are random friends. Other papers could also be good here.
+
+\subsubsection{The problems with current models}
+
+Calibration with data and how to test models. Models with fixed networks won't cut it. 
+
+\subsection{Social Influence}
+
+Including some of the basic literature (Axelrod)
+
+\subsubsection{Shaping opinions}
+
+Introduce the evidence from psychology and computational literature to show why the assumptions in the model make sense
+
+\subsubsection{Models of Social Influence}
+
+Report the evolution of models and where to place this model in all of the literature
+
+\subsection{A network formation model for social influence}
+
+Explain the importance of making both a network formation and opinion dynamics model in one go
+
+\section{Methods}
+
+\subsection{Model specification}
+
+Explain the different parameters of the model
+
+\subsection{Model fitting}
+
+explain how the model was calibrated (Bayesian Hyperparameter Optimization)
+
+\section{Model investigation}
+
+Get familiar with the different parameters and their interpretations
+
+\subsection{The effect of randomness}
+
+How randomness affects the distribution of opinions, as well as the network
+
+\subsection{The effect of the boundary threshold}
+
+How the boundary threshold affects the distribution of opinions, as well as the network
+
+\subsection{The effect of homophily}
+
+How homophily affects the distribution of opinions, as well as the network
+
+\subsection{Important interactions}
+
+Point to some of the important interactions (possible Golden zones)
+
+\section{Results}
+
+\subsection{Network generation}
+
+\subsection{Opinion generation}
+
+\section{Discussion}
+
+\section{Conclusion}
+
+\bibliographystyle{apacite}
+
+\bibliography{../Referencer_new}
+
+\end{document}
