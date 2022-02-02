@@ -135,3 +135,7 @@ class Network:
     def run_simulation(self):
         for _ in tqdm(range(self.N_TIMESTEPS)):
             self.take_turn()
+        if self.STOP_AT_TARGET:
+            while self.N_AGENTS < self.N_TARGET:
+                self.take_turn()
+            return "DONE"
