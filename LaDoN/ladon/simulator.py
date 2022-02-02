@@ -17,12 +17,12 @@ import seaborn as sns
 # lower limits for opinions in the model.
 
 dictionary = {
-    "THRESHOLD": 1.2,
-    "N_TARGET": 5000,
-    "RANDOMNESS": 0.2,
-    "N_TIMESTEPS": 15000,
+    "THRESHOLD": 0.7,
+    "N_TARGET": 300,
+    "RANDOMNESS": 0.3,
+    "N_TIMESTEPS": 8000,
     "POSITIVE_LEARNING_RATE": 0.4,
-    "NEGATIVE_LEARNING_RATE": 0.2,
+    "NEGATIVE_LEARNING_RATE": 0.05,
 }
 
 my_network = Network(dictionary=dictionary)
@@ -43,6 +43,8 @@ plotting = sns.histplot(opinions, stat="percent", binwidth=0.2, kde=True)
 plotting.set(xlim=(-10, 10))
 
 nx.algorithms.cluster.average_clustering(my_network.graph)
+
+nx.algorithms.assortativity.degree_assortativity_coefficient(my_network.graph)
 
 plot_graph(my_network, plot_type="agent_type")
 

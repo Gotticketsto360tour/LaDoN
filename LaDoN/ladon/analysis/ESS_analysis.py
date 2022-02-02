@@ -11,7 +11,7 @@ grouped_data = (
     data.groupby(["cntry", "lrscale"]).agg(opinion=("dweight", sum)).reset_index()
 )
 
-denmark = grouped_data.query("cntry == 'DK'")
+denmark = grouped_data.query("cntry == 'DE'")
 
 sns.barplot(data=denmark, x="lrscale", y="opinion")
 
