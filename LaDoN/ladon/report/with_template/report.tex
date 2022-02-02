@@ -90,10 +90,39 @@ This social influence can potentially explain how
 \subsection{Network Formation}
 
 \subsubsection{Social Networks}
-Here the presentation of the important characteristics of social networks should be included and why they come about. 
-These include the high transitivity, clustering, communities, and exponential degree distributions.
+Social networks differ in key ways to more idealized networks. 
+Here I outline the most important characteristics, which have been found across many different domains and networks.
+
+The first of which is that the average path lengh in social networks tends to be small. 
+This is best exemplified by the idea of "six degrees of separation", which refers to the notion that you are never more than five intermediaries away from any other person on the planet. 
+Average path length is as the average of all shortest paths between nodes. CITE(Meeting strangers and friends) 
+Recently, this notion has been studied empirically on social media networks, including 721 million people.
+They found that the average shortest path length was 4.74, corresponding to closer to four degrees of separation CITE(four degrees of separation).
+This feature is inpart also the claim to fame of small-world networks. Simple lattice networks can be modified with random rewiring of connections, making some connections act as shortcuts across the network. CITE(small world)
+
+The second characteristic is the fact that social networks tend exhibit clustering behavior. Small hubs of the network are well-connected locally, while often having limited connections to other hubs of the network. 
+The level of clustering is often quantified with a clustering coefficient. Here, different coefficients can be used, but arguably the most common is the average clustering coefficient proposed by Watts and Strogatz in the seminal paper on small-world networks CITE(small world).
+The basic intuition is that with higher clustering coefficients, an agent's connections tend to be connected to each other. 
+This is the reason why the literature often includes triangles and closed triangles in their terminology. 
+A triangle is a set of three nodes, where either two of them are connected or three of them are connected. When all three are connected, the resulting set is a closed triangle. 
+Clustering can also be thought of as the ratio between all closed triangles of the graph and all the triangles of the graph. 
+
+The third characteristic is that the degree distributions of networks tend to have "fat tails".
+In this case, the degree distribution refers to the probability distribution of degrees in a network. 
+What is meant when degree distributions are described as having fat tails, is essentially two attributes. 
+The distributions tend to have relatively few nodes with the average degree of the distribution, but instead have many low and high degree nodes.
+These degree distributions are also referred to as being "scale-free" or following a power-law distribution. In other words, most nodes have relatively few connections, but a few of them have disproportionally many connections compared to all the other nodes. 
+
+The fourth characteristic is that high degree nodes tend to connect with other high degree nodes. 
+This is also referred to as nodes having positive assortativity. 
+
+Idealised networks such as the small world network and the scale-free network can generate a subset of these characteristics.
+However, none of these models can generate networks which exhibit all features simultaneously. 
+When evaluating good candidate models for how social networks are generated, our candidate models
+should be able to generate networks which exhibit all characteristics at the same time. 
 
 \subsubsection{Candidate Models}
+For 
 
 A special focus on the Herding Friends (animal model) as well as the how random are random friends. Other papers could also be good here.
 
