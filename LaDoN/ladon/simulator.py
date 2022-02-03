@@ -18,9 +18,9 @@ import scipy
 # lower limits for opinions in the model.
 
 dictionary = {
-    "THRESHOLD": 0.8,
+    "THRESHOLD": 0.7,
     "N_TARGET": 1589,
-    "RANDOMNESS": 0.1,
+    "RANDOMNESS": 0.5,
     "N_TIMESTEPS": 1589 * 3,
     "POSITIVE_LEARNING_RATE": 0.2,
     "NEGATIVE_LEARNING_RATE": 0.05,
