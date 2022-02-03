@@ -181,7 +181,7 @@ A similar example comes from religion. A study concerning the social networks of
 In addition, 80\% of marriages were with other Jews. At the time, Jews consisted of only 2\% of the population.
 
 The underlying mechanism of what causes homophily is not completely clear. The most plausible explanations are individualistic and structuralistic explanations. 
-The individualistic explanation to this effect by stating that psychologically, people will tend to prefer similar people. It is in other words the psychological preferences of the individual. 
+The individualistic explanation to this effect is the psychological claim that people will tend to prefer people who are similar to themselves. It is in other words the psychological preferences of the individual. 
 The structuralistic explanation to this effect is that structure of the environment will make certain choices more or less available to the individual. 
 If most of the people in your neighborhood are similar to you, chances are that you will form ties to people similar to you, regardless of your psychological preference. 
 These two different causes of homophily are important to distinguish, and I will follow the definitions proposed by Kossinets and Watts. 
@@ -191,9 +191,7 @@ In the study by Kossinets and Watts, highly similar pairs were 50 times more lik
 In other words, induced homophily is responsible for much of the observed homophily, but there is also a strong effect of choice homophily regardless. 
 
 Many of the personal characteristics that show the strongest homophilic effect (i.e. race, background, religion) is always or often inherited by parents of the individual.
-This fact also suggests that even small amounts initial choice homophily can lead to extreme levels of induced homophily by amplifying the effect over the course of generations. 
-
-More similar individuals are more likely to interact and interaction between them is likely to make them even more similar through social influence. 
+This fact also suggests that even small amounts initial choice homophily can lead to extreme levels of induced homophily by amplifying the effect over the course of generations. More similar individuals are more likely to interact and interaction between them is likely to make them even more similar through social influence. 
 This is also in line with findings suggesting that peer groups are an important source of influence for the behavior of people. 
 This points to the possibility that powerful feedback loops between homophily and social influence are likely to be an underlying mechanism shaping our opinions and our social networks. 
 
@@ -214,6 +212,29 @@ Explain the importance of making both a network formation and opinion dynamics m
 \section{Methods}
 
 \subsection{Model specification}
+
+The model is a network formation algorithm, relying on the opinion of the agents to determine how tie formation and tie dissolution happens. These opinions in turn rely on the opinion of other agents via social influence. 
+The network is therefore truely dynamic over time in regards to both its connections and the opinions of the agents.
+
+For clarity, we will here give a more rigorous mathematical formulation of the model. 
+Let $G$ be the graph of the network and $t$ be the timestep of the model. 
+We denote $G_t$ to refer to the state of graph, $G$, at timestep, $t$. 
+Let $N$ be current number of nodes in $G$ and $N'$ be the target number of nodes. By target number of nodes, I simply mean the number of nodes we want the final network to contain. 
+As the model is a network formation model, the number of nodes $N$ for $G_0$ will always be 0. 
+We then model the probability of agent genesis, $P(G)$ and agent death $P(D)$ simply as:
+
+\begin{figure}[h]
+	\begin{align*}
+	P(D)& = \frac{N}{2N'}\\
+	P(G)& = 1 - P(D)
+	\end{align*}
+\end{figure}
+
+As $N$ increases, the number of agents will stabilize over time, and oscillate around $N'$. 
+
+At each $t$, a node is either added or deleted from $G$ according to the probabilities specified by $P(G)$ and $P(D)$.
+When an agent is deleted from $G$, it is done so by sampling a node from $G$ randomly.
+When a new node is added, connect them randomly to another node in $G$
 
 Explain the different parameters of the model
 
