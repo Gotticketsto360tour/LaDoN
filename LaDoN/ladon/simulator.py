@@ -17,13 +17,26 @@ import scipy
 # is because of two ceiling effects, which can be corrected by having upper and
 # lower limits for opinions in the model.
 
+# NOTE:
+# Something crazy is happening around 0.7
+
+# dictionary = {
+#     "THRESHOLD": 0.7,
+#     "N_TARGET": 1589,
+#     "RANDOMNESS": 0.5,
+#     "N_TIMESTEPS": 1589 * 3,
+#     "POSITIVE_LEARNING_RATE": 0.2,
+#     "NEGATIVE_LEARNING_RATE": 0.05,
+#     "STOP_AT_TARGET": True,
+# }
+
 dictionary = {
-    "THRESHOLD": 0.7,
-    "N_TARGET": 1589,
-    "RANDOMNESS": 0.5,
-    "N_TIMESTEPS": 1589 * 3,
-    "POSITIVE_LEARNING_RATE": 0.2,
-    "NEGATIVE_LEARNING_RATE": 0.05,
+    "THRESHOLD": 0.8,
+    "N_TARGET": 200,
+    "RANDOMNESS": 0.4,
+    "N_TIMESTEPS": 200 * 3,
+    "POSITIVE_LEARNING_RATE": 0.3,
+    "NEGATIVE_LEARNING_RATE": 0.1,
     "STOP_AT_TARGET": True,
 }
 
@@ -52,13 +65,13 @@ plot_graph(my_network, plot_type="agent_type")
 
 plot_graph(my_network, plot_type="community")
 
-sns.set(rc={"figure.figsize": (11.7, 8.27)})
-
 g = nx.read_gml(path="analysis/data/netscience/netscience.gml")
 
 nx.algorithms.cluster.average_clustering(g)
 nx.algorithms.assortativity.degree_assortativity_coefficient(g)
 degrees_g = [x[1] for x in list(g.degree())]
+sns.histplot(degrees_g, stat="percent")
+
 
 from netrd.distance import DegreeDivergence
 

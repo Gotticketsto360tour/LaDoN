@@ -87,7 +87,7 @@ def plot_graph(network: Network, plot_type="community"):
         networkx.set_node_attributes(
             G, name="agent_types_color", values=agent_types_color
         )
-        color_by_this_attribute = "agent_types_color"
+        color_by_this_attribute = "opinions"  # agent_types_color
         HOVER_TOOLTIPS = [
             ("Character", "@index"),
             ("Degree", "@degree"),
@@ -126,7 +126,13 @@ def plot_graph(network: Network, plot_type="community"):
 
     # Set node sizes and colors according to node degree (color as category from attribute)
     network_graph.node_renderer.glyph = Circle(
-        size=size_by_this_attribute, fill_color=color_by_this_attribute
+        size=size_by_this_attribute,
+        fill_color=linear_cmap(
+            color_by_this_attribute,
+            "Blues256",
+            min(opinions.values()),
+            max(opinions.values()),
+        ),
     )
     # Set node highlight colors
     network_graph.node_renderer.hover_glyph = Circle(
