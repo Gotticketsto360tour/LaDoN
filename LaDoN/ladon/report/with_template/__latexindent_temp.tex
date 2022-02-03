@@ -82,10 +82,9 @@ When new ties are found via triadic closure,
 
 To see why homophily and triadic closure can create self-reinforcing homophily effects, notice the following. Due to homophily, the probability of $A$ being similar to $B$ will be higher than
 When they find new connections via triadic closure i.e. "friends of friends", 
-In such cases, any social agent will have a protensity to like agents which are more similar to themselves. Moreover, they find new connections primarily by finding them via "friends of their friends". 
+In such cases, any social agent will have a propensity to like agents which are more similar to themselves. Moreover, they find new connections primarily by finding them via "friends of their friends". 
 
 Homophily and its effects become especially potent when social agents can be influenced by their peers. 
-This social influence can potentially explain how 
 
 \subsection{Network Formation}
 
@@ -119,20 +118,70 @@ This is also referred to as nodes having positive assortativity.
 Idealised networks such as the small world network and the scale-free network can generate a subset of these characteristics.
 However, none of these models can generate networks which exhibit all features simultaneously. 
 When evaluating good candidate models for how social networks are generated, our candidate models
-should be able to generate networks which exhibit all characteristics at the same time. 
+should be able to generate networks which exhibit all characteristics at the same time using one underlying algorithm. 
 
 \subsubsection{Candidate Models}
-For 
 
-A special focus on the Herding Friends (animal model) as well as the how random are random friends. Other papers could also be good here.
+One model which generates all the characteristics using a simple network generation model is the model proposed by CITE(Jackson and Rogers). 
+The model is a simple network formation model, which creates a network by constantly adding new nodes. The primary mechanism of interest for this paper is the mechanism used for generating new connections.
+In their model, links are primarily formed via "triadic closure" and randomness. Triadic closure refers to the idea of closing triangles. In other words, new connections are formed primarily by searching through "friends of friends". When they are not, they are added randomly between agents.
+Let us first consider why this mechanism of tie formation will likely generate the typical characteristics of social networks. 
+
+In terms of the average path length, the random component of tie formation decreases the average path length considerably. This will create the aforementioned shortcuts in the network as seen in small world networks CITE(small world).
+Clustering is almost guaranteed in this model, as the defining feature of the model is closing triangles. 
+The degree distribution will also be quite similar to social networks and exhibit scale-free tendencies. 
+To see this, notice that larger degrees will have a higher probability of gaining a new agent via triadic closure. The growth of an agent's degree is proportional to their existing degree. This relation will lead to the large disparities in degree observed in scale free degree distributions.
+Finally, positive assortativity is likely as older nodes in the network will tend to have larger degrees as well. Older nodes will therefore also have more frequent opportunities to connect to each other, which will lead to positive assortativity. 
+
+This model was expanded upon by Ilany and Acay (CITE) which contributed in two notable ways. 
+Their model was a model of social inheritance of different social systems in animals. 
+They showed that their simple model could accurately capture the complex social structures of many different types of animals.
+This adds credence to the idea that triadic closure might be a common tie formation strategy throughout biology. 
+The model also made an important alteration to the model by Jackson and Rogers (CITE) by making the network a finite size.
+The original model by Jackson and Rogers, the network grows indefinately. Ilany and Acay modified the network to function more closely to biological networks.
+This is done by having a probability for agents to dissapear from the network, which stabilizes the size. 
+
+Beyond being able to generate the attributes of social networks, the model proposed by Jackson and Rogers (CITE) is in accordance with existing theory. 
+Triadic closure is the most common structural constraint of real life networks. In minimal dynamic social networks, traidic closure should be considered the main mechanism for tie formation. 
+In more general terms, it has been found that the likelihood of forming a new tie is a monotonically decreasing function of distance. 
+Moreover, triadic closure represents a simple and natural mechanism - it lines up with common sense intuitions of how social networks develop. 
 
 \subsubsection{The problems with current models}
 
-Calibration with data and how to test models. Models with fixed networks won't cut it. 
+As mentioned previously, many of the idealized models for generating social networks can only partly generate the characteristics of social networks.
+Arguably, this is a symptom of a deeper problem in the field which is a loose connection between models and empirical data.
+An example of this is the fact that even though we refer to the distributions of social networks as "scale free", scale free networks don't match observed social networks. 
+Few models even include data, or calculates how well their model approximates the system they are modeling. 
+Often such measures of fit are eye-balled and not rigorously defined. 
+
+We therefore need better integration between models and data. This is true both for model creation but also true for model evaluation. 
+As is always the case, a model has to simplify the world and make crude assumptions. A good model is a useful model with useful assumptions. 
+The results from a model critically hinges upon these assumptions. Evaluating the assumptions of a model is therefore a crucial step to take before jumping to conclusion.
+This is especially noteworthy as very few of the current models of social influence are dynamic networks. 
+This assumes that no new relations are created, and that no relations are deleted. 
+This might not seem consequential, but it is. The model will assume that relations are kept between people even when they vermently disagree about everything.
+This fact in itself can account for much of the signal reported in classical models in the literature. 
 
 \subsection{Social Influence}
 
 Including some of the basic literature (Axelrod)
+
+\subsubsection{Homophily}
+One of the most persistent facts regarding social networks is that similarity breeds connection. 
+This tendency is known as homophily where individuals seem to be connected to individuals like themselves. 
+This is not only true for humans, but is a pervasive fact for tie formation in numerous biological systems. 
+From zebras to dolphins, homophily predicts which ties will companionships will form. 
+In primates, similarity even predicts the quality of the tie you have with other people. The more you have in common, the more likely that person is a close friend.
+This is also true for humans. We exhibit high levels of homophily in tie formation. 
+Personal networks in humans are homogeneous across sociodemographic, behavioral and intrapersonal characteristics. 
+Characteristics like age, sex, race, education level, intelligence, attitude and aspirations have all been shown to exhibit high degrees of homophily. 
+This also exemplifies what is meant when it is said that homophily is an extremely robust finding. It permeates almost every part of social life.
+Studies regarding the homophily of race in schools found that in middleschool, only 10\% of the expected cross race friendships were observed. 
+A similar example comes from religion. A study concerning the social networks of Jews found that 80\% of their friendsships were with other Jews. 
+In addition, 80\% of marriages were with other Jews. At the time, Jews consisted of only 2\% of the population.
+
+
+\subsubsection{Xenophobia}
 
 \subsubsection{Shaping opinions}
 
