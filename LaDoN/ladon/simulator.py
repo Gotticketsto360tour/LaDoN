@@ -31,12 +31,12 @@ import scipy
 # }
 
 dictionary = {
-    "THRESHOLD": 0.8,
+    "THRESHOLD": 1,
     "N_TARGET": 200,
     "RANDOMNESS": 0.4,
     "N_TIMESTEPS": 200 * 3,
     "POSITIVE_LEARNING_RATE": 0.3,
-    "NEGATIVE_LEARNING_RATE": 0.1,
+    "NEGATIVE_LEARNING_RATE": 0.05,
     "STOP_AT_TARGET": True,
 }
 

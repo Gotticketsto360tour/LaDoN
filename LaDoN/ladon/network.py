@@ -88,7 +88,7 @@ class Network:
             self.agents[self.agent_number] = Agent(CONFIGS[agent_type])
             self.agent_number += 1
             self.N_AGENTS += 1
-            if self.N_AGENTS > 2:
+            if self.N_AGENTS >= 2:
                 self.add_new_connection_randomly(new_agent)
 
                 # this probability could be a different probability than the other random process
@@ -106,7 +106,7 @@ class Network:
 
     def take_turn(self):
         self.generate_or_eliminate_agent(CONFIGS)
-        if self.N_AGENTS > 2:
+        if self.N_AGENTS >= 2:
             sampled_agent = sample(self.graph.nodes, 1)[0]
             if random() < self.RANDOMNESS:
                 self.add_new_connection_randomly(sampled_agent)

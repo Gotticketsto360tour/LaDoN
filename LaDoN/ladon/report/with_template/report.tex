@@ -219,7 +219,7 @@ The network is therefore truely dynamic over time in regards to both its connect
 For clarity, we will here give a more rigorous mathematical formulation of the model. 
 Let $G$ be the graph of the network and $t$ be the timestep of the model. 
 We denote $G_t$ to refer to the state of graph, $G$, at timestep, $t$. 
-Let $N$ be current number of nodes in $G$ and $N'$ be the target number of nodes. By target number of nodes, I simply mean the number of nodes we want the final network to contain. 
+Let $N$ be current number of nodes in $G$ and $N'$ be the target number of nodes. By target number of nodes, I mean the number of nodes we want the final network to contain. 
 As the model is a network formation model, the number of nodes $N$ for $G_0$ will always be 0. 
 We then model the probability of agent genesis, $P(G)$ and agent death $P(D)$ simply as:
 
@@ -230,14 +230,82 @@ We then model the probability of agent genesis, $P(G)$ and agent death $P(D)$ si
 	\end{align*}
 \end{figure}
 
-As $N$ increases, the number of agents will stabilize over time, and oscillate around $N'$. 
-
 At each $t$, a node is either added or deleted from $G$ according to the probabilities specified by $P(G)$ and $P(D)$.
+By modeling node genesis and death this way, we ensure that for a large enough $t$, $N \approx N'$.
 When an agent is deleted from $G$, it is done so by sampling a node from $G$ randomly.
-When a new node is added, connect them randomly to another node in $G$
+All nodes are initialized with an "opinion"-value, $O$. This value is drawn from uniform distribution, with a lower limit of $-1$ and upper limit of $1$:
 
-Explain the different parameters of the model
+\begin{figure}[h]
+	\begin{align*}
+	O \sim \mathcal{U}(-1, 1)
+	\end{align*}
+\end{figure}
 
+This ensures that agents are initialized without any bias in opinions.
+Moreover, this conceptualization of opinions offers logical interpretations, as $0$ will be the neutral middle of the opinion space. 
+
+In the special case of $N = 0$, a new node is added without adding extra connections. 
+For $N \leq 1$, a new node is added and connected randomly to another node in $G$.
+With probability $P(E)$, the new node will add another connection to a randomly sampled neighbor's neighbor.
+With probability $1 - P(E)$, the new node will add another connection randomly. 
+
+After nodes have been added or deleted, an agent is sampled to be on turn. We denote this agent by $A_t$. 
+$A_t$ will add connections excatly as if it was a new agent. After establishing new connections,
+$A_t$ now updates her opinion based on the opinions of her neighbors. 
+
+Let $O_1$ be the opinion of $A_t$ and $O_2$ be the opinion of one of $A_t$'s neighbors. 
+Let $B$ be the boundary threshold. The boundary threshold defines when two opinions either pull each other closer together or push each other further apart.
+For cases where $B \geq |O_1 - O_2|$, we have a case of positive learning where agents pull each other closer. We define a positive learning rate, $PLR \in [0, 1]$. Let $V$ be a fraction of the distance between $O_1$ and $O_2$ so that
+
+\begin{figure}[h]
+	\begin{align*}
+	V = (|O_1 - O_2|) \cdot PLR
+	\end{align*}
+\end{figure}
+
+The opinions of the agents are then updated using $V$. 
+Let $O_{max}$ be the maximum of the two opinions and $O_{min}$ be the minimum of the two opinions:
+
+\begin{figure}[h]
+	\begin{align*}
+		O_{max} &= \max(O_1, O_2)\\
+		O_{min} &= \min(O_1, O_2)
+	\end{align*}
+\end{figure}
+
+We then pull the two values closer together by $V$:
+
+\begin{figure}[h]
+	\begin{align*}
+		O_{max}' &= O_{max} - V\\
+		O_{min}' &= O_{min} + V
+	\end{align*}
+\end{figure}
+
+For cases where $B \leq |O_1 - O_2|$, we have a case of negative learning where agents push each other further away. Similar to the positive learning, we define a negative learning rate $NLR \in [0,1]$ and let $V$ be given by 
+
+\begin{figure}[h]
+	\begin{align*}
+	V = (|O_1 - O_2|) \cdot NLR
+	\end{align*}
+\end{figure}
+
+We then push the values further apart by $V$:
+
+\begin{figure}[h]
+	\begin{align*}
+		O_{max}' &= O_{max} + V\\
+		O_{min}' &= O_{min} - V
+	\end{align*}
+\end{figure}
+
+Notice that the only difference between positive and negative learning is the learning rate and whether $V$ pushes or pulls the opinions apart.
+
+The process of updating values is done iteratively for each neighbor of $A_t$. 
+Notice that updating is symmetric in the sense that both $A_t$ and the neighbor of $A_t$ will be pushed or pulled by $V$. 
+
+After the process of updating is finished for $A_t$, all ties to agents which are outside of the boundary threshold ($B \geq |O_1 - O_2|$), are disconnected. 
+This concludes one timestep, $t$, in the model. 
 \subsection{Model fitting}
 
 explain how the model was calibrated (Bayesian Hyperparameter Optimization)
