@@ -31,11 +31,11 @@ import scipy
 # }
 
 dictionary = {
-    "THRESHOLD": 1,
-    "N_TARGET": 200,
-    "RANDOMNESS": 0.4,
-    "N_TIMESTEPS": 200 * 3,
-    "POSITIVE_LEARNING_RATE": 0.3,
+    "THRESHOLD": 0.98,
+    "N_TARGET": 1589,
+    "RANDOMNESS": 0.002,
+    "N_TIMESTEPS": 1589 * 3,
+    "POSITIVE_LEARNING_RATE": 0.92,
     "NEGATIVE_LEARNING_RATE": 0.05,
     "STOP_AT_TARGET": True,
 }
@@ -43,7 +43,6 @@ dictionary = {
 my_network = Network(dictionary=dictionary)
 
 my_network.run_simulation()
-
 plot_graph(my_network, plot_type="agent_type")
 
 degrees = my_network.get_degree_distribution()
@@ -71,7 +70,6 @@ nx.algorithms.cluster.average_clustering(g)
 nx.algorithms.assortativity.degree_assortativity_coefficient(g)
 degrees_g = [x[1] for x in list(g.degree())]
 sns.histplot(degrees_g, stat="percent")
-
 
 from netrd.distance import DegreeDivergence
 
