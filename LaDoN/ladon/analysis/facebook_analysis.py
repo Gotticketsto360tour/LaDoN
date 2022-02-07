@@ -5,7 +5,7 @@ sns.set(rc={"figure.figsize": (11.7, 8.27)})
 
 
 g = nx.read_edgelist(
-    "data/facebook_combined.txt", create_using=nx.DiGraph(), nodetype=int
+    "data/facebook_combined.txt", create_using=nx.Graph(), nodetype=int
 )
 
 nx.algorithms.cluster.average_clustering(g)

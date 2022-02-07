@@ -1,3 +1,4 @@
+from statistics import mean
 from typing import Dict
 import networkx as nx
 from agent import Agent
@@ -31,6 +32,24 @@ class Network:
     def get_degree_distribution(self):
         return np.array([degree[1] for degree in list(self.graph.degree())])
 
+    def get_opinion_distances(self):
+        return np.array(
+            [
+                mean(
+                    [
+                        abs(
+                            self.agents.get(agent).opinion
+                            - (self.agents.get(neighbor).opinion)
+                        )
+                        for neighbor in self.graph.neighbors(agent)
+                    ]
+                )
+                if list(self.graph.neighbors(agent))
+                else None
+                for agent in self.agents
+            ]
+        )
+
     def update_values(self, sampled_agent, neigbor):
         list_of_agents = [self.agents.get(sampled_agent), self.agents.get(neigbor)]
         max_agent, min_agent = max(list_of_agents, key=lambda x: x.opinion), min(
@@ -42,10 +61,18 @@ class Network:
             V = V * self.POSITIVE_LEARNING_RATE
             max_agent.opinion -= V
             min_agent.opinion += V
+            if max_agent.opinion < -1:
+                max_agent.opinion = -1
+            if min_agent.opinion > 1:
+                min_agent.opinion = 1
         else:
             V = V * self.NEGATIVE_LEARNING_RATE
             max_agent.opinion += V
             min_agent.opinion -= V
+            if max_agent.opinion > 1:
+                max_agent.opinion = 1
+            if min_agent.opinion < -1:
+                min_agent.opinion = -1
 
     def add_new_connection_randomly(self, agent_on_turn):
         nodes_without_new_agent = [
@@ -97,12 +124,26 @@ class Network:
                     self.add_new_connection_randomly(new_agent)
                 else:
                     self.add_new_connection_through_neighbors(new_agent)
+                self.update_all_values(new_agent)
 
         else:
             sampled_agent = sample(self.graph.nodes, 1)[0]
             self.graph.remove_node(sampled_agent)
             del self.agents[sampled_agent]
             self.N_AGENTS -= 1
+
+    def update_all_values(self, agent):
+        for neighbor in self.graph.neighbors(agent):
+            self.update_values(agent, neighbor)
+
+        negative_relations = [
+            neighbor
+            for neighbor in self.graph.neighbors(agent)
+            if find_distance(self.agents.get(agent), self.agents.get(neighbor))
+            > self.THRESHOLD
+        ]
+        for neighbor in negative_relations:
+            self.graph.remove_edge(agent, neighbor)
 
     def take_turn(self):
         self.generate_or_eliminate_agent(CONFIGS)
@@ -113,24 +154,7 @@ class Network:
             else:
                 self.add_new_connection_through_neighbors(sampled_agent)
 
-            for neighbor in self.graph.neighbors(sampled_agent):
-                self.update_values(sampled_agent, neighbor)
-            # map(
-            #     lambda x: self.update_values(sampled_agent, x),
-            #     self.graph.neighbors(sampled_agent),
-            # )
-
-            negative_relations = [
-                neighbor
-                for neighbor in self.graph.neighbors(sampled_agent)
-                if find_distance(
-                    self.agents.get(sampled_agent), self.agents.get(neighbor)
-                )
-                > self.THRESHOLD
-            ]
-            for neighbor in negative_relations:
-                self.graph.remove_edge(sampled_agent, neighbor)
-            # map(lambda x: self.graph.remove_edge(sampled_agent, x), negative_relations)
+            self.update_all_values(sampled_agent)
 
     def run_simulation(self):
         for _ in tqdm(range(self.N_TIMESTEPS)):
