@@ -50,6 +50,9 @@ class Network:
             ]
         )
 
+    def get_agent_numbers(self):
+        return np.array([agent for agent in self.agents])
+
     def update_values(self, sampled_agent, neigbor):
         list_of_agents = [self.agents.get(sampled_agent), self.agents.get(neigbor)]
         max_agent, min_agent = max(list_of_agents, key=lambda x: x.opinion), min(

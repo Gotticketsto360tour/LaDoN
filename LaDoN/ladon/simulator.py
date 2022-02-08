@@ -1,6 +1,6 @@
 from turtle import distance
 
-from matplotlib.pyplot import title, xlabel, ylabel
+from matplotlib.pyplot import title, xlabel, xlim, ylabel, ylim
 from visualize import plot_graph
 from network import Network
 import networkx as nx
@@ -30,31 +30,31 @@ sns.set_context("talk")
 # shifts sign when the network polarizes.
 
 # NOTE:
-# Something crazy is happening around 0.7
+# It might make sense to have, say, 10 runs within one
+# file for storing data, visualized "as one"
 
-# dictionary = {
-#     "THRESHOLD": 0.7,
-#     "N_TARGET": 1589,
-#     "RANDOMNESS": 0.5,
-#     "N_TIMESTEPS": 1589 * 3,
-#     "POSITIVE_LEARNING_RATE": 0.2,
-#     "NEGATIVE_LEARNING_RATE": 0.05,
-#     "STOP_AT_TARGET": True,
-# }
+# TODO:
+# 1. Run optimization to see more robust values
+# 2. Make functions for recording data
+# 3. Make first visualizations of what is happening
+# 4. Schedule meeting with Paul regarding the model
+# 5. Opinion as a function of initial opinion is really nice
 
 dictionary = {
-    "THRESHOLD": 0.9,
+    "THRESHOLD": 1.2,
     "N_TARGET": 1589,
-    "RANDOMNESS": 0.2,
+    "RANDOMNESS": 0.5,
     "N_TIMESTEPS": 1589 * 3,
-    "POSITIVE_LEARNING_RATE": 0.5,
-    "NEGATIVE_LEARNING_RATE": 0.1,
+    "POSITIVE_LEARNING_RATE": 0.2,
+    "NEGATIVE_LEARNING_RATE": 0.3,
     "STOP_AT_TARGET": False,
 }
 
 my_network = Network(dictionary=dictionary)
 
 my_network.run_simulation()
+
+numbers = my_network.get_agent_numbers()
 
 distances = np.array(
     [distance for distance in my_network.get_opinion_distances() if distance]
@@ -71,10 +71,28 @@ degrees = my_network.get_degree_distribution()
 
 opinions = my_network.get_opinion_distribution()
 
-sns.regplot(centralities, np.array([abs(x) for x in opinions]))
+sns.regplot(numbers, degrees)
+sns.regplot(numbers, centralities)
+sns.regplot(numbers, opinions)
+
+sns.regplot(
+    centralities, np.array([abs(x) for x in opinions]), scatter_kws={"alpha": 0.7}
+).set(
+    title="Absolute value of opinions as a function of Betweeness Centrality",
+    xlabel="Betweeness Centrality",
+    ylabel="Absolute value of Opinion",
+    ylim=(-0.02, 1.02),
+)
 
 initial_opinions = my_network.get_initial_opinion_distribution()
-sns.scatterplot(x=degrees, y=initial_opinions).set(
+np.corrcoef(initial_opinions, opinions)
+sns.regplot(initial_opinions, opinions, scatter_kws={"alpha": 0.7}).set(
+    title="Opinion as a function of initial opinion",
+    xlabel="Initial opinion",
+    ylabel="Opinion",
+)
+
+sns.scatterplot(x=degrees, y=initial_opinions, alpha=0.7).set(
     title="Initial opinion as a function of Degree",
     xlabel="Degree",
     ylabel="Initial Opinion",
@@ -93,6 +111,9 @@ sns.histplot(degrees, stat="percent", binwidth=1, discrete=True, kde=True).set(
 plotting = sns.histplot(opinions, stat="percent", binwidth=0.05, kde=True).set(
     title="Opinion Distribution", xlabel="Opinion"
 )
+
+np.median(np.array([abs(x) for x in opinions]))
+
 plotting.set(xlim=(-10, 10))
 
 nx.algorithms.cluster.average_clustering(my_network.graph)

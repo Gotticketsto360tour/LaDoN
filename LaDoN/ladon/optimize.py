@@ -81,5 +81,5 @@ target = nx.read_gml(path="analysis/data/netscience/netscience.gml")
 
 
 study = optuna.create_study(direction="minimize")
-study.optimize(lambda trial: objective(trial, target, 1), n_trials=100, n_jobs=1)
+study.optimize(lambda trial: objective(trial, target, 5), n_trials=100, n_jobs=1)
 study.best_params
