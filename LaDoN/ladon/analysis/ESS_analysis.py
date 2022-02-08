@@ -1,3 +1,4 @@
+from cProfile import label
 import pandas as pd
 import seaborn as sns
 
@@ -11,9 +12,7 @@ grouped_data = (
     data.groupby(["cntry", "lrscale"]).agg(opinion=("dweight", sum)).reset_index()
 )
 
-denmark = grouped_data.query("cntry == 'DE'")
-
-sns.barplot(data=denmark, x="lrscale", y="opinion")
+denmark = grouped_data.query("cntry == 'DK'")
 
 sns.set(rc={"figure.figsize": (11.7, 8.27)})
-sns.barplot(x=denmark["lrscale"], y=denmark["opinion"])
+sns.barplot(data=denmark, x="lrscale", y="opinion")

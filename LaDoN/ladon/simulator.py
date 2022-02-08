@@ -1,3 +1,4 @@
+from turtle import distance
 from visualize import plot_graph
 from network import Network
 import networkx as nx
@@ -11,13 +12,17 @@ import scipy
 # Specification:
 # This could make relations asymmetric. It could be modelled as
 
+# NOTE:
+# There seems to be a deep correlation between
+# centrality and extremeness of opinions.
+# The fringes in opinions come from the fringes of the network
 
 # NOTE:
-# One of the reasons why we are not seeing the tails of the distribution match
-# is because of two ceiling effects, which can be corrected by having upper and
-# lower limits for opinions in the model.
+# Larger xenophobia rates produce smaller distances
+# to neighbors opinions
 
-# Try to implement both before and after simulation is done
+# NOTE: The correlation between centrality and polarization
+# shifts sign when the network polarizes.
 
 # NOTE:
 # Something crazy is happening around 0.7
@@ -33,31 +38,11 @@ import scipy
 # }
 
 dictionary = {
-    "THRESHOLD": 1.87,
-    "N_TARGET": 4039,
-    "RANDOMNESS": 0.08,
-    "N_TIMESTEPS": 4039 * 3,
-    "POSITIVE_LEARNING_RATE": 0.16,
-    "NEGATIVE_LEARNING_RATE": 0.63,
-    "STOP_AT_TARGET": True,
-}
-
-dictionary = {
-    "THRESHOLD": 1.04,
+    "THRESHOLD": 0.8,
     "N_TARGET": 1589,
-    "RANDOMNESS": 0.39,
+    "RANDOMNESS": 0.6,
     "N_TIMESTEPS": 1589 * 3,
-    "POSITIVE_LEARNING_RATE": 0.27,
-    "NEGATIVE_LEARNING_RATE": 0.14,
-    "STOP_AT_TARGET": True,
-}
-
-dictionary = {
-    "THRESHOLD": 0.7,
-    "N_TARGET": 1589,
-    "RANDOMNESS": 0.1,
-    "N_TIMESTEPS": 1589 * 3,
-    "POSITIVE_LEARNING_RATE": 0.8,
+    "POSITIVE_LEARNING_RATE": 0.7,
     "NEGATIVE_LEARNING_RATE": 0.1,
     "STOP_AT_TARGET": False,
 }
@@ -71,15 +56,22 @@ distances = np.array(
 plotting = sns.histplot(distances, stat="percent", binwidth=0.02, kde=True)
 plot_graph(my_network, plot_type="agent_type")
 
+centralities = np.array(
+    list(nx.algorithms.centrality.betweenness_centrality(my_network.graph).values())
+)
 degrees = my_network.get_degree_distribution()
 
 opinions = my_network.get_opinion_distribution()
+
+sns.regplot(centralities, np.array([abs(x) for x in opinions]))
+
 initial_opinions = my_network.get_initial_opinion_distribution()
 sns.set(rc={"figure.figsize": (11.7, 8.27)})
 sns.scatterplot(x=initial_opinions, y=degrees)
 sns.scatterplot(x=degrees, y=opinions)
-sns.histplot(degrees, stat="percent")
-plotting = sns.histplot(opinions, stat="percent", binwidth=0.2, kde=True)
+sns.regplot(x=degrees, y=centralities)
+sns.histplot(degrees, stat="percent", binwidth=1, discrete=True, kde=True)
+plotting = sns.histplot(opinions, stat="percent", binwidth=0.05, kde=True)
 plotting.set(xlim=(-10, 10))
 
 nx.algorithms.cluster.average_clustering(my_network.graph)

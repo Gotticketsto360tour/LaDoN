@@ -91,8 +91,8 @@ def plot_graph(network: Network, plot_type="community"):
         HOVER_TOOLTIPS = [
             ("Character", "@index"),
             ("Degree", "@degree"),
-            ("Agent Type", "@agent_types"),
-            ("Agent Type Color", "$color[swatch]:agent_types_color"),
+            # ("Agent Type", "@agent_types"),
+            # ("Agent Type Color", "$color[swatch]:agent_types_color"),
             ("Opinion", "@opinions"),
         ]
     # Choose colors for node and edge highlighting

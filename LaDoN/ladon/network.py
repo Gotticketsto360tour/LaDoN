@@ -55,10 +55,10 @@ class Network:
         max_agent, min_agent = max(list_of_agents, key=lambda x: x.opinion), min(
             list_of_agents, key=lambda x: x.opinion
         )
-        V = find_distance(max_agent, min_agent)
+        distance = find_distance(max_agent, min_agent)
 
-        if V <= self.THRESHOLD:
-            V = V * self.POSITIVE_LEARNING_RATE
+        if distance <= self.THRESHOLD:
+            V = 0.5 * distance * self.POSITIVE_LEARNING_RATE
             max_agent.opinion -= V
             min_agent.opinion += V
             if max_agent.opinion < -1:
@@ -66,7 +66,7 @@ class Network:
             if min_agent.opinion > 1:
                 min_agent.opinion = 1
         else:
-            V = V * self.NEGATIVE_LEARNING_RATE
+            V = 0.5 * distance * self.NEGATIVE_LEARNING_RATE
             max_agent.opinion += V
             min_agent.opinion -= V
             if max_agent.opinion > 1:
