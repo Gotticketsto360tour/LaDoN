@@ -1,5 +1,6 @@
 import numpy as np
 from agent import Agent
+import networkx as nx
 
 
 def find_distance(A: Agent, B: Agent):
@@ -8,6 +9,12 @@ def find_distance(A: Agent, B: Agent):
 
 def compare_values(A: Agent, B: Agent):
     return np.linalg.norm((A.opinion - B.opinion))
+
+
+def find_average_path(network):
+    largest_cc = max(nx.connected_components(network), key=len)
+    sub = network.subgraph(largest_cc)
+    return nx.algorithms.average_shortest_path_length(sub)
 
 
 def compare_vectors(A: Agent, B: Agent, neigbor_number: int):

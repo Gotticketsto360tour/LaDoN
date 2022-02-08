@@ -5,9 +5,10 @@ import numpy as np
 import optuna
 import netrd
 from tqdm import tqdm
+from helpers import find_average_path
 
 
-def objective(trial, target):
+def objective(trial, target, repeats):
 
     threshold = trial.suggest_float("threshold", 0, 2)
     randomness = trial.suggest_float("randomness", 0.1, 1)
@@ -16,7 +17,7 @@ def objective(trial, target):
 
     N_TARGET = target.number_of_nodes()
     list_of_norms = []
-    for run in range(10):
+    for run in range(repeats):
 
         dictionary = {
             "THRESHOLD": threshold,
@@ -41,9 +42,18 @@ def objective(trial, target):
             )
             - nx.algorithms.assortativity.degree_assortativity_coefficient(target)
         )
+        network_avg_path = find_average_path(my_network.graph)
+        target_avg_path = find_average_path(target)
+
+        average_path_diff = abs(
+            find_average_path(my_network.graph) - find_average_path(target)
+        ) / max([network_avg_path, target_avg_path])
+
         distance_algorithm = netrd.distance.DegreeDivergence()
         JSD = np.sqrt(distance_algorithm.dist(my_network.graph, target))
-        minimize_array = np.array([clustering_diff, assortativity_diff, JSD])
+        minimize_array = np.array(
+            [clustering_diff, assortativity_diff, average_path_diff, JSD]
+        )
         norm = np.linalg.norm(minimize_array)
         list_of_norms.append(norm)
 
@@ -52,9 +62,9 @@ def objective(trial, target):
 
 target = nx.read_gml(path="analysis/data/netscience/netscience.gml")
 
-target = nx.read_edgelist(
-    "analysis/data/facebook_combined.txt", create_using=nx.Graph(), nodetype=int
-)
+# target = nx.read_edgelist(
+#    "analysis/data/facebook_combined.txt", create_using=nx.Graph(), nodetype=int
+# )
 
 # target = nx.karate_club_graph()
 
@@ -71,5 +81,5 @@ target = nx.read_edgelist(
 
 
 study = optuna.create_study(direction="minimize")
-study.optimize(lambda trial: objective(trial, target), n_trials=100, n_jobs=4)
+study.optimize(lambda trial: objective(trial, target, 1), n_trials=100, n_jobs=1)
 study.best_params

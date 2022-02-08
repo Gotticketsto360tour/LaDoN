@@ -45,9 +45,9 @@ sns.set_context("talk")
 dictionary = {
     "THRESHOLD": 0.9,
     "N_TARGET": 1589,
-    "RANDOMNESS": 0.6,
+    "RANDOMNESS": 0.2,
     "N_TIMESTEPS": 1589 * 3,
-    "POSITIVE_LEARNING_RATE": 0.7,
+    "POSITIVE_LEARNING_RATE": 0.5,
     "NEGATIVE_LEARNING_RATE": 0.1,
     "STOP_AT_TARGET": False,
 }
@@ -55,6 +55,7 @@ dictionary = {
 my_network = Network(dictionary=dictionary)
 
 my_network.run_simulation()
+
 distances = np.array(
     [distance for distance in my_network.get_opinion_distances() if distance]
 )
