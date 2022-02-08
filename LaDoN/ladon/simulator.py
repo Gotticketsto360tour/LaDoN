@@ -1,10 +1,15 @@
 from turtle import distance
+
+from matplotlib.pyplot import title, xlabel, ylabel
 from visualize import plot_graph
 from network import Network
 import networkx as nx
 import numpy as np
 import seaborn as sns
 import scipy
+
+sns.set(rc={"figure.figsize": (11.7, 8.27)})
+sns.set_context("talk")
 
 # TODO:
 # Have agents interact with a certain level of noise, centered around 0.
@@ -38,7 +43,7 @@ import scipy
 # }
 
 dictionary = {
-    "THRESHOLD": 0.8,
+    "THRESHOLD": 0.9,
     "N_TARGET": 1589,
     "RANDOMNESS": 0.6,
     "N_TIMESTEPS": 1589 * 3,
@@ -53,7 +58,9 @@ my_network.run_simulation()
 distances = np.array(
     [distance for distance in my_network.get_opinion_distances() if distance]
 )
-plotting = sns.histplot(distances, stat="percent", binwidth=0.02, kde=True)
+plotting = sns.histplot(distances, stat="percent", binwidth=0.02, kde=True).set(
+    title="Average distance to neighbor's opinion", xlabel="Average distance"
+)
 plot_graph(my_network, plot_type="agent_type")
 
 centralities = np.array(
@@ -66,12 +73,25 @@ opinions = my_network.get_opinion_distribution()
 sns.regplot(centralities, np.array([abs(x) for x in opinions]))
 
 initial_opinions = my_network.get_initial_opinion_distribution()
-sns.set(rc={"figure.figsize": (11.7, 8.27)})
-sns.scatterplot(x=initial_opinions, y=degrees)
-sns.scatterplot(x=degrees, y=opinions)
-sns.regplot(x=degrees, y=centralities)
-sns.histplot(degrees, stat="percent", binwidth=1, discrete=True, kde=True)
-plotting = sns.histplot(opinions, stat="percent", binwidth=0.05, kde=True)
+sns.scatterplot(x=degrees, y=initial_opinions).set(
+    title="Initial opinion as a function of Degree",
+    xlabel="Degree",
+    ylabel="Initial Opinion",
+)
+sns.scatterplot(x=degrees, y=opinions).set(
+    title="Opinion as a function of Degree", xlabel="Degree", ylabel="Opinion"
+)
+sns.regplot(x=degrees, y=centralities).set(
+    title="Centrality as a function of Degree",
+    xlabel="Degree",
+    ylabel="Betweeness Centrality",
+)
+sns.histplot(degrees, stat="percent", binwidth=1, discrete=True, kde=True).set(
+    title="Degree Distribution", xlabel="Degree"
+)
+plotting = sns.histplot(opinions, stat="percent", binwidth=0.05, kde=True).set(
+    title="Opinion Distribution", xlabel="Opinion"
+)
 plotting.set(xlim=(-10, 10))
 
 nx.algorithms.cluster.average_clustering(my_network.graph)
