@@ -53,6 +53,20 @@ class Network:
     def get_agent_numbers(self):
         return np.array([agent for agent in self.agents])
 
+    def get_centrality(self):
+        return np.array(
+            list(nx.algorithms.centrality.betweenness_centrality(self.graph).values())
+        )
+
+    def write_data(self):
+        data = {
+            "opinions": self.get_opinion_distribution(),
+            "initial_opinions": self.get_initial_opinion_distribution(),
+            "degrees": self.get_degree_distribution(),
+            "distances": self.get_opinion_distances(),
+            "centrality": self.get_centrality(),
+        }
+
     def update_values(self, sampled_agent, neigbor):
         list_of_agents = [self.agents.get(sampled_agent), self.agents.get(neigbor)]
         max_agent, min_agent = max(list_of_agents, key=lambda x: x.opinion), min(

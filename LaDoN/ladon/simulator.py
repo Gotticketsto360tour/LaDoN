@@ -1,5 +1,3 @@
-from turtle import distance
-
 from matplotlib.pyplot import title, xlabel, xlim, ylabel, ylim
 from visualize import plot_graph
 from network import Network
@@ -41,14 +39,27 @@ sns.set_context("talk")
 # 5. Opinion as a function of initial opinion is really nice
 
 dictionary = {
-    "THRESHOLD": 1.2,
+    "THRESHOLD": 1.5150662773714703,
     "N_TARGET": 1589,
-    "RANDOMNESS": 0.5,
+    "RANDOMNESS": 0.1448096424703561,
     "N_TIMESTEPS": 1589 * 3,
+    "POSITIVE_LEARNING_RATE": 0.44084799100234867,
+    "NEGATIVE_LEARNING_RATE": 0.36968366749403275,
+    "STOP_AT_TARGET": True,
+}
+
+dictionary = {
+    "THRESHOLD": 1.2,
+    "N_TARGET": 1000,
+    "RANDOMNESS": 0.5,
+    "N_TIMESTEPS": 10,
     "POSITIVE_LEARNING_RATE": 0.2,
     "NEGATIVE_LEARNING_RATE": 0.3,
-    "STOP_AT_TARGET": False,
+    "STOP_AT_TARGET": True,
 }
+
+[0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3]
+8 * 5 * 5 * 5
 
 my_network = Network(dictionary=dictionary)
 
@@ -97,7 +108,7 @@ sns.scatterplot(x=degrees, y=initial_opinions, alpha=0.7).set(
     xlabel="Degree",
     ylabel="Initial Opinion",
 )
-sns.scatterplot(x=degrees, y=opinions).set(
+sns.scatterplot(x=degrees, y=opinions, alpha=0.7).set(
     title="Opinion as a function of Degree", xlabel="Degree", ylabel="Opinion"
 )
 sns.regplot(x=degrees, y=centralities).set(
@@ -126,7 +137,7 @@ plot_graph(my_network, plot_type="community")
 
 g = nx.read_gml(path="analysis/data/netscience/netscience.gml")
 
-g = nx.karate_club_graph()
+# g = nx.karate_club_graph()
 
 nx.algorithms.cluster.average_clustering(g)
 nx.algorithms.assortativity.degree_assortativity_coefficient(g)
@@ -136,4 +147,4 @@ sns.histplot(degrees_g, stat="percent")
 from netrd.distance import DegreeDivergence
 
 distance_algorithm = DegreeDivergence()
-distance_algorithm.dist(my_network.graph, nx.karate_club_graph())
+distance_algorithm.dist(my_network.graph, g)
