@@ -1,3 +1,4 @@
+from scipy import rand
 from network import Network
 import networkx as nx
 import numpy as np
@@ -12,28 +13,23 @@ import multiprocessing as mp
 import pickle as pkl
 
 
-dictionary = {
-    "THRESHOLD": 1.2,
-    "N_TARGET": 1000,
-    "RANDOMNESS": 0.5,
-    "N_TIMESTEPS": 10,
-    "POSITIVE_LEARNING_RATE": 0.2,
-    "NEGATIVE_LEARNING_RATE": 0.3,
-    "STOP_AT_TARGET": True,
-}
+def make_one_simulation(
+    threshold, randomness, positive_learning_rate, negative_learning_rate
+):
 
-my_network = Network(dictionary)
+    dictionary = {
+        "THRESHOLD": threshold,
+        "N_TARGET": 1000,
+        "RANDOMNESS": randomness,
+        "N_TIMESTEPS": 10,
+        "POSITIVE_LEARNING_RATE": positive_learning_rate,
+        "NEGATIVE_LEARNING_RATE": negative_learning_rate,
+        "STOP_AT_TARGET": True,
+    }
 
-
-def make_one_simulation(dictionary):
     networks = [Network(dictionary) for _ in range(10)]
     for network in networks:
         network.run_simulation()
-
-    threshold = dictionary.get("THRESHOLD")
-    randomness = dictionary.get("RANDOMNESS")
-    positive_learning_rate = dictionary.get("POSITIVE_LEARNING_RATE")
-    negative_learning_rate = dictionary.get("NEGATIVE_LEARNING_RATE")
 
     out_dict = {
         "threshold": threshold,
@@ -56,13 +52,10 @@ def make_one_simulation(dictionary):
     }
 
     with open(
-        f"S{threshold}-{randomness}-{positive_learning_rate}-{negative_learning_rate}.pkl",
+        f"analysis/data/simulations/S{threshold}-{randomness}-{positive_learning_rate}-{negative_learning_rate}.pkl",
         "wb",
     ) as handle:
         pkl.dump(out_dict, handle, protocol=pkl.HIGHEST_PROTOCOL)
-
-
-my_dictionary = make_one_simulation(dictionary)
 
 
 def make_all_simulations():
@@ -71,12 +64,12 @@ def make_all_simulations():
 
     combinations = list(itertools.product(*values))
 
-    dictionary = {
-        "THRESHOLD": 1.2,
-        "N_TARGET": 1000,
-        "RANDOMNESS": 0.5,
-        "N_TIMESTEPS": 10,
-        "POSITIVE_LEARNING_RATE": 0.2,
-        "NEGATIVE_LEARNING_RATE": 0.3,
-        "STOP_AT_TARGET": True,
-    }
+    pool = mp.Pool(mp.cpu_count())
+
+    results = [pool.apply(make_one_simulation, args=arg) for arg in combinations]
+
+    pool.close()
+
+
+if __name__ == "__main__":
+    make_all_simulations()
