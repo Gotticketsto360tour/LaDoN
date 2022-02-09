@@ -49,6 +49,9 @@ def make_one_simulation(
             [network.get_opinion_distances() for network in networks]
         ),
         "centrality": np.hstack([network.get_centrality() for network in networks]),
+        "agent_number": np.hstack(
+            [network.get_agent_numbers() for network in networks]
+        ),
     }
 
     with open(
