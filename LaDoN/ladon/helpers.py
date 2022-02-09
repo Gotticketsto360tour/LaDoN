@@ -1,4 +1,5 @@
 import numpy as np
+from prettytable import RANDOM
 from agent import Agent
 import networkx as nx
 
