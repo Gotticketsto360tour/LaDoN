@@ -31,6 +31,10 @@ sns.set_context("talk")
 # It might make sense to have, say, 10 runs within one
 # file for storing data, visualized "as one"
 
+# NOTE:
+# When threshold is low, randomness increases polarization,
+# and when threshold is high, randomness decreases polarization
+
 # TODO:
 # 1. Run optimization to see more robust values
 # 2. Make functions for recording data
