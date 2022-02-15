@@ -58,15 +58,6 @@ class Network:
             list(nx.algorithms.centrality.betweenness_centrality(self.graph).values())
         )
 
-    def write_data(self):
-        data = {
-            "opinions": self.get_opinion_distribution(),
-            "initial_opinions": self.get_initial_opinion_distribution(),
-            "degrees": self.get_degree_distribution(),
-            "distances": self.get_opinion_distances(),
-            "centrality": self.get_centrality(),
-        }
-
     def update_values(self, sampled_agent, neigbor):
         list_of_agents = [self.agents.get(sampled_agent), self.agents.get(neigbor)]
         max_agent, min_agent = max(list_of_agents, key=lambda x: x.opinion), min(
@@ -180,3 +171,31 @@ class Network:
             while self.N_AGENTS < self.N_TARGET:
                 self.take_turn()
             return "DONE"
+
+
+class NoOpinionNetwork(Network):
+    def generate_or_eliminate_agent(self, CONFIGS: Dict):
+        self.graph.add_node(self.agent_number)
+        agent_type = sample(list(CONFIGS.keys()), 1)[0]
+        new_agent = self.agent_number
+        self.agents[self.agent_number] = Agent(CONFIGS[agent_type])
+        self.agent_number += 1
+        self.N_AGENTS += 1
+        if self.N_AGENTS >= 2:
+            self.add_new_connection_randomly(new_agent)
+
+            # this probability could be a different probability than the other random process
+
+            if random() < self.RANDOMNESS:
+                self.add_new_connection_randomly(new_agent)
+            else:
+                self.add_new_connection_through_neighbors(new_agent)
+
+    def take_turn(self):
+        self.generate_or_eliminate_agent(CONFIGS)
+        if self.N_AGENTS >= 2:
+            sampled_agent = sample(self.graph.nodes, 1)[0]
+            if random() < self.RANDOMNESS:
+                self.add_new_connection_randomly(sampled_agent)
+            else:
+                self.add_new_connection_through_neighbors(sampled_agent)
