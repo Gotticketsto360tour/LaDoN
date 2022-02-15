@@ -12,7 +12,18 @@ grouped_data = (
     data.groupby(["cntry", "lrscale"]).agg(opinion=("dweight", sum)).reset_index()
 )
 
-denmark = grouped_data.query("cntry == 'DK'")
+data.groupby("cntry").apply(pd.DataFrame.kurtosis).reset_index()[
+    ["cntry", "lrscale"]
+].sort_values("lrscale")
 
-sns.set(rc={"figure.figsize": (11.7, 8.27)})
-sns.barplot(data=denmark, x="lrscale", y="opinion")
+sns.displot(
+    data=data,
+    x="lrscale",
+    row="cntry",
+    discrete=True,
+    stat="percent",
+    common_norm=False,
+    kde=True,
+)
+
+sns.kdeplot(data=data, x="lrscale", hue="cntry", common_norm=False, linewidth=0.5)

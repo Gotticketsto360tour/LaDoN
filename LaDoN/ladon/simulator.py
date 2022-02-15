@@ -1,10 +1,13 @@
 from matplotlib.pyplot import title, xlabel, xlim, ylabel, ylim
 from visualize import plot_graph
-from network import Network
+from network import Network, NoOpinionNetwork
 import networkx as nx
 import numpy as np
 import seaborn as sns
 import scipy
+import random
+
+random.seed(10)
 
 sns.set(rc={"figure.figsize": (11.7, 8.27)})
 sns.set_context("talk")
@@ -19,28 +22,96 @@ sns.set_context("talk")
 # There seems to be a deep correlation between
 # centrality and extremeness of opinions.
 # The fringes in opinions come from the fringes of the network
+# In stable networks the hub is often composed of
+# old, high degree nodes. These will have high betweeness
+# centrality as they connect to so many nodes.
+# Because centrality is so correlated with age,
+# central nodes will often be nodes that have been
+# under the influence of the conditions of the network
+# for a longer time. If the network tends towards stability,
+# the absolute value of the opinion of central nodes will tend towards 0.
+# As the network becomes more destabilized, this correlation
+# dissapears and even reverses.
 
-# NOTE:
-# Larger xenophobia rates produce smaller distances
-# to neighbors opinions
+# Central nodes are very often high degree nodes.
+# The likelihood of getting a high degree becomes much
+# greater, if your opinion is as close to neutral as possible.
+# In these cases, you can cater to both sides of the spectrum,
+# and get higher degrees.
+# Moreover, nodes with high degrees in stable society
+# will by definition be the nodes exposed to the most opinions in the network.
+# As the network is stable, most of these opinions will be within the
+# bounded confidence interval. Therefore, the high degree nodes
+# will tend towards the mean of the population when the population is stable.
+
+# NOTE: The correlation between degree and centrality
+# fades as the network destabilizes. This suggests that
+# as the network becomes more polarized, some agents
+# become important bridges in the network without having a
+# degree.
+# This should be checked further by finding the instances where
+# polarization is high, degree is low, but centrality is high.
 
 # NOTE: The correlation between centrality and polarization
 # shifts sign when the network polarizes.
 
-# NOTE:
-# It might make sense to have, say, 10 runs within one
-# file for storing data, visualized "as one"
+# TODO:
+# Currently, I don't really use the fact
+# that ties are severed to say anything.
+# Especially problematic is that randomness,
+# doesn't seem to affect any of the important results.
+# This is to some extent interesting in
+# its own right, but it might make more sense to
+# focus the probability of severing ties.
+# This will no doubt have interesting
+# interactions with negative learning rate
+# and threshold.
+
+# What could make sense is to have this as
+# the baseline model, and next model could have
+# randomness at a fixed level (say 0.1) and then
+# vary how much "defriending" there is
 
 # NOTE:
-# When threshold is low, randomness increases polarization,
-# and when threshold is high, randomness decreases polarization
+# Taking stock of the current status of things here:
+# 1. It seems like the model can generate networks
+# quite well in networks where the cost associated
+# with a tie is relatively high. This could be
+# another argument for messing more with tie dissolution
+# instead of degree of randomness.
+
+# 2. The types of opinion distributions I have
+# can be fitted really well with the model.
+# However, the data seems relatively strange.
+# The greatest amount of political consensus
+# seems to be in Estonia and the least
+# in Scandinavia. In other words, something
+# weird is going on. One possible explanation
+# could be that the range of possible political
+# parties within the middle ranges are larger.
+# That could be the explanation for Denmark,
+# but that doesn't explain Norway and Sweden.
+# An important thing to keep in mind is that
+# these are real people on the streets.
+# People in highly polarized places
+# might report central positions to
+# avoid backlash.
+
+# 3. There are some very interesting ties to
+# affective polarization. Some of the surveys
+# especially pertaining to the US could point
+# to high negative learning rates, which
+# could polarize the country. NOTE: These should be
+# explored further
 
 # TODO:
-# 1. Run optimization to see more robust values
-# 2. Make functions for recording data
-# 3. Make first visualizations of what is happening
-# 4. Schedule meeting with Paul regarding the model
-# 5. Opinion as a function of initial opinion is really nice
+# 1. Get fits from networks where opinion dynamics are
+# not included and see if this gets a better fit
+# 2. The network data is really bad. The network science
+# seems to be okay, but Facebook is especially bad. It's too big
+# and too slow - what remedies can be found?
+# 3. Write slides for explaining training and fit of the model
+# 4. Check up on data; can we include clustering in measure?
 
 dictionary = {
     "THRESHOLD": 1.5150662773714703,
@@ -52,103 +123,20 @@ dictionary = {
     "STOP_AT_TARGET": True,
 }
 
+g = nx.read_gml(path="analysis/data/polbooks/polbooks.gml")
+
 dictionary = {
-    "THRESHOLD": 1.2,
-    "N_TARGET": 1000,
-    "RANDOMNESS": 0.5,
+    "THRESHOLD": 0.875823633928921,
+    "N_TARGET": 105,
+    "RANDOMNESS": 0.3480999193670037,
     "N_TIMESTEPS": 10,
-    "POSITIVE_LEARNING_RATE": 0.2,
-    "NEGATIVE_LEARNING_RATE": 0.3,
+    "POSITIVE_LEARNING_RATE": 0.13439617121418493,
+    "NEGATIVE_LEARNING_RATE": 0.18960028610011792,
     "STOP_AT_TARGET": True,
 }
-
-[0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3]
-8 * 5 * 5 * 5
 
 my_network = Network(dictionary=dictionary)
 
 my_network.run_simulation()
 
-numbers = my_network.get_agent_numbers()
-
-distances = np.array(
-    [distance for distance in my_network.get_opinion_distances() if distance]
-)
-plotting = sns.histplot(distances, stat="percent", binwidth=0.02, kde=True).set(
-    title="Average distance to neighbor's opinion", xlabel="Average distance"
-)
 plot_graph(my_network, plot_type="agent_type")
-
-centralities = np.array(
-    list(nx.algorithms.centrality.betweenness_centrality(my_network.graph).values())
-)
-degrees = my_network.get_degree_distribution()
-
-opinions = my_network.get_opinion_distribution()
-
-sns.regplot(numbers, degrees)
-sns.regplot(numbers, centralities)
-sns.regplot(numbers, opinions)
-
-sns.regplot(
-    centralities, np.array([abs(x) for x in opinions]), scatter_kws={"alpha": 0.7}
-).set(
-    title="Absolute value of opinions as a function of Betweeness Centrality",
-    xlabel="Betweeness Centrality",
-    ylabel="Absolute value of Opinion",
-    ylim=(-0.02, 1.02),
-)
-
-initial_opinions = my_network.get_initial_opinion_distribution()
-np.corrcoef(initial_opinions, opinions)
-sns.regplot(initial_opinions, opinions, scatter_kws={"alpha": 0.7}).set(
-    title="Opinion as a function of initial opinion",
-    xlabel="Initial opinion",
-    ylabel="Opinion",
-)
-
-sns.scatterplot(x=degrees, y=initial_opinions, alpha=0.7).set(
-    title="Initial opinion as a function of Degree",
-    xlabel="Degree",
-    ylabel="Initial Opinion",
-)
-sns.scatterplot(x=degrees, y=opinions, alpha=0.7).set(
-    title="Opinion as a function of Degree", xlabel="Degree", ylabel="Opinion"
-)
-sns.regplot(x=degrees, y=centralities).set(
-    title="Centrality as a function of Degree",
-    xlabel="Degree",
-    ylabel="Betweeness Centrality",
-)
-sns.histplot(degrees, stat="percent", binwidth=1, discrete=True, kde=True).set(
-    title="Degree Distribution", xlabel="Degree"
-)
-plotting = sns.histplot(opinions, stat="percent", binwidth=0.05, kde=True).set(
-    title="Opinion Distribution", xlabel="Opinion"
-)
-
-np.median(np.array([abs(x) for x in opinions]))
-
-plotting.set(xlim=(-10, 10))
-
-nx.algorithms.cluster.average_clustering(my_network.graph)
-
-nx.algorithms.assortativity.degree_assortativity_coefficient(my_network.graph)
-
-plot_graph(my_network, plot_type="agent_type")
-
-plot_graph(my_network, plot_type="community")
-
-g = nx.read_gml(path="analysis/data/netscience/netscience.gml")
-
-# g = nx.karate_club_graph()
-
-nx.algorithms.cluster.average_clustering(g)
-nx.algorithms.assortativity.degree_assortativity_coefficient(g)
-degrees_g = [x[1] for x in list(g.degree())]
-sns.histplot(degrees_g, stat="percent")
-
-from netrd.distance import DegreeDivergence
-
-distance_algorithm = DegreeDivergence()
-distance_algorithm.dist(my_network.graph, g)
