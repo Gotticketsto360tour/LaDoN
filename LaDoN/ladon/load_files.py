@@ -1,7 +1,8 @@
 import pickle as pkl
 import glob
 from re import sub
-from matplotlib.pyplot import xlabel, ylabel
+from matplotlib.pyplot import title, xlabel, ylabel
+import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
 
@@ -32,18 +33,18 @@ data["radicalization"] = data["absolute_opinions"] - abs(data["initial_opinions"
 
 data_omit = data.dropna().reset_index(drop=True)
 
-plotting = sns.displot(
-    data=data_omit,
-    x="radicalization",
-    hue="positive_learning_rate",
-    col="threshold",
-    row="negative_learning_rate",
-    stat="percent",
-    common_norm=False,
-    binwidth=0.05,
-    kde=True,
-    facet_kws=dict(margin_titles=True),
-).set(xlabel="Opinion")
+# plotting = sns.displot(
+#     data=data_omit,
+#     x="radicalization",
+#     hue="positive_learning_rate",
+#     col="threshold",
+#     row="negative_learning_rate",
+#     stat="percent",
+#     common_norm=False,
+#     binwidth=0.05,
+#     kde=True,
+#     facet_kws=dict(margin_titles=True),
+# ).set(xlabel="Opinion")
 
 plotting = sns.displot(
     data=data_omit,
@@ -57,23 +58,23 @@ plotting = sns.displot(
     aspect=11.7 / 8.27,
 ).set(xlabel=r"$|O_F| - |O_I|$")
 
-facet = sns.FacetGrid(data, col="threshold", row="negative_learning_rate")
-facet.map_dataframe(
-    lambda data, color: sns.heatmap(
-        data_omit[
-            [
-                "absolute_opinions",
-                "opinions",
-                "distances",
-                "opinion_shift",
-                "initial_opinions",
-                "degrees",
-                "centrality",
-                "agent_number",
-            ]
-        ].corr()
-    )
-)
+# facet = sns.FacetGrid(data, col="threshold", row="negative_learning_rate")
+# facet.map_dataframe(
+#     lambda data, color: sns.heatmap(
+#         data_omit[
+#             [
+#                 "absolute_opinions",
+#                 "opinions",
+#                 "distances",
+#                 "opinion_shift",
+#                 "initial_opinions",
+#                 "degrees",
+#                 "centrality",
+#                 "agent_number",
+#             ]
+#         ].corr()
+#     )
+# )
 
 data_omit.groupby(
     ["threshold", "positive_learning_rate", "negative_learning_rate", "randomness"]
@@ -115,7 +116,7 @@ plotting = sns.histplot(
     common_norm=False,
 ).set(title="Average distance to neighbor's opinion", xlabel="Average distance")
 
-plotting = sns.histplot(
+sns.histplot(
     data=data,
     x="opinions",
     hue="threshold",
@@ -124,16 +125,29 @@ plotting = sns.histplot(
     binwidth=0.05,
     kde=True,
 ).set(title="Opinion Distribution", xlabel=r"$O_F$")
+plt.savefig("plots/Opinion_Distribution_Threshold.png")
 
-plotting = sns.histplot(
-    data=data_omit,
-    x="absolute_opinions",
-    hue="randomness",
+sns.histplot(
+    data=data,
+    x="opinions",
+    hue="positive_learning_rate",
     stat="percent",
     common_norm=False,
     binwidth=0.05,
     kde=True,
-).set(title="Randomness leads to more extreme cases", xlabel=r"$O_F$")
+).set(title="Opinion Distribution", xlabel=r"$O_F$")
+plt.savefig("plots/Opinion_Distribution_PLR.png")
+
+sns.histplot(
+    data=data,
+    x="opinions",
+    hue="negative_learning_rate",
+    stat="percent",
+    common_norm=False,
+    binwidth=0.05,
+    kde=True,
+).set(title="Opinion Distribution", xlabel=r"$O_F$")
+plt.savefig("plots/Opinion_Distribution_NLR.png")
 
 plotting = sns.histplot(
     data=data_omit,
@@ -142,9 +156,10 @@ plotting = sns.histplot(
     stat="percent",
     common_norm=False,
     binwidth=0.05,
-    # discrete=True,
     kde=True,
 ).set(title="Randomness leads to more extreme cases", xlabel=r"$|O_F|$")
+plt.savefig("plots/Absolute_Opinion_Distribution_Randomness.png")
+
 
 plotting = sns.displot(
     data=data_omit,
@@ -171,34 +186,12 @@ plotting = sns.displot(
     kde=True,
     facet_kws=dict(margin_titles=True),
 ).set(xlabel=r"$O_F$")
+plt.savefig("plots/Opinion_Distribution_Facet.png")
 
 # plotting.legend.get_title().set_fontsize(30)
 # Legend texts
 # for text in plotting.legend.texts:
 #    text.set_fontsize(30)
-
-plotting = sns.histplot(
-    data=data_omit,
-    x="degrees",
-    hue="negative_learning_rate",
-    stat="percent",
-    common_norm=False,
-    kde=True,
-    discrete=True,
-).set(title="Opinion Distribution", xlabel="Opinion")
-
-plotting = sns.histplot(
-    data=data_omit,
-    x="degrees",
-    hue="threshold",
-    # col="threshold",
-    # row="randomness",
-    discrete=True,
-    stat="percent",
-    common_norm=False,
-    kde=True,
-    # facet_kws=dict(margin_titles=True),
-).set(xlabel="Degrees")
 
 # NOTE: Randomness makes situations
 # more extreme. Stable conditions
@@ -270,26 +263,6 @@ plotting = sns.displot(
     kde=True,
     facet_kws=dict(margin_titles=True),
 ).set(xlabel="Opinion")
-
-plotting = sns.histplot(
-    data=data,
-    x="opinions",
-    hue="negative_learning_rate",
-    stat="percent",
-    binwidth=0.05,
-    kde=True,
-    common_norm=False,
-).set(title="Opinion Distribution", xlabel="Opinion")
-
-plotting = sns.histplot(
-    data=data,
-    x="opinions",
-    hue="positive_learning_rate",
-    stat="percent",
-    binwidth=0.05,
-    kde=True,
-    common_norm=False,
-).set(title="Opinion Distribution", xlabel="Opinion")
 
 polarization = (
     data_omit.groupby(["threshold", "positive_learning_rate", "negative_learning_rate"])
@@ -388,7 +361,12 @@ sns.relplot(
     height=8.27,
     aspect=11.7 / 8.27,
     kind="line",
-).set(ylabel=r"$\rho_{O_I, O_F}$", xlabel="Positive Learning Rate")
+).set(
+    ylabel=r"$\rho_{O_I, O_F}$",
+    xlabel="Positive Learning Rate",
+    title=r"Correlation between $O_I$ and $O_F$",
+)
+plt.savefig("plots/Correlation_Initial_Opinions_PLR.png")
 
 sns.relplot(
     data=absolute_opinions,
@@ -399,7 +377,13 @@ sns.relplot(
     aspect=11.7 / 8.27,
     palette=blue_pallette,
     kind="line",
+).set(
+    ylabel=r"Median of $|O_F|$",
+    xlabel="Negative Learning Rate",
+    title="Threshold and Negative learning polarizes populations",
 )
+plt.savefig("plots/Median_Threshold_NLR.png")
+
 
 sns.relplot(
     data=absolute_opinions,
@@ -442,7 +426,12 @@ sns.relplot(
     aspect=11.7 / 8.27,
     palette=blue_pallette,
     kind="line",
+).set(
+    ylabel=r"$\rho_{centrality, |O_F|}$",
+    xlabel="Negative Learning Rate",
+    title=r"Correlation between $|O_F|$ and Centrality",
 )
+plt.savefig("plots/Correlation_Absolute_Centrality.png")
 
 correlations_centrality = (
     data_omit.groupby(
@@ -462,7 +451,13 @@ sns.relplot(
     aspect=11.7 / 8.27,
     palette=blue_pallette,
     kind="line",
+).set(
+    ylabel=r"$\rho_{degrees, |O_F|}$",
+    xlabel="Negative Learning Rate",
+    title=r"Correlation between $|O_F|$ and Degrees",
 )
+plt.savefig("plots/Correlation_Absolute_Degrees.png")
+
 
 correlations_centrality = (
     data_omit.groupby(
@@ -484,21 +479,10 @@ sns.relplot(
     kind="line",
 )
 
-sns.relplot(
-    data=correlations_centrality,
-    x="negative_learning_rate",
-    y="absolute_opinions",
-    hue="threshold",
-    palette="mako",
-    height=8.27,
-    aspect=11.7 / 8.27,
-    kind="line",
-)
-
 correlations_centrality = (
     data_omit.groupby(
         ["threshold", "positive_learning_rate", "negative_learning_rate", "randomness"]
-    )["degrees", "absolute_opinions"]
+    )["degrees", "centrality"]
     .corr()
     .iloc[0::2, -1]
     .reset_index()
@@ -507,18 +491,18 @@ correlations_centrality = (
 sns.relplot(
     data=correlations_centrality,
     x="negative_learning_rate",
-    y="absolute_opinions",
+    y="centrality",
     hue="threshold",
-    palette="mako",
     height=8.27,
     aspect=11.7 / 8.27,
+    palette=blue_pallette,
     kind="line",
 )
 
 correlations_centrality = (
     data_omit.groupby(
         ["threshold", "positive_learning_rate", "negative_learning_rate", "randomness"]
-    )["absolute_opinions", "agent_number"]
+    )["degrees", "agent_number"]
     .corr()
     .iloc[0::2, -1]
     .reset_index()
@@ -526,11 +510,11 @@ correlations_centrality = (
 
 sns.relplot(
     data=correlations_centrality,
-    x="positive_learning_rate",
+    x="randomness",
     y="agent_number",
     hue="threshold",
-    palette="mako",
     height=8.27,
     aspect=11.7 / 8.27,
+    palette=blue_pallette,
     kind="line",
 )

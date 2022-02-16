@@ -112,6 +112,7 @@ sns.set_context("talk")
 # and too slow - what remedies can be found?
 # 3. Write slides for explaining training and fit of the model
 # 4. Check up on data; can we include clustering in measure?
+# 5.
 
 dictionary = {
     "THRESHOLD": 1.5150662773714703,
@@ -126,7 +127,7 @@ dictionary = {
 g = nx.read_gml(path="analysis/data/polbooks/polbooks.gml")
 
 dictionary = {
-    "THRESHOLD": 0.875823633928921,
+    "THRESHOLD": 1.775823633928921,
     "N_TARGET": 105,
     "RANDOMNESS": 0.3480999193670037,
     "N_TIMESTEPS": 10,
