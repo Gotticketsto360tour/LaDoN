@@ -105,14 +105,11 @@ sns.set_context("talk")
 # explored further
 
 # TODO:
-# 1. Get fits from networks where opinion dynamics are
-# not included and see if this gets a better fit
-# 2. The network data is really bad. The network science
-# seems to be okay, but Facebook is especially bad. It's too big
-# and too slow - what remedies can be found?
-# 3. Write slides for explaining training and fit of the model
-# 4. Check up on data; can we include clustering in measure?
-# 5.
+# 1. Check up on data; can we include clustering in measure?
+# 2. Try with a pre-specified network, without birth or death of agents
+# 3. Include parameter for probability of tie dissolution.
+# 4. How does number of edges evolve over time?
+
 
 dictionary = {
     "THRESHOLD": 1.5150662773714703,
