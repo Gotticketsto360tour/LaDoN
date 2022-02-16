@@ -110,6 +110,10 @@ sns.set_context("talk")
 # 3. Include parameter for probability of tie dissolution.
 # 4. How does number of edges evolve over time?
 
+# NOTE:
+# If randomness of tie-dissolution is included, I can actually test
+# whether tie dissolution is the reason why polarization doesn't happen
+
 
 dictionary = {
     "THRESHOLD": 1.5150662773714703,
