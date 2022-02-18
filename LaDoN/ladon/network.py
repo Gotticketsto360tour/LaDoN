@@ -1,8 +1,6 @@
 from statistics import mean
-from typing import Dict
 import networkx as nx
 from agent import Agent
-from config import CONFIGS
 from random import sample
 from random import random
 from helpers import find_distance
@@ -13,11 +11,38 @@ import numpy as np
 class Network:
     def __init__(self, dictionary):
         self.__dict__.update(dictionary)
-        self.N_GROUPS = len(CONFIGS)
         self.N_AGENTS = 0
         self.agent_number = 0
+        self.EDGE_SURPLUS = 0
+        self.N_TIE_DISSOLUTIONS = 0
         self.agents = {}
-        self.graph = nx.Graph()
+        self.graph = nx.generators.random_graphs.watts_strogatz_graph(
+            n=self.N_TARGET, k=self.K, p=self.P
+        )
+        self.initialize_network()
+        self.initialize_vectors()
+
+    def initialize_network(self):
+        for agents in range(self.N_TARGET):
+            self.agents[agents] = Agent()
+
+    def initialize_vectors(self):
+        self.MEAN_ABSOLUTE_OPINIONS = []
+        self.SD_ABSOLUTE_OPINIONS = []
+        self.NEGATIVE_TIES_DISSOLUTED = []
+        self.MEAN_DISTANCE = []
+
+    def record_time_step(self):
+        absolute_opinions = abs(self.get_opinion_distribution())
+        mean_absolute_opinions = np.mean(absolute_opinions)
+        standard_deviation = np.std(absolute_opinions)
+        negative_ties_dissoluted = self.N_TIE_DISSOLUTIONS
+        mean_distances = np.mean(self.get_opinion_distances_without_none())
+
+        self.MEAN_ABSOLUTE_OPINIONS.append(mean_absolute_opinions)
+        self.SD_ABSOLUTE_OPINIONS.append(standard_deviation)
+        self.NEGATIVE_TIES_DISSOLUTED.append(negative_ties_dissoluted)
+        self.MEAN_DISTANCE.append(mean_distances)
 
     def get_opinion_distribution(self):
         return np.array(
@@ -50,8 +75,25 @@ class Network:
             ]
         )
 
-    def get_agent_numbers(self):
-        return np.array([agent for agent in self.agents])
+    def get_opinion_distances_without_none(self):
+        return np.array(
+            [
+                mean(
+                    [
+                        abs(
+                            self.agents.get(agent).opinion
+                            - (self.agents.get(neighbor).opinion)
+                        )
+                        for neighbor in self.graph.neighbors(agent)
+                    ]
+                )
+                for agent in self.agents
+                if list(self.graph.neighbors(agent))
+            ]
+        )
+
+    def get_clustering(self):
+        return np.array(list(nx.algorithms.clustering(self.graph).values()))
 
     def get_centrality(self):
         return np.array(
@@ -95,43 +137,27 @@ class Network:
 
     def add_new_connection_through_neighbors(self, agent_on_turn):
 
-        # NOTE: If a neighborhood is fully connected, this action will still be wasted
+        candidate_neighbors = [
+            neighbors_neighbor
+            for neighbor in list(self.graph.neighbors(agent_on_turn))
+            for neighbors_neighbor in list(self.graph.neighbors(neighbor))
+            if neighbors_neighbor != agent_on_turn
+        ]
 
-        neighbors = list(self.graph.neighbors(agent_on_turn))
+        if candidate_neighbors:
+            sampled_neigbor = sample(candidate_neighbors, 1)[0]
+            self.graph.add_edge(agent_on_turn, sampled_neigbor)
 
-        while neighbors:
-            sampled_neighbor = sample(neighbors, 1)[0]
-            # will ensure that no turn is "wasted" by making already existing edges
-            candidate_neighbors = [
-                agent
-                for agent in list(self.graph.neighbors(sampled_neighbor))
-                if agent not in neighbors and agent != agent_on_turn
-            ]
-            if candidate_neighbors:
-                new_neigbor = sample(candidate_neighbors, 1)[0]
-                self.graph.add_edge(agent_on_turn, new_neigbor)
-                break
-            else:
-                neighbors.remove(sampled_neighbor)
-
-    def generate_or_eliminate_agent(self, CONFIGS: Dict):
+    def generate_or_eliminate_agent(self):
         P_d = self.N_AGENTS / (2 * self.N_TARGET)
         if random() >= P_d:
             self.graph.add_node(self.agent_number)
-            agent_type = sample(list(CONFIGS.keys()), 1)[0]
             new_agent = self.agent_number
-            self.agents[self.agent_number] = Agent(CONFIGS[agent_type])
+            self.agents[self.agent_number] = Agent()
             self.agent_number += 1
             self.N_AGENTS += 1
             if self.N_AGENTS >= 2:
                 self.add_new_connection_randomly(new_agent)
-
-                # this probability could be a different probability than the other random process
-
-                if random() < self.RANDOMNESS:
-                    self.add_new_connection_randomly(new_agent)
-                else:
-                    self.add_new_connection_through_neighbors(new_agent)
                 self.update_all_values(new_agent)
 
         else:
@@ -141,7 +167,8 @@ class Network:
             self.N_AGENTS -= 1
 
     def update_all_values(self, agent):
-        for neighbor in self.graph.neighbors(agent):
+        neighbor_list = list(self.graph.neighbors(agent))
+        for neighbor in sample(neighbor_list, k=len(neighbor_list)):
             self.update_values(agent, neighbor)
 
         negative_relations = [
@@ -151,51 +178,46 @@ class Network:
             > self.THRESHOLD
         ]
         for neighbor in negative_relations:
-            self.graph.remove_edge(agent, neighbor)
+            if random() <= self.TIE_DISSOLUTION:
+                self.graph.remove_edge(agent, neighbor)
+                self.N_TIE_DISSOLUTIONS += 1
+                self.EDGE_SURPLUS += 1
 
     def take_turn(self):
-        self.generate_or_eliminate_agent(CONFIGS)
-        if self.N_AGENTS >= 2:
-            sampled_agent = sample(self.graph.nodes, 1)[0]
-            if random() < self.RANDOMNESS:
-                self.add_new_connection_randomly(sampled_agent)
-            else:
-                self.add_new_connection_through_neighbors(sampled_agent)
+        sampled_agent = sample(self.graph.nodes, 1)[0]
+        list_of_neighbors = list(self.graph.neighbors(sampled_agent))
+        if self.EDGE_SURPLUS < 1:
+            self.EDGE_SURPLUS += 1
+            if list_of_neighbors:
+                removed_edge = sample(list_of_neighbors, 1)[0]
+                self.graph.remove_edge(sampled_agent, removed_edge)
+        if random() >= self.RANDOMNESS and list_of_neighbors:
+            self.add_new_connection_through_neighbors(sampled_agent)
+        else:
+            self.add_new_connection_randomly(sampled_agent)
+        self.EDGE_SURPLUS -= 1
 
-            self.update_all_values(sampled_agent)
+        self.update_all_values(sampled_agent)
 
     def run_simulation(self):
-        for _ in tqdm(range(self.N_TIMESTEPS)):
+        for timestep in tqdm(range(self.N_TIMESTEPS)):
             self.take_turn()
-        if self.STOP_AT_TARGET:
-            while self.N_AGENTS < self.N_TARGET:
-                self.take_turn()
-            return "DONE"
+            if timestep % 10 == 0:
+                self.record_time_step()
+        return "DONE"
 
 
 class NoOpinionNetwork(Network):
-    def generate_or_eliminate_agent(self, CONFIGS: Dict):
-        self.graph.add_node(self.agent_number)
-        agent_type = sample(list(CONFIGS.keys()), 1)[0]
-        new_agent = self.agent_number
-        self.agents[self.agent_number] = Agent(CONFIGS[agent_type])
-        self.agent_number += 1
-        self.N_AGENTS += 1
-        if self.N_AGENTS >= 2:
-            self.add_new_connection_randomly(new_agent)
-
-            # this probability could be a different probability than the other random process
-
-            if random() < self.RANDOMNESS:
-                self.add_new_connection_randomly(new_agent)
-            else:
-                self.add_new_connection_through_neighbors(new_agent)
-
     def take_turn(self):
-        self.generate_or_eliminate_agent(CONFIGS)
-        if self.N_AGENTS >= 2:
-            sampled_agent = sample(self.graph.nodes, 1)[0]
-            if random() < self.RANDOMNESS:
-                self.add_new_connection_randomly(sampled_agent)
-            else:
-                self.add_new_connection_through_neighbors(sampled_agent)
+        sampled_agent = sample(self.graph.nodes, 1)[0]
+        list_of_neighbors = list(self.graph.neighbors(sampled_agent))
+        if self.EDGE_SURPLUS < 1:
+            self.EDGE_SURPLUS += 1
+            if list_of_neighbors:
+                removed_edge = sample(list_of_neighbors, 1)[0]
+                self.graph.remove_edge(sampled_agent, removed_edge)
+        if random() >= self.RANDOMNESS and list_of_neighbors:
+            self.add_new_connection_through_neighbors(sampled_agent)
+        else:
+            self.add_new_connection_randomly(sampled_agent)
+        self.EDGE_SURPLUS -= 1

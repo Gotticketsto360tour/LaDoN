@@ -31,7 +31,7 @@ pio.renderers.default = "notebook"
 # fig.show()
 
 
-def run_single_simulation(dictionary, run, target):
+def run_single_simulation(dictionary, run, target, target_dictionary):
     random.seed(run)
 
     my_network = Network(dictionary=dictionary)
@@ -39,18 +39,17 @@ def run_single_simulation(dictionary, run, target):
 
     clustering_diff = abs(
         nx.algorithms.cluster.average_clustering(my_network.graph)
-        - nx.algorithms.cluster.average_clustering(target)
+        - (target_dictionary.get("clustering"))
     )
     assortativity_diff = abs(
         nx.algorithms.assortativity.degree_assortativity_coefficient(my_network.graph)
-        - nx.algorithms.assortativity.degree_assortativity_coefficient(target)
+        - (target_dictionary.get("assortativity"))
     )
     network_avg_path = find_average_path(my_network.graph)
-    target_avg_path = find_average_path(target)
 
     average_path_diff = abs(
-        find_average_path(my_network.graph) - find_average_path(target)
-    ) / max([network_avg_path, target_avg_path])
+        network_avg_path - target_dictionary.get("average_path")
+    ) / max([network_avg_path, target_dictionary.get("average_path")])
 
     distance_algorithm = netrd.distance.DegreeDivergence()
     JSD = np.sqrt(distance_algorithm.dist(my_network.graph, target))
@@ -62,69 +61,40 @@ def run_single_simulation(dictionary, run, target):
 
 
 def objective(trial, target, repeats):
-
-    threshold = trial.suggest_float("threshold", 0, 2)
+    target_dictionary = {
+        "clustering": nx.algorithms.cluster.average_clustering(target),
+        "assortativity": nx.algorithms.assortativity.degree_assortativity_coefficient(
+            target
+        ),
+        "average_path": find_average_path(target),
+    }
+    N_TARGET = target.number_of_nodes()
+    N_EDGES = target.number_of_edges()
+    K = round(N_EDGES / N_TARGET)
+    threshold = trial.suggest_float("threshold", 0.5, 2)
     randomness = trial.suggest_float("randomness", 0.1, 1)
     positive_learning_rate = trial.suggest_float("positive_learning_rate", 0, 0.5)
     negative_learning_rate = trial.suggest_float("negative_learning_rate", 0, 0.5)
+    tie_dissolution = trial.suggest_float("tie_dissolution", 0.1, 1)
 
-    N_TARGET = target.number_of_nodes()
     dictionary = {
         "THRESHOLD": threshold,
         "N_TARGET": N_TARGET,
         "RANDOMNESS": randomness,
-        "N_TIMESTEPS": 10,
+        "N_TIMESTEPS": N_TARGET * 10,
         "POSITIVE_LEARNING_RATE": positive_learning_rate,
         "NEGATIVE_LEARNING_RATE": negative_learning_rate,
-        "STOP_AT_TARGET": True,
+        "P": 0.4,
+        "K": K,
+        "TIE_DISSOLUTION": tie_dissolution,
     }
 
-    results = [run_single_simulation(dictionary, run, target) for run in range(10)]
+    results = [
+        run_single_simulation(dictionary, run, target, target_dictionary)
+        for run in range(repeats)
+    ]
 
     return mean(results)
-
-    for run in range(repeats):
-        random.seed(run)
-
-        dictionary = {
-            "THRESHOLD": threshold,
-            "N_TARGET": N_TARGET,
-            "RANDOMNESS": randomness,
-            "N_TIMESTEPS": 10,
-            "POSITIVE_LEARNING_RATE": positive_learning_rate,
-            "NEGATIVE_LEARNING_RATE": negative_learning_rate,
-            "STOP_AT_TARGET": True,
-        }
-
-        my_network = Network(dictionary=dictionary)
-        my_network.run_simulation()
-
-        clustering_diff = abs(
-            nx.algorithms.cluster.average_clustering(my_network.graph)
-            - nx.algorithms.cluster.average_clustering(target)
-        )
-        assortativity_diff = abs(
-            nx.algorithms.assortativity.degree_assortativity_coefficient(
-                my_network.graph
-            )
-            - nx.algorithms.assortativity.degree_assortativity_coefficient(target)
-        )
-        network_avg_path = find_average_path(my_network.graph)
-        target_avg_path = find_average_path(target)
-
-        average_path_diff = abs(
-            find_average_path(my_network.graph) - find_average_path(target)
-        ) / max([network_avg_path, target_avg_path])
-
-        distance_algorithm = netrd.distance.DegreeDivergence()
-        JSD = np.sqrt(distance_algorithm.dist(my_network.graph, target))
-        minimize_array = np.array(
-            [clustering_diff, assortativity_diff, average_path_diff, JSD]
-        )
-        norm = np.linalg.norm(minimize_array)
-        list_of_norms.append(norm)
-
-    return mean(list_of_norms)
 
 
 netscience = nx.read_gml(path="analysis/data/netscience/netscience.gml")
@@ -154,13 +124,13 @@ if __name__ == "__main__":
         "polbooks": polbooks,
         "polblogs": polblogs,
         "netscience": netscience,
-        # "facebook": facebook,
+        "facebook": facebook,
     }
     for name, network in name_dictionary.items():
         print(f"--- NOW RUNNING: {name} ---")
         study = optuna.create_study(study_name=name, direction="minimize")
         study.optimize(
-            lambda trial: objective(trial, network, 5), n_trials=100, n_jobs=-1
+            lambda trial: objective(trial, network, 5), n_trials=1000, n_jobs=-1
         )
         study.best_params
         resulting_dictionary[name] = study.best_params

@@ -10,7 +10,7 @@ sns.set(rc={"figure.figsize": (11.7, 8.27)})
 sns.set_context("talk")
 blue_pallette = sns.dark_palette("#69d", reverse=True, as_cmap=True)
 
-list_of_simulations = glob.glob("analysis/data/simulations/*")
+list_of_simulations = glob.glob("analysis/data/simulations/over_time/*")
 
 
 def make_one_data_frame(path: str):
