@@ -1,4 +1,3 @@
-from matplotlib.pyplot import title, xlabel, xlim, ylabel, ylim
 from visualize import plot_graph
 from network import Network, NoOpinionNetwork
 import networkx as nx
@@ -6,8 +5,6 @@ import numpy as np
 import seaborn as sns
 import scipy
 import random
-
-random.seed(10)
 
 sns.set(rc={"figure.figsize": (11.7, 8.27)})
 sns.set_context("talk")
@@ -114,31 +111,72 @@ sns.set_context("talk")
 # If randomness of tie-dissolution is included, I can actually test
 # whether tie dissolution is the reason why polarization doesn't happen
 
+# NOTE:
+# For low thresholds, high randomness, low negative_learning_rate
+# this generates classic connected caveman graphs.
+
+# NOTE:
+# There does exist parameter combinations,
+# that seem reasonable,
+# which produces polarization sometimes
+# and diversity at other times. Very nice!
 
 dictionary = {
-    "THRESHOLD": 1.5150662773714703,
-    "N_TARGET": 1589,
-    "RANDOMNESS": 0.1448096424703561,
-    "N_TIMESTEPS": 1589 * 3,
-    "POSITIVE_LEARNING_RATE": 0.44084799100234867,
-    "NEGATIVE_LEARNING_RATE": 0.36968366749403275,
-    "STOP_AT_TARGET": True,
+    "THRESHOLD": 0.8,
+    "N_TARGET": 500,
+    "RANDOMNESS": 0.2,
+    "N_TIMESTEPS": 10000,
+    "POSITIVE_LEARNING_RATE": 0.1,
+    "NEGATIVE_LEARNING_RATE": 0.1,
+    "P": 0.4,
+    "K": 7,
+    "TIE_DISSOLUTION": 0.9,
 }
-
-g = nx.read_gml(path="analysis/data/polbooks/polbooks.gml")
 
 dictionary = {
-    "THRESHOLD": 1.775823633928921,
-    "N_TARGET": 105,
-    "RANDOMNESS": 0.3480999193670037,
-    "N_TIMESTEPS": 10,
-    "POSITIVE_LEARNING_RATE": 0.13439617121418493,
-    "NEGATIVE_LEARNING_RATE": 0.18960028610011792,
-    "STOP_AT_TARGET": True,
+    "THRESHOLD": 0.7,
+    "N_TARGET": 1000,
+    "RANDOMNESS": 0.1,
+    "N_TIMESTEPS": 10000,
+    "POSITIVE_LEARNING_RATE": 0.5,
+    "NEGATIVE_LEARNING_RATE": 0.1,
+    "P": 0.4,
+    "K": 7,
+    "TIE_DISSOLUTION": 0.9,
 }
+
+networks = [Network(dictionary) for _ in range(10)]
+for i, network in enumerate(networks):
+    random.seed(i)
+    network.run_simulation()
 
 my_network = Network(dictionary=dictionary)
 
 my_network.run_simulation()
+
+# plot_graph(my_network, plot_type="agent_type")
+
+opinions = my_network.get_opinion_distribution()
+
+plotting = sns.displot(
+    data=opinions,
+    stat="percent",
+    common_norm=False,
+    # binwidth=0.05,
+    kde=True,
+    height=8.27,
+    aspect=11.7 / 8.27,
+).set(xlabel=r"$O_F$")
+
+plotting = sns.histplot(
+    data=my_network.get_degree_distribution(),
+    stat="percent",
+    common_norm=False,
+    # binwidth=0.05,
+    kde=True,
+    # height=8.27,
+    # aspect=11.7 / 8.27,
+    discrete=True,
+).set(xlabel=r"$O_F$")
 
 plot_graph(my_network, plot_type="agent_type")
