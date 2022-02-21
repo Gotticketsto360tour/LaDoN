@@ -1,6 +1,7 @@
 import numpy as np
 from agent import Agent
 import networkx as nx
+import random
 
 
 def find_distance(A: Agent, B: Agent):

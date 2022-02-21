@@ -131,28 +131,48 @@ dictionary = {
     "P": 0.4,
     "K": 7,
     "TIE_DISSOLUTION": 0.9,
+    "RECORD": True,
 }
 
 dictionary = {
-    "THRESHOLD": 0.7,
+    "THRESHOLD": 1.9,
     "N_TARGET": 1000,
     "RANDOMNESS": 0.1,
     "N_TIMESTEPS": 10000,
-    "POSITIVE_LEARNING_RATE": 0.5,
+    "POSITIVE_LEARNING_RATE": 0.25,
     "NEGATIVE_LEARNING_RATE": 0.1,
     "P": 0.4,
     "K": 7,
-    "TIE_DISSOLUTION": 0.9,
+    "TIE_DISSOLUTION": 0.8,
+    "RECORD": False,
 }
-
-networks = [Network(dictionary) for _ in range(10)]
-for i, network in enumerate(networks):
-    random.seed(i)
-    network.run_simulation()
 
 my_network = Network(dictionary=dictionary)
 
 my_network.run_simulation()
+
+S = [
+    my_network.graph.subgraph(c).copy()
+    for c in sorted(nx.connected_components(my_network.graph), key=len, reverse=True)
+]
+
+sum(
+    [
+        ((s.number_of_nodes() + (n + 1)) / 1000)
+        * (nx.average_shortest_path_length(s) + 1)
+        for n, s in enumerate(S)
+    ]
+)
+
+nx.average_shortest_path_length(S[0])
+
+my_network.graph.number_of_nodes()
+
+len(list(nx.connected_components(my_network.graph)))
+
+nx.average_shortest_path_length(my_network.graph)
+
+sns.lineplot(data=my_network.AVERAGE_PATH_LENGTH)
 
 # plot_graph(my_network, plot_type="agent_type")
 

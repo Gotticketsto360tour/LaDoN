@@ -3,7 +3,7 @@ import networkx as nx
 from agent import Agent
 from random import sample
 from random import random
-from helpers import find_distance
+from helpers import find_distance, find_average_path
 from tqdm import tqdm
 import numpy as np
 
@@ -31,6 +31,9 @@ class Network:
         self.SD_ABSOLUTE_OPINIONS = []
         self.NEGATIVE_TIES_DISSOLUTED = []
         self.MEAN_DISTANCE = []
+        self.AVERAGE_PATH_LENGTH = []
+        self.AVERAGE_CLUSTERING = []
+        self.ASSORTATIVITY = []
 
     def record_time_step(self):
         absolute_opinions = abs(self.get_opinion_distribution())
@@ -43,6 +46,11 @@ class Network:
         self.SD_ABSOLUTE_OPINIONS.append(standard_deviation)
         self.NEGATIVE_TIES_DISSOLUTED.append(negative_ties_dissoluted)
         self.MEAN_DISTANCE.append(mean_distances)
+        self.AVERAGE_CLUSTERING.append(nx.average_clustering(self.graph))
+        self.AVERAGE_PATH_LENGTH.append(find_average_path(self.graph))
+        self.ASSORTATIVITY.append(
+            nx.algorithms.assortativity.degree_assortativity_coefficient(self.graph)
+        )
 
     def get_opinion_distribution(self):
         return np.array(
@@ -202,7 +210,7 @@ class Network:
     def run_simulation(self):
         for timestep in tqdm(range(self.N_TIMESTEPS)):
             self.take_turn()
-            if timestep % 10 == 0:
+            if timestep % 20 == 0 and self.RECORD:
                 self.record_time_step()
         return "DONE"
 

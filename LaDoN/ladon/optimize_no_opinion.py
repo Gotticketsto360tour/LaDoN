@@ -1,6 +1,6 @@
 from statistics import mean
 from unittest import result
-from network import Network
+from network import Network, NoOpinionNetwork
 import networkx as nx
 import numpy as np
 import optuna
@@ -35,7 +35,7 @@ pio.renderers.default = "notebook"
 def run_single_simulation(dictionary, run, target, target_dictionary):
     random.seed(run)
 
-    my_network = Network(dictionary=dictionary)
+    my_network = NoOpinionNetwork(dictionary=dictionary)
     my_network.run_simulation()
 
     clustering_diff = abs(
@@ -65,22 +65,18 @@ def objective(trial, target, repeats, target_dictionary):
     N_TARGET = target.number_of_nodes()
     N_EDGES = target.number_of_edges()
     K = math.ceil(N_EDGES / N_TARGET)
-    threshold = trial.suggest_float("threshold", 0.5, 2)
+    # threshold = trial.suggest_float("threshold", 0.5, 2)
     randomness = trial.suggest_float("randomness", 0.1, 1)
-    positive_learning_rate = trial.suggest_float("positive_learning_rate", 0, 0.5)
-    negative_learning_rate = trial.suggest_float("negative_learning_rate", 0, 0.5)
-    tie_dissolution = trial.suggest_float("tie_dissolution", 0.1, 1)
+    # positive_learning_rate = trial.suggest_float("positive_learning_rate", 0, 0.5)
+    # negative_learning_rate = trial.suggest_float("negative_learning_rate", 0, 0.5)
+    # tie_dissolution = trial.suggest_float("tie_dissolution", 0.1, 1)
 
     dictionary = {
-        "THRESHOLD": threshold,
         "N_TARGET": N_TARGET,
         "RANDOMNESS": randomness,
         "N_TIMESTEPS": N_TARGET * 10,
-        "POSITIVE_LEARNING_RATE": positive_learning_rate,
-        "NEGATIVE_LEARNING_RATE": negative_learning_rate,
         "P": 0.4,
         "K": K,
-        "TIE_DISSOLUTION": tie_dissolution,
         "RECORD": False,
     }
 
@@ -120,13 +116,13 @@ dolphin = nx.read_gml(path="analysis/data/dolphins/dolphins.gml")
 if __name__ == "__main__":
     resulting_dictionary = {}
     name_dictionary = {
-        # "karate": karate,
-        # "dolphin": dolphin,
-        # "polbooks": polbooks,
-        # "netscience": netscience,
-        # "astrophysics": astrophysics,
+        "karate": karate,
+        "dolphin": dolphin,
+        "polbooks": polbooks,
+        "netscience": netscience,
         "polblogs": polblogs,
         "facebook": facebook,
+        "astrophysics": astrophysics,
     }
     for name, network in name_dictionary.items():
         print(f"--- NOW RUNNING: {name} ---")
@@ -143,9 +139,9 @@ if __name__ == "__main__":
         )
         study.best_params
         resulting_dictionary[name] = study.best_params
-        joblib.dump(study, f"analysis/data/optimization/{name}_study.pkl")
+        joblib.dump(study, f"analysis/data/optimization/{name}_study_no_opinion.pkl")
     with open(
-        f"analysis/data/optimization/best_optimization_results.pkl",
+        f"analysis/data/optimization/best_optimization_results_no_opinion.pkl",
         "wb",
     ) as handle:
         pkl.dump(resulting_dictionary, handle, protocol=pkl.HIGHEST_PROTOCOL)

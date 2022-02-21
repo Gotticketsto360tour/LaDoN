@@ -9,9 +9,18 @@ from config import (
     NEGATIVE_LEARNING_RATES,
     TIE_DISSOLUTIONS,
 )
+import random
 import itertools
 import multiprocessing as mp
 import pickle as pkl
+
+
+def make_network_by_seed(dictionary, run):
+    random.seed(run)
+    np.random.seed(run)
+    network = Network(dictionary)
+    network.run_simulation()
+    return network
 
 
 def make_one_simulation(
@@ -31,11 +40,10 @@ def make_one_simulation(
         "P": 0.4,
         "K": 7,
         "TIE_DISSOLUTION": tie_dissolution,
+        "RECORD": True,
     }
 
-    networks = [Network(dictionary) for _ in range(10)]
-    for network in networks:
-        network.run_simulation()
+    networks = [make_network_by_seed(dictionary, run) for run in range(10)]
 
     out_dict_final_state = {
         "threshold": threshold,
