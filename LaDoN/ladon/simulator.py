@@ -125,6 +125,19 @@ sns.set_context("talk")
 # which produces polarization sometimes
 # and diversity at other times. Very nice!
 
+# NOTE:
+# There needs to be a serious consideration
+# for whether agents with degree 1 should be able
+# to be disconnected based on random rewiring.
+# I think this could distort the results quite considerably.
+
+# This can be done quite easily. But this
+# means that it assumed that agents with few friends don't really
+# "move" socially, but instead stays put.
+# The inclusion of this assumption can be made so strong so
+# as to ensure that the graph is connected. Is this better or worse?
+# Having it be connected could
+
 dictionary = {
     "THRESHOLD": 0.8,
     "N_TARGET": 500,
@@ -139,12 +152,12 @@ dictionary = {
 }
 
 dictionary = {
-    "THRESHOLD": 0.9,
+    "THRESHOLD": 0.4,
     "N_TARGET": 500,
-    "RANDOMNESS": 0.14,
+    "RANDOMNESS": 0.1,
     "N_TIMESTEPS": 5000,
-    "POSITIVE_LEARNING_RATE": 0.4,
-    "NEGATIVE_LEARNING_RATE": 0.2,
+    "POSITIVE_LEARNING_RATE": 0.1,
+    "NEGATIVE_LEARNING_RATE": 0.05,
     "P": 0.4,
     "K": 7,
     "TIE_DISSOLUTION": 0.99,
@@ -155,7 +168,15 @@ my_network = Network(dictionary=dictionary)
 
 my_network.run_simulation()
 
-sns.lineplot(data=my_network.MEAN_ABSOLUTE_OPINIONS)
+sns.lineplot(data=my_network.EDGE_SURPLUS_LIST)
+
+sns.lineplot(data=my_network.N_EDGES)
+sns.lineplot(data=my_network.NEGATIVE_TIES_DISSOLUTED)
+sns.lineplot(data=my_network.N_MAIN_COMPONENT)
+sns.lineplot(data=my_network.AVERAGE_CLUSTERING)
+sns.lineplot(data=my_network.NEGATIVE_TIES_DISSOLUTED)
+sns.lineplot(data=my_network.ASSORTATIVITY)
+
 
 plot_graph(my_network, plot_type="agent_type", save_path="MyHtmlPlot.html")
 

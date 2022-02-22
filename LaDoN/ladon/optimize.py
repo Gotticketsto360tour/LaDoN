@@ -64,7 +64,7 @@ def run_single_simulation(dictionary, run, target, target_dictionary):
 def objective(trial, target, repeats, target_dictionary):
     N_TARGET = target.number_of_nodes()
     N_EDGES = target.number_of_edges()
-    K = math.ceil(N_EDGES / N_TARGET)
+    K = round(N_EDGES / N_TARGET)
     threshold = trial.suggest_float("threshold", 0.5, 2)
     randomness = trial.suggest_float("randomness", 0.1, 1)
     positive_learning_rate = trial.suggest_float("positive_learning_rate", 0, 0.5)
@@ -79,7 +79,7 @@ def objective(trial, target, repeats, target_dictionary):
         "POSITIVE_LEARNING_RATE": positive_learning_rate,
         "NEGATIVE_LEARNING_RATE": negative_learning_rate,
         "P": 0.4,
-        "K": K,
+        "K": 2 * K,
         "TIE_DISSOLUTION": tie_dissolution,
         "RECORD": False,
     }

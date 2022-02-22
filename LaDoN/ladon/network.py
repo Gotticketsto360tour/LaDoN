@@ -34,6 +34,9 @@ class Network:
         # self.AVERAGE_PATH_LENGTH = []
         self.AVERAGE_CLUSTERING = []
         self.ASSORTATIVITY = []
+        self.N_MAIN_COMPONENT = []
+        self.N_EDGES = []
+        self.EDGE_SURPLUS_LIST = []
 
     def record_time_step(self):
         absolute_opinions = abs(self.get_opinion_distribution())
@@ -51,6 +54,11 @@ class Network:
         self.ASSORTATIVITY.append(
             nx.algorithms.assortativity.degree_assortativity_coefficient(self.graph)
         )
+        self.N_MAIN_COMPONENT.append(
+            len(max(nx.connected_components(self.graph), key=len))
+        )
+        self.N_EDGES.append(self.graph.number_of_edges())
+        self.EDGE_SURPLUS_LIST.append(self.EDGE_SURPLUS)
 
     def get_opinion_distribution(self):
         return np.array(
@@ -140,6 +148,7 @@ class Network:
             and agent not in self.graph.neighbors(agent_on_turn)
         ]
         if nodes_without_new_agent:
+            self.EDGE_SURPLUS -= 1
             sampled_agent = sample(nodes_without_new_agent, 1)[0]
             self.graph.add_edge(agent_on_turn, sampled_agent)
 
@@ -150,9 +159,11 @@ class Network:
             for neighbor in list(self.graph.neighbors(agent_on_turn))
             for neighbors_neighbor in list(self.graph.neighbors(neighbor))
             if neighbors_neighbor != agent_on_turn
+            and neighbors_neighbor not in self.graph.neighbors(agent_on_turn)
         ]
 
         if candidate_neighbors:
+            self.EDGE_SURPLUS -= 1
             sampled_neigbor = sample(candidate_neighbors, 1)[0]
             self.graph.add_edge(agent_on_turn, sampled_neigbor)
 
@@ -194,16 +205,14 @@ class Network:
     def take_turn(self):
         sampled_agent = sample(self.graph.nodes, 1)[0]
         list_of_neighbors = list(self.graph.neighbors(sampled_agent))
-        if self.EDGE_SURPLUS < 1:
+        if self.EDGE_SURPLUS < 0 and len(list_of_neighbors) > 1:
             self.EDGE_SURPLUS += 1
-            if list_of_neighbors:
-                removed_edge = sample(list_of_neighbors, 1)[0]
-                self.graph.remove_edge(sampled_agent, removed_edge)
+            removed_edge = sample(list_of_neighbors, 1)[0]
+            self.graph.remove_edge(sampled_agent, removed_edge)
         if random() >= self.RANDOMNESS and list_of_neighbors:
             self.add_new_connection_through_neighbors(sampled_agent)
         else:
             self.add_new_connection_randomly(sampled_agent)
-        self.EDGE_SURPLUS -= 1
 
         self.update_all_values(sampled_agent)
 
