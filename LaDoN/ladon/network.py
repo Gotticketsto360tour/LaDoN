@@ -31,7 +31,7 @@ class Network:
         self.SD_ABSOLUTE_OPINIONS = []
         self.NEGATIVE_TIES_DISSOLUTED = []
         self.MEAN_DISTANCE = []
-        self.AVERAGE_PATH_LENGTH = []
+        # self.AVERAGE_PATH_LENGTH = []
         self.AVERAGE_CLUSTERING = []
         self.ASSORTATIVITY = []
 
@@ -47,7 +47,7 @@ class Network:
         self.NEGATIVE_TIES_DISSOLUTED.append(negative_ties_dissoluted)
         self.MEAN_DISTANCE.append(mean_distances)
         self.AVERAGE_CLUSTERING.append(nx.average_clustering(self.graph))
-        self.AVERAGE_PATH_LENGTH.append(find_average_path(self.graph))
+        # self.AVERAGE_PATH_LENGTH.append(find_average_path(self.graph))
         self.ASSORTATIVITY.append(
             nx.algorithms.assortativity.degree_assortativity_coefficient(self.graph)
         )

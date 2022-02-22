@@ -21,6 +21,7 @@ from bokeh.palettes import (
 )
 from bokeh.transform import linear_cmap
 from bokeh.models import EdgesAndLinkedNodes, NodesAndLinkedEdges
+from bokeh.plotting import save, output_file, figure
 import pandas as pd
 import networkx
 import matplotlib.pyplot as plt
@@ -33,7 +34,7 @@ from network import Network
 output_notebook()
 
 
-def plot_graph(network: Network, plot_type="community"):
+def plot_graph(network: Network, plot_type="community", save_path=""):
     G = network.graph
     degrees = dict(networkx.degree(G))
     networkx.set_node_attributes(G, name="degree", values=degrees)
@@ -73,7 +74,7 @@ def plot_graph(network: Network, plot_type="community"):
             ("Degree", "@degree"),
             ("Modularity Class", "@modularity_class"),
             ("Modularity Color", "$color[swatch]:modularity_color"),
-            ("Opinion", "@opinions"),
+            ("Opinion", "$opinions{%0.2f}"),
         ]
     elif plot_type == "agent_type":
         agent_types = {}
@@ -89,11 +90,11 @@ def plot_graph(network: Network, plot_type="community"):
         )
         color_by_this_attribute = "opinions"  # agent_types_color
         HOVER_TOOLTIPS = [
-            ("Character", "@index"),
+            # ("Character", "@index"),
             ("Degree", "@degree"),
             # ("Agent Type", "@agent_types"),
             # ("Agent Type Color", "$color[swatch]:agent_types_color"),
-            ("Opinion", "@opinions"),
+            ("Opinion", "@opinions{0.00}"),
         ]
     # Choose colors for node and edge highlighting
     node_highlight_color = "white"
@@ -130,8 +131,8 @@ def plot_graph(network: Network, plot_type="community"):
         fill_color=linear_cmap(
             color_by_this_attribute,
             "Blues256",
-            min(opinions.values()),
-            max(opinions.values()),
+            -1,
+            1,
         ),
     )
     # Set node highlight colors
@@ -162,3 +163,7 @@ def plot_graph(network: Network, plot_type="community"):
     plot.renderers.append(network_graph)
 
     show(plot)
+
+    if save_path:
+        output_file(filename=save_path, title="Static HTML file")
+        save(plot)

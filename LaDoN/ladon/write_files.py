@@ -32,9 +32,9 @@ def make_one_simulation(
 ):
     dictionary = {
         "THRESHOLD": threshold,
-        "N_TARGET": 1000,
+        "N_TARGET": 500,
         "RANDOMNESS": randomness,
-        "N_TIMESTEPS": 10000,
+        "N_TIMESTEPS": 5000,
         "POSITIVE_LEARNING_RATE": positive_learning_rate,
         "NEGATIVE_LEARNING_RATE": negative_learning_rate,
         "P": 0.4,
@@ -86,7 +86,7 @@ def make_one_simulation(
             [np.array(network.SD_ABSOLUTE_OPINIONS) for network in networks]
         ),
         "timestep": np.array(
-            [timestep for network in networks for timestep in range(0, 10000, 10)]
+            [timestep for network in networks for timestep in range(0, 5000, 10)]
         ),
     }
 
@@ -115,7 +115,7 @@ def make_all_simulations():
 
     combinations = list(itertools.product(*values))
 
-    pool = mp.Pool(mp.cpu_count())
+    pool = mp.Pool(mp.cpu_count() - 1)
 
     results = [pool.apply(make_one_simulation, args=arg) for arg in combinations]
 

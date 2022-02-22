@@ -1,6 +1,6 @@
 from numpy.core.numeric import outer
 
-THRESHOLDS = [0.7, 0.8, 0.9, 1, 1.1, 1.2]
+THRESHOLDS = [0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2]
 RANDOMNESS = [0.1, 0.2, 0.3, 0.4, 0.5]
 POSITIVE_LEARNING_RATES = [0.0, 0.1, 0.2, 0.3, 0.4, 0.5]
 NEGATIVE_LEARNING_RATES = [0.0, 0.1, 0.2, 0.3, 0.4, 0.5]

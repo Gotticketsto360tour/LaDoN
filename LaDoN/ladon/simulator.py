@@ -102,10 +102,14 @@ sns.set_context("talk")
 # explored further
 
 # TODO:
-# 1. Check up on data; can we include clustering in measure?
-# 2. Try with a pre-specified network, without birth or death of agents
-# 3. Include parameter for probability of tie dissolution.
-# 4. How does number of edges evolve over time?
+# 1. Write up sections regarding the missing
+# tie dissolution in previous work (relate)
+# to the article from Smaldino
+# 2. Write-up examples of the importance of
+# co-evolution instead of "bi-evolution"
+# 3. Include the physics networks in modelling
+# 4. Start simulating for all different conditions
+
 
 # NOTE:
 # If randomness of tie-dissolution is included, I can actually test
@@ -135,46 +139,25 @@ dictionary = {
 }
 
 dictionary = {
-    "THRESHOLD": 1.9,
-    "N_TARGET": 1000,
-    "RANDOMNESS": 0.1,
-    "N_TIMESTEPS": 10000,
-    "POSITIVE_LEARNING_RATE": 0.25,
-    "NEGATIVE_LEARNING_RATE": 0.1,
+    "THRESHOLD": 0.9,
+    "N_TARGET": 500,
+    "RANDOMNESS": 0.14,
+    "N_TIMESTEPS": 5000,
+    "POSITIVE_LEARNING_RATE": 0.4,
+    "NEGATIVE_LEARNING_RATE": 0.2,
     "P": 0.4,
     "K": 7,
-    "TIE_DISSOLUTION": 0.8,
-    "RECORD": False,
+    "TIE_DISSOLUTION": 0.99,
+    "RECORD": True,
 }
 
 my_network = Network(dictionary=dictionary)
 
 my_network.run_simulation()
 
-S = [
-    my_network.graph.subgraph(c).copy()
-    for c in sorted(nx.connected_components(my_network.graph), key=len, reverse=True)
-]
+sns.lineplot(data=my_network.MEAN_ABSOLUTE_OPINIONS)
 
-sum(
-    [
-        ((s.number_of_nodes() + (n + 1)) / 1000)
-        * (nx.average_shortest_path_length(s) + 1)
-        for n, s in enumerate(S)
-    ]
-)
-
-nx.average_shortest_path_length(S[0])
-
-my_network.graph.number_of_nodes()
-
-len(list(nx.connected_components(my_network.graph)))
-
-nx.average_shortest_path_length(my_network.graph)
-
-sns.lineplot(data=my_network.AVERAGE_PATH_LENGTH)
-
-# plot_graph(my_network, plot_type="agent_type")
+plot_graph(my_network, plot_type="agent_type", save_path="MyHtmlPlot.html")
 
 opinions = my_network.get_opinion_distribution()
 
@@ -197,6 +180,17 @@ plotting = sns.histplot(
     # height=8.27,
     # aspect=11.7 / 8.27,
     discrete=True,
+).set(xlabel=r"$O_F$")
+
+sns.histplot(
+    data=my_network.get_opinion_distances_without_none(),
+    stat="percent",
+    common_norm=False,
+    # binwidth=0.05,
+    kde=True,
+    # height=8.27,
+    # aspect=11.7 / 8.27,
+    # discrete=True,
 ).set(xlabel=r"$O_F$")
 
 plot_graph(my_network, plot_type="agent_type")
