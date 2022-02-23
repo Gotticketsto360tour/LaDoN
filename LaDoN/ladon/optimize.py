@@ -120,13 +120,13 @@ dolphin = nx.read_gml(path="analysis/data/dolphins/dolphins.gml")
 if __name__ == "__main__":
     resulting_dictionary = {}
     name_dictionary = {
-        # "karate": karate,
-        # "dolphin": dolphin,
-        # "polbooks": polbooks,
-        # "netscience": netscience,
+        "karate": karate,
+        "dolphin": dolphin,
+        "polbooks": polbooks,
+        "netscience": netscience,
         # "astrophysics": astrophysics,
         "polblogs": polblogs,
-        "facebook": facebook,
+        # "facebook": facebook,
     }
     for name, network in name_dictionary.items():
         print(f"--- NOW RUNNING: {name} ---")

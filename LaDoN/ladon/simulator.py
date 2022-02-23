@@ -152,7 +152,7 @@ dictionary = {
 }
 
 dictionary = {
-    "THRESHOLD": 0.4,
+    "THRESHOLD": 0.9,
     "N_TARGET": 500,
     "RANDOMNESS": 0.1,
     "N_TIMESTEPS": 5000,
@@ -160,7 +160,7 @@ dictionary = {
     "NEGATIVE_LEARNING_RATE": 0.05,
     "P": 0.4,
     "K": 7,
-    "TIE_DISSOLUTION": 0.99,
+    "TIE_DISSOLUTION": 0.8,
     "RECORD": True,
 }
 
@@ -169,12 +169,10 @@ my_network = Network(dictionary=dictionary)
 my_network.run_simulation()
 
 sns.lineplot(data=my_network.EDGE_SURPLUS_LIST)
-
 sns.lineplot(data=my_network.N_EDGES)
 sns.lineplot(data=my_network.NEGATIVE_TIES_DISSOLUTED)
 sns.lineplot(data=my_network.N_MAIN_COMPONENT)
 sns.lineplot(data=my_network.AVERAGE_CLUSTERING)
-sns.lineplot(data=my_network.NEGATIVE_TIES_DISSOLUTED)
 sns.lineplot(data=my_network.ASSORTATIVITY)
 
 

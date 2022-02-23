@@ -380,11 +380,113 @@ Many of the classic models are analytical models, but the field has largely tran
 In these models, modellers have tried to incorporate some of the knowledge already discussed in the introduction. 
 Specifically, these models are normally based on the idea of social influence and homophily. 
 In other words, agents influence each other through interactions and they prefer to interact with agents that are similar to themselves. 
-Beyond assimilative forces, modellers have also introduced "negative" social influence. Agents can sometimes cause their opinions to drift further apart. 
-One of these models goes by the name of a "bounded confidence model". The work I am doing builds specifically on this model, so we will spend some time introducing it in some detail.
+Beyond assimilative forces, modellers have also introduced "negative" social influence. Agents can sometimes cause their opinions to drift further apart. It's important to mention that negative influence is weakly supported by evidence, wheras positive influence is a robust finding. 
+One of these models goes by the name of a "bounded confidence model". The work I am doing builds specifically on this type of model, so we will spend some time introducing it in some detail. 
 
-Thankfully, it is a very simple and intuitive model. Agents are connected in a network. 
-An agent is then sampled on time-step. This agen
+Thankfully, it is a very simple and intuitive agent-based model. We conceptualize opinions as a continous value between -1 and 1. We have agents initialized with opinions drawn from a uniform distribution:
+
+\begin{figure}[h]
+	\begin{align*}
+	O \sim \mathcal{U}(-1, 1)
+	\end{align*}
+\end{figure}
+
+We situate the agents in a network, typically a fully connected network or a lattice structure. 
+We then sample an agent, who updates their opinion based on the opinions of her peers. 
+To model the homophilic nature of human interactions, we introduce a bound on the confidence on the agents, hence the name "bounded confidence". 
+We can think of this as a threshold for when agent's are similar enough to interact:
+
+\begin{figure}[h]
+	\begin{align*}
+	B \geq |O_1 - O_2|
+	\end{align*}
+\end{figure}
+
+where $B$ is the threshold for confidence and $O_1$ and $O_2$ refers to opinions of two interacting agents.
+When agents are similar, they interact positively, meaning that they pull each other's opinions closer together. 
+When they are too dissimilar, they push each other further away.
+This is formalized by letting the agents update their values based on the distance between them:
+
+\begin{figure}[h]
+	\begin{align*}
+	V_p &= \frac{1}{2} (|O_1 - O_2|) \cdot \alpha \\
+	V_n &=  \frac{1}{2} (|O_1 - O_2|) \cdot \beta
+	\end{align*}
+\end{figure}
+
+where $V_p$ is the positive influence value, $V_n$ is the negative influence value,
+$\alpha$ is the positive learning rate and $\beta$ is the negative learning rate. 
+The fraction $\frac{1}{2}$ is only there to ease the interpretation of the learning rates.
+When $\alpha = 1$, agents will take the mean of $O_1$ and $O_2$ to be their opinion. They meet each other halfway.
+When $\alpha = \frac{1}{2}$, will both go half the distance from their onset to the mean of $O_1$ and $O_2$. 
+$\beta$ is less intuitive, but it's exactly the same idea as $\alpha$. The distance that opinions are pushed is proportional to the distance of opinions.
+$\beta$ defines how much of that distance agents are pushed away from each other.
+
+This does not outline the specific implementation of these models, but the principle is the exact same for these types of models. 
+And these models have been well-studied and are a famous class of models within the opinion dynamics field.
+But is this a good model of opinion dynamics? 
+To answer that, it is fruitful to ask what the model assumes. All models make assumptions, but some models abstract away crucial pieces of the puzzle.
+And in this case, a crucial point is that social networks determine opinions and opinions determine social networks.
+Connections to other people determines largely what kind of discussions we have, what opinions we are exposed to. 
+But opinions and ideas also determine what people we are drawn to and who we keep as friends. Connections are not set in stone. Connections and opinions are in an interplay, where they co-evolve dynamically.
+In this case, bounded confidence models typically assume static networks.
+This assumes that opinions will not affect the underlying social structure. 
+More specifically, the model assumes that although people can annoy you enough to change to the "opposite" opinions,
+you will still stay friends with them. 
+
+I will therefore argue that tie dissolution and tie creation should be an important feature of any opinion dynamic model.
+In related game-theoretic work on cooperation, tie dissolution has been shown to be an extremely important mechanism for generating cooperation. 
+By deleting ties with non-cooperaters, the defectors are isolated, and cooperation soars in populations. 
+In other words, by defriending toxic people, you are helping making the world a more cooperative place. 
+And something similar might be happening in opinion dynamics. By deleting ties with 
+agents of negative influence, you might avoid radicalization and polarization.
+We therefore need to develop a good model for tie generation and tie dissolution in a network. 
+
+\subsection{Models of Network Formation}
+A consistent problem in the field of network formation is that idealized networks don't look like social networks.
+Typically, the networks can replicate one or two of the typical features of social networks, but not all of them at the same time. 
+Ideally, we want a model that can generate the general pattern of real social networks, and not just one or two of their characteristics.
+Some of the most prominent social network characteristics are short average path length, high clustering coefficient, degree assortativity and scale-free degree distributions. 
+Based on empirical networks studied over time, a good candidate model seems to be one based on the principle of triadic closure.
+Triadic closure is a fancy way of saying "finding new connections through friends of friends". The study found that connections based on triadic closure was 30 times more likely that finding through "friends of friends of friends", in other words one handshake more away from you. 
+Models based on triadic closure has shown success in generating many of the classical patterns of social networks, as well as being able to describe social networks in animals. 
+For this reason, I assume that most new connections are made through triadic closure and that the rest can be modelled as random connections in the network. 
+
+\subsection{Summary}
+We consider a model of opinion dynamics, where agents are initialized in a small-world network and interact with each other as described by the bounded confidence model.
+However, we let the connections of the network be changed over time based on the opinions of agents. 
+At every time-step, an agent is sampled to be on turn. This agent makes new connections via triadic closure or via connection to a randomly sampled agent.
+After making this new connection, the sampled agent interacts with all their neighbors iteratively. When all neighbors have been interacted with, negative ties have some probability of being removed.
+
+To keep the number of edges more or less constant, the model keeps track of how many edges have been disconnected. When there is no surplus of edges, agents create new connections by rewiring existing connections. When there is a surplus, these connections are generated without rewiring. 
+
+At some point, we have to stop running the simulation. We let the number of timesteps be 10 times the number of agents. On average, each agent will have 10 times where it is the agent on turn. 
+This is where you can debate whether the model should be run for longer amounts of time, as many of the classic models are run more or less until all agents reach equilibrium values, where no opinion change is happening. We simplify and note that for most simulations, the overall direction of the simulation will be apparent after these runs.
+
+\subsection{Training the model}
+
+As mentioned, previous models have had problems with generating the combination of characteristic patterns of social networks. Moreover, many of them have problems of generalizability and for the most part only work in one context. 
+To be part of the solution and not the problem, I fit the model to different real world social networks and evaluate how well the model can capture the observed network characteristics.
+Beyond evaluating the model, we can compare it to the network formation model which does not include any opinion dynamics. This serves as a more abstract model comparison, to see how much better the model captures the network characteristics by including opinion dynamics. 
+
+To fit the models, we run through the parameters of the model (randomness, confidence boundary, learning rate, tie dissolution rate) and find the best combination using Bayesian Hyperparameter Optimization.
+Bayesian Hyperparameter Optimization is just an algorithm for efficiently searching the parameter space to find some minimum. What we want to minimize here is the difference between the generated network and the target network. 
+Therefore, I minimize the Eucledian norm of the differences between the generated network and the target network:
+
+\begin{figure}[h]
+	\begin{align*}
+	\begin{bmatrix}
+		Correlation Coefficient \\
+		Degree Assortativity \\
+		Average Path Length \\
+		Jensen-Shannon Divergence
+	  \end{bmatrix}
+	\end{align*}
+\end{figure}
+
+Although getting as close as possible numerically is what we want, we are more interested in whether the model is able to capture the patterns qualitatively. 
+Of special interest to my purpose of getting more information regarding the co-evolution of networks and opinion dynamics, the relative difference between the model with and without opinion dynamics is interesting.
+If the co-evolutoin of networks does influence networks, we would expect the model with opinion dynamics to better than the model without the opinion dynamics. 
 
 
 

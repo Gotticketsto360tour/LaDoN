@@ -167,24 +167,6 @@ class Network:
             sampled_neigbor = sample(candidate_neighbors, 1)[0]
             self.graph.add_edge(agent_on_turn, sampled_neigbor)
 
-    def generate_or_eliminate_agent(self):
-        P_d = self.N_AGENTS / (2 * self.N_TARGET)
-        if random() >= P_d:
-            self.graph.add_node(self.agent_number)
-            new_agent = self.agent_number
-            self.agents[self.agent_number] = Agent()
-            self.agent_number += 1
-            self.N_AGENTS += 1
-            if self.N_AGENTS >= 2:
-                self.add_new_connection_randomly(new_agent)
-                self.update_all_values(new_agent)
-
-        else:
-            sampled_agent = sample(self.graph.nodes, 1)[0]
-            self.graph.remove_node(sampled_agent)
-            del self.agents[sampled_agent]
-            self.N_AGENTS -= 1
-
     def update_all_values(self, agent):
         neighbor_list = list(self.graph.neighbors(agent))
         for neighbor in sample(neighbor_list, k=len(neighbor_list)):
@@ -205,7 +187,7 @@ class Network:
     def take_turn(self):
         sampled_agent = sample(self.graph.nodes, 1)[0]
         list_of_neighbors = list(self.graph.neighbors(sampled_agent))
-        if self.EDGE_SURPLUS < 0 and len(list_of_neighbors) > 1:
+        if self.EDGE_SURPLUS < 1 and list_of_neighbors:
             self.EDGE_SURPLUS += 1
             removed_edge = sample(list_of_neighbors, 1)[0]
             self.graph.remove_edge(sampled_agent, removed_edge)
@@ -228,13 +210,11 @@ class NoOpinionNetwork(Network):
     def take_turn(self):
         sampled_agent = sample(self.graph.nodes, 1)[0]
         list_of_neighbors = list(self.graph.neighbors(sampled_agent))
-        if self.EDGE_SURPLUS < 1:
+        if self.EDGE_SURPLUS < 1 and list_of_neighbors:
             self.EDGE_SURPLUS += 1
-            if list_of_neighbors:
-                removed_edge = sample(list_of_neighbors, 1)[0]
-                self.graph.remove_edge(sampled_agent, removed_edge)
+            removed_edge = sample(list_of_neighbors, 1)[0]
+            self.graph.remove_edge(sampled_agent, removed_edge)
         if random() >= self.RANDOMNESS and list_of_neighbors:
             self.add_new_connection_through_neighbors(sampled_agent)
         else:
             self.add_new_connection_randomly(sampled_agent)
-        self.EDGE_SURPLUS -= 1

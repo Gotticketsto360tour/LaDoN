@@ -121,8 +121,8 @@ if __name__ == "__main__":
         "polbooks": polbooks,
         "netscience": netscience,
         "polblogs": polblogs,
-        "facebook": facebook,
-        "astrophysics": astrophysics,
+        # "facebook": facebook,
+        # "astrophysics": astrophysics,
     }
     for name, network in name_dictionary.items():
         print(f"--- NOW RUNNING: {name} ---")
