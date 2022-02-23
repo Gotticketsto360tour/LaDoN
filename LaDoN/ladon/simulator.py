@@ -152,7 +152,7 @@ dictionary = {
 }
 
 dictionary = {
-    "THRESHOLD": 0.85,
+    "THRESHOLD": 0.9,
     "N_TARGET": 500,
     "RANDOMNESS": 0.1,
     "N_TIMESTEPS": 5000,
@@ -160,13 +160,15 @@ dictionary = {
     "NEGATIVE_LEARNING_RATE": 0.1,
     "P": 0.4,
     "K": 10,
-    "TIE_DISSOLUTION": 0.7,
-    "RECORD": True,
+    "TIE_DISSOLUTION": 0.99,
+    "RECORD": False,
 }
 
 my_network = Network(dictionary=dictionary)
 
 my_network.run_simulation()
+
+sns.lineplot(data=my_network.MEAN_ABSOLUTE_OPINIONS)
 
 sns.lineplot(data=my_network.NEGATIVE_TIES_DISSOLUTED)
 sns.lineplot(data=my_network.AVERAGE_CLUSTERING)
@@ -200,7 +202,7 @@ plotting = sns.histplot(
     # height=8.27,
     # aspect=11.7 / 8.27,
     discrete=True,
-).set(xlabel=r"$O_F$")
+).set(xlabel="Degree")
 
 sns.histplot(
     data=my_network.get_opinion_distances_without_none(),

@@ -175,6 +175,13 @@ class Network:
                 self.graph.remove_edge(agent, neighbor)
                 self.N_TIE_DISSOLUTIONS += 1
                 self.EDGE_SURPLUS += 1
+                self.ensure_no_lone_agents(agent, neighbor)
+
+    def ensure_no_lone_agents(self, sampled_agent, neighbor):
+        if len(list(self.graph.neighbors(sampled_agent))) == 0:
+            self.add_new_connection_randomly(sampled_agent)
+        if len(list(self.graph.neighbors(neighbor))) == 0:
+            self.add_new_connection_randomly(neighbor)
 
     def take_turn(self):
         sampled_agent = sample(self.graph.nodes, 1)[0]
@@ -183,6 +190,7 @@ class Network:
             self.EDGE_SURPLUS += 1
             removed_edge = sample(list_of_neighbors, 1)[0]
             self.graph.remove_edge(sampled_agent, removed_edge)
+            self.ensure_no_lone_agents(sampled_agent, removed_edge)
         if random() >= self.RANDOMNESS and list_of_neighbors:
             self.add_new_connection_through_neighbors(sampled_agent)
         else:
@@ -206,6 +214,7 @@ class NoOpinionNetwork(Network):
             self.EDGE_SURPLUS += 1
             removed_edge = sample(list_of_neighbors, 1)[0]
             self.graph.remove_edge(sampled_agent, removed_edge)
+            self.ensure_no_lone_agents(sampled_agent, removed_edge)
         if random() >= self.RANDOMNESS and list_of_neighbors:
             self.add_new_connection_through_neighbors(sampled_agent)
         else:
