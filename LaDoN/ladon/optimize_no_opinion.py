@@ -7,6 +7,7 @@ import optuna
 import netrd
 from tqdm import tqdm
 from helpers import find_average_path
+from helpers import get_main_component
 import random
 import pickle as pkl
 import multiprocessing as mp
@@ -126,6 +127,7 @@ if __name__ == "__main__":
     }
     for name, network in name_dictionary.items():
         print(f"--- NOW RUNNING: {name} ---")
+        network = get_main_component(network)
         study = optuna.create_study(study_name=name, direction="minimize")
         target_dictionary = {
             "clustering": nx.algorithms.cluster.average_clustering(network),

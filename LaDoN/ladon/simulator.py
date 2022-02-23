@@ -125,18 +125,12 @@ sns.set_context("talk")
 # which produces polarization sometimes
 # and diversity at other times. Very nice!
 
-# NOTE:
-# There needs to be a serious consideration
-# for whether agents with degree 1 should be able
-# to be disconnected based on random rewiring.
-# I think this could distort the results quite considerably.
-
-# This can be done quite easily. But this
-# means that it assumed that agents with few friends don't really
-# "move" socially, but instead stays put.
-# The inclusion of this assumption can be made so strong so
-# as to ensure that the graph is connected. Is this better or worse?
-# Having it be connected could
+# TODO:
+# 1. Find better networks to match as targets
+# 2. Read and understand the polarization of politics paper
+# 3. Make connectedpapers and read for papers connected to "cooperation tie dissolution" paper
+# 4. Run full sweep of parameters
+# 5. Write up an abstract of the idea for friday
 
 dictionary = {
     "THRESHOLD": 0.8,
@@ -152,23 +146,21 @@ dictionary = {
 }
 
 dictionary = {
-    "THRESHOLD": 0.9,
+    "THRESHOLD": 1,
     "N_TARGET": 500,
     "RANDOMNESS": 0.1,
     "N_TIMESTEPS": 5000,
-    "POSITIVE_LEARNING_RATE": 0.15,
-    "NEGATIVE_LEARNING_RATE": 0.1,
+    "POSITIVE_LEARNING_RATE": 0.2,
+    "NEGATIVE_LEARNING_RATE": 0.2,
     "P": 0.4,
     "K": 10,
     "TIE_DISSOLUTION": 0.99,
-    "RECORD": False,
+    "RECORD": True,
 }
 
 my_network = Network(dictionary=dictionary)
 
 my_network.run_simulation()
-
-sns.lineplot(data=my_network.MEAN_ABSOLUTE_OPINIONS)
 
 sns.lineplot(data=my_network.NEGATIVE_TIES_DISSOLUTED)
 sns.lineplot(data=my_network.AVERAGE_CLUSTERING)

@@ -1,5 +1,6 @@
 from statistics import mean
 from unittest import result
+from helpers import get_main_component
 from network import Network
 import networkx as nx
 import numpy as np
@@ -15,7 +16,6 @@ import plotly.io as pio
 import math
 
 pio.renderers.default = "notebook"
-
 
 # study = joblib.load("analysis/data/optimization/polbooks_study.pkl")
 
@@ -104,6 +104,12 @@ astrophysics = nx.read_edgelist(
     nodetype=int,
 )
 
+theoretical_physics = nx.read_edgelist(
+    "analysis/data/physics/ca-HepTh.txt",
+    create_using=nx.Graph(),
+    nodetype=int,
+)
+
 karate = nx.karate_club_graph()
 
 polblogs = nx.read_gml(
@@ -128,7 +134,9 @@ if __name__ == "__main__":
         "polblogs": polblogs,
         # "facebook": facebook,
     }
+
     for name, network in name_dictionary.items():
+        network = get_main_component(network=network)
         print(f"--- NOW RUNNING: {name} ---")
         study = optuna.create_study(study_name=name, direction="minimize")
         target_dictionary = {

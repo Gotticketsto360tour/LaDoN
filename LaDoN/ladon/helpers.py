@@ -13,9 +13,13 @@ def compare_values(A: Agent, B: Agent):
     return np.linalg.norm((A.opinion - B.opinion))
 
 
-def find_average_path(network):
+def get_main_component(network):
     largest_cc = max(nx.connected_components(network), key=len)
-    sub = network.subgraph(largest_cc)
+    return network.subgraph(largest_cc)
+
+
+def find_average_path(network):
+    sub = get_main_component(network)
     nodes = list(sub.nodes())
     n_samples = 1000
     sampling_shortest_path = []
