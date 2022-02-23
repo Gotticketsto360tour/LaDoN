@@ -152,15 +152,15 @@ dictionary = {
 }
 
 dictionary = {
-    "THRESHOLD": 0.9,
+    "THRESHOLD": 0.85,
     "N_TARGET": 500,
     "RANDOMNESS": 0.1,
     "N_TIMESTEPS": 5000,
-    "POSITIVE_LEARNING_RATE": 0.1,
-    "NEGATIVE_LEARNING_RATE": 0.05,
+    "POSITIVE_LEARNING_RATE": 0.15,
+    "NEGATIVE_LEARNING_RATE": 0.1,
     "P": 0.4,
-    "K": 7,
-    "TIE_DISSOLUTION": 0.8,
+    "K": 10,
+    "TIE_DISSOLUTION": 0.7,
     "RECORD": True,
 }
 
@@ -168,12 +168,13 @@ my_network = Network(dictionary=dictionary)
 
 my_network.run_simulation()
 
-sns.lineplot(data=my_network.EDGE_SURPLUS_LIST)
-sns.lineplot(data=my_network.N_EDGES)
 sns.lineplot(data=my_network.NEGATIVE_TIES_DISSOLUTED)
-sns.lineplot(data=my_network.N_MAIN_COMPONENT)
 sns.lineplot(data=my_network.AVERAGE_CLUSTERING)
 sns.lineplot(data=my_network.ASSORTATIVITY)
+sns.lineplot(data=my_network.MEAN_ABSOLUTE_OPINIONS)
+sns.lineplot(data=my_network.AVERAGE_PATH_LENGTH)
+sns.lineplot(data=my_network.MEAN_DISTANCE)
+sns.lineplot(data=my_network.SD_ABSOLUTE_OPINIONS)
 
 
 plot_graph(my_network, plot_type="agent_type", save_path="MyHtmlPlot.html")
