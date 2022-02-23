@@ -150,11 +150,11 @@ dictionary = {
     "N_TARGET": 500,
     "RANDOMNESS": 0.1,
     "N_TIMESTEPS": 5000,
-    "POSITIVE_LEARNING_RATE": 0.2,
-    "NEGATIVE_LEARNING_RATE": 0.2,
+    "POSITIVE_LEARNING_RATE": 0.05,
+    "NEGATIVE_LEARNING_RATE": 0.08,
     "P": 0.4,
     "K": 10,
-    "TIE_DISSOLUTION": 0.99,
+    "TIE_DISSOLUTION": 0.5,
     "RECORD": True,
 }
 
