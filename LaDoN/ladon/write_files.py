@@ -86,7 +86,7 @@ def make_one_simulation(
             [np.array(network.SD_ABSOLUTE_OPINIONS) for network in networks]
         ),
         "timestep": np.array(
-            [timestep for network in networks for timestep in range(0, 5000, 10)]
+            [timestep for network in networks for timestep in range(0, 5000, 20)]
         ),
     }
 

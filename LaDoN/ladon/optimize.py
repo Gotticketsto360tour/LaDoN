@@ -67,8 +67,8 @@ def objective(trial, target, repeats, target_dictionary):
     K = round(N_EDGES / N_TARGET)
     threshold = trial.suggest_float("threshold", 0.5, 2)
     randomness = trial.suggest_float("randomness", 0.1, 1)
-    positive_learning_rate = trial.suggest_float("positive_learning_rate", 0, 0.5)
-    negative_learning_rate = trial.suggest_float("negative_learning_rate", 0, 0.5)
+    positive_learning_rate = trial.suggest_float("positive_learning_rate", 0.05, 0.5)
+    negative_learning_rate = trial.suggest_float("negative_learning_rate", 0.05, 0.5)
     tie_dissolution = trial.suggest_float("tie_dissolution", 0.1, 1)
 
     dictionary = {
