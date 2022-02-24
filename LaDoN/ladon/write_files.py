@@ -85,8 +85,18 @@ def make_one_simulation(
         "sd_absolute_opinion": np.hstack(
             [np.array(network.SD_ABSOLUTE_OPINIONS) for network in networks]
         ),
+        "average_path_length": np.hstack(
+            [np.array(network.AVERAGE_PATH_LENGTH) for network in networks]
+        ),
         "timestep": np.array(
             [timestep for network in networks for timestep in range(0, 5000, 20)]
+        ),
+        "run": np.array(
+            [
+                run
+                for run, network in enumerate(networks)
+                for timestep in range(0, 5000, 20)
+            ]
         ),
     }
 

@@ -182,6 +182,9 @@ class Network:
             self.add_new_connection_randomly(sampled_agent)
         if len(list(self.graph.neighbors(neighbor))) == 0:
             self.add_new_connection_randomly(neighbor)
+        if not nx.is_connected(self.graph):
+            self.EDGE_SURPLUS -= 1
+            self.graph.add_edge(sampled_agent, neighbor)
 
     def take_turn(self):
         sampled_agent = sample(self.graph.nodes, 1)[0]

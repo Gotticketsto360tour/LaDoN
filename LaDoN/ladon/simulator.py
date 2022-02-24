@@ -125,6 +125,30 @@ sns.set_context("talk")
 # which produces polarization sometimes
 # and diversity at other times. Very nice!
 
+# NOTE:
+# When tie-dissolution is 0, there is no correlation between distance in opinion space and distance in the network.
+# As tie-dissolution rises, the correspondance between average path length and absolute opinion becomes stronger.
+# This makes sense as tie-dissolution is the only way for agents to change their connections in relation to their opinion.
+# When tie-dissolution is 0, polarization of opinion does not lead to polarization of the network or vice versa.
+# These conditions resemble the classic models in the literature. The results of polarization often happens directly because
+# the agents do not reflect their opinions in their connections.
+# As soon as tie-dissolution is greater than 0, agents will over time have less and less distance to their neighbors.
+# This is because assimilation will draw agents close and distant agents will gradually be discarded.
+# As a result of this process, communities evolve where opinions are similar.
+# Because of triadic closure, these neighborhoods become more connected and more similar, creating a self-reinforcing loop.
+# In other words, tie-dissolution results in homophily.
+# As a result, distance in network space and distance in opinion space becomes more and more alike.
+# When the network polarizes in opinion space, the result will be a polarization in the network, where the two poles push each other further and further away from each other, resulting in bi-polarization.
+# As only a few connections remain between the two parts of the graph, the average path length increases substantially.
+# In these circumstances, random connections that connect across the network will often be severed, and will therefore be unlikely.
+# When the network is best characterized by consensus, the network consists of one primary core. Long-range connections are more likely to be sustained, creating a "small-world" effect.
+
+# NOTE:
+# Make the visualization of networks evolving over time - really sells the point.
+
+# NOTE:
+# Randomness doesn't affect qualitative results - it affects the speed of convergence.
+
 # TODO:
 # 1. Find better networks to match as targets
 # 2. Read and understand the polarization of politics paper
@@ -141,20 +165,20 @@ dictionary = {
     "NEGATIVE_LEARNING_RATE": 0.1,
     "P": 0.4,
     "K": 7,
-    "TIE_DISSOLUTION": 0.9,
+    "TIE_DISSOLUTION": 0.8,
     "RECORD": True,
 }
 
 dictionary = {
-    "THRESHOLD": 1,
+    "THRESHOLD": 0.7,
     "N_TARGET": 500,
-    "RANDOMNESS": 0.1,
-    "N_TIMESTEPS": 5000,
-    "POSITIVE_LEARNING_RATE": 0.05,
-    "NEGATIVE_LEARNING_RATE": 0.08,
+    "RANDOMNESS": 0.4,
+    "N_TIMESTEPS": 10000,
+    "POSITIVE_LEARNING_RATE": 0.2,
+    "NEGATIVE_LEARNING_RATE": 0.05,
     "P": 0.4,
     "K": 10,
-    "TIE_DISSOLUTION": 0.5,
+    "TIE_DISSOLUTION": 0.9,
     "RECORD": True,
 }
 
@@ -206,5 +230,12 @@ sns.histplot(
     # aspect=11.7 / 8.27,
     # discrete=True,
 ).set(xlabel=r"$O_F$")
+
+# THIS IS A PRETTY GREAT WAY OF SHOWING
+# WHAT HAPPENS TO THE NETWORK OVER TIME
+
+my_network = Network(dictionary=dictionary)
+
+my_network.run_simulation()
 
 plot_graph(my_network, plot_type="agent_type")
