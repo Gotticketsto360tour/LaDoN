@@ -41,7 +41,6 @@ class Network:
         standard_deviation = np.std(absolute_opinions)
         negative_ties_dissoluted = self.N_TIE_DISSOLUTIONS
         mean_distances = np.mean(self.get_opinion_distances_without_none())
-
         self.MEAN_ABSOLUTE_OPINIONS.append(mean_absolute_opinions)
         self.SD_ABSOLUTE_OPINIONS.append(standard_deviation)
         self.NEGATIVE_TIES_DISSOLUTED.append(negative_ties_dissoluted)

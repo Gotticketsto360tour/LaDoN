@@ -19,14 +19,13 @@ def get_main_component(network):
 
 
 def find_average_path(network):
-    sub = get_main_component(network)
-    nodes = list(sub.nodes())
+    nodes = list(network.nodes())
     n_samples = 1000
     sampling_shortest_path = []
     for _ in range(n_samples):
         n1, n2 = random.choices(nodes, k=2)
         sampling_shortest_path.append(
-            nx.shortest_path_length(sub, source=n1, target=n2)
+            nx.shortest_path_length(network, source=n1, target=n2)
         )
 
     return mean(sampling_shortest_path)

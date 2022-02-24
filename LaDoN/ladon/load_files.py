@@ -1,6 +1,7 @@
 import pickle as pkl
 import glob
 from re import sub
+from turtle import color
 from matplotlib.pyplot import title, xlabel, ylabel
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -10,7 +11,7 @@ sns.set(rc={"figure.figsize": (11.7, 8.27)})
 sns.set_context("talk")
 blue_pallette = sns.dark_palette("#69d", reverse=True, as_cmap=True)
 
-list_of_simulations = glob.glob("analysis/data/simulations/over_time/*")
+list_of_simulations = glob.glob("analysis/data/simulations/final_state/*")
 
 
 def make_one_data_frame(path: str):
@@ -26,6 +27,8 @@ def combine_data():
 
 
 data = combine_data()
+
+sns.lineplot(data=data, x="timestep", y="mean_absolute_opinion")
 
 data["absolute_opinions"] = data["opinions"].apply(lambda x: abs(x))
 data["opinion_shift"] = abs(data["initial_opinions"] - (data["opinions"]))
@@ -90,7 +93,7 @@ sns.heatmap(
             "initial_opinions",
             "degrees",
             "centrality",
-            "agent_number",
+            "clustering",
         ]
     ].corr(),
     annot=True,

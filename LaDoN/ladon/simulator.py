@@ -170,14 +170,14 @@ dictionary = {
 }
 
 dictionary = {
-    "THRESHOLD": 0.7,
+    "THRESHOLD": 0.8,
     "N_TARGET": 500,
-    "RANDOMNESS": 0.4,
+    "RANDOMNESS": 0.1,
     "N_TIMESTEPS": 10000,
-    "POSITIVE_LEARNING_RATE": 0.2,
-    "NEGATIVE_LEARNING_RATE": 0.05,
-    "P": 0.4,
-    "K": 10,
+    "POSITIVE_LEARNING_RATE": 0.15,
+    "NEGATIVE_LEARNING_RATE": 0.1,
+    "P": 0.1,
+    "K": 7,
     "TIE_DISSOLUTION": 0.9,
     "RECORD": True,
 }

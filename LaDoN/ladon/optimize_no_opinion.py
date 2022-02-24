@@ -31,13 +31,16 @@ pio.renderers.default = "notebook"
 
 # fig = optuna.visualization.plot_slice(study)
 # fig.show()
+def make_network_by_seed(dictionary, run):
+    random.seed(run)
+    np.random.seed(run)
+    network = NoOpinionNetwork(dictionary)
+    network.run_simulation()
+    return network
 
 
 def run_single_simulation(dictionary, run, target, target_dictionary):
-    random.seed(run)
-
-    my_network = NoOpinionNetwork(dictionary=dictionary)
-    my_network.run_simulation()
+    my_network = make_network_by_seed(dictionary=dictionary, run=run)
 
     clustering_diff = abs(
         nx.algorithms.cluster.average_clustering(my_network.graph)
@@ -75,8 +78,8 @@ def objective(trial, target, repeats, target_dictionary):
     dictionary = {
         "N_TARGET": N_TARGET,
         "RANDOMNESS": randomness,
-        "N_TIMESTEPS": N_TARGET * 10,
-        "P": 0.4,
+        "N_TIMESTEPS": N_TARGET * 20,
+        "P": 0.1,
         "K": 2 * K,
         "RECORD": False,
     }

@@ -1,4 +1,5 @@
 from statistics import mean
+from typing import Dict
 from unittest import result
 from helpers import get_main_component
 from network import Network
@@ -32,11 +33,29 @@ pio.renderers.default = "notebook"
 # fig.show()
 
 
-def run_single_simulation(dictionary, run, target, target_dictionary):
+def make_network_by_seed(dictionary, run):
     random.seed(run)
+    np.random.seed(run)
+    network = Network(dictionary)
+    network.run_simulation()
+    return network
 
-    my_network = Network(dictionary=dictionary)
-    my_network.run_simulation()
+
+def run_single_simulation(
+    dictionary: Dict, run: int, target: nx.Graph(), target_dictionary: Dict
+):
+    """Run a single simulation and return the eucledian norm of the vector of differences.
+
+    Args:
+        dictionary (Dict): Dictionary specifying how the Network class should be initiated.
+        run (int): _description_
+        target (nx.Graph): _description_
+        target_dictionary (Dict): _description_
+
+    Returns:
+        _type_: _description_
+    """
+    my_network = make_network_by_seed(dictionary=dictionary, run=run)
 
     clustering_diff = abs(
         nx.algorithms.cluster.average_clustering(my_network.graph)
@@ -75,10 +94,10 @@ def objective(trial, target, repeats, target_dictionary):
         "THRESHOLD": threshold,
         "N_TARGET": N_TARGET,
         "RANDOMNESS": randomness,
-        "N_TIMESTEPS": N_TARGET * 10,
+        "N_TIMESTEPS": N_TARGET * 20,
         "POSITIVE_LEARNING_RATE": positive_learning_rate,
         "NEGATIVE_LEARNING_RATE": negative_learning_rate,
-        "P": 0.4,
+        "P": 0.1,
         "K": 2 * K,
         "TIE_DISSOLUTION": tie_dissolution,
         "RECORD": False,

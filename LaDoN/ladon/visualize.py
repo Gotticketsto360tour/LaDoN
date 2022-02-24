@@ -35,6 +35,13 @@ output_notebook()
 
 
 def plot_graph(network: Network, plot_type="community", save_path=""):
+    """Plot the graph from the Network-class
+
+    Args:
+        network (Network): Instance of a Network-class
+        plot_type (str, optional): String specifying plot type. Currently only "agent_type" is working as intented. Defaults to "community".
+        save_path (str, optional): String specifying the path to save the graph's html object to. When no path is given, the graph is not saved. Defaults to "".
+    """
     G = network.graph
     degrees = dict(networkx.degree(G))
     networkx.set_node_attributes(G, name="degree", values=degrees)

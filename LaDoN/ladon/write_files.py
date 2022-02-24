@@ -34,10 +34,10 @@ def make_one_simulation(
         "THRESHOLD": threshold,
         "N_TARGET": 500,
         "RANDOMNESS": randomness,
-        "N_TIMESTEPS": 5000,
+        "N_TIMESTEPS": 10000,
         "POSITIVE_LEARNING_RATE": positive_learning_rate,
         "NEGATIVE_LEARNING_RATE": negative_learning_rate,
-        "P": 0.4,
+        "P": 0.1,
         "K": 7,
         "TIE_DISSOLUTION": tie_dissolution,
         "RECORD": True,
@@ -89,13 +89,13 @@ def make_one_simulation(
             [np.array(network.AVERAGE_PATH_LENGTH) for network in networks]
         ),
         "timestep": np.array(
-            [timestep for network in networks for timestep in range(0, 5000, 20)]
+            [timestep for network in networks for timestep in range(0, 10000, 20)]
         ),
         "run": np.array(
             [
                 run
                 for run, network in enumerate(networks)
-                for timestep in range(0, 5000, 20)
+                for timestep in range(0, 10000, 20)
             ]
         ),
     }
