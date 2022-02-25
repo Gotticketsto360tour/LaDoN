@@ -125,6 +125,13 @@ def make_all_simulations():
     ]
 
     combinations = list(itertools.product(*values))
+    combinations = [
+        one_combination
+        for one_combination in combinations
+        if not os.path.exists(
+            f"analysis/data/simulations/over_time/S{one_combination[0]}-{one_combination[1]}-{one_combination[2]}-{one_combination[3]}_{one_combination[4]}.pkl"
+        )
+    ]
 
     # mp.cpu_count()
     with mp.Pool(mp.cpu_count()) as pool:
