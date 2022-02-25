@@ -13,6 +13,7 @@ import random
 import itertools
 import multiprocessing as mp
 import pickle as pkl
+import os
 
 
 def make_network_by_seed(dictionary, run):
@@ -43,7 +44,7 @@ def make_one_simulation(
         "RECORD": True,
     }
 
-    networks = [make_network_by_seed(dictionary, run) for run in range(10)]
+    networks = [make_network_by_seed(dictionary, run) for run in range(5)]
 
     out_dict_final_state = {
         "threshold": threshold,
@@ -125,11 +126,10 @@ def make_all_simulations():
 
     combinations = list(itertools.product(*values))
 
-    pool = mp.Pool(mp.cpu_count() - 1)
-
-    results = [pool.apply(make_one_simulation, args=arg) for arg in combinations]
-
-    pool.close()
+    # mp.cpu_count()
+    with mp.Pool(mp.cpu_count()) as pool:
+        results = pool.starmap(make_one_simulation, combinations)
+        # results = [pool.apply(make_one_simulation, args=arg) for arg in combinations]
 
 
 if __name__ == "__main__":
