@@ -89,6 +89,12 @@ def make_one_simulation(
         "average_path_length": np.hstack(
             [np.array(network.AVERAGE_PATH_LENGTH) for network in networks]
         ),
+        "average_clustering": np.hstack(
+            [np.array(network.AVERAGE_CLUSTERING) for network in networks]
+        ),
+        "assortativity": np.hstack(
+            [np.array(network.ASSORTATIVITY) for network in networks]
+        ),
         "timestep": np.array(
             [timestep for network in networks for timestep in range(0, 10000, 20)]
         ),

@@ -4,6 +4,7 @@
 \usepackage{apacite}
 \usepackage{graphicx}
 \usepackage{mathptmx}
+\usepackage{amsmath}
 \usepackage[font = {small, it}]{caption}
 \DeclareCaptionLabelFormat{cont}{#1~#2\alph{ContinuedFloat}}
 \captionsetup[ContinuedFloat]{labelformat=cont}
@@ -29,7 +30,7 @@
 \fancypagestyle{plain}{
 \fancyhf{}
 \rhead{Mikkel Werling (201706722)}
-\lhead{The Life and Death of Social Networks}
+\lhead{Unfriending facilitates cooperation}
 \cfoot{\thepage}
 }
 \pagestyle{plain}
@@ -38,84 +39,112 @@
 \setlength{\parskip}{1em}
 \renewcommand{\baselinestretch}{1.5}
 
-\title{The Life and Death of Social Networks: A network formation model for opinion dynamics}
+\title{Unfriending facilitates cooperation: \\Co-evolution of opinion and network dynamics}
 \author{Mikkel Werling, (201706722)}
 \date{}
 \begin{document}
 \maketitle
 
+\section{Conceptual overview}
+The model consists of agents situated in an undirected network. Nodes on the network represent social agents. Edges represent social ties to other agents. 
+The model simulates social interactions between the agents without agents having any strategy or task. 
 
-\section{Theory}
+\section{Components and their properties}
+The model is specified by five different parameters. 
+The first three describe how interactions change opinions ($\alpha$, $\beta$, $T$). 
+The fourth specifies the probability of creating new edges randomly instead of through triadic closure ($R$). 
+Finally, the fifth paramater specifies the probability of dissoluting negative ties ($D$).
+The specifics of how they influence the model is specified in "Dynamics".  
 
-\subsection{Network Formation}
+To limit the combinations of different values, we limit the possible values of the different parameters with the following:
 
-\subsubsection{Social Networks}
-Here the presentation of the important characteristics of social networks should be included and why they come about. 
-These include the high transitivity, clustering, communities, and exponential degree distributions.
 
-\subsubsection{Candidate Models}
+\begin{align*}
+    \alpha \in & \{0.05, 0.10, 0.15, 0.20, 0.25\} \\
+    \beta \in & \{0.00, 0.05, 0.10, 0.15, 0.20, 0.25\}\\
+    T \in & \{0.8, 0.9, 1.0, 1.1, 1.2\}\\
+    R \in & \{0.1, 0.3, 0.5\}\\
+    D \in & \{0.0, 0.2, 0.4, 0.6, 0.8, 1.0\}
+\end{align*}
 
-A special focus on the Herding Friends (animal model) as well as the how random are random friends. Other papers could also be good here.
 
-\subsubsection{The problems with current models}
+\section{Initialization}
+A random Watts-Strogatz small-world graph is created 
+with $N=500$, $k=7$, and $p=0.1$. For each node in the network,
+an agent is initialized with a value ($O_i$) which is taken to represent the opinion of the agent. All values of $O_i$ are initialized by drawing from a uniform distribution between -1 and 1: 
+$$O_i \sim U(-1, 1)$$
 
-Calibration with data and how to test models. Models with fixed networks won't cut it. 
+\section{Dynamics}
 
-\subsection{Social Influence}
+\subsection{Sampling agents and interactions}
 
-Including some of the basic literature (Axelrod)
+At every timestep ($t$) a random agent ($A_t$) is sampled from the network ($N_t$). This agent creates a new edge to another agent in the network. The network occationally deletes edges.
+To keep the number of edges in the network approximately constant, edges are either created or rewired to account for deleted edges. 
+To do this, let $E_1$ be the number of edges of $N_1$ and let $E_t$ be the number of edges of $N_t$. 
+If $E_t < E_1$, $A_t$ will not rewire one of its existing edges, but instead create a new edge. If $E_t \geq E_1$, $A_t$ will rewire one of its existing connections to the new agents.
+With a probability of $R$, $A_t$ connects to a random agent, that $A_t$ is not currently connected to. 
+With a probability of $1-R$, $A_t$ connects to one of its edge's edges. Regardless of whether the connection was sampled randomly or through an edge's edges, let $C_t$ define the newly connected agent.
 
-\subsubsection{Shaping opinions}
+In other to calculate the average path length of the network, the model is restricted to being only one component. 
+To ensure this property, we check the degree of $A_t$ and $C_t$. If the degree of either $A_t$ or $C_t$ is 0, a new edge is created randomly to a new node from $N_t$.
+If both $A_t$ and $C_t$ have degrees larger than 0, and the network has more than one component, a new edge is created to restore the network. Specifically, we restore the edge that $A_t$ rewired to $C_t$, while keeping the edge from $A_t$ to $C_t$.
+I will refer to the process of ensuring only one connected component simply as component ensurance. 
 
-Introduce the evidence from psychology and computational literature to show why the assumptions in the model make sense
+\subsection{Interaction between neighbors}
 
-\subsubsection{Models of Social Influence}
+After a new connection has been formed to $A_t$, $A_t$ interacts with all its edges.
+This is done by iteratively interacting with every edge of $A_t$. Let $B$ denote an edge of $A_t$. Let $O(\cdot)$ define a function with agents as inputs and their opinions as outputs.
+The interaction between two different agents is determined by a threshold value, $T$. 
 
-Report the evolution of models and where to place this model in all of the literature
+When $T \geq |O(A_t) - O(B)|$, the interaction will pull the opinions of the two agents closer to each other. The force with which they are pulled is defined as a fraction of their distance from each other:
+$$V_p = \big(|O(A_t) - O(B)|\big) \cdot \frac{\alpha}{2}$$
 
-\subsection{A network formation model for social influence}
+Let $O_{max} = \max(O(A_t), O(B))$ and $O_{min} = \min(O(A_t), O(B))$ and update the values of opinions by:
 
-Explain the importance of making both a network formation and opinion dynamics model in one go
+$$O_{max} = O_{max} - V_p$$
+$$O_{min} = O_{min} + V_p$$
 
-\section{Methods}
+When $T < |O(A_t) - O(B)|$, the interaction will push the opinions of the two agents further apart by a similar principle as illustrated above: 
 
-\subsection{Model specification}
+$$V_n = \big(|O(A_t) - O(B)|\big) \cdot \frac{\beta}{2}$$
 
-Explain the different parameters of the model
+Using the same definition for $O_{max}$ and $O_{min}$, we update the opinions of each agent:
 
-\subsection{Model fitting}
+$$O_{max} = O_{max} + V_n$$
+$$O_{min} = O_{min} - V_n$$
 
-explain how the model was calibrated (Bayesian Hyperparameter Optimization)
+This process concludes when $A_t$ has updated her values for all her edges.
 
-\section{Model investigation}
+\subsection{Tie-dissolution}
 
-Get familiar with the different parameters and their interpretations
+When $A_t$ has finished interacting with all her edges, the tie dissolution process begins. 
+If $T < |O(A_t) - O(B)|$, then dissolute the edge between the two agents with a probability of $D$.
+After ties are dissoluted, the process of component ensurance is performed where $C_t$ is replaced with $B$.
+When all edges of $A_t$ have been evaluated, the time-step concludes. This process is repeated for 10.000 time-steps.
 
-\subsection{The effect of randomness}
+\section{Outcome metrics} 
 
-How randomness affects the distribution of opinions, as well as the network
+\subsection{Time-dependent Metrics}
+Every 20th time-step, the current state of the network is recorded. 
+To track the polarization of opinions over time,
+the mean and standard deviation of the absolute value of opinions are recorded.
+To track the similarity of an agent's opinion to the opinion of their neighors, the average distance to all edges are recorded.
+To evaluate the effect of tie-dissolution, the cumulative frequency of tie-dissolutions are recorded.
+For characterizing the network, I record the average clustering coefficient, average path length and degree assortativity coefficient.
 
-\subsection{The effect of the boundary threshold}
+\subsection{Final State Metrics}
+After 10.000 time-steps, the network reaches its final state and its characteristics are recorded. 
+For every agent in the network, I record: 
+\begin{itemize}
+    \item The initial opinion of the agent
+    \item The opinion of the agent at the final state of the network
+    \item The mean distance to all neighbors' opinions
+    \item The degree of the agent 
+    \item The betweeness centrality of the agent 
+    \item The clustering coefficient of the agent 
+\end{itemize}
 
-How the boundary threshold affects the distribution of opinions, as well as the network
-
-\subsection{The effect of homophily}
-
-How homophily affects the distribution of opinions, as well as the network
-
-\subsection{Important interactions}
-
-Point to some of the important interactions (possible Golden zones)
-
-\section{Results}
-
-\subsection{Network generation}
-
-\subsection{Opinion generation}
-
-\section{Discussion}
-
-\section{Conclusion}
+The measures related to the opinion of agents can then be correlated with clustering, centrality and degrees to see how changes in network topology relate to changes in opinions. 
 
 \bibliographystyle{apacite}
 
