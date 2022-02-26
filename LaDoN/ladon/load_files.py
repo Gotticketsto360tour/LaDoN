@@ -11,7 +11,10 @@ sns.set(rc={"figure.figsize": (11.7, 8.27)})
 sns.set_context("talk")
 blue_pallette = sns.dark_palette("#69d", reverse=True, as_cmap=True)
 
-list_of_simulations = glob.glob("analysis/data/simulations/final_state/*")
+list_of_simulations = glob.glob("analysis/data/simulations/over_time/*")
+
+with open(list_of_simulations[0], "rb") as f:
+    data = pkl.load(f)
 
 
 def make_one_data_frame(path: str):
@@ -28,7 +31,76 @@ def combine_data():
 
 data = combine_data()
 
-sns.lineplot(data=data, x="timestep", y="mean_absolute_opinion")
+data_limit = data.query("threshold == 0.9")
+
+g = sns.lineplot(
+    data=data,
+    x="timestep",
+    y="mean_absolute_opinion",
+    hue="tie_dissolution",
+    palette=blue_pallette,
+).set(ylabel=r"$|O|$", xlabel=r"$t$")
+
+plt.legend(title=r"$P(D)$", bbox_to_anchor=(1.0, 0.75))
+plt.show(g)
+
+g = sns.lineplot(
+    data=data,
+    x="timestep",
+    y="average_path_length",
+    hue="negative_learning_rate",
+    palette=blue_pallette,
+).set(ylabel=r"$APL$", xlabel=r"$t$")
+
+plt.legend(title=r"$P(D)$", bbox_to_anchor=(1.0, 0.75))
+plt.show(g)
+
+g = sns.lineplot(
+    data=data,
+    x="timestep",
+    y="mean_distance",
+    hue="tie_dissolution",
+    palette=blue_pallette,
+).set(ylabel=r"$Mean Distance$", xlabel=r"$t$")
+
+plt.legend(title=r"$P(D)$", bbox_to_anchor=(1.0, 0.75))
+plt.show(g)
+
+g = sns.lineplot(
+    data=data,
+    x="timestep",
+    y="mean_distance",
+    hue="tie_dissolution",
+    palette=blue_pallette,
+).set(ylabel=r"$Mean Distance$", xlabel=r"$t$")
+
+plt.legend(title=r"$P(D)$", bbox_to_anchor=(1.0, 0.75))
+plt.show(g)
+
+correlations = (
+    data.groupby(
+        [
+            "threshold",
+            "positive_learning_rate",
+            "negative_learning_rate",
+            "tie_dissolution",
+        ]
+    )["mean_absolute_opinion", "average_path_length"]
+    .corr()
+    .iloc[0::2, -1]
+    .reset_index()
+)
+
+sns.lineplot(
+    data=correlations,
+    x="positive_learning_rate",
+    y="average_path_length",
+    hue="tie_dissolution",
+    # kind="line",
+    palette=blue_pallette,
+).set(ylabel=r"$\rho_{|O|, AVG}$", xlabel=r"$\alpha$")
+
+plt.legend(title=r"$P(D)$", bbox_to_anchor=(1.0, 0.75))
 
 data["absolute_opinions"] = data["opinions"].apply(lambda x: abs(x))
 data["opinion_shift"] = abs(data["initial_opinions"] - (data["opinions"]))
