@@ -25,26 +25,26 @@ def make_network_by_seed(dictionary, run):
 
 
 def make_one_simulation(
-    threshold,
-    randomness,
-    positive_learning_rate,
-    negative_learning_rate,
-    tie_dissolution,
+    threshold: float,
+    randomness: float,
+    positive_learning_rate: float,
+    negative_learning_rate: float,
+    tie_dissolution: float,
 ):
     dictionary = {
         "THRESHOLD": threshold,
         "N_TARGET": 500,
-        "RANDOMNESS": randomness,
+        "RANDOMNESS": 0.1,
         "N_TIMESTEPS": 10000,
         "POSITIVE_LEARNING_RATE": positive_learning_rate,
         "NEGATIVE_LEARNING_RATE": negative_learning_rate,
-        "P": 0.1,
+        "P": 0.5,
         "K": 7,
         "TIE_DISSOLUTION": tie_dissolution,
         "RECORD": True,
     }
 
-    networks = [make_network_by_seed(dictionary, run) for run in range(5)]
+    networks = [make_network_by_seed(dictionary, run) for run in range(10)]
 
     out_dict_final_state = {
         "threshold": threshold,
