@@ -14,6 +14,7 @@ import itertools
 import multiprocessing as mp
 import pickle as pkl
 import os
+import pandas as pd
 
 
 def make_network_by_seed(dictionary, run):
@@ -106,6 +107,38 @@ def make_one_simulation(
             ]
         ),
     }
+
+    data_list = [
+        [
+            {
+                "threshold": threshold,
+                "randomness": randomness,
+                "positive_learning_rate": positive_learning_rate,
+                "negative_learning_rate": negative_learning_rate,
+                "tie_dissolution": tie_dissolution,
+                "time": (time + 1) * dictionary.get("N_TARGET"),
+                "run": run,
+                "agent": [agent for agent in range(dictionary.get("N_TARGET"))],
+                "opinions": opinion,
+            }
+            for time, opinion in enumerate(network.OPINION_DISTRIBUTIONS)
+        ]
+        for run, network in enumerate(networks)
+    ]
+
+    df = pd.concat(
+        [
+            pd.concat([pd.DataFrame(x) for x in data], ignore_index=True)
+            for data in data_list
+        ],
+        ignore_index=True,
+    )
+
+    with open(
+        f"analysis/data/simulations/opinions/S{threshold}-{randomness}-{positive_learning_rate}-{negative_learning_rate}_{tie_dissolution}.pkl",
+        "wb",
+    ) as handle:
+        pkl.dump(df, handle, protocol=pkl.HIGHEST_PROTOCOL)
 
     with open(
         f"analysis/data/simulations/final_state/S{threshold}-{randomness}-{positive_learning_rate}-{negative_learning_rate}_{tie_dissolution}.pkl",

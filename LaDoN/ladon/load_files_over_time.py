@@ -58,7 +58,18 @@ g = sns.lineplot(
     palette=blue_pallette,
 ).set(ylabel=r"$APL$", xlabel=r"$t$")
 
-plt.legend(title=r"$P(D)$", bbox_to_anchor=(1.0, 0.75))
+plt.legend(title=r"$\beta$", bbox_to_anchor=(1.0, 0.75))
+plt.show(g)
+
+g = sns.lineplot(
+    data=data,
+    x="timestep",
+    y="average_path_length",
+    hue="threshold",
+    palette=blue_pallette,
+).set(ylabel=r"$APL$", xlabel=r"$t$")
+
+plt.legend(title=r"$Threshold$", bbox_to_anchor=(1.0, 0.75))
 plt.show(g)
 
 g = sns.lineplot(
@@ -75,8 +86,8 @@ plt.show(g)
 g = sns.lineplot(
     data=data,
     x="timestep",
-    y="mean_distance",
-    hue="tie_dissolution",
+    y="average_clustering",
+    hue="threshold",
     palette=blue_pallette,
 ).set(ylabel=r"$Mean Distance$", xlabel=r"$t$")
 
@@ -96,6 +107,15 @@ correlations = (
     .iloc[0::2, -1]
     .reset_index()
 )
+
+sns.relplot(
+    data=correlations,
+    x="negative_learning_rate",
+    y="average_path_length",
+    hue="tie_dissolution",
+    kind="line",
+    palette=blue_pallette,
+).set(ylabel=r"$\rho_{|O|, AVG}$", xlabel=r"$\beta$")
 
 sns.relplot(
     data=correlations,
@@ -142,6 +162,14 @@ g = sns.relplot(
     kind="line",
     palette=blue_pallette,
 ).set(ylabel=r"$|O|$", xlabel=r"$t$")
+
+sns.lineplot(
+    data=data,
+    x="timestep",
+    y="assortativity",
+    hue="tie_dissolution",
+    palette=blue_pallette,
+).set(ylabel=r"$Assortativity$", xlabel=r"$t$")
 
 g = sns.relplot(
     data=data,

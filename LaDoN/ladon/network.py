@@ -34,6 +34,10 @@ class Network:
         self.AVERAGE_PATH_LENGTH = []
         self.AVERAGE_CLUSTERING = []
         self.ASSORTATIVITY = []
+        self.OPINION_DISTRIBUTIONS = []
+
+    def record_opinion_distributions(self):
+        self.OPINION_DISTRIBUTIONS.append(self.get_opinion_distribution())
 
     def record_time_step(self):
         absolute_opinions = abs(self.get_opinion_distribution())
@@ -201,10 +205,12 @@ class Network:
         self.update_all_values(sampled_agent)
 
     def run_simulation(self):
-        for timestep in tqdm(range(self.N_TIMESTEPS)):
+        for timestep in tqdm(range(1, self.N_TIMESTEPS + 1)):
             self.take_turn()
             if timestep % 20 == 0 and self.RECORD:
                 self.record_time_step()
+            if timestep % 500 == 0 and self.RECORD:
+                self.record_opinion_distributions()
         return "DONE"
 
 

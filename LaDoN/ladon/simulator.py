@@ -5,6 +5,8 @@ import numpy as np
 import seaborn as sns
 import scipy
 import random
+import pandas as pd
+import matplotlib.pyplot as plt
 
 sns.set(rc={"figure.figsize": (11.7, 8.27)})
 sns.set_context("talk")
@@ -174,11 +176,11 @@ dictionary = {
     "N_TARGET": 500,
     "RANDOMNESS": 0.1,
     "N_TIMESTEPS": 10000,
-    "POSITIVE_LEARNING_RATE": 0.15,
+    "POSITIVE_LEARNING_RATE": 0.05,
     "NEGATIVE_LEARNING_RATE": 0.05,
     "P": 0.5,
     "K": 7,
-    "TIE_DISSOLUTION": 0.9,
+    "TIE_DISSOLUTION": 1,
     "RECORD": True,
 }
 
@@ -236,6 +238,98 @@ sns.histplot(
 
 my_network = Network(dictionary=dictionary)
 
-my_network.run_simulation()
+for _ in range(500):
+    my_network.take_turn()
+
+# my_network.run_simulation()
 
 plot_graph(my_network, plot_type="agent_type")
+
+my_network.run_simulation()
+
+my_network = Network(dictionary=dictionary)
+data = {}
+data_list = []
+for repeats in range(1, 21):
+    for time in range(1, 501):
+        my_network.take_turn()
+    data_list.append(
+        {"time": time * repeats, "opinions": my_network.get_opinion_distribution()}
+    )
+
+networks = [Network(dictionary=dictionary) for i in range(10)]
+for network in networks:
+    network.run_simulation()
+
+
+data_list = [
+    [
+        {
+            "time": (time + 1) * 500,
+            "run": run,
+            "agent": [agent for agent in range(500)],
+            "opinions": opinion,
+        }
+        for time, opinion in enumerate(network.OPINION_DISTRIBUTIONS)
+    ]
+    for run, network in enumerate(networks)
+]
+
+df = pd.concat(
+    [
+        pd.concat([pd.DataFrame(x) for x in data], ignore_index=True)
+        for data in data_list
+    ],
+    ignore_index=True,
+)
+
+sns.relplot(
+    data=df, x="time", y="opinions", hue="agent", row="run", alpha=0.25, kind="line"
+)
+
+sns.set_theme(style="white", rc={"axes.facecolor": (0, 0, 0, 0)})
+
+# Initialize the FacetGrid object
+pal = sns.cubehelix_palette(20, rot=-0.25, light=0.7)
+g = sns.FacetGrid(df, row="time", hue="time", aspect=15, height=0.5, palette=pal)
+
+# Draw the densities in a few steps
+g.map(
+    sns.kdeplot,
+    "opinions",
+    bw_adjust=0.5,
+    clip_on=False,
+    fill=True,
+    alpha=1,
+    linewidth=1.5,
+)
+g.map(sns.kdeplot, "opinions", clip_on=False, color="w", lw=2, bw_adjust=0.5)
+
+# passing color=None to refline() uses the hue mapping
+g.refline(y=0, linewidth=2, linestyle="-", color=None, clip_on=False)
+
+
+# Define and use a simple function to label the plot in axes coordinates
+def label(x, color, label):
+    ax = plt.gca()
+    ax.text(
+        0,
+        0.2,
+        label,
+        fontweight="bold",
+        color=color,
+        ha="left",
+        va="center",
+        transform=ax.transAxes,
+    )
+
+
+g.map(label, "opinions")
+
+# Set the subplots to overlap
+g.figure.subplots_adjust(hspace=-0.25)
+
+# Remove axes details that don't play well with overlap
+g.set_titles("")
+g.set(yticks=[], ylabel="")
+g.despine(bottom=True, left=True)
