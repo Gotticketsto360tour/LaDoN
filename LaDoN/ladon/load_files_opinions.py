@@ -26,4 +26,57 @@ def combine_data():
     )
 
 
-data = combine_data()
+df = combine_data()
+
+
+sns.relplot(
+    data=df, x="time", y="opinions", hue="agent", row="run", alpha=0.25, kind="line"
+)
+
+
+def plot_distribution_over_time(df):
+
+    sns.set_theme(style="white", rc={"axes.facecolor": (0, 0, 0, 0)})
+
+    # Initialize the FacetGrid object
+    pal = sns.cubehelix_palette(20, rot=-0.25, light=0.7)
+    g = sns.FacetGrid(df, row="time", hue="time", aspect=15, height=0.5, palette=pal)
+
+    # Draw the densities in a few steps
+    g.map(
+        sns.kdeplot,
+        "opinions",
+        bw_adjust=0.5,
+        clip_on=False,
+        fill=True,
+        alpha=1,
+        linewidth=1.5,
+    )
+    g.map(sns.kdeplot, "opinions", clip_on=False, color="w", lw=2, bw_adjust=0.5)
+
+    # passing color=None to refline() uses the hue mapping
+    g.refline(y=0, linewidth=2, linestyle="-", color=None, clip_on=False)
+
+    # Define and use a simple function to label the plot in axes coordinates
+    def label(x, color, label):
+        ax = plt.gca()
+        ax.text(
+            0,
+            0.2,
+            label,
+            fontweight="bold",
+            color=color,
+            ha="left",
+            va="center",
+            transform=ax.transAxes,
+        )
+
+    g.map(label, "opinions")
+
+    # Set the subplots to overlap
+    g.figure.subplots_adjust(hspace=-0.25)
+
+    # Remove axes details that don't play well with overlap
+    g.set_titles("")
+    g.set(yticks=[], ylabel="")
+    g.despine(bottom=True, left=True)
