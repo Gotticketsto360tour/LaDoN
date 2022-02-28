@@ -1,13 +1,13 @@
 # Fdb version 3
-["bibtex report"] 1645836804 "report.aux" "report.bbl" "report" 1645836804
+["bibtex report"] 1646076512 "report.aux" "report.bbl" "report" 1646076513
   "../Referencer_new.bib" 0 -1 0 ""
   "/usr/local/texlive/2021/texmf-dist/bibtex/bst/apacite/apacite.bst" 1374530685 141073 9d7b79dbf9d91133318126032cff8c27 ""
-  "report.aux" 1645836772 1268 2d4a55169415ac02fa5e6412225636b8 "pdflatex"
+  "report.aux" 1646076513 1367 32f3ac2ec1fbf97f0b62eaaac4a38253 "pdflatex"
   (generated)
   "report.bbl"
   "report.blg"
-["pdflatex"] 1645836771 "/Users/mikkelwerling/Documents/LaDoN/LaDoN/ladon/report/report.tex" "report.pdf" "report" 1645836804
-  "/Users/mikkelwerling/Documents/LaDoN/LaDoN/ladon/report/report.tex" 1645836804 7305 fc7563b99a08f2b80c284de3a3e631b0 ""
+["pdflatex"] 1646076512 "/Users/mikkelwerling/Documents/LaDoN/LaDoN/ladon/report/report.tex" "report.pdf" "report" 1646076513
+  "/Users/mikkelwerling/Documents/LaDoN/LaDoN/ladon/report/report.tex" 1646076512 8469 77ceb7548367320ecdace35ad00964af ""
   "/usr/local/texlive/2021/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/local/texlive/2021/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/tfm/adobe/symbol/psyr.tfm" 1136768653 1408 5937f58aa508ea2cea4901c07d10f5fe ""
@@ -86,9 +86,9 @@
   "/usr/local/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1643323655 4379201 880d78f4a2bde4f491e7d718ab91f390 ""
   "/usr/local/texlive/2021/texmf-var/web2c/pdftex/pdflatex.fmt" 1643323721 2796779 5d118f325eff48385f25df8d5c174017 ""
   "/usr/local/texlive/2021/texmf.cnf" 1616695596 577 4c1911a7228e554c6032256d3cf5567d ""
-  "report.aux" 1645836772 1268 2d4a55169415ac02fa5e6412225636b8 "pdflatex"
+  "report.aux" 1646076513 1367 32f3ac2ec1fbf97f0b62eaaac4a38253 "pdflatex"
   "report.bbl" 0 -1 0 "bibtex report"
-  "report.tex" 1645836804 7305 fc7563b99a08f2b80c284de3a3e631b0 ""
+  "report.tex" 1646076512 8469 77ceb7548367320ecdace35ad00964af ""
   (generated)
   "report.aux"
   "report.log"

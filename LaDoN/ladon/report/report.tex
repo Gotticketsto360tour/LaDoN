@@ -49,6 +49,17 @@
 The model consists of agents situated in an undirected network. Nodes on the network represent social agents. Edges represent social ties to other agents. 
 The model simulates social interactions between the agents without agents having any strategy or task. 
 
+\section{Assumptions}
+It is assumed that the opinion of an agent is shaped only by her initial opinion and the influence of her peers. 
+The model assumes that agents will compromise their opinion when interacting with agents with similar opinions. 
+When agents interact with agents dissimilar from them, the model assumes that agents will either not change their opinion or they will become more opposed by the interactions.
+Furthermore, it is assumed that connections between agents are not static but dynamic in nature. 
+Specifically, the model assumes that agents will find new connections primarily through their already existing connections. In other words, 
+agents primarily find new friends via "friends of friends". Finally, it is assumed that agents will tend to relinguish ties to agents too dissimilar from themselves.
+All these assumptions can vary in the strength of the proposed effect. For instance, similar agents could reach a perfect compromise or only convince each other slightly. 
+As the results of the model critically hinges on the strength of these assumptions, I introduce model parameters that control the strength of these mechanisms.
+
+
 \section{Components and their properties}
 The model is specified by five different parameters. 
 The first three describe how interactions change opinions ($\alpha$, $\beta$, $T$). 
