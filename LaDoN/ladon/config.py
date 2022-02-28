@@ -1,7 +1,7 @@
 from numpy.core.numeric import outer
 
 THRESHOLDS = [0.8, 0.9, 1, 1.1, 1.2]
-RANDOMNESS = [0.1, 0.3, 0.5]
+RANDOMNESS = [0.1]
 POSITIVE_LEARNING_RATES = [0.05, 0.1, 0.15, 0.2, 0.25]
 NEGATIVE_LEARNING_RATES = [0.0, 0.05, 0.1, 0.15, 0.2, 0.25]
 TIE_DISSOLUTIONS = [0.0, 0.2, 0.4, 0.6, 0.8, 1]
