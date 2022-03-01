@@ -1,6 +1,6 @@
 from statistics import mean
 from typing import Dict
-from unittest import result
+from venv import create
 from helpers import get_main_component
 from network import Network
 import networkx as nx
@@ -111,23 +111,36 @@ def objective(trial, target, repeats, target_dictionary):
     return mean(results)
 
 
-netscience = nx.read_gml(path="analysis/data/netscience/netscience.gml")
+with open("analysis/data/fb-pages-government/fb-pages-government.nodes", "rb+") as f:
+    data = [str(node, "utf-8").strip().split(",")[-1] for node in f.readlines()[1:]]
 
-facebook = nx.read_edgelist(
-    "analysis/data/facebook_combined.txt", create_using=nx.Graph(), nodetype=int
-)
+politicians = nx.Graph()
 
-astrophysics = nx.read_edgelist(
-    "analysis/data/dimacs10-astro-ph/out.dimacs10-astro-ph",
-    create_using=nx.Graph(),
-    nodetype=int,
-)
+politicians.add_nodes_from(data)
 
-theoretical_physics = nx.read_edgelist(
-    "analysis/data/physics/ca-HepTh.txt",
-    create_using=nx.Graph(),
-    nodetype=int,
-)
+with open("analysis/data/fb-pages-government/fb-pages-government.edges", "rb+") as f:
+    data = [str(node, "utf-8").strip().split(",") for node in f.readlines()]
+
+politicians.add_edges_from(data)
+
+
+# netscience = nx.read_gml(path="analysis/data/netscience/netscience.gml")
+
+# facebook = nx.read_edgelist(
+#     "analysis/data/facebook_combined.txt", create_using=nx.Graph(), nodetype=int
+# )
+
+# astrophysics = nx.read_edgelist(
+#     "analysis/data/dimacs10-astro-ph/out.dimacs10-astro-ph",
+#     create_using=nx.Graph(),
+#     nodetype=int,
+# )
+
+# theoretical_physics = nx.read_edgelist(
+#     "analysis/data/physics/ca-HepTh.txt",
+#     create_using=nx.Graph(),
+#     nodetype=int,
+# )
 
 karate = nx.karate_club_graph()
 
@@ -145,13 +158,14 @@ dolphin = nx.read_gml(path="analysis/data/dolphins/dolphins.gml")
 if __name__ == "__main__":
     resulting_dictionary = {}
     name_dictionary = {
-        "karate": karate,
-        "dolphin": dolphin,
-        "polbooks": polbooks,
-        "netscience": netscience,
+        # "karate": karate,
+        # "dolphin": dolphin,
+        # "polbooks": polbooks,
+        # "netscience": netscience,
         # "astrophysics": astrophysics,
-        "polblogs": polblogs,
+        # "polblogs": polblogs,
         # "facebook": facebook,
+        "politicians": politicians
     }
 
     for name, network in name_dictionary.items():
@@ -166,7 +180,7 @@ if __name__ == "__main__":
             "average_path": find_average_path(network),
         }
         study.optimize(
-            lambda trial: objective(trial, network, 5, target_dictionary), n_trials=1000
+            lambda trial: objective(trial, network, 1, target_dictionary), n_trials=100
         )
         study.best_params
         resulting_dictionary[name] = study.best_params

@@ -29,12 +29,44 @@ def combine_data():
 df = combine_data()
 
 
-sns.relplot(
-    data=df, x="time", y="opinions", hue="agent", row="run", alpha=0.25, kind="line"
-)
+def plot_trajectory_over_time(
+    df,
+    threshold: float,
+    positive_learning_rate: float,
+    negative_learning_rate: float,
+    tie_dissolution: float,
+    run: int = None,
+):
+    df = df[
+        (df["threshold"] == threshold)
+        & (df["positive_learning_rate"] == positive_learning_rate)
+        & (df["negative_learning_rate"] == negative_learning_rate)
+        & (df["tie_dissolution"] == tie_dissolution)
+    ]
+    if isinstance(run, int):
+        df = df[df["run"] == run]
+
+    sns.relplot(
+        data=df, x="time", y="opinions", hue="agent", row="run", alpha=0.25, kind="line"
+    )
 
 
-def plot_distribution_over_time(df):
+def plot_distribution_over_time(
+    df,
+    threshold: float,
+    positive_learning_rate: float,
+    negative_learning_rate: float,
+    tie_dissolution: float,
+    run: int = None,
+):
+    df = df[
+        (df["threshold"] == threshold)
+        & (df["positive_learning_rate"] == positive_learning_rate)
+        & (df["negative_learning_rate"] == negative_learning_rate)
+        & (df["tie_dissolution"] == tie_dissolution)
+    ]
+    if isinstance(run, int):
+        df = df[df["run"] == run]
 
     sns.set_theme(style="white", rc={"axes.facecolor": (0, 0, 0, 0)})
 
@@ -50,7 +82,7 @@ def plot_distribution_over_time(df):
         clip_on=False,
         fill=True,
         alpha=1,
-        linewidth=1.5,
+        linewidth=0.5,
     )
     g.map(sns.kdeplot, "opinions", clip_on=False, color="w", lw=2, bw_adjust=0.5)
 
@@ -80,3 +112,22 @@ def plot_distribution_over_time(df):
     g.set_titles("")
     g.set(yticks=[], ylabel="")
     g.despine(bottom=True, left=True)
+
+
+plot_distribution_over_time(
+    df,
+    threshold=0.8,
+    positive_learning_rate=0.15,
+    negative_learning_rate=0.1,
+    tie_dissolution=1,
+    run=6,
+)
+
+plot_trajectory_over_time(
+    df,
+    threshold=1,
+    positive_learning_rate=0.25,
+    negative_learning_rate=0.25,
+    tie_dissolution=1,
+    run=1,
+)

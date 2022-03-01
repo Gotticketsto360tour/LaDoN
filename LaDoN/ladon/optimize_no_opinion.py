@@ -117,16 +117,31 @@ polbooks = nx.read_gml(
 
 dolphin = nx.read_gml(path="analysis/data/dolphins/dolphins.gml")
 
+
+with open("analysis/data/fb-pages-government/fb-pages-government.nodes", "rb+") as f:
+    data = [str(node, "utf-8").strip().split(",")[-1] for node in f.readlines()[1:]]
+
+politicians = nx.Graph()
+
+politicians.add_nodes_from(data)
+
+with open("analysis/data/fb-pages-government/fb-pages-government.edges", "rb+") as f:
+    data = [str(node, "utf-8").strip().split(",") for node in f.readlines()]
+
+politicians.add_edges_from(data)
+
+
 if __name__ == "__main__":
     resulting_dictionary = {}
     name_dictionary = {
-        "karate": karate,
-        "dolphin": dolphin,
-        "polbooks": polbooks,
-        "netscience": netscience,
-        "polblogs": polblogs,
+        # "karate": karate,
+        # "dolphin": dolphin,
+        # "polbooks": polbooks,
+        # "netscience": netscience,
+        # "polblogs": polblogs,
         # "facebook": facebook,
         # "astrophysics": astrophysics,
+        "politicians": politicians
     }
     for name, network in name_dictionary.items():
         print(f"--- NOW RUNNING: {name} ---")
@@ -140,7 +155,7 @@ if __name__ == "__main__":
             "average_path": find_average_path(network),
         }
         study.optimize(
-            lambda trial: objective(trial, network, 5, target_dictionary), n_trials=1000
+            lambda trial: objective(trial, network, 1, target_dictionary), n_trials=100
         )
         study.best_params
         resulting_dictionary[name] = study.best_params

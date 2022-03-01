@@ -3,13 +3,21 @@ from network import Network, NoOpinionNetwork
 import networkx as nx
 import numpy as np
 import seaborn as sns
-import scipy
 import random
 import pandas as pd
 import matplotlib.pyplot as plt
 
 sns.set(rc={"figure.figsize": (11.7, 8.27)})
 sns.set_context("talk")
+
+
+def make_network_by_seed(dictionary, run):
+    random.seed(run)
+    np.random.seed(run)
+    network = Network(dictionary)
+    network.run_simulation()
+    return network
+
 
 # TODO:
 # Have agents interact with a certain level of noise, centered around 0.
@@ -184,9 +192,7 @@ dictionary = {
     "RECORD": True,
 }
 
-my_network = Network(dictionary=dictionary)
-
-my_network.run_simulation()
+my_network = make_network_by_seed(dictionary=dictionary, run=6)
 
 sns.lineplot(data=my_network.NEGATIVE_TIES_DISSOLUTED)
 sns.lineplot(data=my_network.AVERAGE_CLUSTERING)
