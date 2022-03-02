@@ -1,4 +1,4 @@
-from bokeh.io import output_notebook, show, save
+from bokeh.io import output_notebook, show, export_png
 from bokeh.models import (
     Range1d,
     Circle,
@@ -28,13 +28,15 @@ import matplotlib.pyplot as plt
 import numpy as np
 import colorcet
 from colorcet import b_glasbey_bw_minc_20
+from selenium import webdriver
 
 from network import Network
+import random
 
 output_notebook()
 
 
-def plot_graph(network: Network, plot_type="community", save_path=""):
+def plot_graph(network: Network, plot_type="community", save_path="", title=""):
     """Plot the graph from the Network-class
 
     Args:
@@ -114,7 +116,8 @@ def plot_graph(network: Network, plot_type="community", save_path=""):
     color_palette = Blues8
 
     # Choose a title!
-    title = "LaDoN Network"
+    if not title:
+        title = "LaDoN Network"
 
     # Establish which categories will appear when hovering over each node
 
@@ -172,5 +175,48 @@ def plot_graph(network: Network, plot_type="community", save_path=""):
     show(plot)
 
     if save_path:
-        output_file(filename=save_path, title="Static HTML file")
-        save(plot)
+        driver = webdriver.Firefox()
+        export_png(
+            obj=plot, filename=save_path, webdriver=driver, width=2000, height=2000
+        )
+        driver.close()
+        # save(plot)
+
+
+def generate_network_plots(
+    network: Network, plot_type="agent_type", save_path="", title="", run=0
+):
+    random.seed(run)
+    np.random.seed(run)
+    original_save_path = save_path
+    if save_path:
+        plot_graph(
+            network=network,
+            plot_type=plot_type,
+            save_path=f"{save_path}_0.png",
+            title="Timestep: 0",
+        )
+    else:
+        plot_graph(
+            network=network,
+            plot_type=plot_type,
+            save_path="",
+            title="Timestep: 0",
+        )
+    for run in range(1, 21):
+        for turn in range(1, 501):
+            network.take_turn()
+        if save_path:
+            plot_graph(
+                network=network,
+                plot_type=plot_type,
+                title=f"Timestep: {turn * run}",
+                save_path=f"{save_path}_{run * turn}.png",
+            )
+        else:
+            plot_graph(
+                network=network,
+                plot_type=plot_type,
+                title=f"Timestep: {turn * run}",
+                save_path="",
+            )

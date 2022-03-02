@@ -1,4 +1,4 @@
-from visualize import plot_graph
+from visualize import plot_graph, generate_network_plots
 from network import Network, NoOpinionNetwork
 import networkx as nx
 import numpy as np
@@ -6,6 +6,10 @@ import seaborn as sns
 import random
 import pandas as pd
 import matplotlib.pyplot as plt
+from selenium import webdriver
+import os
+
+from selenium import webdriver
 
 sns.set(rc={"figure.figsize": (11.7, 8.27)})
 sns.set_context("talk")
@@ -15,7 +19,7 @@ def make_network_by_seed(dictionary, run):
     random.seed(run)
     np.random.seed(run)
     network = Network(dictionary)
-    network.run_simulation()
+    # network.run_simulation()
     return network
 
 
@@ -251,4 +255,23 @@ for _ in range(500):
 
 plot_graph(my_network, plot_type="agent_type")
 
-my_network.run_simulation()
+dictionary = {
+    "THRESHOLD": 0.8,
+    "N_TARGET": 500,
+    "RANDOMNESS": 0.1,
+    "N_TIMESTEPS": 10000,
+    "POSITIVE_LEARNING_RATE": 0.15,
+    "NEGATIVE_LEARNING_RATE": 0.1,
+    "P": 0.5,
+    "K": 7,
+    "TIE_DISSOLUTION": 1,
+    "RECORD": False,
+}
+my_network = make_network_by_seed(dictionary, run=7)
+
+generate_network_plots(
+    my_network,
+    plot_type="agent_type",
+    # save_path="plots/networks/network_example",
+    run=7,
+)

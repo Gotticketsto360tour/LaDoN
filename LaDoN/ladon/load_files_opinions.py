@@ -6,6 +6,7 @@ from matplotlib.pyplot import title, xlabel, ylabel
 import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
+from sklearn.preprocessing import scale
 
 sns.set(rc={"figure.figsize": (11.7, 8.27)})
 sns.set_context("talk")
@@ -46,9 +47,18 @@ def plot_trajectory_over_time(
     if isinstance(run, int):
         df = df[df["run"] == run]
 
-    sns.relplot(
-        data=df, x="time", y="opinions", hue="agent", row="run", alpha=0.25, kind="line"
+    plotting = sns.relplot(
+        data=df,
+        x="time",
+        y="opinions",
+        hue="agent",
+        alpha=0.15,
+        kind="line",
+        palette=blue_pallette,
+        height=8,
+        aspect=1.5,
     )
+    plotting._legend.remove()
 
 
 def plot_distribution_over_time(
@@ -72,7 +82,7 @@ def plot_distribution_over_time(
 
     # Initialize the FacetGrid object
     pal = sns.cubehelix_palette(20, rot=-0.25, light=0.7)
-    g = sns.FacetGrid(df, row="time", hue="time", aspect=15, height=0.5, palette=pal)
+    g = sns.FacetGrid(df, row="time", hue="time", aspect=15, height=0.65, palette=pal)
 
     # Draw the densities in a few steps
     g.map(
@@ -110,7 +120,7 @@ def plot_distribution_over_time(
 
     # Remove axes details that don't play well with overlap
     g.set_titles("")
-    g.set(yticks=[], ylabel="")
+    g.set(yticks=[], ylabel="", xlabel="Opinion")
     g.despine(bottom=True, left=True)
 
 
@@ -123,11 +133,23 @@ plot_distribution_over_time(
     run=6,
 )
 
+plt.savefig("plots/Distribution_Over_Time.png")
+
 plot_trajectory_over_time(
     df,
-    threshold=1,
-    positive_learning_rate=0.25,
-    negative_learning_rate=0.25,
+    threshold=0.8,
+    positive_learning_rate=0.15,
+    negative_learning_rate=0.1,
     tie_dissolution=1,
-    run=1,
+    run=6,
+)
+plt.savefig("plots/Lineplot_Over_Time.png")
+
+plot_trajectory_over_time(
+    df,
+    threshold=0.6,
+    positive_learning_rate=0.1,
+    negative_learning_rate=0.05,
+    tie_dissolution=1,
+    run=5,
 )

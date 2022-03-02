@@ -32,10 +32,8 @@ data["absolute_opinions"] = data["opinions"].apply(lambda x: abs(x))
 data["opinion_shift"] = abs(data["initial_opinions"] - (data["opinions"]))
 data["radicalization"] = data["absolute_opinions"] - abs(data["initial_opinions"])
 
-data_no_negative = data.query("negative_learning_rate == 0.0")
-
 sns.histplot(
-    data=data_no_negative,
+    data=data,
     x="opinions",
     hue="threshold",
     stat="percent",
@@ -45,7 +43,7 @@ sns.histplot(
 ).set(title="Opinion Distribution", xlabel=r"$O_F$")
 
 sns.histplot(
-    data=data_no_negative,
+    data=data,
     x="opinions",
     hue="tie_dissolution",
     stat="percent",
@@ -54,25 +52,22 @@ sns.histplot(
     kde=True,
 ).set(title="Opinion Distribution", xlabel=r"$O_F$")
 
-data_omit = data.dropna().reset_index(drop=True)
-
-# plotting = sns.displot(
-#     data=data_omit,
-#     x="radicalization",
-#     hue="positive_learning_rate",
-#     col="threshold",
-#     row="negative_learning_rate",
-#     stat="percent",
-#     common_norm=False,
-#     binwidth=0.05,
-#     kde=True,
-#     facet_kws=dict(margin_titles=True),
-# ).set(xlabel="Opinion")
-
 plotting = sns.displot(
-    data=data_omit,
+    data=data,
     x="radicalization",
     hue="negative_learning_rate",
+    stat="percent",
+    common_norm=False,
+    binwidth=0.05,
+    kde=True,
+    height=8.27,
+    aspect=11.7 / 8.27,
+).set(xlabel=r"$|O_F| - |O_I|$")
+
+plotting = sns.displot(
+    data=data,
+    x="radicalization",
+    hue="tie_dissolution",
     stat="percent",
     common_norm=False,
     binwidth=0.05,
@@ -98,10 +93,6 @@ plotting = sns.displot(
 #         ].corr()
 #     )
 # )
-
-data_omit.groupby(
-    ["threshold", "positive_learning_rate", "negative_learning_rate", "randomness"]
-).agg(n=("opinions", "count")).reset_index()
 
 sns.heatmap(
     data[
@@ -130,7 +121,7 @@ plotting = sns.histplot(
 ).set(title="Opinion shift", xlabel=r"$|O_I - O_F|$")
 
 plotting = sns.histplot(
-    data=data_omit,
+    data=data,
     x="distances",
     stat="percent",
     hue="positive_learning_rate",
@@ -138,17 +129,6 @@ plotting = sns.histplot(
     kde=True,
     common_norm=False,
 ).set(title="Average distance to neighbor's opinion", xlabel="Average distance")
-
-sns.histplot(
-    data=data,
-    x="opinions",
-    hue="threshold",
-    stat="percent",
-    common_norm=False,
-    binwidth=0.05,
-    kde=True,
-).set(title="Opinion Distribution", xlabel=r"$O_F$")
-plt.savefig("plots/Opinion_Distribution_Threshold.png")
 
 sns.histplot(
     data=data,
@@ -172,35 +152,11 @@ sns.histplot(
 ).set(title="Opinion Distribution", xlabel=r"$O_F$")
 plt.savefig("plots/Opinion_Distribution_NLR.png")
 
-plotting = sns.histplot(
-    data=data_omit,
-    x="absolute_opinions",
-    hue="randomness",
-    stat="percent",
-    common_norm=False,
-    binwidth=0.05,
-    kde=True,
-).set(title="Randomness leads to more extreme cases", xlabel=r"$|O_F|$")
-plt.savefig("plots/Absolute_Opinion_Distribution_Randomness.png")
-
-
-plotting = sns.displot(
-    data=data_omit,
-    x="absolute_opinions",
-    hue="randomness",
-    stat="percent",
-    col="threshold",
-    row="negative_learning_rate",
-    common_norm=False,
-    binwidth=0.05,
-    kde=True,
-).set(xlabel=r"$|O_F|$")
-
 
 plotting = sns.displot(
     data=data,
     x="opinions",
-    hue="positive_learning_rate",
+    hue="tie_dissolution",
     col="threshold",
     row="negative_learning_rate",
     stat="percent",
@@ -238,118 +194,14 @@ plt.savefig("plots/Opinion_Distribution_Facet.png")
 # correlates with variance of opinions
 # for different conditions
 
-randomness_effect = (
-    data_omit.groupby(
-        ["threshold", "positive_learning_rate", "negative_learning_rate", "randomness"]
-    )
-    .agg(variance=("opinions", "var"), radicalization=("radicalization", "mean"))
-    .reset_index()
-)
-
-kurtosis_data = (
-    data_omit.groupby(
-        ["threshold", "positive_learning_rate", "negative_learning_rate", "randomness"]
-    )
-    .apply(pd.DataFrame.kurtosis)[
-        [
-            "opinions",
-            "initial_opinions",
-            "degrees",
-            "distances",
-            "centrality",
-            "absolute_opinions",
-            "opinion_shift",
-            "radicalization",
-        ]
-    ]
-    .reset_index()
-)
-
-sns.relplot(
-    data=kurtosis_data,
-    x="threshold",
-    y="opinions",
-    hue="negative_learning_rate",
-    kind="line",
-)
-
-
-plotting = sns.displot(
-    data=data_omit,
-    x="opinions",
-    hue="negative_learning_rate",
-    col="threshold",
-    row="randomness",
-    stat="percent",
-    common_norm=False,
-    binwidth=0.05,
-    kde=True,
-    facet_kws=dict(margin_titles=True),
-).set(xlabel="Opinion")
-
-polarization = (
-    data_omit.groupby(["threshold", "positive_learning_rate", "negative_learning_rate"])
-    .agg(
-        median_opinions=("absolute_opinions", "median"),
-        variance_opinions=("opinions", "var"),
-    )
-    .reset_index()
-)
-
-polarized_simulations = polarization.query("median_opinions > 0.53")
-
-polarized_data = polarized_simulations.merge(
-    data_omit,
-    on=["threshold", "positive_learning_rate", "negative_learning_rate"],
-    how="inner",
-)
-
-polarized_data.query("degrees < 10 & centrality > 0.01")
-
-sns.relplot(
-    data=polarization,
-    x="negative_learning_rate",
-    y="variance_opinions",
-    hue="threshold",
-    palette=blue_pallette,
-    height=8.27,
-    aspect=11.7 / 8.27,
-    kind="line",
-)
-
-sns.relplot(
-    data=polarization,
-    x="positive_learning_rate",
-    y="median_opinions",
-    hue="threshold",
-    palette=blue_pallette,
-    height=8.27,
-    aspect=11.7 / 8.27,
-    kind="line",
-)
-
-sns.relplot(
-    data=polarization,
-    x="negative_learning_rate",
-    y="median_opinions",
-    hue="threshold",
-    palette=blue_pallette,
-    height=8.27,
-    aspect=11.7 / 8.27,
-    kind="line",
-)
-
-absolute_opinions = (
-    data_omit.groupby(
-        ["threshold", "positive_learning_rate", "negative_learning_rate", "randomness"]
-    )
-    .agg(median_opinion=("absolute_opinions", "median"))
-    .reset_index()
-)
-
 correlations = (
-    data_omit.groupby(
-        ["threshold", "positive_learning_rate", "negative_learning_rate", "randomness"]
+    data.groupby(
+        [
+            "threshold",
+            "positive_learning_rate",
+            "negative_learning_rate",
+            "tie_dissolution",
+        ]
     )["initial_opinions", "opinions"]
     .corr()
     .iloc[0::2, -1]
@@ -357,8 +209,13 @@ correlations = (
 )
 
 distances = (
-    data_omit.groupby(
-        ["threshold", "positive_learning_rate", "negative_learning_rate", "randomness"]
+    data.groupby(
+        [
+            "threshold",
+            "positive_learning_rate",
+            "negative_learning_rate",
+            "tie_dissolution",
+        ]
     )
     .agg(median_distance=("distances", "median"))
     .reset_index()
@@ -375,65 +232,40 @@ sns.relplot(
     kind="line",
 )
 
-sns.relplot(
+sns.boxplot(
     data=correlations,
-    x="positive_learning_rate",
+    x="threshold",
     y="opinions",
-    hue="threshold",
-    palette=blue_pallette,
-    height=8.27,
-    aspect=11.7 / 8.27,
-    kind="line",
+    # hue="threshold",
+    palette=sns.cubehelix_palette(10, rot=-0.25, light=1.2),
 ).set(
     ylabel=r"$\rho_{O_I, O_F}$",
-    xlabel="Positive Learning Rate",
+    xlabel="Threshold",
+    title=r"Correlation between $O_I$ and $O_F$",
+)
+sns.stripplot(
+    data=correlations,
+    x="threshold",
+    y="opinions",
+    color="black",
+    alpha=0.6,
+    # palette=sns.cubehelix_palette(8, rot=-0.25, light=0.9),
+).set(
+    ylabel=r"$\rho_{O_I, O_F}$",
+    xlabel="Threshold",
     title=r"Correlation between $O_I$ and $O_F$",
 )
 plt.savefig("plots/Correlation_Initial_Opinions_PLR.png")
 
-sns.relplot(
-    data=absolute_opinions,
-    x="negative_learning_rate",
-    y="median_opinion",
-    hue="threshold",
-    height=8.27,
-    aspect=11.7 / 8.27,
-    palette=blue_pallette,
-    kind="line",
-).set(
-    ylabel=r"Median of $|O_F|$",
-    xlabel="Negative Learning Rate",
-    title="Threshold and Negative learning polarizes populations",
-)
-plt.savefig("plots/Median_Threshold_NLR.png")
-
-
-sns.relplot(
-    data=absolute_opinions,
-    x="threshold",
-    y="median_opinion",
-    hue="randomness",
-    height=8.27,
-    aspect=11.7 / 8.27,
-    palette=blue_pallette,
-    kind="line",
-)
-
-sns.relplot(
-    data=absolute_opinions,
-    x="negative_learning_rate",
-    y="median_opinion",
-    hue="randomness",
-    height=8.27,
-    aspect=11.7 / 8.27,
-    palette=blue_pallette,
-    kind="line",
-)
-
 
 correlations_centrality = (
-    data_omit.groupby(
-        ["threshold", "positive_learning_rate", "negative_learning_rate", "randomness"]
+    data.groupby(
+        [
+            "threshold",
+            "positive_learning_rate",
+            "negative_learning_rate",
+            "tie_dissolution",
+        ]
     )["centrality", "absolute_opinions"]
     .corr()
     .iloc[0::2, -1]
@@ -457,84 +289,71 @@ sns.relplot(
 plt.savefig("plots/Correlation_Absolute_Centrality.png")
 
 correlations_centrality = (
-    data_omit.groupby(
-        ["threshold", "positive_learning_rate", "negative_learning_rate", "randomness"]
-    )["degrees", "absolute_opinions"]
-    .corr()
-    .iloc[0::2, -1]
-    .reset_index()
-)
-
-sns.relplot(
-    data=correlations_centrality,
-    x="negative_learning_rate",
-    y="absolute_opinions",
-    hue="threshold",
-    height=8.27,
-    aspect=11.7 / 8.27,
-    palette=blue_pallette,
-    kind="line",
-).set(
-    ylabel=r"$\rho_{degrees, |O_F|}$",
-    xlabel="Negative Learning Rate",
-    title=r"Correlation between $|O_F|$ and Degrees",
-)
-plt.savefig("plots/Correlation_Absolute_Degrees.png")
-
-
-correlations_centrality = (
-    data_omit.groupby(
-        ["threshold", "positive_learning_rate", "negative_learning_rate", "randomness"]
-    )["agent_number", "absolute_opinions"]
-    .corr()
-    .iloc[0::2, -1]
-    .reset_index()
-)
-
-sns.relplot(
-    data=correlations_centrality,
-    x="negative_learning_rate",
-    y="absolute_opinions",
-    hue="threshold",
-    height=8.27,
-    aspect=11.7 / 8.27,
-    palette=blue_pallette,
-    kind="line",
-)
-
-correlations_centrality = (
-    data_omit.groupby(
-        ["threshold", "positive_learning_rate", "negative_learning_rate", "randomness"]
+    data.groupby(
+        [
+            "threshold",
+            "positive_learning_rate",
+            "negative_learning_rate",
+            "tie_dissolution",
+        ]
     )["degrees", "centrality"]
     .corr()
     .iloc[0::2, -1]
     .reset_index()
 )
 
+sns.boxplot(
+    data=correlations_centrality,
+    x="tie_dissolution",
+    y="centrality",
+    # hue="threshold",
+    palette=sns.cubehelix_palette(10, rot=-0.25, light=1.2),
+).set(
+    ylabel=r"$\rho_{Degree, Centrality}$",
+    xlabel=r"$P(D)$",
+    title=r"Correlation between Degree and Centrality",
+)
+sns.stripplot(
+    data=correlations_centrality,
+    x="tie_dissolution",
+    y="centrality",
+    color="black",
+    alpha=0.6,
+    # palette=sns.cubehelix_palette(8, rot=-0.25, light=0.9),
+).set(
+    ylabel=r"$\rho_{Degree, Centrality}$",
+    xlabel=r"$P(D)$",
+    title=r"Correlation between Degree and Centrality",
+)
+
+sns.boxplot(
+    data=correlations_centrality,
+    x="threshold",
+    y="centrality",
+    # hue="threshold",
+    palette=sns.cubehelix_palette(10, rot=-0.25, light=1.2),
+).set(
+    ylabel=r"$\rho_{Degree, Centrality}$",
+    xlabel=r"$Threshold$",
+    title=r"Correlation between Degree and Centrality",
+)
+sns.stripplot(
+    data=correlations_centrality,
+    x="threshold",
+    y="centrality",
+    color="black",
+    alpha=0.6,
+    # palette=sns.cubehelix_palette(8, rot=-0.25, light=0.9),
+).set(
+    ylabel=r"$\rho_{Degree, Centrality}$",
+    xlabel=r"$Threshold$",
+    title=r"Correlation between Degree and Centrality",
+)
+
 sns.relplot(
     data=correlations_centrality,
     x="negative_learning_rate",
     y="centrality",
-    hue="threshold",
-    height=8.27,
-    aspect=11.7 / 8.27,
-    palette=blue_pallette,
-    kind="line",
-)
-
-correlations_centrality = (
-    data_omit.groupby(
-        ["threshold", "positive_learning_rate", "negative_learning_rate", "randomness"]
-    )["degrees", "agent_number"]
-    .corr()
-    .iloc[0::2, -1]
-    .reset_index()
-)
-
-sns.relplot(
-    data=correlations_centrality,
-    x="randomness",
-    y="agent_number",
     hue="threshold",
     height=8.27,
     aspect=11.7 / 8.27,
