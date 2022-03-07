@@ -40,7 +40,10 @@ g = sns.lineplot(
 ).set(ylabel=r"$|O|$", xlabel=r"$t$")
 
 plt.legend(title=r"$Threshold$", bbox_to_anchor=(1.0, 0.75))
-plt.show(g)
+plt.savefig(
+    "plots/overall/Absolute_Opinion_Threshold.png", dpi=300, bbox_inches="tight"
+)
+
 
 g = sns.lineplot(
     data=data,
@@ -51,7 +54,11 @@ g = sns.lineplot(
 ).set(ylabel=r"$|O|$", xlabel=r"$t$")
 
 plt.legend(title=r"$\alpha$", bbox_to_anchor=(1.0, 0.75))
-plt.show(g)
+plt.savefig(
+    "plots/overall/Absolute_Opinion_Positive_Learning_Rate.png",
+    dpi=300,
+    bbox_inches="tight",
+)
 
 g = sns.lineplot(
     data=data,
@@ -62,7 +69,11 @@ g = sns.lineplot(
 ).set(ylabel=r"$|O|$", xlabel=r"$t$")
 
 plt.legend(title=r"$\beta$", bbox_to_anchor=(1.0, 0.75))
-plt.show(g)
+plt.savefig(
+    "plots/overall/Absolute_Opinion_Negative_Learning_Rate.png",
+    dpi=300,
+    bbox_inches="tight",
+)
 
 g = sns.lineplot(
     data=data,
@@ -73,7 +84,9 @@ g = sns.lineplot(
 ).set(ylabel=r"$|O|$", xlabel=r"$t$")
 
 plt.legend(title=r"$P(D)$", bbox_to_anchor=(1.0, 0.75))
-plt.show(g)
+plt.savefig(
+    "plots/overall/Absolute_Opinion_Tie_Dissolution.png", dpi=300, bbox_inches="tight"
+)
 
 g = sns.lineplot(
     data=data,
@@ -84,7 +97,6 @@ g = sns.lineplot(
 ).set(ylabel=r"$APL$", xlabel=r"$t$")
 
 plt.legend(title=r"$\beta$", bbox_to_anchor=(1.0, 0.75))
-plt.show(g)
 
 g = sns.lineplot(
     data=data,
@@ -95,7 +107,6 @@ g = sns.lineplot(
 ).set(ylabel=r"$APL$", xlabel=r"$t$")
 
 plt.legend(title=r"$Threshold$", bbox_to_anchor=(1.0, 0.75))
-plt.show(g)
 
 g = sns.lineplot(
     data=data,
@@ -106,7 +117,6 @@ g = sns.lineplot(
 ).set(ylabel=r"$Mean Distance$", xlabel=r"$t$")
 
 plt.legend(title=r"$P(D)$", bbox_to_anchor=(1.0, 0.75))
-plt.show(g)
 
 g = sns.lineplot(
     data=data,
@@ -117,7 +127,6 @@ g = sns.lineplot(
 ).set(ylabel=r"$Mean Distance$", xlabel=r"$t$")
 
 plt.legend(title=r"$P(D)$", bbox_to_anchor=(1.0, 0.75))
-plt.show(g)
 
 correlations = (
     data_without.groupby(
@@ -150,7 +159,7 @@ sns.stripplot(
     alpha=0.6,
     # palette=sns.cubehelix_palette(8, rot=-0.25, light=0.9),
 ).set(ylabel=r"$\rho_{|O|, APL}$", xlabel=r"$P(D)$")
-plt.savefig("plots/Tie_Dissolution_Correlations_Boxplot_Full.png")
+plt.savefig("plots/overall/Tie_Dissolution_Correlations_Boxplot_Full.png")
 
 sns.boxplot(
     data=correlations.query("tie_dissolution > 0"),
@@ -169,7 +178,7 @@ sns.stripplot(
     alpha=0.6,
     # palette=sns.cubehelix_palette(8, rot=-0.25, light=0.9),
 ).set(ylabel=r"$\rho_{|O|, APL}$", xlabel=r"$P(D)$")
-plt.savefig("plots/Tie_Dissolution_Correlations_Boxplot_Over_Zero.png")
+plt.savefig("plots/overall/Tie_Dissolution_Correlations_Boxplot_Over_Zero.png")
 
 data_specific = data[
     (data["threshold"] == 0.8)
@@ -185,7 +194,7 @@ g = sns.lineplot(
     y="average_path_length",
     palette=blue_pallette,
 ).set(ylabel=r"$APL$", xlabel=r"$t$")
-plt.savefig("plots/Example_Average_Path_Length.png")
+plt.savefig("plots/example/Example_Average_Path_Length.png")
 
 g = sns.lineplot(
     data=data_specific,
@@ -193,7 +202,7 @@ g = sns.lineplot(
     y="mean_absolute_opinion",
     palette=blue_pallette,
 ).set(ylabel=r"$|O|$", xlabel=r"$t$")
-plt.savefig("plots/Example_Absolute_Opinion.png")
+plt.savefig("plots/example/Example_Absolute_Opinion.png")
 
 plt.legend(title=r"$Threshold$", bbox_to_anchor=(1.0, 0.75))
 plt.show(g)

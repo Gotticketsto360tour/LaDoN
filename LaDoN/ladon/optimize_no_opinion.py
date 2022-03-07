@@ -31,7 +31,7 @@ pio.renderers.default = "notebook"
 
 # fig = optuna.visualization.plot_slice(study)
 # fig.show()
-def make_network_by_seed(dictionary, run):
+def make_no_opinion_network_by_seed(dictionary, run):
     random.seed(run)
     np.random.seed(run)
     network = NoOpinionNetwork(dictionary)
@@ -40,7 +40,7 @@ def make_network_by_seed(dictionary, run):
 
 
 def run_single_simulation(dictionary, run, target, target_dictionary):
-    my_network = make_network_by_seed(dictionary=dictionary, run=run)
+    my_network = make_no_opinion_network_by_seed(dictionary=dictionary, run=run)
 
     clustering_diff = abs(
         nx.algorithms.cluster.average_clustering(my_network.graph)

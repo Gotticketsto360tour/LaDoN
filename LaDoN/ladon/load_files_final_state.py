@@ -6,6 +6,7 @@ from matplotlib.pyplot import title, xlabel, ylabel
 import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
+import ptitprince as pt
 
 sns.set(rc={"figure.figsize": (11.7, 8.27)})
 sns.set_context("talk")
@@ -348,6 +349,17 @@ sns.stripplot(
     ylabel=r"$\rho_{Degree, Centrality}$",
     xlabel=r"$Threshold$",
     title=r"Correlation between Degree and Centrality",
+)
+
+ax = pt.RainCloud(
+    x="threshold",
+    y="centrality",
+    data=correlations_centrality,
+    palette=sns.cubehelix_palette(10, rot=-0.25, light=1.2),
+    bw=0.2,
+    width_viol=1,
+    alpha=1,
+    dodge=True,
 )
 
 sns.relplot(

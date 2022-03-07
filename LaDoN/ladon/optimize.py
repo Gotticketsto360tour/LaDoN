@@ -1,14 +1,12 @@
 from statistics import mean
 from typing import Dict
-from venv import create
-from helpers import get_main_component
+from helpers import get_main_component, find_average_path
 from network import Network
 import networkx as nx
 import numpy as np
 import optuna
 import netrd
 from tqdm import tqdm
-from helpers import find_average_path
 import random
 import pickle as pkl
 import multiprocessing as mp
@@ -97,7 +95,7 @@ def objective(trial, target, repeats, target_dictionary):
         "N_TIMESTEPS": N_TARGET * 20,
         "POSITIVE_LEARNING_RATE": positive_learning_rate,
         "NEGATIVE_LEARNING_RATE": negative_learning_rate,
-        "P": 0.1,
+        "P": 0.5,
         "K": 2 * K,
         "TIE_DISSOLUTION": tie_dissolution,
         "RECORD": False,
@@ -110,21 +108,6 @@ def objective(trial, target, repeats, target_dictionary):
 
     return mean(results)
 
-
-with open("analysis/data/fb-pages-government/fb-pages-government.nodes", "rb+") as f:
-    data = [str(node, "utf-8").strip().split(",")[-1] for node in f.readlines()[1:]]
-
-politicians = nx.Graph()
-
-politicians.add_nodes_from(data)
-
-with open("analysis/data/fb-pages-government/fb-pages-government.edges", "rb+") as f:
-    data = [str(node, "utf-8").strip().split(",") for node in f.readlines()]
-
-politicians.add_edges_from(data)
-
-
-# netscience = nx.read_gml(path="analysis/data/netscience/netscience.gml")
 
 # facebook = nx.read_edgelist(
 #     "analysis/data/facebook_combined.txt", create_using=nx.Graph(), nodetype=int
@@ -142,6 +125,21 @@ politicians.add_edges_from(data)
 #     nodetype=int,
 # )
 
+with open("analysis/data/fb-pages-government/fb-pages-government.nodes", "rb+") as f:
+    data = [str(node, "utf-8").strip().split(",")[-1] for node in f.readlines()[1:]]
+
+politicians = nx.Graph()
+
+politicians.add_nodes_from(data)
+
+with open("analysis/data/fb-pages-government/fb-pages-government.edges", "rb+") as f:
+    data = [str(node, "utf-8").strip().split(",") for node in f.readlines()]
+
+politicians.add_edges_from(data)
+
+
+netscience = nx.read_gml(path="analysis/data/netscience/netscience.gml")
+
 karate = nx.karate_club_graph()
 
 polblogs = nx.read_gml(
@@ -158,14 +156,12 @@ dolphin = nx.read_gml(path="analysis/data/dolphins/dolphins.gml")
 if __name__ == "__main__":
     resulting_dictionary = {}
     name_dictionary = {
-        # "karate": karate,
-        # "dolphin": dolphin,
-        # "polbooks": polbooks,
-        # "netscience": netscience,
-        # "astrophysics": astrophysics,
-        # "polblogs": polblogs,
-        # "facebook": facebook,
-        "politicians": politicians
+        "karate": karate,
+        "dolphin": dolphin,
+        "polbooks": polbooks,
+        "netscience": netscience,
+        "polblogs": polblogs,
+        "politicians": politicians,
     }
 
     for name, network in name_dictionary.items():
