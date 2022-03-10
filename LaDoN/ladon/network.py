@@ -6,6 +6,7 @@ from random import random
 from helpers import find_distance, find_average_path
 from tqdm import tqdm
 import numpy as np
+from datetime import datetime
 
 
 class Network:
@@ -162,7 +163,15 @@ class Network:
             sampled_neigbor = sample(candidate_neighbors, 1)[0]
             self.graph.add_edge(agent_on_turn, sampled_neigbor)
 
+    def delete_tie(self, agent, neighbor):
+        if random() <= self.TIE_DISSOLUTION:
+            self.graph.remove_edge(agent, neighbor)
+            self.N_TIE_DISSOLUTIONS += 1
+            self.EDGE_SURPLUS += 1
+            self.ensure_no_lone_agents(agent, neighbor)
+
     def update_all_values(self, agent):
+
         neighbor_list = list(self.graph.neighbors(agent))
         for neighbor in sample(neighbor_list, k=len(neighbor_list)):
             self.update_values(agent, neighbor)
@@ -173,19 +182,20 @@ class Network:
             if find_distance(self.agents.get(agent), self.agents.get(neighbor))
             > self.THRESHOLD
         ]
-        for neighbor in negative_relations:
-            if random() <= self.TIE_DISSOLUTION:
-                self.graph.remove_edge(agent, neighbor)
-                self.N_TIE_DISSOLUTIONS += 1
-                self.EDGE_SURPLUS += 1
-                self.ensure_no_lone_agents(agent, neighbor)
+        remove_ties = [
+            self.delete_tie(agent, neighbor) for neighbor in negative_relations
+        ]
 
     def ensure_no_lone_agents(self, sampled_agent, neighbor):
-        if len(list(self.graph.neighbors(sampled_agent))) == 0:
+        sampled_agents_neighbors = list(self.graph.neighbors(sampled_agent))
+        neighbors_neighbors = list(self.graph.neighbors(neighbor))
+        if len(sampled_agents_neighbors) == 0:
             self.add_new_connection_randomly(sampled_agent)
-        if len(list(self.graph.neighbors(neighbor))) == 0:
+        elif len(list(self.graph.neighbors(neighbor))) == 0:
             self.add_new_connection_randomly(neighbor)
-        if not nx.is_connected(self.graph):
+        elif not nx.has_path(
+            self.graph, sampled_agents_neighbors[0], neighbors_neighbors[0]
+        ):
             self.EDGE_SURPLUS -= 1
             self.graph.add_edge(sampled_agent, neighbor)
 

@@ -70,7 +70,7 @@ def objective(trial, target, repeats, target_dictionary):
     N_EDGES = target.number_of_edges()
     K = round(N_EDGES / N_TARGET)
     # threshold = trial.suggest_float("threshold", 0.5, 2)
-    randomness = trial.suggest_float("randomness", 0.1, 1)
+    randomness = trial.suggest_float("randomness", 0, 1)
     # positive_learning_rate = trial.suggest_float("positive_learning_rate", 0, 0.5)
     # negative_learning_rate = trial.suggest_float("negative_learning_rate", 0, 0.5)
     # tie_dissolution = trial.suggest_float("tie_dissolution", 0.1, 1)
@@ -79,7 +79,7 @@ def objective(trial, target, repeats, target_dictionary):
         "N_TARGET": N_TARGET,
         "RANDOMNESS": randomness,
         "N_TIMESTEPS": N_TARGET * 20,
-        "P": 0.1,
+        "P": 0.5,
         "K": 2 * K,
         "RECORD": False,
     }
