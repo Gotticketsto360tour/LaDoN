@@ -46,10 +46,10 @@ def run_single_simulation(dictionary, run, target, target_dictionary):
         nx.algorithms.cluster.average_clustering(my_network.graph)
         - (target_dictionary.get("clustering"))
     )
-    assortativity_diff = abs(
-        nx.algorithms.assortativity.degree_assortativity_coefficient(my_network.graph)
-        - (target_dictionary.get("assortativity"))
-    )
+    # assortativity_diff = abs(
+    #     nx.algorithms.assortativity.degree_assortativity_coefficient(my_network.graph)
+    #     - (target_dictionary.get("assortativity"))
+    # )
     network_avg_path = find_average_path(my_network.graph)
 
     average_path_diff = abs(
@@ -58,11 +58,9 @@ def run_single_simulation(dictionary, run, target, target_dictionary):
 
     distance_algorithm = netrd.distance.DegreeDivergence()
     JSD = distance_algorithm.dist(my_network.graph, target)
-    minimize_array = np.array(
-        [clustering_diff, assortativity_diff, average_path_diff, JSD]
-    )
-    norm = np.linalg.norm(minimize_array)
-    return norm
+    minimize_array = np.array([clustering_diff, average_path_diff, JSD])
+    mean = np.mean(minimize_array)
+    return mean
 
 
 def objective(trial, target, repeats, target_dictionary):
