@@ -1,5 +1,6 @@
 from statistics import mean
 from unittest import result
+from config import NAME_DICTIONARY
 from network import Network, NoOpinionNetwork
 import networkx as nx
 import numpy as np
@@ -90,71 +91,9 @@ def objective(trial, target, repeats, target_dictionary):
     return mean(results)
 
 
-netscience = nx.read_gml(path="analysis/data/netscience/netscience.gml")
-
-facebook = nx.read_edgelist(
-    "analysis/data/facebook_combined.txt", create_using=nx.Graph(), nodetype=int
-)
-
-astrophysics = nx.read_edgelist(
-    "analysis/data/dimacs10-astro-ph/out.dimacs10-astro-ph",
-    create_using=nx.Graph(),
-    nodetype=int,
-)
-
-karate = nx.karate_club_graph()
-
-polblogs = nx.read_gml(
-    path="analysis/data/polblogs/polblogs.gml",
-)
-polblogs = nx.Graph(polblogs.to_undirected())
-
-polbooks = nx.read_gml(
-    path="analysis/data/polbooks/polbooks.gml",
-)
-
-dolphin = nx.read_gml(path="analysis/data/dolphins/dolphins.gml")
-
-
-with open("analysis/data/fb-pages-government/fb-pages-government.nodes", "rb+") as f:
-    data = [str(node, "utf-8").strip().split(",")[-1] for node in f.readlines()[1:]]
-
-government = nx.Graph()
-
-government.add_nodes_from(data)
-
-with open("analysis/data/fb-pages-government/fb-pages-government.edges", "rb+") as f:
-    data = [str(node, "utf-8").strip().split(",") for node in f.readlines()]
-
-government.add_edges_from(data)
-
-with open("analysis/data/fb-pages-politician/fb-pages-politician.nodes", "rb+") as f:
-    data = [str(node, "utf-8").strip().split(",")[-1] for node in f.readlines()[1:]]
-
-politicians = nx.Graph()
-
-politicians.add_nodes_from(data)
-
-with open("analysis/data/fb-pages-politician/fb-pages-politician.edges", "rb+") as f:
-    data = [str(node, "utf-8").strip().split(",") for node in f.readlines()]
-
-politicians.add_edges_from(data)
-
-
 if __name__ == "__main__":
     resulting_dictionary = {}
-    name_dictionary = {
-        # "karate": karate,
-        # "dolphin": dolphin,
-        # "polbooks": polbooks,
-        # "netscience": netscience,
-        # "polblogs": polblogs,
-        # "facebook": facebook,
-        # "astrophysics": astrophysics,
-        "politicians": politicians,
-        "government": government,
-    }
-    for name, network in name_dictionary.items():
+    for name, network in NAME_DICTIONARY.items():
         print(f"--- NOW RUNNING: {name} ---")
         network = get_main_component(network)
         study = optuna.create_study(study_name=name, direction="minimize")
