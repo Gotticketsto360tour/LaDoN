@@ -121,11 +121,23 @@ dolphin = nx.read_gml(path="analysis/data/dolphins/dolphins.gml")
 with open("analysis/data/fb-pages-government/fb-pages-government.nodes", "rb+") as f:
     data = [str(node, "utf-8").strip().split(",")[-1] for node in f.readlines()[1:]]
 
+government = nx.Graph()
+
+government.add_nodes_from(data)
+
+with open("analysis/data/fb-pages-government/fb-pages-government.edges", "rb+") as f:
+    data = [str(node, "utf-8").strip().split(",") for node in f.readlines()]
+
+government.add_edges_from(data)
+
+with open("analysis/data/fb-pages-politician/fb-pages-politician.nodes", "rb+") as f:
+    data = [str(node, "utf-8").strip().split(",")[-1] for node in f.readlines()[1:]]
+
 politicians = nx.Graph()
 
 politicians.add_nodes_from(data)
 
-with open("analysis/data/fb-pages-government/fb-pages-government.edges", "rb+") as f:
+with open("analysis/data/fb-pages-politician/fb-pages-politician.edges", "rb+") as f:
     data = [str(node, "utf-8").strip().split(",") for node in f.readlines()]
 
 politicians.add_edges_from(data)
@@ -141,7 +153,8 @@ if __name__ == "__main__":
         # "polblogs": polblogs,
         # "facebook": facebook,
         # "astrophysics": astrophysics,
-        "politicians": politicians
+        "politicians": politicians,
+        "government": government,
     }
     for name, network in name_dictionary.items():
         print(f"--- NOW RUNNING: {name} ---")

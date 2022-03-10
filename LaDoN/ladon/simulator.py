@@ -196,7 +196,7 @@ dictionary = {
     "RECORD": True,
 }
 
-my_network = make_network_by_seed(dictionary=dictionary, run=6)
+my_network = make_network_by_seed(dictionary=dictionary, run=5)
 
 sns.lineplot(data=my_network.NEGATIVE_TIES_DISSOLUTED)
 sns.lineplot(data=my_network.AVERAGE_CLUSTERING)

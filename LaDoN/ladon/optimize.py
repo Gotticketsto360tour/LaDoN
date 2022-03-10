@@ -59,10 +59,10 @@ def run_single_simulation(
         nx.algorithms.cluster.average_clustering(my_network.graph)
         - (target_dictionary.get("clustering"))
     )
-    assortativity_diff = abs(
-        nx.algorithms.assortativity.degree_assortativity_coefficient(my_network.graph)
-        - (target_dictionary.get("assortativity"))
-    )
+    # assortativity_diff = abs(
+    #     nx.algorithms.assortativity.degree_assortativity_coefficient(my_network.graph)
+    #     - (target_dictionary.get("assortativity"))
+    # )
     network_avg_path = find_average_path(my_network.graph)
 
     average_path_diff = abs(
@@ -71,11 +71,9 @@ def run_single_simulation(
 
     distance_algorithm = netrd.distance.DegreeDivergence()
     JSD = distance_algorithm.dist(my_network.graph, target)
-    minimize_array = np.array(
-        [clustering_diff, assortativity_diff, average_path_diff, JSD]
-    )
-    norm = np.linalg.norm(minimize_array)
-    return norm
+    minimize_array = np.array([clustering_diff, average_path_diff, JSD])
+    mean = np.mean(minimize_array)
+    return mean
 
 
 def objective(trial, target, repeats, target_dictionary):
@@ -128,15 +126,26 @@ def objective(trial, target, repeats, target_dictionary):
 with open("analysis/data/fb-pages-government/fb-pages-government.nodes", "rb+") as f:
     data = [str(node, "utf-8").strip().split(",")[-1] for node in f.readlines()[1:]]
 
-politicians = nx.Graph()
+government = nx.Graph()
 
-politicians.add_nodes_from(data)
+government.add_nodes_from(data)
 
 with open("analysis/data/fb-pages-government/fb-pages-government.edges", "rb+") as f:
     data = [str(node, "utf-8").strip().split(",") for node in f.readlines()]
 
-politicians.add_edges_from(data)
+government.add_edges_from(data)
 
+with open("analysis/data/fb-pages-politician/fb-pages-politician.nodes", "rb+") as f:
+    data = [str(node, "utf-8").strip().split(",")[-1] for node in f.readlines()[1:]]
+
+politicians = nx.Graph()
+
+politicians.add_nodes_from(data)
+
+with open("analysis/data/fb-pages-politician/fb-pages-politician.edges", "rb+") as f:
+    data = [str(node, "utf-8").strip().split(",") for node in f.readlines()]
+
+politicians.add_edges_from(data)
 
 netscience = nx.read_gml(path="analysis/data/netscience/netscience.gml")
 
@@ -162,6 +171,7 @@ if __name__ == "__main__":
         "netscience": netscience,
         "polblogs": polblogs,
         "politicians": politicians,
+        "government": government,
     }
 
     for name, network in name_dictionary.items():
