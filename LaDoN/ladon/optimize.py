@@ -81,7 +81,7 @@ def objective(trial, target, repeats, target_dictionary):
     N_TARGET = target.number_of_nodes()
     N_EDGES = target.number_of_edges()
     K = round(N_EDGES / N_TARGET)
-    threshold = trial.suggest_float("threshold", 0.4, 1.2)
+    threshold = trial.suggest_float("threshold", 0.4, 1.3)
     randomness = trial.suggest_float("randomness", 0, 1)
     positive_learning_rate = trial.suggest_float("positive_learning_rate", 0.05, 0.5)
     negative_learning_rate = trial.suggest_float("negative_learning_rate", 0.05, 0.5)
@@ -123,7 +123,7 @@ if __name__ == "__main__":
             "average_path": find_average_path(network),
         }
         study.optimize(
-            lambda trial: objective(trial, network, 5, target_dictionary), n_trials=1000
+            lambda trial: objective(trial, network, 1, target_dictionary), n_trials=500
         )
         study.best_params
         resulting_dictionary[name] = study.best_params

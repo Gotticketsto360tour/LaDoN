@@ -105,7 +105,7 @@ if __name__ == "__main__":
             "average_path": find_average_path(network),
         }
         study.optimize(
-            lambda trial: objective(trial, network, 5, target_dictionary), n_trials=1000
+            lambda trial: objective(trial, network, 1, target_dictionary), n_trials=500
         )
         study.best_params
         resulting_dictionary[name] = study.best_params

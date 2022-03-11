@@ -86,7 +86,7 @@ NAME_DICTIONARY = {
     "polbooks": polbooks,
     "netscience": netscience,
     "polblogs": polblogs,
-    "facebook": facebook,
+    # "facebook": facebook,
     "politicians": politicians,
     "government": government,
 }
