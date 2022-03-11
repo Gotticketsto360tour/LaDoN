@@ -9,20 +9,17 @@ from network import Network, NoOpinionNetwork
 import netrd
 import seaborn as sns
 import numpy as np
+from config import NAME_DICTIONARY
 
 sns.set(rc={"figure.figsize": (11.7, 8.27)})
 sns.set_context("talk")
 blue_pallette = sns.dark_palette("#69d", reverse=True, as_cmap=True)
 
 
-def get_norm(model, target_dictionary, network):
+def get_mean(model, target_dictionary, network):
     clustering_diff = abs(
         nx.algorithms.cluster.average_clustering(model.graph)
         - (target_dictionary.get("clustering")[0])
-    )
-    assortativity_diff = abs(
-        nx.algorithms.assortativity.degree_assortativity_coefficient(model.graph)
-        - (target_dictionary.get("assortativity")[0])
     )
     network_avg_path = find_average_path(model.graph)
 
@@ -32,56 +29,15 @@ def get_norm(model, target_dictionary, network):
 
     distance_algorithm = netrd.distance.DegreeDivergence()
     JSD = distance_algorithm.dist(model.graph, network)
-    minimize_array = np.array(
-        [clustering_diff, assortativity_diff, average_path_diff, JSD]
-    )
-    norm = np.linalg.norm(minimize_array)
-    return norm
+    minimize_array = np.array([clustering_diff, average_path_diff, JSD])
+    mean = np.mean(minimize_array)
+    return mean
 
 
 def generate_network_dataframe():
 
-    with open(
-        "analysis/data/fb-pages-government/fb-pages-government.nodes", "rb+"
-    ) as f:
-        data = [str(node, "utf-8").strip().split(",")[-1] for node in f.readlines()[1:]]
-
-    politicians = nx.Graph()
-
-    politicians.add_nodes_from(data)
-
-    with open(
-        "analysis/data/fb-pages-government/fb-pages-government.edges", "rb+"
-    ) as f:
-        data = [str(node, "utf-8").strip().split(",") for node in f.readlines()]
-
-    politicians.add_edges_from(data)
-
-    netscience = nx.read_gml(path="analysis/data/netscience/netscience.gml")
-
-    karate = nx.karate_club_graph()
-
-    polblogs = nx.read_gml(
-        path="analysis/data/polblogs/polblogs.gml",
-    )
-    polblogs = nx.Graph(polblogs.to_undirected())
-
-    polbooks = nx.read_gml(
-        path="analysis/data/polbooks/polbooks.gml",
-    )
-
-    dolphin = nx.read_gml(path="analysis/data/dolphins/dolphins.gml")
-
-    name_dictionary = {
-        "karate": karate,
-        "dolphin": dolphin,
-        "polbooks": polbooks,
-        "netscience": netscience,
-        "polblogs": polblogs,
-        "politicians": politicians,
-    }
     list_of_dictionaries = []
-    for name, network in name_dictionary.items():
+    for name, network in NAME_DICTIONARY.items():
         network = get_main_component(network=network)
         target_dictionary = {
             "type": ["Target"],
@@ -93,7 +49,7 @@ def generate_network_dataframe():
             "network": [name],
             "JSD": [0],
             "run": [0],
-            "norm": [0],
+            "mean": [0],
         }
         list_of_dictionaries.append(target_dictionary)
         best_study_opinions = joblib.load(
@@ -138,8 +94,8 @@ def generate_network_dataframe():
                 "network": [name],
                 "JSD": [distance_algorithm.dist(model.graph, network)],
                 "run": [run],
-                "norm": [
-                    get_norm(
+                "mean": [
+                    get_mean(
                         model=model,
                         target_dictionary=target_dictionary,
                         network=network,
@@ -186,8 +142,8 @@ def generate_network_dataframe():
                 "network": [name],
                 "JSD": [distance_algorithm.dist(model.graph, network)],
                 "run": [run],
-                "norm": [
-                    get_norm(
+                "mean": [
+                    get_mean(
                         model=model,
                         target_dictionary=target_dictionary,
                         network=network,
@@ -201,22 +157,6 @@ def generate_network_dataframe():
     # pd.concat([pd.DataFrame(data) for data in list_of_dictionaries])
     return list_of_dictionaries
 
-
-# test = generate_network_dataframe()
-
-# sns.barplot(data=test, x="network", y="clustering", hue="type")
-# sns.barplot(data=test, x="network", y="average_path", hue="type")
-# sns.barplot(data=test, x="network", y="assortativity", hue="type")
-# sns.barplot(data=test, x="network", y="JSD", hue="type")
-
-# sns.barplot(data=test.query("type != 'Target'"), x="network", y="norm", hue="type")
-
-# test.groupby(["network", "type"]).agg(
-#     clustering=("clustering", "mean"),
-#     average_path=("average_path", "mean"),
-#     assortativity=("assortativity", "mean"),
-#     JSD=("JSD", "mean"),
-# ).reset_index()
 
 if __name__ == "__main__":
     data = generate_network_dataframe()
