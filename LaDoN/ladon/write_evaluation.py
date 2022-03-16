@@ -16,16 +16,16 @@ sns.set_context("talk")
 blue_pallette = sns.dark_palette("#69d", reverse=True, as_cmap=True)
 
 
-def get_mean(model, target_dictionary, network):
+def get_mean(model, target_dictionary, network, denominator):
     clustering_diff = abs(
         nx.algorithms.cluster.average_clustering(model.graph)
         - (target_dictionary.get("clustering")[0])
     )
     network_avg_path = find_average_path(model.graph)
 
-    average_path_diff = abs(
-        network_avg_path - target_dictionary.get("average_path")[0]
-    ) / max([network_avg_path, target_dictionary.get("average_path")[0]])
+    average_path_diff = (
+        abs(network_avg_path - target_dictionary.get("average_path")[0]) / denominator
+    )
 
     distance_algorithm = netrd.distance.DegreeDivergence()
     JSD = distance_algorithm.dist(model.graph, network)
@@ -34,7 +34,7 @@ def get_mean(model, target_dictionary, network):
     return mean
 
 
-def generate_network_dataframe():
+def generate_network_dataframe(repeats: int):
 
     list_of_dictionaries = []
     for name, network in NAME_DICTIONARY.items():
@@ -62,6 +62,13 @@ def generate_network_dataframe():
         N_EDGES = network.number_of_edges()
         K = round(N_EDGES / N_TARGET)
 
+        denominator_graph = nx.watts_strogatz_graph(
+            n=network.number_of_nodes(),
+            k=2 * K,
+            p=0,
+        )
+        denominator = find_average_path(denominator_graph)
+
         dictionary = {
             "THRESHOLD": best_parameters.get("threshold"),
             "N_TARGET": N_TARGET,
@@ -76,7 +83,8 @@ def generate_network_dataframe():
         }
 
         best_study_opinion_networks = [
-            make_network_by_seed(dictionary=dictionary, run=run) for run in range(5)
+            make_network_by_seed(dictionary=dictionary, run=run)
+            for run in range(repeats)
         ]
 
         distance_algorithm = netrd.distance.DegreeDivergence()
@@ -99,6 +107,7 @@ def generate_network_dataframe():
                         model=model,
                         target_dictionary=target_dictionary,
                         network=network,
+                        denominator=denominator,
                     )
                 ],
             }
@@ -124,7 +133,7 @@ def generate_network_dataframe():
 
         best_study_no_opinion_networks = [
             make_no_opinion_network_by_seed(dictionary=dictionary, run=run)
-            for run in range(5)
+            for run in range(repeats)
         ]
 
         distance_algorithm = netrd.distance.DegreeDivergence()
@@ -147,6 +156,7 @@ def generate_network_dataframe():
                         model=model,
                         target_dictionary=target_dictionary,
                         network=network,
+                        denominator=denominator,
                     )
                 ],
             }
@@ -159,7 +169,7 @@ def generate_network_dataframe():
 
 
 if __name__ == "__main__":
-    data = generate_network_dataframe()
+    data = generate_network_dataframe(repeats=10)
     with open(
         f"analysis/data/optimization/data_from_all_runs.pkl",
         "wb",

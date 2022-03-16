@@ -300,16 +300,16 @@ sns.lineplot(
     hue="polarized",
     hue_order=["Polarized", "Inbetween", "Consensus"],
     estimator=None,
-    alpha=0.1,
+    alpha=0.05,
     ci=None,
-    # linewidth=0.1,
+    linewidth=3,
     err_style=None,
     units="unique_condition",
     palette=sns.color_palette("deep", n_colors=3),
 ).set(ylabel=r"$|O|$", xlabel=r"$t$")
 plt.legend(
     title="Final State",
-    bbox_to_anchor=(1.0, 0.5),
+    bbox_to_anchor=(1.0, 0.6),
 )
 
 sns.lineplot(

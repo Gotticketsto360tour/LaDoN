@@ -55,7 +55,7 @@ def run_single_simulation(dictionary, run, target, target_dictionary):
 
     average_path_diff = abs(
         network_avg_path - target_dictionary.get("average_path")
-    ) / max([network_avg_path, target_dictionary.get("average_path")])
+    ) / target_dictionary.get("denominator")
 
     distance_algorithm = netrd.distance.DegreeDivergence()
     JSD = distance_algorithm.dist(my_network.graph, target)
@@ -96,6 +96,12 @@ if __name__ == "__main__":
     for name, network in NAME_DICTIONARY.items():
         print(f"--- NOW RUNNING: {name} ---")
         network = get_main_component(network)
+        denominator_graph = nx.watts_strogatz_graph(
+            n=network.number_of_nodes(),
+            k=2 * round(network.number_of_edges() / network.number_of_nodes()),
+            p=0,
+        )
+        denominator = find_average_path(denominator_graph)
         study = optuna.create_study(study_name=name, direction="minimize")
         target_dictionary = {
             "clustering": nx.algorithms.cluster.average_clustering(network),
@@ -103,6 +109,7 @@ if __name__ == "__main__":
                 network
             ),
             "average_path": find_average_path(network),
+            "denominator": denominator,
         }
         study.optimize(
             lambda trial: objective(trial, network, 1, target_dictionary), n_trials=500

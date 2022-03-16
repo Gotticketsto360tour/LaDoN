@@ -41,7 +41,10 @@ def make_network_by_seed(dictionary, run):
 
 
 def run_single_simulation(
-    dictionary: Dict, run: int, target: nx.Graph(), target_dictionary: Dict
+    dictionary: Dict,
+    run: int,
+    target: nx.Graph(),
+    target_dictionary: Dict,
 ):
     """Run a single simulation and return the eucledian norm of the vector of differences.
 
@@ -68,7 +71,7 @@ def run_single_simulation(
 
     average_path_diff = abs(
         network_avg_path - target_dictionary.get("average_path")
-    ) / max([network_avg_path, target_dictionary.get("average_path")])
+    ) / target_dictionary.get("denominator")
 
     distance_algorithm = netrd.distance.DegreeDivergence()
     JSD = distance_algorithm.dist(my_network.graph, target)
@@ -81,7 +84,7 @@ def objective(trial, target, repeats, target_dictionary):
     N_TARGET = target.number_of_nodes()
     N_EDGES = target.number_of_edges()
     K = round(N_EDGES / N_TARGET)
-    threshold = trial.suggest_float("threshold", 0.4, 1.3)
+    threshold = trial.suggest_float("threshold", 0.2, 1.3)
     randomness = trial.suggest_float("randomness", 0, 1)
     positive_learning_rate = trial.suggest_float("positive_learning_rate", 0.05, 0.5)
     negative_learning_rate = trial.suggest_float("negative_learning_rate", 0.05, 0.5)
@@ -113,6 +116,12 @@ if __name__ == "__main__":
 
     for name, network in NAME_DICTIONARY.items():
         network = get_main_component(network=network)
+        denominator_graph = nx.watts_strogatz_graph(
+            n=network.number_of_nodes(),
+            k=2 * round(network.number_of_edges() / network.number_of_nodes()),
+            p=0,
+        )
+        denominator = find_average_path(denominator_graph)
         print(f"--- NOW RUNNING: {name} ---")
         study = optuna.create_study(study_name=name, direction="minimize")
         target_dictionary = {
@@ -121,6 +130,7 @@ if __name__ == "__main__":
                 network
             ),
             "average_path": find_average_path(network),
+            "denominator": denominator,
         }
         study.optimize(
             lambda trial: objective(trial, network, 1, target_dictionary), n_trials=500

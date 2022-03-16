@@ -47,25 +47,24 @@ data = pd.concat([pd.DataFrame(x) for x in data])
 
 data["type"] = data["type"].apply(lambda x: change_labels(x))
 data["network"] = data["network"].apply(lambda x: change_network_labels(x))
-sns.barplot(data=data, x="network", y="clustering", hue="type")
-sns.barplot(data=data, x="network", y="average_path", hue="type")
-sns.barplot(data=data, x="network", y="assortativity", hue="type")
-sns.barplot(data=data, x="network", y="JSD", hue="type")
+sns.barplot(data=data, y="network", x="clustering", hue="type")
+sns.barplot(data=data, y="network", x="average_path", hue="type")
+sns.barplot(data=data.query("type != 'Target'"), y="network", x="JSD", hue="type")
 
 g = sns.barplot(
     data=data.query("type != 'Target'"),
     y="network",
-    x="norm",
+    x="mean",
     hue="type",
     order=[
         "Dolphins",
-        "Political Books",
-        "Citation Network",
         "Karate Club",
+        "Citation Network",
+        "Political Books",
         "Politicians",
         "Political Blogs",
     ],
 )
-g.set(xlabel="Eucledian Norm", ylabel="")
+g.set(xlabel="Mean", ylabel="")
 plt.legend(title="Type of Network")
 plt.savefig("plots/overall/Model_Evaluation.png", dpi=300, bbox_inches="tight")
