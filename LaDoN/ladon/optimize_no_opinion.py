@@ -96,20 +96,15 @@ if __name__ == "__main__":
     for name, network in NAME_DICTIONARY.items():
         print(f"--- NOW RUNNING: {name} ---")
         network = get_main_component(network)
-        denominator_graph = nx.watts_strogatz_graph(
-            n=network.number_of_nodes(),
-            k=2 * round(network.number_of_edges() / network.number_of_nodes()),
-            p=0,
-        )
-        denominator = find_average_path(denominator_graph)
+        average_path = find_average_path(network=network)
         study = optuna.create_study(study_name=name, direction="minimize")
         target_dictionary = {
             "clustering": nx.algorithms.cluster.average_clustering(network),
             "assortativity": nx.algorithms.assortativity.degree_assortativity_coefficient(
                 network
             ),
-            "average_path": find_average_path(network),
-            "denominator": denominator,
+            "average_path": average_path,
+            "denominator": average_path + 2,
         }
         study.optimize(
             lambda trial: objective(trial, network, 1, target_dictionary), n_trials=500

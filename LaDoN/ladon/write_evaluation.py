@@ -62,12 +62,7 @@ def generate_network_dataframe(repeats: int):
         N_EDGES = network.number_of_edges()
         K = round(N_EDGES / N_TARGET)
 
-        denominator_graph = nx.watts_strogatz_graph(
-            n=network.number_of_nodes(),
-            k=2 * K,
-            p=0,
-        )
-        denominator = find_average_path(denominator_graph)
+        denominator = target_dictionary.get("average_path")[0]
 
         dictionary = {
             "THRESHOLD": best_parameters.get("threshold"),

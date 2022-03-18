@@ -66,5 +66,5 @@ g = sns.barplot(
     ],
 )
 g.set(xlabel="Mean", ylabel="")
-plt.legend(title="Type of Network")
+plt.legend(title="Type of Network", bbox_to_anchor=(0.5, 0.5, 0.52, 0.52))
 plt.savefig("plots/overall/Model_Evaluation.png", dpi=300, bbox_inches="tight")

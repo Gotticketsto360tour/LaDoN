@@ -1,13 +1,13 @@
 # Fdb version 3
-["bibtex report"] 1646087743 "report.aux" "report.bbl" "report" 1646087744
+["bibtex report"] 1647471941 "report.aux" "report.bbl" "report" 1647471941
   "../Referencer_new.bib" 0 -1 0 ""
   "/usr/local/texlive/2021/texmf-dist/bibtex/bst/apacite/apacite.bst" 1374530685 141073 9d7b79dbf9d91133318126032cff8c27 ""
   "report.aux" 1646087744 1367 8f38b82b1a19f8cad3b45f374597a456 "pdflatex"
   (generated)
   "report.bbl"
   "report.blg"
-["pdflatex"] 1646087743 "/Users/mikkelwerling/Documents/LaDoN/LaDoN/ladon/report/report.tex" "report.pdf" "report" 1646087744
-  "/Users/mikkelwerling/Documents/LaDoN/LaDoN/ladon/report/report.tex" 1646087743 10259 796012c1af90303644c57aecb1c2a795 ""
+["pdflatex"] 1646087743 "/Users/mikkelwerling/Documents/LaDoN/LaDoN/ladon/report/report.tex" "report.pdf" "report" 1647471941
+  "/Users/mikkelwerling/Documents/LaDoN/LaDoN/ladon/report/report.tex" 1647471940 10259 796012c1af90303644c57aecb1c2a795 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/local/texlive/2021/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/tfm/adobe/symbol/psyr.tfm" 1136768653 1408 5937f58aa508ea2cea4901c07d10f5fe ""
@@ -88,7 +88,7 @@
   "/usr/local/texlive/2021/texmf.cnf" 1616695596 577 4c1911a7228e554c6032256d3cf5567d ""
   "report.aux" 1646087744 1367 8f38b82b1a19f8cad3b45f374597a456 "pdflatex"
   "report.bbl" 0 -1 0 "bibtex report"
-  "report.tex" 1646087743 10259 796012c1af90303644c57aecb1c2a795 ""
+  "report.tex" 1647471940 10259 796012c1af90303644c57aecb1c2a795 ""
   (generated)
   "report.aux"
   "report.log"
