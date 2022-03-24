@@ -32,6 +32,7 @@ def combine_data():
 data = combine_data()
 data_without = data.query("threshold != 1.2")
 data_without = data_without.query("threshold != 0.6")
+data_without = data_without.query("negative_learning_rate > 0")
 data = data_without
 
 g = sns.lineplot(
@@ -249,7 +250,7 @@ def make_identifier_column(
     return f"T{threshold}_R{randomness}_P{positive_learning_rate}_N{negative_learning_rate}_D{tie_dissolution}_{run}"
 
 
-data_polarized["polarized"] = data_polarized["final_polarization"].apply(
+data_polarized["Final State"] = data_polarized["final_polarization"].apply(
     lambda x: binary_polarization(x)
 )
 
@@ -265,7 +266,7 @@ data_polarized["unique_condition"] = data_polarized.apply(
     axis=1,
 )
 
-data_polarized["polarized"].value_counts()
+data_polarized["Final State"].value_counts()
 
 data_merged = data.merge(data_polarized)
 
@@ -273,7 +274,7 @@ g = sns.lineplot(
     data=data_merged,
     x="timestep",
     y="mean_absolute_opinion",
-    hue="polarized",
+    hue="Final State",
     # palette=blue_pallette,
 ).set(ylabel=r"$|O|$", xlabel=r"$t$")
 
@@ -281,7 +282,21 @@ g = sns.relplot(
     data=data_merged,
     x="timestep",
     y="mean_absolute_opinion",
-    col="polarized",
+    col="Final State",
+    # hue="Final State",
+    alpha=0.1,
+    kind="line",
+    units="run",
+    estimator=None,
+    # linewidth = 0.1
+    # palette=blue_pallette,
+).set(ylabel=r"$|O|$", xlabel=r"$t$")
+
+g = sns.relplot(
+    data=data_merged,
+    x="timestep",
+    y="mean_absolute_opinion",
+    col="Final State",
     # hue="polarized",
     alpha=0.1,
     kind="line",
