@@ -46,6 +46,17 @@ sns.histplot(
 sns.histplot(
     data=data,
     x="opinions",
+    hue="randomness",
+    stat="percent",
+    common_norm=False,
+    binwidth=0.05,
+    kde=True,
+).set(title="Opinion Distribution", xlabel=r"$O_F$")
+
+
+sns.histplot(
+    data=data,
+    x="opinions",
     hue="tie_dissolution",
     stat="percent",
     common_norm=False,

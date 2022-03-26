@@ -35,7 +35,7 @@ def make_one_simulation(
     dictionary = {
         "THRESHOLD": threshold,
         "N_TARGET": 500,
-        "RANDOMNESS": 0.1,
+        "RANDOMNESS": randomness,
         "N_TIMESTEPS": 10000,
         "POSITIVE_LEARNING_RATE": positive_learning_rate,
         "NEGATIVE_LEARNING_RATE": negative_learning_rate,
@@ -135,19 +135,19 @@ def make_one_simulation(
     )
 
     with open(
-        f"analysis/data/simulations/opinions/S{threshold}-{randomness}-{positive_learning_rate}-{negative_learning_rate}_{tie_dissolution}.pkl",
+        f"analysis/data/simulations/opinions/T{threshold}-R{randomness}-P{positive_learning_rate}-N{negative_learning_rate}-D{tie_dissolution}.pkl",
         "wb",
     ) as handle:
         pkl.dump(df, handle, protocol=pkl.HIGHEST_PROTOCOL)
 
     with open(
-        f"analysis/data/simulations/final_state/S{threshold}-{randomness}-{positive_learning_rate}-{negative_learning_rate}_{tie_dissolution}.pkl",
+        f"analysis/data/simulations/final_state/T{threshold}-R{randomness}-P{positive_learning_rate}-N{negative_learning_rate}-D{tie_dissolution}.pkl",
         "wb",
     ) as handle:
         pkl.dump(out_dict_final_state, handle, protocol=pkl.HIGHEST_PROTOCOL)
 
     with open(
-        f"analysis/data/simulations/over_time/S{threshold}-{randomness}-{positive_learning_rate}-{negative_learning_rate}_{tie_dissolution}.pkl",
+        f"analysis/data/simulations/over_time/T{threshold}-R{randomness}-P{positive_learning_rate}-N{negative_learning_rate}-D{tie_dissolution}.pkl",
         "wb",
     ) as handle:
         pkl.dump(out_dict_over_time, handle, protocol=pkl.HIGHEST_PROTOCOL)
@@ -168,7 +168,7 @@ def make_all_simulations():
         one_combination
         for one_combination in combinations
         if not os.path.exists(
-            f"analysis/data/simulations/over_time/S{one_combination[0]}-{one_combination[1]}-{one_combination[2]}-{one_combination[3]}_{one_combination[4]}.pkl"
+            f"analysis/data/simulations/over_time/T{one_combination[0]}-R{one_combination[1]}-P{one_combination[2]}-N{one_combination[3]}_D{one_combination[4]}.pkl"
         )
     ]
 
