@@ -16,6 +16,8 @@ blue_pallette = sns.dark_palette("#69d", reverse=True, as_cmap=True)
 
 list_of_simulations = glob.glob("analysis/data/simulations/over_time/*")
 
+# make fraction of alpha / beta and plot the effect
+
 
 def make_one_data_frame(path: str):
     with open(path, "rb") as f:
@@ -78,6 +80,18 @@ plt.savefig(
     dpi=300,
     bbox_inches="tight",
 )
+
+g = sns.relplot(
+    data=data,
+    x="timestep",
+    y="mean_absolute_opinion",
+    hue="tie_dissolution",
+    kind="line",
+    col="randomness",
+    palette=blue_pallette,
+).set(ylabel=r"$|O|$", xlabel=r"$t$")
+
+plt.legend(title=r"$P(D)$", bbox_to_anchor=(1.0, 0.75))
 
 g = sns.lineplot(
     data=data,
