@@ -41,6 +41,14 @@ g = sns.lineplot(
     data=data,
     x="timestep",
     y="mean_absolute_opinion",
+    hue="randomness",
+    palette=blue_pallette,
+).set(ylabel=r"$|O|$", xlabel=r"$t$")
+
+g = sns.lineplot(
+    data=data,
+    x="timestep",
+    y="mean_absolute_opinion",
     hue="threshold",
     palette=blue_pallette,
 ).set(ylabel=r"$|O|$", xlabel=r"$t$")
@@ -66,10 +74,11 @@ plt.savefig(
     bbox_inches="tight",
 )
 
-g = sns.lineplot(
+g = sns.relplot(
     data=data,
     x="timestep",
     y="mean_absolute_opinion",
+    kind="line",
     hue="negative_learning_rate",
     palette=blue_pallette,
 ).set(ylabel=r"$|O|$", xlabel=r"$t$")
@@ -147,12 +156,13 @@ g = sns.lineplot(
 plt.legend(title=r"$P(D)$", bbox_to_anchor=(1.0, 0.75))
 
 correlations = (
-    data_without.groupby(
+    data.groupby(
         [
             "tie_dissolution",
             "threshold",
             "negative_learning_rate",
             "positive_learning_rate",
+            "randomness",
         ]
     )["mean_absolute_opinion", "average_path_length"]
     .corr()
