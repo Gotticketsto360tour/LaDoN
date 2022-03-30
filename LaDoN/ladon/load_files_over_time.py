@@ -97,7 +97,7 @@ g = sns.relplot(
     hue="tie_dissolution",
     kind="line",
     col="randomness",
-    # palette=blue_pallette,
+    palette=blue_pallette,
 ).set(ylabel=r"$|O|$", xlabel=r"$t$")
 
 rename_plot(g, titles=[r"$R = 0.1$", r"$R = 0.3$", r"$R = 0.5$"], legend=r"$P(D)$")
@@ -164,6 +164,16 @@ correlations = (
     .iloc[0::2, -1]
     .reset_index()
 )
+sns.set_context(
+    "paper",
+    rc={
+        "figure.figsize": (11.7, 8.27),
+        "font.size": 13,
+        "axes.titlesize": 17,
+        "axes.labelsize": 22,
+    },
+    font_scale=1.7,
+)
 
 sns.boxplot(
     data=correlations,
@@ -211,6 +221,7 @@ data_specific = data[
     & (data["negative_learning_rate"] == 0.1)
     & (data["tie_dissolution"] == 1)
     & (data["run"] == 6)
+    & (data["randomness"] == 0.1)
 ]
 
 g = sns.lineplot(
