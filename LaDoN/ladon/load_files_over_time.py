@@ -10,8 +10,20 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.patches as patches
 
-sns.set(rc={"figure.figsize": (11.7, 8.27)})
-sns.set_context("talk")
+sns.set(rc={"figure.figsize": (11.7, 8.27)}, font_scale=1.5)
+# Set the font to be serif, rather than sans
+# sns.set_context("talk")
+sns.set_context(
+    "paper",
+    rc={
+        "figure.figsize": (11.7, 8.27),
+        "font.size": 13,
+        "axes.titlesize": 17,
+        "axes.labelsize": 15,
+    },
+    font_scale=1.7,
+)
+
 blue_pallette = sns.dark_palette("#69d", reverse=True, as_cmap=True)
 
 list_of_simulations = glob.glob("analysis/data/simulations/over_time/*")
@@ -31,19 +43,15 @@ def combine_data():
     )
 
 
-data = combine_data()
-data_without = data.query("threshold != 1.2")
-data_without = data_without.query("threshold != 0.6")
-data_without = data_without.query("negative_learning_rate > 0")
-data = data_without
+def rename_plot(g, titles, legend):
+    for ax, title in zip(g.axes.flatten(), titles):
+        ax.set_title(title)
+    g.legend.set(title=legend)
+    g.legend.set_frame_on(True)
+    return g.figure
 
-g = sns.lineplot(
-    data=data,
-    x="timestep",
-    y="mean_absolute_opinion",
-    hue="randomness",
-    palette=blue_pallette,
-).set(ylabel=r"$|O|$", xlabel=r"$t$")
+
+data = combine_data()
 
 g = sns.lineplot(
     data=data,
@@ -57,7 +65,6 @@ plt.legend(title=r"$Threshold$", bbox_to_anchor=(1.0, 0.75))
 plt.savefig(
     "plots/overall/Absolute_Opinion_Threshold.png", dpi=300, bbox_inches="tight"
 )
-
 
 g = sns.lineplot(
     data=data,
@@ -100,7 +107,8 @@ g = sns.relplot(
     palette=blue_pallette,
 ).set(ylabel=r"$|O|$", xlabel=r"$t$")
 
-plt.legend(title=r"$P(D)$", bbox_to_anchor=(1.0, 0.75))
+rename_plot(g, titles=[r"$R = 0.1$", r"$R = 0.3$", r"$R = 0.5$"], legend=r"$P(D)$")
+
 
 g = sns.lineplot(
     data=data,
@@ -135,23 +143,17 @@ g = sns.lineplot(
 
 plt.legend(title=r"$Threshold$", bbox_to_anchor=(1.0, 0.75))
 
-g = sns.lineplot(
+g = sns.relplot(
     data=data,
     x="timestep",
     y="mean_distance",
     hue="tie_dissolution",
+    kind="line",
+    col="randomness",
     palette=blue_pallette,
 ).set(ylabel=r"$Mean Distance$", xlabel=r"$t$")
 
-plt.legend(title=r"$P(D)$", bbox_to_anchor=(1.0, 0.75))
-
-g = sns.lineplot(
-    data=data,
-    x="timestep",
-    y="average_clustering",
-    hue="threshold",
-    palette=blue_pallette,
-).set(ylabel=r"$Mean Distance$", xlabel=r"$t$")
+rename_plot(g, titles=[r"$R = 0.1$", r"$R = 0.3$", r"$R = 0.5$"], legend=r"$P(D)$")
 
 plt.legend(title=r"$P(D)$", bbox_to_anchor=(1.0, 0.75))
 
@@ -184,7 +186,8 @@ sns.stripplot(
     y="average_path_length",
     dodge=True,
     color="black",
-    alpha=0.6,
+    alpha=0.4,
+    size=3
     # palette=sns.cubehelix_palette(8, rot=-0.25, light=0.9),
 ).set(ylabel=r"$\rho_{|O|, APL}$", xlabel=r"$P(D)$")
 plt.savefig("plots/overall/Tie_Dissolution_Correlations_Boxplot_Full.png")
@@ -203,7 +206,8 @@ sns.stripplot(
     y="average_path_length",
     dodge=True,
     color="black",
-    alpha=0.6,
+    alpha=0.4,
+    size=3
     # palette=sns.cubehelix_palette(8, rot=-0.25, light=0.9),
 ).set(ylabel=r"$\rho_{|O|, APL}$", xlabel=r"$P(D)$")
 plt.savefig("plots/overall/Tie_Dissolution_Correlations_Boxplot_Over_Zero.png")
