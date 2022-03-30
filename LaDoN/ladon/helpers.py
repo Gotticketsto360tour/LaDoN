@@ -5,6 +5,14 @@ import random
 from statistics import mean
 
 
+def rename_plot(g, titles, legend):
+    for ax, title in zip(g.axes.flatten(), titles):
+        ax.set_title(title)
+    g.legend.set(title=legend)
+    g.legend.set_frame_on(True)
+    return g.figure
+
+
 def find_distance(A: Agent, B: Agent):
     return abs(A.opinion - (B.opinion))
 

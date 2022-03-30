@@ -7,9 +7,22 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
 import ptitprince as pt
+from helpers import rename_plot
+import itertools
 
-sns.set(rc={"figure.figsize": (11.7, 8.27)})
-sns.set_context("talk")
+sns.set(rc={"figure.figsize": (11.7, 8.27)}, font_scale=1.5)
+# Set the font to be serif, rather than sans
+# sns.set_context("talk")
+sns.set_context(
+    "paper",
+    rc={
+        "figure.figsize": (11.7, 8.27),
+        "font.size": 17,
+        "axes.titlesize": 50,
+        "axes.labelsize": 40,
+    },
+    font_scale=5,
+)
 blue_pallette = sns.dark_palette("#69d", reverse=True, as_cmap=True)
 
 list_of_simulations = glob.glob("analysis/data/simulations/final_state/*")
@@ -76,11 +89,17 @@ plotting = sns.displot(
     aspect=11.7 / 8.27,
 ).set(xlabel=r"$|O_F| - |O_I|$")
 
+betas = [0.0, 0.05, 0.10, 0.15, 0.20, 0.25]
+thresholds = [0.6, 0.7, 0.8, 0.9, 1.0, 1.1, 1.2]
+combinations = list(itertools.product(thresholds, betas))
+
 plotting = sns.displot(
     data=data,
     x="radicalization",
     hue="tie_dissolution",
     stat="percent",
+    col="negative_learning_rate",
+    row="threshold",
     common_norm=False,
     binwidth=0.05,
     kde=True,
@@ -88,23 +107,12 @@ plotting = sns.displot(
     aspect=11.7 / 8.27,
 ).set(xlabel=r"$|O_F| - |O_I|$")
 
-# facet = sns.FacetGrid(data, col="threshold", row="negative_learning_rate")
-# facet.map_dataframe(
-#     lambda data, color: sns.heatmap(
-#         data_omit[
-#             [
-#                 "absolute_opinions",
-#                 "opinions",
-#                 "distances",
-#                 "opinion_shift",
-#                 "initial_opinions",
-#                 "degrees",
-#                 "centrality",
-#                 "agent_number",
-#             ]
-#         ].corr()
-#     )
-# )
+rename_plot(
+    g=plotting,
+    titles=[rf"$\beta = {x[0]}, B = {x[1]}$" for x in combinations],
+    legend=r"$P(D)$",
+)
+plotting.savefig("plots/overall/Radicalization.png")
 
 sns.heatmap(
     data[
@@ -199,31 +207,7 @@ correlations = (
     .reset_index()
 )
 
-distances = (
-    data.groupby(
-        [
-            "threshold",
-            "positive_learning_rate",
-            "negative_learning_rate",
-            "tie_dissolution",
-            "randomness",
-        ]
-    )
-    .agg(median_distance=("distances", "median"))
-    .reset_index()
-)
-
-sns.relplot(
-    data=distances,
-    x="negative_learning_rate",
-    y="median_distance",
-    hue="threshold",
-    palette=blue_pallette,
-    height=8.27,
-    aspect=11.7 / 8.27,
-    kind="line",
-)
-sns.violinplot(
+sns.boxplot(
     data=correlations,
     x="negative_learning_rate",
     y="opinions",
@@ -246,7 +230,7 @@ sns.stripplot(
     xlabel=r"$\beta$",
 )
 
-sns.violinplot(
+sns.boxplot(
     data=correlations,
     x="threshold",
     y="opinions",
