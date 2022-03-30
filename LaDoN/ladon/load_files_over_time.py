@@ -9,6 +9,7 @@ from numpy import size
 import pandas as pd
 import seaborn as sns
 import matplotlib.patches as patches
+from helpers import rename_plot
 
 sns.set(rc={"figure.figsize": (11.7, 8.27)}, font_scale=1.5)
 # Set the font to be serif, rather than sans
@@ -41,14 +42,6 @@ def combine_data():
     return pd.concat(
         [make_one_data_frame(path) for path in list_of_simulations], ignore_index=True
     )
-
-
-def rename_plot(g, titles, legend):
-    for ax, title in zip(g.axes.flatten(), titles):
-        ax.set_title(title)
-    g.legend.set(title=legend)
-    g.legend.set_frame_on(True)
-    return g.figure
 
 
 data = combine_data()

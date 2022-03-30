@@ -46,49 +46,6 @@ data["absolute_opinions"] = data["opinions"].apply(lambda x: abs(x))
 data["opinion_shift"] = abs(data["initial_opinions"] - (data["opinions"]))
 data["radicalization"] = data["absolute_opinions"] - abs(data["initial_opinions"])
 
-sns.histplot(
-    data=data,
-    x="opinions",
-    hue="threshold",
-    stat="percent",
-    common_norm=False,
-    binwidth=0.05,
-    kde=True,
-).set(title="Opinion Distribution", xlabel=r"$O_F$")
-
-sns.histplot(
-    data=data,
-    x="opinions",
-    hue="randomness",
-    stat="percent",
-    common_norm=False,
-    binwidth=0.05,
-    kde=True,
-).set(title="Opinion Distribution", xlabel=r"$O_F$")
-
-
-sns.histplot(
-    data=data,
-    x="opinions",
-    hue="tie_dissolution",
-    stat="percent",
-    common_norm=False,
-    binwidth=0.05,
-    kde=True,
-).set(title="Opinion Distribution", xlabel=r"$O_F$")
-
-plotting = sns.displot(
-    data=data,
-    x="radicalization",
-    hue="negative_learning_rate",
-    stat="percent",
-    common_norm=False,
-    binwidth=0.05,
-    kde=True,
-    height=8.27,
-    aspect=11.7 / 8.27,
-).set(xlabel=r"$|O_F| - |O_I|$")
-
 betas = [0.0, 0.05, 0.10, 0.15, 0.20, 0.25]
 thresholds = [0.6, 0.7, 0.8, 0.9, 1.0, 1.1, 1.2]
 combinations = list(itertools.product(thresholds, betas))
@@ -112,85 +69,8 @@ rename_plot(
     titles=[rf"$\beta = {x[0]}, B = {x[1]}$" for x in combinations],
     legend=r"$P(D)$",
 )
+
 plotting.savefig("plots/overall/Radicalization.png")
-
-sns.heatmap(
-    data[
-        [
-            "absolute_opinions",
-            "opinions",
-            "distances",
-            "opinion_shift",
-            "initial_opinions",
-            "degrees",
-            "centrality",
-            "clustering",
-        ]
-    ].corr(),
-    annot=True,
-)
-
-plotting = sns.histplot(
-    data=data,
-    x="opinion_shift",
-    stat="percent",
-    hue="negative_learning_rate",
-    binwidth=0.05,
-    kde=True,
-    common_norm=False,
-).set(title="Opinion shift", xlabel=r"$|O_I - O_F|$")
-
-plotting = sns.histplot(
-    data=data,
-    x="distances",
-    stat="percent",
-    hue="positive_learning_rate",
-    binwidth=0.05,
-    kde=True,
-    common_norm=False,
-).set(title="Average distance to neighbor's opinion", xlabel="Average distance")
-
-sns.histplot(
-    data=data,
-    x="opinions",
-    hue="positive_learning_rate",
-    stat="percent",
-    common_norm=False,
-    binwidth=0.05,
-    kde=True,
-).set(title="Opinion Distribution", xlabel=r"$O_F$")
-plt.savefig("plots/Opinion_Distribution_PLR.png")
-
-sns.histplot(
-    data=data,
-    x="opinions",
-    hue="negative_learning_rate",
-    stat="percent",
-    common_norm=False,
-    binwidth=0.05,
-    kde=True,
-).set(title="Opinion Distribution", xlabel=r"$O_F$")
-plt.savefig("plots/Opinion_Distribution_NLR.png")
-
-
-plotting = sns.displot(
-    data=data,
-    x="opinions",
-    hue="positive_learning_rate",
-    col="threshold",
-    row="negative_learning_rate",
-    stat="percent",
-    common_norm=False,
-    binwidth=0.05,
-    kde=True,
-    facet_kws=dict(margin_titles=True),
-).set(xlabel=r"$O_F$")
-plt.savefig("plots/Opinion_Distribution_Facet.png")
-
-# plotting.legend.get_title().set_fontsize(30)
-# Legend texts
-# for text in plotting.legend.texts:
-#    text.set_fontsize(30)
 
 correlations = (
     data.groupby(
@@ -205,6 +85,16 @@ correlations = (
     .corr()
     .iloc[0::2, -1]
     .reset_index()
+)
+sns.set_context(
+    "paper",
+    rc={
+        "figure.figsize": (11.7, 8.27),
+        "font.size": 5,
+        "axes.titlesize": 5,
+        "axes.labelsize": 25,
+    },
+    font_scale=2,
 )
 
 sns.boxplot(
@@ -229,6 +119,7 @@ sns.stripplot(
     ylabel=r"$\rho_{O_I, O_F}$",
     xlabel=r"$\beta$",
 )
+plt.savefig("plots/overall/Correlation_Initial_Opinions_Negative_Learning_Rate.png")
 
 sns.boxplot(
     data=correlations,
