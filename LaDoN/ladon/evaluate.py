@@ -1,12 +1,5 @@
 import pickle as pkl
-import networkx as nx
 import pandas as pd
-from helpers import get_main_component, find_average_path
-from optimize import make_network_by_seed
-from optimize_no_opinion import make_no_opinion_network_by_seed
-import joblib
-from network import Network, NoOpinionNetwork
-import netrd
 import seaborn as sns
 import numpy as np
 import matplotlib.pyplot as plt
@@ -65,6 +58,6 @@ g = sns.barplot(
         "Political Blogs",
     ],
 )
-g.set(xlabel="Mean", ylabel="")
-plt.legend(title="Type of Network", bbox_to_anchor=(0.5, 0.5, 0.52, 0.52))
+g.set(xlabel="Mean Difference", ylabel="")
+plt.legend(title="Type of Model", bbox_to_anchor=(0.5, 0.5, 0.52, 0.52))
 plt.savefig("plots/overall/Model_Evaluation.png", dpi=300, bbox_inches="tight")

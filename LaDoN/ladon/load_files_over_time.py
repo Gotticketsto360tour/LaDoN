@@ -172,7 +172,7 @@ sns.set_context(
         "axes.titlesize": 17,
         "axes.labelsize": 22,
     },
-    font_scale=1.7,
+    font_scale=2,
 )
 
 sns.boxplot(
@@ -224,13 +224,59 @@ data_specific = data[
     & (data["randomness"] == 0.1)
 ]
 
+data_specific_random = data[
+    (data["threshold"] == 0.8)
+    & (data["positive_learning_rate"] == 0.15)
+    & (data["negative_learning_rate"] == 0.1)
+    & (data["tie_dissolution"] == 1)
+    & (data["run"] == 6)
+]
+
+sns.set_context(
+    "paper",
+    rc={
+        "figure.figsize": (11.7, 8.27),
+        "font.size": 13,
+        "axes.titlesize": 17,
+        "axes.labelsize": 18,
+    },
+    font_scale=1.7,
+)
+
+g = sns.lineplot(
+    data=data_specific_random,
+    x="timestep",
+    y="mean_absolute_opinion",
+    hue="randomness",
+    palette=blue_pallette,
+).set(ylabel=r"$|O|$", xlabel=r"$t$")
+
+plt.legend(title=r"$R$", bbox_to_anchor=(1.15, 0.6))
+plt.savefig("plots/example/Example_Absolute_Opinion.png", dpi=300, bbox_inches="tight")
+
+
+g = sns.lineplot(
+    data=data_specific_random,
+    x="timestep",
+    y="average_path_length",
+    hue="randomness",
+    palette=blue_pallette,
+).set(ylabel=r"$APL$", xlabel=r"$t$")
+
+plt.legend(title=r"$R$", bbox_to_anchor=(1.15, 0.6))
+plt.savefig(
+    "plots/example/Example_Average_Path_Length.png", dpi=300, bbox_inches="tight"
+)
+
 g = sns.lineplot(
     data=data_specific,
     x="timestep",
     y="average_path_length",
     palette=blue_pallette,
 ).set(ylabel=r"$APL$", xlabel=r"$t$")
-plt.savefig("plots/example/Example_Average_Path_Length.png")
+plt.savefig(
+    "plots/example/Example_Average_Path_Length.png", dpi=300, bbox_inches="tight"
+)
 
 g = sns.lineplot(
     data=data_specific,
@@ -337,8 +383,6 @@ g = sns.relplot(
     # linewidth = 0.1
     # palette=blue_pallette,
 ).set(ylabel=r"$|O|$", xlabel=r"$t$")
-
-data_merged
 
 sns.lineplot(
     data=data_merged,
