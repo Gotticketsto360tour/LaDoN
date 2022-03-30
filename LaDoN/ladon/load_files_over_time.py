@@ -104,7 +104,7 @@ g = sns.relplot(
     hue="tie_dissolution",
     kind="line",
     col="randomness",
-    palette=blue_pallette,
+    # palette=blue_pallette,
 ).set(ylabel=r"$|O|$", xlabel=r"$t$")
 
 rename_plot(g, titles=[r"$R = 0.1$", r"$R = 0.3$", r"$R = 0.5$"], legend=r"$P(D)$")
