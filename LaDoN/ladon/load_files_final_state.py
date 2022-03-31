@@ -66,7 +66,7 @@ plotting = sns.displot(
 
 rename_plot(
     g=plotting,
-    titles=[rf"$\beta = {x[0]}, B = {x[1]}$" for x in combinations],
+    titles=[rf"$B = {x[0]}, \beta = {x[1]}$" for x in combinations],
     legend=r"$P(D)$",
 )
 
