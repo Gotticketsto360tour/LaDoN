@@ -186,9 +186,8 @@ def plot_graph(network: Network, plot_type="community", save_path="", title=""):
 def generate_network_plots(
     network: Network, plot_type="agent_type", save_path="", title="", run=0
 ):
-    random.seed(run)
-    np.random.seed(run)
-    original_save_path = save_path
+    # random.seed(run)
+    # np.random.seed(run)
     if save_path:
         plot_graph(
             network=network,

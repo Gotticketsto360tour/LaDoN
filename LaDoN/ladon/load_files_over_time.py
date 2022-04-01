@@ -54,7 +54,7 @@ g = sns.lineplot(
     palette=blue_pallette,
 ).set(ylabel=r"$|O|$", xlabel=r"$t$")
 
-plt.legend(title=r"$Threshold$", bbox_to_anchor=(1.0, 0.75))
+plt.legend(title=r"$Threshold$", bbox_to_anchor=(1.0, 0.65))
 plt.savefig(
     "plots/overall/Absolute_Opinion_Threshold.png", dpi=300, bbox_inches="tight"
 )
@@ -67,23 +67,22 @@ g = sns.lineplot(
     palette=blue_pallette,
 ).set(ylabel=r"$|O|$", xlabel=r"$t$")
 
-plt.legend(title=r"$\alpha$", bbox_to_anchor=(1.0, 0.75))
+plt.legend(title=r"$\alpha$", bbox_to_anchor=(1.0, 0.65))
 plt.savefig(
     "plots/overall/Absolute_Opinion_Positive_Learning_Rate.png",
     dpi=300,
     bbox_inches="tight",
 )
 
-g = sns.relplot(
+g = sns.lineplot(
     data=data,
     x="timestep",
     y="mean_absolute_opinion",
-    kind="line",
     hue="negative_learning_rate",
     palette=blue_pallette,
 ).set(ylabel=r"$|O|$", xlabel=r"$t$")
 
-plt.legend(title=r"$\beta$", bbox_to_anchor=(1.0, 0.75))
+plt.legend(title=r"$\beta$", bbox_to_anchor=(1.0, 0.65))
 plt.savefig(
     "plots/overall/Absolute_Opinion_Negative_Learning_Rate.png",
     dpi=300,
@@ -101,54 +100,9 @@ g = sns.relplot(
 ).set(ylabel=r"$|O|$", xlabel=r"$t$")
 
 rename_plot(g, titles=[r"$R = 0.1$", r"$R = 0.3$", r"$R = 0.5$"], legend=r"$P(D)$")
-
-
-g = sns.lineplot(
-    data=data,
-    x="timestep",
-    y="mean_absolute_opinion",
-    hue="tie_dissolution",
-    palette=blue_pallette,
-).set(ylabel=r"$|O|$", xlabel=r"$t$")
-
-plt.legend(title=r"$P(D)$", bbox_to_anchor=(1.0, 0.75))
-plt.savefig(
+g.savefig(
     "plots/overall/Absolute_Opinion_Tie_Dissolution.png", dpi=300, bbox_inches="tight"
 )
-
-g = sns.lineplot(
-    data=data,
-    x="timestep",
-    y="average_path_length",
-    hue="negative_learning_rate",
-    palette=blue_pallette,
-).set(ylabel=r"$APL$", xlabel=r"$t$")
-
-plt.legend(title=r"$\beta$", bbox_to_anchor=(1.0, 0.75))
-
-g = sns.lineplot(
-    data=data,
-    x="timestep",
-    y="average_path_length",
-    hue="threshold",
-    palette=blue_pallette,
-).set(ylabel=r"$APL$", xlabel=r"$t$")
-
-plt.legend(title=r"$Threshold$", bbox_to_anchor=(1.0, 0.75))
-
-g = sns.relplot(
-    data=data,
-    x="timestep",
-    y="mean_distance",
-    hue="tie_dissolution",
-    kind="line",
-    col="randomness",
-    palette=blue_pallette,
-).set(ylabel=r"$Mean Distance$", xlabel=r"$t$")
-
-rename_plot(g, titles=[r"$R = 0.1$", r"$R = 0.3$", r"$R = 0.5$"], legend=r"$P(D)$")
-
-plt.legend(title=r"$P(D)$", bbox_to_anchor=(1.0, 0.75))
 
 correlations = (
     data.groupby(
@@ -289,9 +243,6 @@ plt.savefig("plots/example/Example_Absolute_Opinion.png")
 plt.legend(title=r"$Threshold$", bbox_to_anchor=(1.0, 0.75))
 plt.show(g)
 
-data = data.query("negative_learning_rate > 0")
-data = data.query("tie_dissolution > 0")
-
 data_polarized = (
     data.groupby(
         [
@@ -374,7 +325,7 @@ g = sns.relplot(
     data=data_merged,
     x="timestep",
     y="mean_absolute_opinion",
-    col="Final State",
+    hue="Final State",
     # hue="polarized",
     alpha=0.1,
     kind="line",
