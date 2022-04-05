@@ -47,6 +47,21 @@ def combine_data():
 data = combine_data()
 
 g = sns.lineplot(
+    data=data.query("negative_learning_rate == 0"),
+    x="timestep",
+    y="mean_absolute_opinion",
+    hue="tie_dissolution",
+    palette=blue_pallette,
+).set(ylabel=r"$|O|$", xlabel=r"$t$")
+
+plt.legend(title=r"$P(D)$", bbox_to_anchor=(1.1, 0.65))
+plt.savefig(
+    "plots/overall/Absolute_Opinion_Tie_Deletion_Without_Negative.png",
+    dpi=300,
+    bbox_inches="tight",
+)
+
+g = sns.lineplot(
     data=data,
     x="timestep",
     y="mean_absolute_opinion",
