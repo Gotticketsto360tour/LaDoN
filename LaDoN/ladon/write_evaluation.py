@@ -1,4 +1,5 @@
 import pickle as pkl
+from typing import Dict
 import networkx as nx
 import pandas as pd
 from helpers import get_main_component, find_average_path
@@ -16,7 +17,18 @@ sns.set_context("talk")
 blue_pallette = sns.dark_palette("#69d", reverse=True, as_cmap=True)
 
 
-def get_mean(model, target_dictionary, network, denominator):
+def get_mean(model, target_dictionary: Dict, network: nx.Graph(), denominator: float):
+    """Returns the mean of the vector of differences
+
+    Args:
+        model (Network or NoOpinionNetwork): Model to be evaluated
+        target_dictionary (Dict): Dictionary containing precomputed values
+        network (nx.Graph): Target network
+        denominator (float): Denominator for normalizing the average path length
+
+    Returns:
+        float: Mean of the vector of differences
+    """
     clustering_diff = abs(
         nx.algorithms.cluster.average_clustering(model.graph)
         - (target_dictionary.get("clustering")[0])
@@ -35,6 +47,14 @@ def get_mean(model, target_dictionary, network, denominator):
 
 
 def generate_network_dataframe(repeats: int):
+    """Generate the dataframe for evaluating the models
+
+    Args:
+        repeats (int): Integer giving how many repeats of each network needs to be simulated
+
+    Returns:
+        list: List of dictionary in json style
+    """
 
     list_of_dictionaries = []
     for name, network in NAME_DICTIONARY.items():

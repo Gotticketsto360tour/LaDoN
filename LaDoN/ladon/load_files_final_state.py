@@ -128,7 +128,8 @@ g.map(sns.stripplot, "threshold", "opinions", color="black", alpha=0.55, size=4)
 
 g.set(ylabel=r"$\rho_{O_I, O_F}$", xlabel="Threshold")
 for ax, title in zip(
-    g.axes.flatten(), [r"$\beta < 0.05$", r"$0.05 < \beta < 0.15$", r"$0.15 < \beta$"]
+    g.axes.flatten(),
+    [r"$\beta < 0.10$", r"$0.10 \leq \beta \leq 0.15$", r"$0.20 \leq \beta$"],
 ):
     ax.set_title(title)
 

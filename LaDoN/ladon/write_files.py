@@ -1,3 +1,4 @@
+from typing import Dict
 from scipy import rand
 from network import Network
 import networkx as nx
@@ -17,7 +18,17 @@ import os
 import pandas as pd
 
 
-def make_network_by_seed(dictionary, run):
+def make_network_by_seed(dictionary: Dict, run: int):
+    """Sets a seed and runs the simulation for a network
+
+    Args:
+        dictionary (Dict): Dictionary specifying the network
+        run (int): Random seed
+
+    Returns:
+        Network: Network after simulation
+    """
+
     random.seed(run)
     np.random.seed(run)
     network = Network(dictionary)
@@ -32,6 +43,7 @@ def make_one_simulation(
     negative_learning_rate: float,
     tie_dissolution: float,
 ):
+
     dictionary = {
         "THRESHOLD": threshold,
         "N_TARGET": 500,
@@ -172,10 +184,8 @@ def make_all_simulations():
         )
     ]
 
-    # mp.cpu_count()
     with mp.Pool(mp.cpu_count()) as pool:
         results = pool.starmap(make_one_simulation, combinations)
-        # results = [pool.apply(make_one_simulation, args=arg) for arg in combinations]
 
 
 if __name__ == "__main__":

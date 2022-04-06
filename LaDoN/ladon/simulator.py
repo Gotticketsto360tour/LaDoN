@@ -20,25 +20,12 @@ def make_network_by_seed(dictionary, run):
 
 
 dictionary = {
-    "THRESHOLD": 0.8,
-    "N_TARGET": 500,
-    "RANDOMNESS": 0.2,
-    "N_TIMESTEPS": 10000,
-    "POSITIVE_LEARNING_RATE": 0.1,
-    "NEGATIVE_LEARNING_RATE": 0.1,
-    "P": 0.4,
-    "K": 7,
-    "TIE_DISSOLUTION": 0.8,
-    "RECORD": True,
-}
-
-dictionary = {
     "THRESHOLD": 0.6,
     "N_TARGET": 500,
-    "RANDOMNESS": 0.01,
+    "RANDOMNESS": 0.1,
     "N_TIMESTEPS": 10000,
     "POSITIVE_LEARNING_RATE": 0.10,
-    "NEGATIVE_LEARNING_RATE": 0.01,
+    "NEGATIVE_LEARNING_RATE": 0.05,
     "P": 0.5,
     "K": 7,
     "TIE_DISSOLUTION": 1,
@@ -81,17 +68,6 @@ plotting = sns.histplot(
     # aspect=11.7 / 8.27,
     discrete=True,
 ).set(xlabel="Degree")
-
-sns.histplot(
-    data=my_network.get_opinion_distances_without_none(),
-    stat="percent",
-    common_norm=False,
-    # binwidth=0.05,
-    kde=True,
-    # height=8.27,
-    # aspect=11.7 / 8.27,
-    # discrete=True,
-).set(xlabel=r"$O_F$")
 
 # THIS IS A PRETTY GREAT WAY OF SHOWING
 # WHAT HAPPENS TO THE NETWORK OVER TIME
