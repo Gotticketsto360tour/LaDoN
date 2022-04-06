@@ -46,16 +46,16 @@ def run_single_simulation(
     target: nx.Graph(),
     target_dictionary: Dict,
 ):
-    """Run a single simulation and return the eucledian norm of the vector of differences.
+    """Run a single simulation and return the mean of the vector of differences.
 
     Args:
         dictionary (Dict): Dictionary specifying how the Network class should be initiated.
-        run (int): _description_
-        target (nx.Graph): _description_
-        target_dictionary (Dict): _description_
+        run (int): Integer specifying which seed should be set for reproducibility
+        target (nx.Graph): Empirical data to match by the generated network.
+        target_dictionary (Dict): Dictionary containing precomputed characteristics from the target network
 
     Returns:
-        _type_: _description_
+        float: Mean of the vector of differences
     """
     my_network = make_network_by_seed(dictionary=dictionary, run=run)
 
@@ -80,7 +80,19 @@ def run_single_simulation(
     return mean
 
 
-def objective(trial, target, repeats, target_dictionary):
+def objective(trial: int, target: nx.Graph(), repeats: int, target_dictionary: Dict):
+    """Objective function for Optuna
+
+    Args:
+        trial (int): Trial number used by Optuna
+        target (nx.Graph): Target network to match by simulation
+        repeats (int): Integer specifying how many samples are used to estimate goodness of fit
+        target_dictionary (Dict): Dictionary containing precomputed values
+
+    Returns:
+        float: Mean goodness of fit of the simulated network
+    """
+
     N_TARGET = target.number_of_nodes()
     N_EDGES = target.number_of_edges()
     K = round(N_EDGES / N_TARGET)

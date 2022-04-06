@@ -1,9 +1,11 @@
 import pickle as pkl
 import glob
 from re import sub
+from statistics import correlation
 from turtle import color
 from matplotlib.pyplot import title, xlabel, ylabel
 import matplotlib.pyplot as plt
+from numpy import negative
 import pandas as pd
 import seaborn as sns
 import ptitprince as pt
@@ -91,11 +93,45 @@ sns.set_context(
     rc={
         "figure.figsize": (11.7, 8.27),
         "font.size": 5,
-        "axes.titlesize": 5,
+        "axes.titlesize": 25,
         "axes.labelsize": 25,
     },
     font_scale=2,
 )
+
+
+def make_negative_learning_levels(negative_learning_rate: float):
+    if negative_learning_rate < 0.05:
+        return "Low"
+    if negative_learning_rate > 0.05 and negative_learning_rate < 0.2:
+        return "Medium"
+    if negative_learning_rate > 0.15:
+        return "High"
+
+
+correlations["Negative Learning Level"] = correlations["negative_learning_rate"].apply(
+    lambda x: make_negative_learning_levels(x)
+)
+
+g = sns.catplot(
+    data=correlations,
+    x="threshold",
+    y="opinions",
+    kind="box",
+    col="Negative Learning Level",
+    height=7,
+    # hue="threshold",
+    palette=sns.cubehelix_palette(8, rot=-0.25, light=0.9),
+)
+
+g.map(sns.stripplot, "threshold", "opinions", color="black", alpha=0.55, size=4)
+
+g.set(ylabel=r"$\rho_{O_I, O_F}$", xlabel="Threshold")
+for ax, title in zip(
+    g.axes.flatten(), [r"$\beta < 0.05$", r"$0.05 < \beta < 0.15$", r"$0.15 < \beta$"]
+):
+    ax.set_title(title)
+
 
 sns.boxplot(
     data=correlations,

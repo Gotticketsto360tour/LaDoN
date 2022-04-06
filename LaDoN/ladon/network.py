@@ -24,6 +24,9 @@ class Network:
         self.initialize_vectors()
 
     def initialize_network(self):
+        """Fills the dictionary of agents with class instantiations
+        of the "Agent" datatype
+        """
         for agents in range(self.N_TARGET):
             self.agents[agents] = Agent()
 
@@ -41,6 +44,7 @@ class Network:
         self.OPINION_DISTRIBUTIONS.append(self.get_opinion_distribution())
 
     def record_time_step(self):
+        """Records measures of interest over time"""
         absolute_opinions = abs(self.get_opinion_distribution())
         mean_absolute_opinions = np.mean(absolute_opinions)
         standard_deviation = np.std(absolute_opinions)
@@ -163,14 +167,14 @@ class Network:
             sampled_neigbor = sample(candidate_neighbors, 1)[0]
             self.graph.add_edge(agent_on_turn, sampled_neigbor)
 
-    def delete_tie(self, agent, neighbor):
+    def delete_tie(self, agent: int, neighbor: int):
         if random() <= self.TIE_DISSOLUTION:
             self.graph.remove_edge(agent, neighbor)
             self.N_TIE_DISSOLUTIONS += 1
             self.EDGE_SURPLUS += 1
             self.ensure_no_lone_agents(agent, neighbor)
 
-    def update_all_values(self, agent):
+    def update_all_values(self, agent: int):
 
         neighbor_list = list(self.graph.neighbors(agent))
         for neighbor in sample(neighbor_list, k=len(neighbor_list)):
@@ -186,7 +190,13 @@ class Network:
             self.delete_tie(agent, neighbor) for neighbor in negative_relations
         ]
 
-    def ensure_no_lone_agents(self, sampled_agent, neighbor):
+    def ensure_no_lone_agents(self, sampled_agent: int, neighbor: int):
+        """Function for ensuring that the network only has one component.
+
+        Args:
+            sampled_agent (int): Integer which specifies the sampled agent
+            neighbor (int): Integer which specifies the neighbor
+        """
         sampled_agents_neighbors = list(self.graph.neighbors(sampled_agent))
         neighbors_neighbors = list(self.graph.neighbors(neighbor))
         if len(sampled_agents_neighbors) == 0:
@@ -225,6 +235,16 @@ class Network:
 
 
 class NoOpinionNetwork(Network):
+    """Child of the Network Class.
+    Includes all the same methods, but
+    the take turn function is edited so
+    that it does not include any opinion
+    dynamics.
+
+    Args:
+        Network (Network): The Co-evolutionary Network Class
+    """
+
     def take_turn(self):
         sampled_agent = sample(self.graph.nodes, 1)[0]
         list_of_neighbors = list(self.graph.neighbors(sampled_agent))

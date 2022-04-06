@@ -44,12 +44,32 @@
 \date{}
 \begin{document}
 \maketitle
+\tableofcontents
 
-\section{Conceptual overview}
+\section{Introduction}
+
+\subsection{Polarization, echo chambers and the threat to democracy}
+
+\section{Motivation of the framework}
+\subsection{Agent-based models of complex issues}
+
+\section{Central Mechanisms}
+\subsection{Homophily}
+\subsubsection{Explaining Homophily}
+\subsection{Social Influence}
+\section{Opinion Dynamics}
+\section{Network Formation}
+\subsection{Triadic Closure}
+
+\section{Co-evolution}
+\subsection{Tie-deletion as the co-evolutionary mechanism}
+
+\section{Model Description}
+\subsection{Conceptual overview}
 The model consists of agents situated in an undirected network. Nodes on the network represent social agents. Edges represent social ties to other agents. 
 The model simulates social interactions between the agents without agents having any strategy or task. 
 
-\section{Assumptions}
+\subsection{Assumptions}
 It is assumed that the opinion of an agent is shaped only by her initial opinion and the influence of her peers. 
 The model assumes that agents will compromise their opinion when interacting with agents with similar opinions. 
 When agents interact with agents dissimilar from them, the model assumes that agents will either not change their opinion or they will become more opposed by the interactions.
@@ -60,7 +80,7 @@ All these assumptions can vary in the strength of the proposed effect. For insta
 As the results of the model critically hinges on the strength of these assumptions, I introduce model parameters that control the strength of these mechanisms.
 
 
-\section{Components and their properties}
+\subsection{Components and their properties}
 The model is specified by four different parameters. 
 The first three describe how interactions change opinions ($\alpha$, $\beta$, $T$). 
 The fourth parameter specifies the probability of dissoluting negative ties ($D$).
@@ -77,7 +97,7 @@ To limit the combinations of different values, we limit the possible values of t
 \end{align*}
 
 
-\section{Initialization}
+\subsection{Initialization}
 A random Watts-Strogatz small-world graph is created 
 with $N=500$, $k=7$, and $p=0.5$. For each node in the network,
 an agent is initialized with a value ($O_i$) which is taken to represent the opinion of the agent. The opinion is modelled as a continous number between -1 and 1. 
@@ -85,9 +105,9 @@ The idea is to represent that opinions can be anywhere inbetween extremely pro a
 To initialize the model, we start of with a diverse set of opinions. All values of $O_i$ are initialized by drawing from a uniform distribution between -1 and 1: 
 $$O_i \sim U(-1, 1)$$
 
-\section{Dynamics}
+\subsection{Dynamics}
 
-\subsection{Sampling agents and interactions}
+\subsubsection{Sampling agents and interactions}
 
 The model is an attempt at representing social encounters and their change over time. 
 To represent this idea, agents interact with each other over a certain amount of time-steps. 
@@ -105,7 +125,7 @@ To ensure this property, we check the degree of $A_t$ and $C_t$. If the degree o
 If both $A_t$ and $C_t$ have degrees larger than 0, and the network has more than one component, a new edge is created to restore the network. Specifically, we restore the edge that $A_t$ rewired to $C_t$, while keeping the edge from $A_t$ to $C_t$.
 I will refer to the process of ensuring only one connected component simply as component ensurance. 
 
-\subsection{Interaction between neighbors}
+\subsubsection{Interaction between neighbors}
 After finding a new connection, the agents interact with each other. This is meant to represent 
 discussion, statements or other social interactions between agents. 
 Social interactions between similar individuals will lead to compromise between their initial opinion and their opinion after the encounter.
@@ -134,7 +154,7 @@ $$O_{min} = O_{min} - V_n$$
 
 This process concludes when $A_t$ has updated her values for all her edges.
 
-\subsection{Tie-dissolution}
+\subsubsection{Tie-dissolution}
 After interacting with her connected agents, $A_t$ might delete the connection to some of these agents based on their similarity.
 In this model, social interactions can result in opinions becoming more distant than they were initially. 
 This can be because what the agents are discussing is divisive or controversial. When this happens, connections can be severed.
@@ -144,9 +164,9 @@ When $D = 1$, all dissimilar ties are severed. When $D = 0.5$, there is 50\% cha
 After ties are dissoluted, the process of component ensurance is performed where $C_t$ is replaced with $B$.
 When all edges of $A_t$ have been evaluated, the time-step concludes. This process is repeated for 10.000 time-steps.
 
-\section{Outcome metrics} 
+\subsection{Outcome metrics} 
 
-\subsection{Time-dependent Metrics}
+\subsubsection{Time-dependent Metrics}
 Every 20th time-step, the current state of the network is recorded. 
 To track the polarization of opinions over time,
 the mean and standard deviation of the absolute value of opinions are recorded.
@@ -154,7 +174,7 @@ To track the similarity of an agent's opinion to the opinion of their neighors, 
 To evaluate the effect of tie-dissolution, the cumulative frequency of tie-dissolutions are recorded.
 For characterizing the network, I record the average clustering coefficient, average path length and degree assortativity coefficient.
 
-\subsection{Final State Metrics}
+\subsubsection{Final State Metrics}
 After 10.000 time-steps, the network reaches its final state and its characteristics are recorded. 
 For every agent in the network, I record: 
 \begin{itemize}
@@ -167,6 +187,40 @@ For every agent in the network, I record:
 \end{itemize}
 
 The measures related to the opinion of agents can then be correlated with clustering, centrality and degrees to see how changes in network topology relate to changes in opinions. 
+
+\section{Model Evaluation}
+
+\section{Data}
+
+\subsection{Hyperparameter Optimization}
+
+\subsection{Why is co-evolution a better explanation?}
+
+\section{Results}
+
+\subsection{Alpha, beta, threshold, tie-deletion and chaotic systems}
+
+\subsection{Correlations}
+
+\section{Discussion}
+
+\subsection{Reiterating previous literature}
+
+\subsection{Tie-deletion facilitates cooperation}
+
+\subsection{The effect of initial opinions}
+
+\subsection{Distance in opinion and network space}
+
+\section{Short comings and future work}
+
+\subsection{Accurate perceptions of opinions}
+
+\subsection{Social influence exclusively}
+
+\section{A broader perspective}
+
+\section{Conclusion}
 
 \bibliographystyle{apacite}
 
