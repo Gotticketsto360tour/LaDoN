@@ -184,6 +184,17 @@ def generate_network_dataframe(repeats: int):
 
 
 if __name__ == "__main__":
+    best_dict = [
+        joblib.load(f"analysis/data/optimization/{name}_study.pkl").best_params
+        for name in NAME_DICTIONARY
+    ]
+    for i, name in enumerate(NAME_DICTIONARY):
+        best_dict[i]["network"] = name
+    pd.DataFrame(best_dict)
+
+    best_study_opinions = joblib.load(f"analysis/data/optimization/{name}_study.pkl")
+
+    best_parameters = best_study_opinions.best_params
     data = generate_network_dataframe(repeats=10)
     with open(
         f"analysis/data/optimization/data_from_all_runs.pkl",

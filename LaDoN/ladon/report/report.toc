@@ -27,17 +27,17 @@
 \contentsline {section}{\numberline {8}Model Evaluation}{9}{}%
 \contentsline {section}{\numberline {9}Data}{9}{}%
 \contentsline {subsection}{\numberline {9.1}Hyperparameter Optimization}{9}{}%
-\contentsline {subsection}{\numberline {9.2}Why is co-evolution a better explanation?}{9}{}%
-\contentsline {section}{\numberline {10}Results}{9}{}%
-\contentsline {subsection}{\numberline {10.1}Alpha, beta, threshold, tie-deletion and chaotic systems}{9}{}%
-\contentsline {subsection}{\numberline {10.2}Correlations}{9}{}%
-\contentsline {section}{\numberline {11}Discussion}{9}{}%
-\contentsline {subsection}{\numberline {11.1}Reiterating previous literature}{9}{}%
-\contentsline {subsection}{\numberline {11.2}Tie-deletion facilitates cooperation}{9}{}%
-\contentsline {subsection}{\numberline {11.3}The effect of initial opinions}{9}{}%
-\contentsline {subsection}{\numberline {11.4}Distance in opinion and network space}{9}{}%
-\contentsline {section}{\numberline {12}Short comings and future work}{9}{}%
-\contentsline {subsection}{\numberline {12.1}Accurate perceptions of opinions}{9}{}%
-\contentsline {subsection}{\numberline {12.2}Social influence exclusively}{9}{}%
-\contentsline {section}{\numberline {13}A broader perspective}{9}{}%
-\contentsline {section}{\numberline {14}Conclusion}{9}{}%
+\contentsline {subsection}{\numberline {9.2}Why is co-evolution a better explanation?}{10}{}%
+\contentsline {section}{\numberline {10}Results}{10}{}%
+\contentsline {subsection}{\numberline {10.1}Alpha, beta, threshold, tie-deletion and chaotic systems}{10}{}%
+\contentsline {subsection}{\numberline {10.2}Correlations}{10}{}%
+\contentsline {section}{\numberline {11}Discussion}{10}{}%
+\contentsline {subsection}{\numberline {11.1}Reiterating previous literature}{10}{}%
+\contentsline {subsection}{\numberline {11.2}Tie-deletion facilitates cooperation}{10}{}%
+\contentsline {subsection}{\numberline {11.3}The effect of initial opinions}{10}{}%
+\contentsline {subsection}{\numberline {11.4}Distance in opinion and network space}{10}{}%
+\contentsline {section}{\numberline {12}Short comings and future work}{10}{}%
+\contentsline {subsection}{\numberline {12.1}Accurate perceptions of opinions}{10}{}%
+\contentsline {subsection}{\numberline {12.2}Social influence exclusively}{10}{}%
+\contentsline {section}{\numberline {13}A broader perspective}{10}{}%
+\contentsline {section}{\numberline {14}Conclusion}{10}{}%

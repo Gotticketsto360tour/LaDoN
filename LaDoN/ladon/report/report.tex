@@ -5,6 +5,7 @@
 \usepackage{graphicx}
 \usepackage{mathptmx}
 \usepackage{amsmath}
+\usepackage{multirow}
 \usepackage[font = {small, it}]{caption}
 \DeclareCaptionLabelFormat{cont}{#1~#2\alph{ContinuedFloat}}
 \captionsetup[ContinuedFloat]{labelformat=cont}
@@ -193,6 +194,26 @@ The measures related to the opinion of agents can then be correlated with cluste
 \section{Data}
 
 \subsection{Hyperparameter Optimization}
+
+\begin{figure}[H]
+\begin{center}
+    
+\begin{tabular}{ |p{3cm}||p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
+    \hline
+    \multicolumn{6}{|c|}{Table of best parameter values} \\
+    \hline
+    \bf{Network} & Randomness & Threshold & $\alpha$ & $\beta$ & $P(D)$\\
+    \hline
+    Dolphins   & 0.003    &0.531&   0.202&   0.095&   0.111\\
+    Karate Club&   0.870  & 0.137   &0.282&   0.090&   0.911\\
+    Citation Network   &0.060 & 0.655&  0.389&   0.493&   0.150\\
+    Political Books &0.004 & 0.222&  0.075&   0.144&   0.508\\
+    Politicians&   0.014  & 0.101 &0.050&   0.014&   0.229\\
+    Political Blogs & 0.109  & 0.100   &0.246&   0.007&   0.249\\
+    \hline
+\end{tabular}
+\end{center}
+\end{figure}
 
 \subsection{Why is co-evolution a better explanation?}
 

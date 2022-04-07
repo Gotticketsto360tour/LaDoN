@@ -1,13 +1,13 @@
 # Fdb version 3
-["bibtex report"] 1649180006 "report.aux" "report.bbl" "report" 1649180006
+["bibtex report"] 1649358575 "report.aux" "report.bbl" "report" 1649358575
   "../Referencer_new.bib" 0 -1 0 ""
   "/usr/local/texlive/2021/texmf-dist/bibtex/bst/apacite/apacite.bst" 1374530685 141073 9d7b79dbf9d91133318126032cff8c27 ""
-  "report.aux" 1649176199 4995 a109d3688ca62acdc7d85ddf41d7ad93 "pdflatex"
+  "report.aux" 1649358575 5010 ec965d6f5c3b74093ff203d9fb4f46cf "pdflatex"
   (generated)
   "report.bbl"
   "report.blg"
-["pdflatex"] 1649176199 "/Users/mikkelwerling/Documents/LaDoN/LaDoN/ladon/report/report.tex" "report.pdf" "report" 1649180006
-  "/Users/mikkelwerling/Documents/LaDoN/LaDoN/ladon/report/report.tex" 1649180005 11468 41777c421aafaebd48536760507a1ed4 ""
+["pdflatex"] 1649358575 "/Users/mikkelwerling/Documents/LaDoN/LaDoN/ladon/report/report.tex" "report.pdf" "report" 1649358575
+  "/Users/mikkelwerling/Documents/LaDoN/LaDoN/ladon/report/report.tex" 1649358574 12191 c3ceb4b6dc2273f6aabbdfa7c17d67f3 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/local/texlive/2021/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/tfm/adobe/symbol/psyr.tfm" 1136768653 1408 5937f58aa508ea2cea4901c07d10f5fe ""
@@ -73,6 +73,7 @@
   "/usr/local/texlive/2021/texmf-dist/tex/latex/listings/listings.sty" 1585170648 80964 64e57373f36316e4a09b517cbf1aba2e ""
   "/usr/local/texlive/2021/texmf-dist/tex/latex/listings/lstlang1.sty" 1585170648 204271 bae5b2d457283e99567249c1990510be ""
   "/usr/local/texlive/2021/texmf-dist/tex/latex/listings/lstmisc.sty" 1585170648 77022 ee25ce086f4a79d8cf73bac6f94c02a5 ""
+  "/usr/local/texlive/2021/texmf-dist/tex/latex/multirow/multirow.sty" 1615845910 6149 2398eec4faa1ee24ff761581e580ecf1 ""
   "/usr/local/texlive/2021/texmf-dist/tex/latex/psnfss/mathptmx.sty" 1586716065 4631 6e41de2b7a83dfa5d2c4b0a2fe01f046 ""
   "/usr/local/texlive/2021/texmf-dist/tex/latex/psnfss/omlztmcm.fd" 1137110629 411 12564a37a279e4e0b533cdf5e03eeb7c ""
   "/usr/local/texlive/2021/texmf-dist/tex/latex/psnfss/omsztmcm.fd" 1137110629 348 f4ce75d394e7d9ac12ca7aac4045ed77 ""
@@ -86,10 +87,10 @@
   "/usr/local/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1643323655 4379201 880d78f4a2bde4f491e7d718ab91f390 ""
   "/usr/local/texlive/2021/texmf-var/web2c/pdftex/pdflatex.fmt" 1643323721 2796779 5d118f325eff48385f25df8d5c174017 ""
   "/usr/local/texlive/2021/texmf.cnf" 1616695596 577 4c1911a7228e554c6032256d3cf5567d ""
-  "report.aux" 1649176199 4995 a109d3688ca62acdc7d85ddf41d7ad93 "pdflatex"
+  "report.aux" 1649358575 5010 ec965d6f5c3b74093ff203d9fb4f46cf "pdflatex"
   "report.bbl" 0 -1 0 "bibtex report"
-  "report.tex" 1649180005 11468 41777c421aafaebd48536760507a1ed4 ""
-  "report.toc" 1649176199 3144 a850f1a1045decca415aab3c73be43dc "pdflatex"
+  "report.tex" 1649358574 12191 c3ceb4b6dc2273f6aabbdfa7c17d67f3 ""
+  "report.toc" 1649358575 3158 b0f3e50866cb67b8346b77479642a8e0 "pdflatex"
   (generated)
   "report.aux"
   "report.log"

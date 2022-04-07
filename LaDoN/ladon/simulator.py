@@ -20,19 +20,19 @@ def make_network_by_seed(dictionary, run):
 
 
 dictionary = {
-    "THRESHOLD": 0.6,
+    "THRESHOLD": 0.1,
     "N_TARGET": 500,
-    "RANDOMNESS": 0.1,
+    "RANDOMNESS": 0.01,
     "N_TIMESTEPS": 10000,
-    "POSITIVE_LEARNING_RATE": 0.10,
-    "NEGATIVE_LEARNING_RATE": 0.05,
+    "POSITIVE_LEARNING_RATE": 0.05,
+    "NEGATIVE_LEARNING_RATE": 0.007,
     "P": 0.5,
     "K": 7,
-    "TIE_DISSOLUTION": 1,
+    "TIE_DISSOLUTION": 0.2,
     "RECORD": True,
 }
 
-my_network = make_network_by_seed(dictionary=dictionary, run=5)
+my_network = make_network_by_seed(dictionary=dictionary, run=1)
 my_network.run_simulation()
 
 sns.lineplot(data=my_network.NEGATIVE_TIES_DISSOLUTED)
