@@ -1,7 +1,6 @@
 import pickle as pkl
 import glob
 from re import sub
-from statistics import correlation
 from turtle import color
 from matplotlib.pyplot import title, xlabel, ylabel
 import matplotlib.pyplot as plt
@@ -132,6 +131,8 @@ for ax, title in zip(
     [r"$\beta < 0.10$", r"$0.10 \leq \beta \leq 0.15$", r"$0.20 \leq \beta$"],
 ):
     ax.set_title(title)
+
+g.savefig("plots/overall/Correlation_Initial_Opinions.png")
 
 
 sns.boxplot(
