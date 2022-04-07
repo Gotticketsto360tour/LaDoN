@@ -20,7 +20,7 @@ sns.set_context(
         "figure.figsize": (11.7, 8.27),
         "font.size": 13,
         "axes.titlesize": 17,
-        "axes.labelsize": 15,
+        "axes.labelsize": 20,
     },
     font_scale=1.7,
 )
@@ -54,11 +54,22 @@ g = sns.lineplot(
     palette=blue_pallette,
 ).set(ylabel=r"$|O|$", xlabel=r"$t$")
 
-plt.legend(title=r"$P(D)$", bbox_to_anchor=(1.1, 0.65))
+plt.legend(title=r"$P(D)$", bbox_to_anchor=(1.15, 0.65))
 plt.savefig(
     "plots/overall/Absolute_Opinion_Tie_Deletion_Without_Negative.png",
     dpi=300,
     bbox_inches="tight",
+)
+
+sns.set_context(
+    "paper",
+    rc={
+        "figure.figsize": (11.7, 8.27),
+        "font.size": 13,
+        "axes.titlesize": 17,
+        "axes.labelsize": 15,
+    },
+    font_scale=1.7,
 )
 
 g = sns.lineplot(
@@ -66,6 +77,7 @@ g = sns.lineplot(
     x="timestep",
     y="mean_absolute_opinion",
     hue="threshold",
+    legend="full",
     palette=blue_pallette,
 ).set(ylabel=r"$|O|$", xlabel=r"$t$")
 
@@ -236,27 +248,6 @@ plt.legend(title=r"$R$", bbox_to_anchor=(1.15, 0.6))
 plt.savefig(
     "plots/example/Example_Average_Path_Length.png", dpi=300, bbox_inches="tight"
 )
-
-g = sns.lineplot(
-    data=data_specific,
-    x="timestep",
-    y="average_path_length",
-    palette=blue_pallette,
-).set(ylabel=r"$APL$", xlabel=r"$t$")
-plt.savefig(
-    "plots/example/Example_Average_Path_Length.png", dpi=300, bbox_inches="tight"
-)
-
-g = sns.lineplot(
-    data=data_specific,
-    x="timestep",
-    y="mean_absolute_opinion",
-    palette=blue_pallette,
-).set(ylabel=r"$|O|$", xlabel=r"$t$")
-plt.savefig("plots/example/Example_Absolute_Opinion.png")
-
-plt.legend(title=r"$Threshold$", bbox_to_anchor=(1.0, 0.75))
-plt.show(g)
 
 data_polarized = (
     data.groupby(
