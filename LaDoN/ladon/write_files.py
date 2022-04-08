@@ -18,7 +18,7 @@ import os
 import pandas as pd
 
 
-def make_network_by_seed(dictionary: Dict, run: int):
+def make_network_by_seed(dictionary: Dict, run: int) -> Network:
     """Sets a seed and runs the simulation for a network
 
     Args:
@@ -42,7 +42,7 @@ def make_one_simulation(
     positive_learning_rate: float,
     negative_learning_rate: float,
     tie_dissolution: float,
-):
+) -> None:
 
     dictionary = {
         "THRESHOLD": threshold,
@@ -165,7 +165,7 @@ def make_one_simulation(
         pkl.dump(out_dict_over_time, handle, protocol=pkl.HIGHEST_PROTOCOL)
 
 
-def make_all_simulations():
+def make_all_simulations() -> None:
 
     values = [
         THRESHOLDS,

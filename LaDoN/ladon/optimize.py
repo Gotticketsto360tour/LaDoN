@@ -32,7 +32,7 @@ pio.renderers.default = "notebook"
 # fig.show()
 
 
-def make_network_by_seed(dictionary, run):
+def make_network_by_seed(dictionary, run) -> Network:
     random.seed(run)
     np.random.seed(run)
     network = Network(dictionary)
@@ -45,7 +45,7 @@ def run_single_simulation(
     run: int,
     target: nx.Graph(),
     target_dictionary: Dict,
-):
+) -> float:
     """Run a single simulation and return the mean of the vector of differences.
 
     Args:
@@ -80,7 +80,9 @@ def run_single_simulation(
     return mean
 
 
-def objective(trial: int, target: nx.Graph(), repeats: int, target_dictionary: Dict):
+def objective(
+    trial: int, target: nx.Graph(), repeats: int, target_dictionary: Dict
+) -> float:
     """Objective function for Optuna
 
     Args:

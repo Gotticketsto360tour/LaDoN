@@ -1,5 +1,5 @@
 import pickle as pkl
-from typing import Dict
+from typing import Dict, List
 import networkx as nx
 import pandas as pd
 from helpers import get_main_component, find_average_path
@@ -17,7 +17,9 @@ sns.set_context("talk")
 blue_pallette = sns.dark_palette("#69d", reverse=True, as_cmap=True)
 
 
-def get_mean(model, target_dictionary: Dict, network: nx.Graph(), denominator: float):
+def get_mean(
+    model, target_dictionary: Dict, network: nx.Graph(), denominator: float
+) -> float:
     """Returns the mean of the vector of differences
 
     Args:
@@ -46,7 +48,7 @@ def get_mean(model, target_dictionary: Dict, network: nx.Graph(), denominator: f
     return mean
 
 
-def generate_network_dataframe(repeats: int):
+def generate_network_dataframe(repeats: int) -> List[Dict]:
     """Generate the dataframe for evaluating the models
 
     Args:

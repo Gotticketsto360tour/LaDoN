@@ -36,7 +36,7 @@ import random
 output_notebook()
 
 
-def plot_graph(network: Network, plot_type="community", save_path="", title=""):
+def plot_graph(network: Network, plot_type="community", save_path="", title="") -> None:
     """Plot the graph from the Network-class
 
     Args:
@@ -185,7 +185,7 @@ def plot_graph(network: Network, plot_type="community", save_path="", title=""):
 
 def generate_network_plots(
     network: Network, plot_type="agent_type", save_path="", title="", run=0
-):
+) -> None:
     # random.seed(run)
     # np.random.seed(run)
     if save_path:

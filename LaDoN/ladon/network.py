@@ -6,7 +6,6 @@ from random import random
 from helpers import find_distance, find_average_path
 from tqdm import tqdm
 import numpy as np
-from datetime import datetime
 
 
 class Network:
@@ -60,20 +59,20 @@ class Network:
             nx.algorithms.assortativity.degree_assortativity_coefficient(self.graph)
         )
 
-    def get_opinion_distribution(self):
+    def get_opinion_distribution(self) -> np.array:
         return np.array(
             [float(self.agents.get(agent).opinion) for agent in self.agents]
         )
 
-    def get_initial_opinion_distribution(self):
+    def get_initial_opinion_distribution(self) -> np.array:
         return np.array(
             [float(self.agents.get(agent).initial_opinion) for agent in self.agents]
         )
 
-    def get_degree_distribution(self):
+    def get_degree_distribution(self) -> np.array:
         return np.array([degree[1] for degree in list(self.graph.degree())])
 
-    def get_opinion_distances(self):
+    def get_opinion_distances(self) -> np.array:
         return np.array(
             [
                 mean(
@@ -91,7 +90,7 @@ class Network:
             ]
         )
 
-    def get_opinion_distances_without_none(self):
+    def get_opinion_distances_without_none(self) -> np.array:
         return np.array(
             [
                 mean(
@@ -108,10 +107,10 @@ class Network:
             ]
         )
 
-    def get_clustering(self):
+    def get_clustering(self) -> np.array:
         return np.array(list(nx.algorithms.clustering(self.graph).values()))
 
-    def get_centrality(self):
+    def get_centrality(self) -> np.array:
         return np.array(
             list(nx.algorithms.centrality.betweenness_centrality(self.graph).values())
         )

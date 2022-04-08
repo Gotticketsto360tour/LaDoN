@@ -40,7 +40,7 @@ def make_no_opinion_network_by_seed(dictionary, run):
     return network
 
 
-def run_single_simulation(dictionary, run, target, target_dictionary):
+def run_single_simulation(dictionary, run, target, target_dictionary) -> float:
     my_network = make_no_opinion_network_by_seed(dictionary=dictionary, run=run)
 
     clustering_diff = abs(
@@ -64,7 +64,7 @@ def run_single_simulation(dictionary, run, target, target_dictionary):
     return mean
 
 
-def objective(trial, target, repeats, target_dictionary):
+def objective(trial, target, repeats, target_dictionary) -> float:
     N_TARGET = target.number_of_nodes()
     N_EDGES = target.number_of_edges()
     K = round(N_EDGES / N_TARGET)
