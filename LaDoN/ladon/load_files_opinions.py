@@ -2,14 +2,23 @@ import pickle as pkl
 import glob
 from re import sub
 from turtle import color
-from matplotlib.pyplot import title, xlabel, ylabel
+from matplotlib.pyplot import legend, title, xlabel, ylabel
 import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
 from sklearn.preprocessing import scale
 
 sns.set(rc={"figure.figsize": (11.7, 8.27)})
-sns.set_context("talk")
+sns.set_context(
+    "paper",
+    rc={
+        "figure.figsize": (11.7, 8.27),
+        "font.size": 17,
+        "axes.titlesize": 50,
+        "axes.labelsize": 22,
+    },
+    font_scale=2,
+)
 blue_pallette = sns.dark_palette("#69d", reverse=True, as_cmap=True)
 
 list_of_simulations = glob.glob("analysis/data/simulations/opinions/*")
@@ -43,6 +52,7 @@ def plot_trajectory_over_time(
         & (df["positive_learning_rate"] == positive_learning_rate)
         & (df["negative_learning_rate"] == negative_learning_rate)
         & (df["tie_dissolution"] == tie_dissolution)
+        # & (df["randomness"] == randomness)
     ]
     if isinstance(run, int):
         df = df[df["run"] == run]
@@ -51,14 +61,17 @@ def plot_trajectory_over_time(
         data=df,
         x="time",
         y="opinions",
-        hue="agent",
-        alpha=0.15,
+        units="agent",
+        estimator=None,
+        hue="randomness",
+        alpha=0.25,
         kind="line",
         palette=blue_pallette,
         height=8,
         aspect=1.5,
-    )
+    ).set(xlabel=r"$t$", ylabel=r"$O$")
     plotting._legend.remove()
+    plt.legend(title=r"$R$", bbox_to_anchor=(1.15, 0.65))
 
 
 def plot_distribution_over_time(
@@ -82,7 +95,15 @@ def plot_distribution_over_time(
 
     # Initialize the FacetGrid object
     pal = sns.cubehelix_palette(20, rot=-0.25, light=0.7)
-    g = sns.FacetGrid(df, row="time", hue="time", aspect=15, height=0.65, palette=pal)
+    g = sns.FacetGrid(
+        df,
+        row="time",
+        hue="randomness",
+        # hue="time",
+        aspect=15,
+        height=0.65,
+        # palette=pal,
+    )
 
     # Draw the densities in a few steps
     g.map(
@@ -91,7 +112,7 @@ def plot_distribution_over_time(
         bw_adjust=0.5,
         clip_on=False,
         fill=True,
-        alpha=1,
+        alpha=0.5,
         linewidth=0.5,
     )
     g.map(sns.kdeplot, "opinions", clip_on=False, color="w", lw=2, bw_adjust=0.5)
@@ -107,13 +128,13 @@ def plot_distribution_over_time(
             0.2,
             label,
             fontweight="bold",
-            color=color,
+            # color=color,
             ha="left",
             va="center",
             transform=ax.transAxes,
         )
 
-    g.map(label, "opinions")
+    g.map(label, "time")
 
     # Set the subplots to overlap
     g.figure.subplots_adjust(hspace=-0.25)
@@ -141,15 +162,11 @@ plot_trajectory_over_time(
     positive_learning_rate=0.15,
     negative_learning_rate=0.1,
     tie_dissolution=1,
+    randomness=0.1,
     run=6,
 )
-plt.savefig("plots/Lineplot_Over_Time.png")
-
-plot_trajectory_over_time(
-    df,
-    threshold=0.6,
-    positive_learning_rate=0.1,
-    negative_learning_rate=0.05,
-    tie_dissolution=1,
-    run=5,
+plt.savefig(
+    "plots/Lineplot_Over_Time.png",
+    dpi=300,
+    bbox_inches="tight",
 )
