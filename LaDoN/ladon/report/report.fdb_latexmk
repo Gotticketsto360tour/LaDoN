@@ -1,13 +1,13 @@
 # Fdb version 3
-["bibtex report"] 1649358575 "report.aux" "report.bbl" "report" 1649358575
+["bibtex report"] 1649551748 "report.aux" "report.bbl" "report" 1649551748
   "../Referencer_new.bib" 0 -1 0 ""
   "/usr/local/texlive/2021/texmf-dist/bibtex/bst/apacite/apacite.bst" 1374530685 141073 9d7b79dbf9d91133318126032cff8c27 ""
-  "report.aux" 1649358575 5010 ec965d6f5c3b74093ff203d9fb4f46cf "pdflatex"
+  "report.aux" 1649551703 5246 5f695b7c796de129c46994e69ecd42b6 "pdflatex"
   (generated)
   "report.bbl"
   "report.blg"
-["pdflatex"] 1649358575 "/Users/mikkelwerling/Documents/LaDoN/LaDoN/ladon/report/report.tex" "report.pdf" "report" 1649358575
-  "/Users/mikkelwerling/Documents/LaDoN/LaDoN/ladon/report/report.tex" 1649358574 12191 c3ceb4b6dc2273f6aabbdfa7c17d67f3 ""
+["pdflatex"] 1649551702 "/Users/mikkelwerling/Documents/LaDoN/LaDoN/ladon/report/report.tex" "report.pdf" "report" 1649551748
+  "/Users/mikkelwerling/Documents/LaDoN/LaDoN/ladon/report/report.tex" 1649551747 51676 8c5e0837b79455af2d7e4fd930349f35 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/local/texlive/2021/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/tfm/adobe/symbol/psyr.tfm" 1136768653 1408 5937f58aa508ea2cea4901c07d10f5fe ""
@@ -87,10 +87,10 @@
   "/usr/local/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1643323655 4379201 880d78f4a2bde4f491e7d718ab91f390 ""
   "/usr/local/texlive/2021/texmf-var/web2c/pdftex/pdflatex.fmt" 1643323721 2796779 5d118f325eff48385f25df8d5c174017 ""
   "/usr/local/texlive/2021/texmf.cnf" 1616695596 577 4c1911a7228e554c6032256d3cf5567d ""
-  "report.aux" 1649358575 5010 ec965d6f5c3b74093ff203d9fb4f46cf "pdflatex"
+  "report.aux" 1649551703 5246 5f695b7c796de129c46994e69ecd42b6 "pdflatex"
   "report.bbl" 0 -1 0 "bibtex report"
-  "report.tex" 1649358574 12191 c3ceb4b6dc2273f6aabbdfa7c17d67f3 ""
-  "report.toc" 1649358575 3158 b0f3e50866cb67b8346b77479642a8e0 "pdflatex"
+  "report.tex" 1649551747 51676 8c5e0837b79455af2d7e4fd930349f35 ""
+  "report.toc" 1649551703 3312 d34d8f7c846b68d7c4255431a6590124 "pdflatex"
   (generated)
   "report.aux"
   "report.log"
