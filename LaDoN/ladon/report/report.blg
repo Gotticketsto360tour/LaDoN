@@ -15,45 +15,45 @@ Database file #1: References.bib
 apacite.bst [2013/07/21 v6.03 APA bibliography style]
 Warning--No journal in jackson_search_2004
 Warning--No journal in jackson_meeting_2007
-You've used 59 entries,
+You've used 62 entries,
             6951 wiz_defined-function locations,
-            1747 strings with 26843 characters,
-and the built_in function-call counts, 124750 in all, are:
-= -- 15026
-> -- 1065
-< -- 6104
-+ -- 6286
-- -- 118
-* -- 8610
-:= -- 22804
-add.period$ -- 250
-call.type$ -- 59
-change.case$ -- 1105
+            1770 strings with 27816 characters,
+and the built_in function-call counts, 132248 in all, are:
+= -- 15957
+> -- 1143
+< -- 6446
++ -- 6647
+- -- 124
+* -- 9101
+:= -- 24072
+add.period$ -- 266
+call.type$ -- 62
+change.case$ -- 1164
 chr.to.int$ -- 0
-cite$ -- 120
-duplicate$ -- 3503
-empty$ -- 4947
-format.name$ -- 1807
-if$ -- 23268
+cite$ -- 126
+duplicate$ -- 3730
+empty$ -- 5233
+format.name$ -- 1935
+if$ -- 24696
 int.to.chr$ -- 0
-int.to.str$ -- 177
+int.to.str$ -- 186
 missing$ -- 0
-newline$ -- 1775
-num.names$ -- 472
-pop$ -- 1786
+newline$ -- 1869
+num.names$ -- 496
+pop$ -- 1942
 preamble$ -- 1
-purify$ -- 332
+purify$ -- 350
 quote$ -- 0
-skip$ -- 7748
+skip$ -- 8210
 stack$ -- 0
-substring$ -- 6890
-swap$ -- 2087
-text.length$ -- 266
+substring$ -- 7298
+swap$ -- 2221
+text.length$ -- 290
 text.prefix$ -- 0
 top$ -- 1
-type$ -- 5232
+type$ -- 5600
 warning$ -- 2
-while$ -- 710
+while$ -- 758
 width$ -- 0
-write$ -- 2199
+write$ -- 2322
 (There were 2 warnings)

@@ -1,6 +1,48 @@
 \begin{thebibliography}{}
 
 \bibitem [\protect \citeauthoryear {%
+Akiba%
+, Sano%
+, Yanase%
+, Ohta%
+\BCBL {}\ \BBA {} Koyama%
+}{%
+Akiba%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2019}}%
+}]{%
+akiba_optuna_2019}
+\APACinsertmetastar {%
+akiba_optuna_2019}%
+\begin{APACrefauthors}%
+Akiba, T.%
+, Sano, S.%
+, Yanase, T.%
+, Ohta, T.%
+\BCBL {}\ \BBA {} Koyama, M.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2019}{{\APACmonth{07}}}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Optuna: {A} {Next}-generation {Hyperparameter}
+  {Optimization} {Framework}} {Optuna: {A} {Next}-generation {Hyperparameter}
+  {Optimization} {Framework}}.{\BBCQ}
+\newblock
+\BIn{} \APACrefbtitle {Proceedings of the 25th {ACM} {SIGKDD} {International}
+  {Conference} on {Knowledge} {Discovery} \& {Data} {Mining}} {Proceedings of
+  the 25th {ACM} {SIGKDD} {International} {Conference} on {Knowledge}
+  {Discovery} \& {Data} {Mining}}\ (\BPGS\ 2623--2631).
+\newblock
+\APACaddressPublisher{New York, NY, USA}{Association for Computing Machinery}.
+\newblock
+\begin{APACrefURL} [{2022-02-24}]\url{https://doi.org/10.1145/3292500.3330701}
+  \end{APACrefURL}
+\newblock
+\begin{APACrefDOI} \doi{10.1145/3292500.3330701} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
 Andris%
 \ \protect \BOthers {.}}{%
 Andris%
@@ -860,6 +902,37 @@ Friedkin, N\BPBI E.%
   https://doi.org/10.1080/0022250X.1990.9990069}
 \newblock
 \begin{APACrefDOI} \doi{10.1080/0022250X.1990.9990069} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Fuglede%
+\ \BBA {} Topsoe%
+}{%
+Fuglede%
+\ \BBA {} Topsoe%
+}{%
+{\protect \APACyear {2004}}%
+}]{%
+fuglede_jensen-shannon_2004}
+\APACinsertmetastar {%
+fuglede_jensen-shannon_2004}%
+\begin{APACrefauthors}%
+Fuglede, B.%
+\BCBT {}\ \BBA {} Topsoe, F.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2004}{{\APACmonth{06}}}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Jensen-{Shannon} divergence and {Hilbert} space
+  embedding} {Jensen-{Shannon} divergence and {Hilbert} space
+  embedding}.{\BBCQ}
+\newblock
+\BIn{} \APACrefbtitle {International {Symposium} {onInformation} {Theory},
+  2004. {ISIT} 2004. {Proceedings}.} {International {Symposium} {onInformation}
+  {Theory}, 2004. {ISIT} 2004. {Proceedings}.}\ (\BPGS\ 31--).
+\newblock
+\begin{APACrefDOI} \doi{10.1109/ISIT.2004.1365067} \end{APACrefDOI}
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
@@ -2001,6 +2074,43 @@ Winter, F.%
 \APACrefnote{Publisher: SAGE Publications Ltd}
 \newblock
 \begin{APACrefDOI} \doi{10.1177/1043463120919380} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Wu%
+\ \protect \BOthers {.}}{%
+Wu%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2019}}%
+}]{%
+wu_hyperparameter_2019}
+\APACinsertmetastar {%
+wu_hyperparameter_2019}%
+\begin{APACrefauthors}%
+Wu, J.%
+, Chen, X\BHBI Y.%
+, Zhang, H.%
+, Xiong, L\BHBI D.%
+, Lei, H.%
+\BCBL {}\ \BBA {} Deng, S\BHBI H.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2019}{{\APACmonth{03}}}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Hyperparameter {Optimization} for {Machine} {Learning}
+  {Models} {Based} on {Bayesian} {Optimizationb}} {Hyperparameter
+  {Optimization} for {Machine} {Learning} {Models} {Based} on {Bayesian}
+  {Optimizationb}}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Journal of Electronic Science and
+  Technology}{17}{1}{26--40}.
+\newblock
+\begin{APACrefURL}
+  [{2022-04-04}]\url{https://www.sciencedirect.com/science/article/pii/S1674862X19300047}
+  \end{APACrefURL}
+\newblock
+\begin{APACrefDOI} \doi{10.11989/JEST.1674-862X.80904120} \end{APACrefDOI}
 \PrintBackRefs{\CurrentBib}
 
 \end{thebibliography}

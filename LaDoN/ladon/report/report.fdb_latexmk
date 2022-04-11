@@ -1,13 +1,13 @@
 # Fdb version 3
-["bibtex report"] 1649708574 "report.aux" "report.bbl" "report" 1649708574
+["bibtex report"] 1649710307 "report.aux" "report.bbl" "report" 1649710848
   "/usr/local/texlive/2021/texmf-dist/bibtex/bst/apacite/apacite.bst" 1374530685 141073 9d7b79dbf9d91133318126032cff8c27 ""
   "References.bib" 1649555571 191467 307d7946ceee2c48e8055b2e3883b499 ""
-  "report.aux" 1649708574 25174 a6875c82a19c020d999c371ebc121e8d "pdflatex"
+  "report.aux" 1649710848 26014 f31e18a110a45a730d8611c0e5c0bafa "pdflatex"
   (generated)
   "report.bbl"
   "report.blg"
-["pdflatex"] 1649708574 "/Users/mikkelwerling/Documents/LaDoN/LaDoN/ladon/report/report.tex" "report.pdf" "report" 1649708574
-  "/Users/mikkelwerling/Documents/LaDoN/LaDoN/ladon/report/report.tex" 1649708572 53663 fc6aa5f399215df5c1610f2a9d61366b ""
+["pdflatex"] 1649710847 "/Users/mikkelwerling/Documents/LaDoN/LaDoN/ladon/report/report.tex" "report.pdf" "report" 1649710848
+  "/Users/mikkelwerling/Documents/LaDoN/LaDoN/ladon/report/report.tex" 1649710846 55329 a18e0503b8a823991871f1db4c3c9fc0 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/local/texlive/2021/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/tfm/adobe/symbol/psyr.tfm" 1136768653 1408 5937f58aa508ea2cea4901c07d10f5fe ""
@@ -76,7 +76,10 @@
   "/usr/local/texlive/2021/texmf-dist/tex/latex/listings/listings.sty" 1585170648 80964 64e57373f36316e4a09b517cbf1aba2e ""
   "/usr/local/texlive/2021/texmf-dist/tex/latex/listings/lstlang1.sty" 1585170648 204271 bae5b2d457283e99567249c1990510be ""
   "/usr/local/texlive/2021/texmf-dist/tex/latex/listings/lstmisc.sty" 1585170648 77022 ee25ce086f4a79d8cf73bac6f94c02a5 ""
+  "/usr/local/texlive/2021/texmf-dist/tex/latex/mathtools/mathtools.sty" 1618257904 58665 e757d1a5d2f651d761f187cea16ae3f3 ""
+  "/usr/local/texlive/2021/texmf-dist/tex/latex/mathtools/mhsetup.sty" 1616101747 5582 a43dedf8e5ec418356f1e9dfe5d29fc3 ""
   "/usr/local/texlive/2021/texmf-dist/tex/latex/multirow/multirow.sty" 1615845910 6149 2398eec4faa1ee24ff761581e580ecf1 ""
+  "/usr/local/texlive/2021/texmf-dist/tex/latex/ncctools/nccmath.sty" 1530651749 14585 b9ec0dfe305551751c94c3d416a3bea2 ""
   "/usr/local/texlive/2021/texmf-dist/tex/latex/psnfss/mathptmx.sty" 1586716065 4631 6e41de2b7a83dfa5d2c4b0a2fe01f046 ""
   "/usr/local/texlive/2021/texmf-dist/tex/latex/psnfss/omlztmcm.fd" 1137110629 411 12564a37a279e4e0b533cdf5e03eeb7c ""
   "/usr/local/texlive/2021/texmf-dist/tex/latex/psnfss/omsztmcm.fd" 1137110629 348 f4ce75d394e7d9ac12ca7aac4045ed77 ""
@@ -86,14 +89,15 @@
   "/usr/local/texlive/2021/texmf-dist/tex/latex/psnfss/ts1ptm.fd" 1137110629 619 96f56dc5d1ef1fe1121f1cfeec70ee0c ""
   "/usr/local/texlive/2021/texmf-dist/tex/latex/subfigure/subfigure.cfg" 1167176009 2062 a0e7d66e09e508f51289a656aec06ed2 ""
   "/usr/local/texlive/2021/texmf-dist/tex/latex/subfigure/subfigure.sty" 1167176009 15188 91281c7ddbccfa54a8e0c3b56ab5aa72 ""
+  "/usr/local/texlive/2021/texmf-dist/tex/latex/tools/calc.sty" 1622581934 10214 00ce62e730d0cfe22b35e8f1c84949c7 ""
   "/usr/local/texlive/2021/texmf-dist/web2c/texmf.cnf" 1621028613 40042 fe981136cbb5f3715ab1b0e46e3d3892 ""
   "/usr/local/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1643323655 4379201 880d78f4a2bde4f491e7d718ab91f390 ""
   "/usr/local/texlive/2021/texmf-var/web2c/pdftex/pdflatex.fmt" 1643323721 2796779 5d118f325eff48385f25df8d5c174017 ""
   "/usr/local/texlive/2021/texmf.cnf" 1616695596 577 4c1911a7228e554c6032256d3cf5567d ""
-  "report.aux" 1649708574 25174 a6875c82a19c020d999c371ebc121e8d "pdflatex"
-  "report.bbl" 1649708574 53382 8402423d6415ba73372f8ddbdb378dd4 "bibtex report"
-  "report.tex" 1649708572 53663 fc6aa5f399215df5c1610f2a9d61366b ""
-  "report.toc" 1649708574 3356 7b20553357f11bb19a96035cad4fd18f "pdflatex"
+  "report.aux" 1649710848 26014 f31e18a110a45a730d8611c0e5c0bafa "pdflatex"
+  "report.bbl" 1649710307 56495 1e364014d25db522d319d72ee12c7ced "bibtex report"
+  "report.tex" 1649710846 55329 a18e0503b8a823991871f1db4c3c9fc0 ""
+  "report.toc" 1649710848 3356 7b20553357f11bb19a96035cad4fd18f "pdflatex"
   (generated)
   "report.aux"
   "report.log"
