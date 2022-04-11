@@ -14,6 +14,10 @@
 \usepackage{float}
 \usepackage{fancyhdr}
 \usepackage{listings}
+\usepackage{mathtools, nccmath}
+
+\DeclarePairedDelimiter{\nint}\lfloor\rceil
+\DeclarePairedDelimiter{\abs}\lvert\rvert
 
 \lstset{language=Python}
 
@@ -178,17 +182,17 @@ To model this kind of behavior, the randomly sampled agent, $A_t$, interacts wit
 This is done by iteratively interacting with every edge of $A_t$. Let $B$ denote an edge of $A_t$. Let $O(\cdot)$ define a function with agents as inputs and their opinions as outputs.
 The interaction between two different agents is determined by a threshold value, $T$. 
 
-When $T \geq |O(A_t) - O(B)|$, the interaction will pull the opinions of the two agents closer to each other. The force with which they are pulled is defined as a fraction of their distance from each other:
-$$V_p = \big(|O(A_t) - O(B)|\big) \cdot \frac{\alpha}{2}$$
+When $T \geq \abs{O(A_t) - O(B)}$, the interaction will pull the opinions of the two agents closer to each other. The force with which they are pulled is defined as a fraction of their distance from each other:
+$$V_p = \big(\abs{O(A_t) - O(B)}\big) \cdot \frac{\alpha}{2}$$
 
 Let $O_{max} = \max(O(A_t), O(B))$ and $O_{min} = \min(O(A_t), O(B))$ and update the values of opinions by:
 
 $$O_{max} = O_{max} - V_p$$
 $$O_{min} = O_{min} + V_p$$
 
-When $T < |O(A_t) - O(B)|$, the interaction will push the opinions of the two agents further apart by a similar principle as illustrated above: 
+When $T < \abs{O(A_t) - O(B)}$, the interaction will push the opinions of the two agents further apart by a similar principle as illustrated above: 
 
-$$V_n = \big(|O(A_t) - O(B)|\big) \cdot \frac{\beta}{2}$$
+$$V_n = \big(\abs{O(A_t) - O(B)}\big) \cdot \frac{\beta}{2}$$
 
 Using the same definition for $O_{max}$ and $O_{min}$, we update the opinions of each agent:
 
@@ -202,7 +206,7 @@ After interacting with her connected agents, $A_t$ might delete the connection t
 In this model, social interactions can result in opinions becoming more distant than they were initially. 
 This can be because what the agents are discussing is divisive or controversial. When this happens, connections can be severed.
 I call this process tie-dissolution. 
-If $T < |O(A_t) - O(B)|$, there is a chance that their tie is dissoluted after interacting. This probability of dissolution between dissimilar agents in the model is described by the parameter $D$.
+If $T < \abs{O(A_t) - O(B)}$, there is a chance that their tie is dissoluted after interacting. This probability of dissolution between dissimilar agents in the model is described by the parameter $D$.
 When $D = 1$, all dissimilar ties are severed. When $D = 0.5$, there is 50\% chance that dissimilar ties will be deleted. 
 After ties are dissoluted, the process of component ensurance is performed where $C_t$ is replaced with $B$.
 When all edges of $A_t$ have been evaluated, the time-step concludes. This process is repeated for 10.000 time-steps.
@@ -245,11 +249,20 @@ To fit the model to data, we consider 6 empirical social networks; a network of 
 \subsection{Hyperparameter Optimization}
 To evaluate how closely the generated networks resemble the real networks, we must first define a distance metric between networks. Although many features are important for characterizing a network, we will follow previous suggestions that identify the average path length, the average clustering coefficient and the degree distribution as the most defining aspects of a network (Jackson \& Rogers, 2004, 2007). We therefore seek to minimize the mean difference on these parameters between the generated and the real networks. 
 Before we can simply calculate the mean of difference, there are some specifics that needs to be clarified. These primarily concern the average path length and how to operationalize the difference in degree distributions. 
-To identify the distance of degree distributions of networks, we calculate the Jensen Shannon Divergence (Fuglede \& Topsoe, 2004) between the two distributions. 
-The computational cost of calculating the average path length can be dramatic, especially for large networks (Matsumura et al., 2018). Instead of calculating the actual average path length, we approximate it by taking 1000 samples of random pairs of nodes and calculating the average path length of those 1000 nodes. Although this is still only an estimation of the actual average path length, this method generally approximates the average path length fairly well (Matsumura et al., 2018).
-Both the correlation coefficient and the Jensen Shannon Divergence are values between 0 and 1. Average path length on the other hand is not restricted in the same way. If it is not normalized, it will therefore be weighted much higher than the correlation coefficient and the Jensen Shannon Divergence. We therefore normalize the average path length, by dividing with the real network + 2. Adding two to the denominator is somewhat arbitrary. The choice was made to be more certain that the value would still 
+To identify the distance of degree distributions of networks, we calculate the Jensen Shannon Divergence between the two distributions. The Jensen Shannon Divergence is a distance metric between probability distributions \cite{fuglede_jensen-shannon_2004}. 
+In terms of the average path length, there is a problem of computational costs. Calculating the average path length can be very expensive computationally, especially for large networks (Matsumura et al., 2018). Instead of calculating the actual average path length, we approximate it by taking 1000 samples of random pairs of nodes and calculating the average path length of those 1000 nodes. Although this is still only an estimation of the actual average path length, this method generally approximates the average path length fairly well (Matsumura et al., 2018).
+Both the correlation coefficient and the Jensen Shannon Divergence are values between 0 and 1. Average path length on the other hand is not restricted in the same way. If it is not normalized, it will therefore be weighted much higher than the correlation coefficient and the Jensen Shannon Divergence in the distance metric. We therefore normalize the average path length by
 
-All models were fit by first calculating the ratio between edges and vertices and set K = round (2 * E/V) in the initially generated small world network to ensure that the generated network has approximately the same number of edges per vertex as the target network. 
+$$APL* = \frac{\abs{APL(G) - APL(A)}}{APL(A)+2}$$
+
+where $APL*$ is the normalized average path length, $APL(G)$ is the approximated average path length of the generated network and $APL(A)$ is the apprioximated average path length for the actual network. Adding two to the denominator is somewhat arbitrary. The choice was made to be more certain that $APL*$ would still be below 1.
+With this in place, the final distance metric considered between the actual network, $A$ and the generated network $G$ is 
+
+$$ O(A, G) = \frac{1}{3} \cdot \left(JSD(D(A), D(G)) + \abs{C(A) - C(G)} + APL*\right)$$
+
+where $O(A, G)$ is the distance between distance between the two networks, $JSD$ is the Jensen Shannon Divergence, $D(A)$ is the degree distribution of $A$, $D(G)$ is the degree distibution of $G$, $C(A)$ is the average clustering coefficient of $A$ and $C(G)$ is the average clustering coefficient of $G$. This distance metric is just the average difference on the considered network characteristics between $A$ and $G$. This is also why the sum of the difference is multiplied by $\frac{1}{3}$. This distance metric between networks, $O(A, G)$ will serve as the objective function that we want to minimize. The hyperparameter optimization algorithm search the parameter space for the combination of parameters that results in the lowest values of $O(A, G)$ \cite{akiba_optuna_2019,wu_hyperparameter_2019}.
+
+All models were fit by first calculating the ratio between edges, $E$, and vertices, $V$, and calculating $K = \nint{(2 \cdot \frac{E}{V})}$. The value $K$ is then used as the $K$-parameter in the initially generated small world network to ensure that the generated network has approximately the same number of edges per vertex as the target network. 
 For both models, we let randomness be a free parameter between 0 and 1. For the co-evolutionary model, we restrict the threshold to be between 0.1 and 1.3. The lower limit is chosen as values of threshold close to 0 results in agents that don’t agree with anyone else but themselves. The upper limit was chosen to ensure that the behavior of the model differs significantly from the model without opinion dynamics. 
 The values of positive learning rate are restricted to be between 0.05 and 0.5. This is justified by values close to 0 being akin to no positive social influence and values above 0.5 assumes social influence to be an unrealistically powerful force. Similarly, we let the negative learning rate be restricted to be between 0 and 0.5. Here, we allow values close to 0 to reflect that negative social influence is still a less established fact. Finally, we force the model to exhibit co-evolution by restricting the probability of tie-deletion to be between 0.1 and 1. 
 
