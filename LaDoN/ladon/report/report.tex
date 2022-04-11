@@ -274,8 +274,15 @@ After finding the best parameter values, the importance of each parameter value 
 The results indicate that the network formation algorithm of triadic closure can explain many of the considered characteristics of social networks. The model without opinion dynamics performs well on most networks and is on par with the model with opinion dynamics. It even performs better than the model with opinion dynamics in the Karate Club network. On the political networks investigated here, the model with opinion dynamics performs much better.
 Parameter importance shows that the randomness parameter was the most important parameter for all networks except for the network of politicians and political blogs.  In these networks, the most important parameter is instead the threshold. 
 
-
 \begin{figure}[H]
+    \centering
+    \includegraphics[width=.8\linewidth]{../plots/overall/Model_Evaluation.png}
+  \caption{Difference in model performance. X-axis shows the mean difference between the generated network and actual networks, ($O(A, G)$). Y-axis shows the different empirical networks considered. Colors indicate whether the model includes or excludes opinion dynamics. Black lines indicate 95\% confidence intervals.}
+  \label{fig:sfig1}
+\end{figure}
+
+
+\begin{table}[H]
 \begin{center}
     
 \begin{tabular}{ |p{3cm}||p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
@@ -294,9 +301,10 @@ Parameter importance shows that the randomness parameter was the most important 
     \hline
 \end{tabular}
 \end{center}
-\end{figure}
+\caption{Table of best parameter values}
+\end{table}
 
-\begin{figure}[H]
+\begin{table}[H]
     \begin{center}
         
     \begin{tabular}{ |p{3cm}||p{1.5cm}|p{1.5cm}|p{1.5cm}|p{1.5cm}|p{1.5cm}|p{1.5cm}|}
@@ -315,7 +323,8 @@ Parameter importance shows that the randomness parameter was the most important 
         \hline
     \end{tabular}
     \end{center}
-    \end{figure}
+    \caption{Table of network characteristics.}
+    \end{table}
 
 \subsection{Why is co-evolution a better explanation?}
 

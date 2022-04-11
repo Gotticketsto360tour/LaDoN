@@ -132,6 +132,7 @@ g = sns.barplot(
         "Politicians",
         "Political Blogs",
     ],
+    capsize=0.07,
 )
 g.set(xlabel="Mean Difference", ylabel="")
 plt.legend(title="Network", bbox_to_anchor=(0.5, 0.5, 0.52, 0.52))

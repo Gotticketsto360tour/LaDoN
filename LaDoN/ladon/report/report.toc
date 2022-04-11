@@ -29,18 +29,18 @@
 \contentsline {subsection}{\numberline {8.2}Data}{16}{}%
 \contentsline {subsection}{\numberline {8.3}Hyperparameter Optimization}{16}{}%
 \contentsline {subsection}{\numberline {8.4}Results}{17}{}%
-\contentsline {subsection}{\numberline {8.5}Why is co-evolution a better explanation?}{18}{}%
-\contentsline {section}{\numberline {9}Results}{20}{}%
-\contentsline {subsection}{\numberline {9.1}Alpha, beta, threshold, tie-deletion and chaotic systems}{20}{}%
-\contentsline {subsection}{\numberline {9.2}Correlations}{20}{}%
-\contentsline {section}{\numberline {10}Discussion}{20}{}%
-\contentsline {subsection}{\numberline {10.1}Reiterating previous literature}{20}{}%
-\contentsline {subsection}{\numberline {10.2}Tie-deletion facilitates cooperation}{20}{}%
-\contentsline {subsection}{\numberline {10.3}The effect of initial opinions}{20}{}%
-\contentsline {subsection}{\numberline {10.4}Distance in opinion and network space}{20}{}%
-\contentsline {section}{\numberline {11}Short comings and future work}{20}{}%
-\contentsline {subsection}{\numberline {11.1}Accurate perceptions of opinions}{20}{}%
-\contentsline {subsection}{\numberline {11.2}Social influence exclusively}{20}{}%
-\contentsline {section}{\numberline {12}A broader perspective}{20}{}%
-\contentsline {section}{\numberline {13}Conclusion}{20}{}%
-\contentsline {section}{References}{20}{}%
+\contentsline {subsection}{\numberline {8.5}Why is co-evolution a better explanation?}{19}{}%
+\contentsline {section}{\numberline {9}Results}{21}{}%
+\contentsline {subsection}{\numberline {9.1}Alpha, beta, threshold, tie-deletion and chaotic systems}{21}{}%
+\contentsline {subsection}{\numberline {9.2}Correlations}{21}{}%
+\contentsline {section}{\numberline {10}Discussion}{21}{}%
+\contentsline {subsection}{\numberline {10.1}Reiterating previous literature}{21}{}%
+\contentsline {subsection}{\numberline {10.2}Tie-deletion facilitates cooperation}{21}{}%
+\contentsline {subsection}{\numberline {10.3}The effect of initial opinions}{21}{}%
+\contentsline {subsection}{\numberline {10.4}Distance in opinion and network space}{21}{}%
+\contentsline {section}{\numberline {11}Short comings and future work}{21}{}%
+\contentsline {subsection}{\numberline {11.1}Accurate perceptions of opinions}{21}{}%
+\contentsline {subsection}{\numberline {11.2}Social influence exclusively}{21}{}%
+\contentsline {section}{\numberline {12}A broader perspective}{21}{}%
+\contentsline {section}{\numberline {13}Conclusion}{21}{}%
+\contentsline {section}{References}{21}{}%
