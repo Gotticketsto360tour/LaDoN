@@ -6,6 +6,8 @@ import matplotlib.pyplot as plt
 import plotly.io as pio
 import optuna
 import joblib
+import networkx as nx
+from helpers import find_average_path, get_main_component
 from config import NAME_DICTIONARY
 
 sns.set(rc={"figure.figsize": (11.7, 8.27)})
@@ -30,6 +32,7 @@ def change_network_labels(string: str):
         "polblogs": "Political Blogs",
         "polbooks": "Political Books",
         "politicians": "Politicians",
+        "tvshows": "TV Shows",
     }
     return translation.get(string)
 
@@ -53,6 +56,7 @@ g = sns.barplot(
         "Dolphins",
         "Karate Club",
         "Citation Network",
+        "TV Shows",
         "Political Books",
         "Politicians",
         "Political Blogs",
@@ -76,6 +80,7 @@ g = sns.barplot(
         "Dolphins",
         "Karate Club",
         "Citation Network",
+        "TV Shows",
         "Political Books",
         "Politicians",
         "Political Blogs",
@@ -98,6 +103,7 @@ g = sns.barplot(
         "Dolphins",
         "Karate Club",
         "Citation Network",
+        "TV Shows",
         "Political Books",
         "Politicians",
         "Political Blogs",
@@ -121,6 +127,7 @@ g = sns.barplot(
         "Dolphins",
         "Karate Club",
         "Citation Network",
+        "TV Shows",
         "Political Books",
         "Politicians",
         "Political Blogs",
@@ -176,6 +183,7 @@ sns.barplot(
         "Karate Club",
         "Dolphins",
         "Citation Network",
+        "TV Shows",
         "Political Books",
         "Political Blogs",
         "Politicians",
@@ -190,6 +198,30 @@ plt.savefig(
     dpi=300,
     bbox_inches="tight",
 )
+
+
+def get_important_network_characteristics(name: str, network: nx.Graph()):
+    network = get_main_component(network=network)
+    degrees = np.array([degree[1] for degree in network.degree()])
+
+    return {
+        "name": name,
+        "nodes": len(degrees),
+        "edges": len(network.edges()),
+        "mean_degree": degrees.mean(),
+        "sd_degree": degrees.std(),
+        "clustering coefficient": nx.average_clustering(network),
+        "average_path_length": find_average_path(network),
+    }
+
+
+pd.DataFrame(
+    [
+        get_important_network_characteristics(name, network)
+        for name, network in NAME_DICTIONARY.items()
+    ]
+)
+
 
 fig = optuna.visualization.plot_param_importances(study)
 fig.show()

@@ -93,7 +93,7 @@ def generate_network_dataframe(repeats: int) -> List[Dict]:
             "N_TIMESTEPS": N_TARGET * 20,
             "POSITIVE_LEARNING_RATE": best_parameters.get("positive_learning_rate"),
             "NEGATIVE_LEARNING_RATE": best_parameters.get("negative_learning_rate"),
-            "P": 0.1,
+            "P": 0.5,
             "K": 2 * K,
             "TIE_DISSOLUTION": best_parameters.get("tie_dissolution"),
             "RECORD": False,
@@ -143,7 +143,7 @@ def generate_network_dataframe(repeats: int) -> List[Dict]:
             "N_TARGET": N_TARGET,
             "RANDOMNESS": best_parameters.get("randomness"),
             "N_TIMESTEPS": N_TARGET * 20,
-            "P": 0.1,
+            "P": 0.5,
             "K": 2 * K,
             "RECORD": False,
         }

@@ -53,6 +53,19 @@ with open("analysis/data/fb-pages-government/fb-pages-government.edges", "rb+") 
 
 government.add_edges_from(data)
 
+#
+with open("analysis/data/fb-pages-tvshow/fb-pages-tvshow.nodes", "rb+") as f:
+    data = [str(node, "utf-8").strip().split(",")[-1] for node in f.readlines()[1:]]
+
+tvshows = nx.Graph()
+
+tvshows.add_nodes_from(data)
+
+with open("analysis/data/fb-pages-tvshow/fb-pages-tvshow.edges", "rb+") as f:
+    data = [str(node, "utf-8").strip().split(",") for node in f.readlines()]
+
+tvshows.add_edges_from(data)
+
 with open("analysis/data/fb-pages-politician/fb-pages-politician.nodes", "rb+") as f:
     data = [str(node, "utf-8").strip().split(",")[-1] for node in f.readlines()[1:]]
 
@@ -89,4 +102,5 @@ NAME_DICTIONARY = {
     # "facebook": facebook,
     "politicians": politicians,
     # "government": government,
+    "tvshows": tvshows,
 }

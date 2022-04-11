@@ -177,7 +177,9 @@ def plot_graph(network: Network, plot_type="community", save_path="", title="") 
     if save_path:
         driver = webdriver.Firefox()
         export_png(
-            obj=plot, filename=save_path, webdriver=driver, width=2000, height=2000
+            obj=plot,
+            filename=save_path,
+            webdriver=driver,  # width=2000, height=2000
         )
         driver.close()
         # save(plot)
