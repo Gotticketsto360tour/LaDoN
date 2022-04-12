@@ -347,61 +347,72 @@ This second notion points to the fact that the effects of network and opinion dy
 
 \subsection{Alpha, beta, threshold, tie-deletion and chaotic systems}
 
+Higher values of the threshold decrease polarization. Higher values of alpha decreases polarization. Higher values of beta increases polarization. Notably, when beta is zero, almost all simulations reach consensus, regardless of all other parameters. Similarly, the is no effect of negative tie-deletion when $\beta = 0$. 
+The drivers of polarization is low values of $T$ and high values of $\beta$. When $T$ is sufficiently small and $\beta$ is sufficiently large, all agents will have more extreme opinions at the end of the simulations than they had in the beginning. With intermediate values of $\beta$ and $T$, whether the opinions of a simulation becomes polarized or not is largely dictated by $P(D)$. 
+The results indicate that higher values of $P(D)$ results in lower values of $|O|$ on average. 
+The strength of the effect is modulated by how random new connections are made in the network. 
+When randomness is higher, the effect of cooperation facilitation by high tie-deletion is diminished. 
+Notably, when $P(D) = 0$ and $\beta > 0$, the network almost always polarizes. 
+
 \begin{figure}[H]
     \centering
     \includegraphics[width=.8\linewidth]{../plots/overall/Absolute_Opinion_Threshold.png}
-  \caption{Polarization and thresholds}
+  \caption{$T$'s effect on polarization over time. X-axis shows the time-step and the y-axis shows the absolute value of the opinions of agents. Colors indicate different values of $T$. Lines indicate the mean value of each time-step, aggregated over all parameters excluding $T$. Shaded regions are the 95\% confidence intervals.}
   \label{fig:sfig1}
 \end{figure}
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=.8\linewidth]{../plots/overall/Absolute_Opinion_Positive_Learning_Rate.png}
-  \caption{Polarization and alphas}
+  \caption{$\alpha$'s effect on polarization over time. X-axis shows the time-step and the y-axis shows the absolute value of the opinions of agents. Colors indicate different values of $\alpha$. Lines indicate the mean value of each time-step, aggregated over all parameters excluding $\alpha$. Shaded regions are the 95\% confidence intervals.}
   \label{fig:sfig1}
 \end{figure}
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=.8\linewidth]{../plots/overall/Absolute_Opinion_Negative_Learning_Rate.png}
-  \caption{Polarization and betas}
+  \caption{$\beta$'s effect on polarization over time. X-axis shows the time-step and the y-axis shows the absolute value of the opinions of agents. Colors indicate different values of $\beta$. Lines indicate the mean value of each time-step, aggregated over all parameters excluding $\beta$. Shaded regions are the 95\% confidence intervals.}
   \label{fig:sfig1}
 \end{figure}
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=.8\linewidth]{../plots/overall/Absolute_Opinion_Tie_Dissolution.png}
-  \caption{Polarization and probability of tie-deletion}
+  \caption{$P(D)$'s effect of polarization over time. X-axis shows the time-step and the y-axis shows the absolute value of the opinions of agents. Colors indicate different probabilities of tie-deletion of dissimilar agents. Lines indicate the mean value of each time-step, aggregated over all parameters excluding the probability of tie-deletion and randomness. Shaded regions are the 95\% confidence intervals. The three different plots show the different values of probability of new connections to be generated randomly. }
   \label{fig:sfig1}
 \end{figure}
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=.8\linewidth]{../plots/overall/Absolute_Opinion_Tie_Deletion_Without_Negative.png}
-  \caption{Polarization and probability of tie-deletion}
+  \caption{The effect of $P(D)$ without negative learning. X-axis shows the time-step and the y-axis shows the absolute value of the opinions of agents. Colors indicate different probabilities of tie-deletion of dissimilar agents. Lines indicate the mean value of each time-step, aggregated over all parameters with $\beta = 0$, excluding the probability of tie-deletion. Shaded regions are the 95\% confidence intervals.}
   \label{fig:sfig1}
 \end{figure}
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=.8\linewidth]{../plots/overall/Radicalization.png}
-  \caption{Radicalization}
+  \caption{Distribution of opinion changes across different conditions. Rows display different values of thresholds, columns indicate different values of negative influence. Different colors show different values of probability of tie-deletion. X-axis shows the difference between the absolute value of the final and initial opinions of agents. This measure can be thought of as a measure of “radicalization”. Higher values indicate that the final value of agents is more extreme than the initial values, and vice versa. Y-axis exhibit the percent of values within each bin. }
   \label{fig:sfig1}
 \end{figure}
 
 \subsection{Correlations}
 
+We calculate two Pearson Correlation Coefficients of interest for all simulations. The first of which is the correlation coefficient between the initial opinions and the final opinions of agents, $\rho_{O_I, O_F}$. The second is the correlation between the absolute value of opinions and the average path length, $\rho_{|O|, APL}$.
+We start by reporting the findings for $\rho_{O_I, O_F}$. When $\beta$ is low and threshold is high, there is little correlation between initial and final opinions. When the opposite is true, final and initial values are highly correlated. 
+Next, we turn to $\rho_{|O|, APL}$. As the probability of tie-deletion increases, so does the correlation between the average path length of the network and the absolute value of opinions. When the probability of tie-deletion is 0, there is no consistent correlation between the two variables. 
+
 \begin{figure}[H]
     \centering
     \includegraphics[width=.8\linewidth]{../plots/overall/Correlation_Initial_Opinions.png}
-  \caption{Correlations of initial opinions and final opinions}
+  \caption{Correlations between initial opinions and final opinions. X-axis shows different values of threshold and the y-axis shows the Pearson Correlation Coefficient between the initial and final opinion of agents. Boxes indicate the quartiles, whiskers indicate the 1.5 of the inter-quartile range outside of the quartiles. Points outside this range is depicted as diamonds. Smaller dark dots show the correlation coefficient for individual simulations. Columns show low, medium and high values of $\beta$. }
   \label{fig:sfig1}
 \end{figure}
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=.8\linewidth]{../plots/overall/Tie_Dissolution_Correlations_Boxplot_Full.png}
-  \caption{Correlation of average path length and probability of tie-deletion}
+  \caption{Correlations between absolute opinion and average path length. The Pearson Correlation Coefficient between the initial and final opinion of agents was calculated for all simulations. Boxes indicate the quartiles, whiskers indicate the 1.5 of the inter-quartile range outside of the quartiles. Points outside this range is depicted as diamonds. Smaller dark dots show the correlation coefficient for individual simulations. First plot has negative learning rate on the x-axis. Second plot shows the threshold on the x-axis. }
   \label{fig:sfig1}
 \end{figure}
 
@@ -409,11 +420,71 @@ This second notion points to the fact that the effects of network and opinion dy
 
 \subsection{Reiterating previous literature}
 
-\subsection{Tie-deletion facilitates cooperation}
+We first discuss the main effects of $\alpha$, $T$ and $\beta$. All of these are intuitive and are in line with previous research on similar models \cite{flache_models_2017}. When $\alpha$ is high, there is a stronger force pulling the opinion of agent's closer together. Higher values of $\alpha$ therefore results in lower values of polarization. But as can be seen from the scale of the y-axis, although this is large effect, it is small in comparison to the effect of $\beta$ and $T$. Higher values of $\beta$ has more drastic effects on the polarization of the population. 
+This is primarily caused by the considered values of $T$ and its operationalization. When $\beta = 0$, all simulations reach a consensus. If this simulation had considered lower values of $T$, this would most likely not be true. Lower values of $T$ are known to be able to produce clusters of opinions \cite{flache_models_2017,sasahara_social_2021}. When $\beta$ is large, almost all simulations polarize. The reason for this is partly that in its operationalization, it is a stronger force than $\alpha$. The effect of pushing and pulling opinions is defined as being proportional to the distance between agents. 
+By definition, agents that are pushed away from each other are further apart than agents that are pulling closer together. In this sense, $\beta$ is a stronger force than $\alpha$. Only in aggregate can the effect of $\alpha$ become stronger than $\beta$. This is only possible when the number of positive interactions is much higher than the number of negative interactions. The effect of $T$ is therefore not surprising. With larger values of $T$, agents are more "open-minded" - they can cooperate with more diverse agents, and will therefore have much more positive interactions than negative. Notice that if an agent has an opinion of 0 and $T\geq1$, this agent will not be able to have any negative interactions. The opposite effect is witnessed when $T$ is low. This limits the subset of agents you can cooperate with, which makes negative interactions much more plausible.
 
 \subsection{The effect of initial opinions}
 
+The results indicate that in some conditions, there is a strong positive correlation between starting opinion of an agent and the final opinion of the agent. 
+These are conditions of high negative influence and of low thresholds. These conditions are likely to lead to high degrees of polarization. The results indicate that in polarized conditions, agents will tend to move less than in conditions where they agents reach consensus. In conditions where agents do reach consensus, your starting position does not matter much. All agents will tend to be close to zero, no matter the starting condition. In polarizing conditions, agents will be very unlikely to move far from their starting position and will instead be pushed to the nearest extreme. 
+
+\subsection{Tie-deletion facilitates cooperation}
+
+Finally, one of the main findings of this paper is that higher probabilities of tie-deletion can prevent polarization and facilitate cooperation. This is especially the case when new ties are created via triadic closure and not randomly. This happens because of two effects in the system. The first is that deleting negative ties will cause fewer negative social interactions, which limits the effect of $\beta$. When negative ties are deleted, agents will assort based on the their opinions. 
+Deleting negative ties is important in its own right because it deletes negative ties, that will cause further polarization. But because of assortment, tie-deletion interacts with how random new ties are created. When assortment on opinions is high, the heuristic that "a friend of a friend is a friend" is very likely true. Triadic closure will therefore result in even more positive interactions, because similar to what is found in empirical networks, distance in the social network is highly indicative of distance in similarity. When randomness is high, the probability of connecting to a very dissimilar agent is much higher than through triadic closure. In other words, increasing randomness decreases assortment, which leads to more negative encounters.
+This is also the reason for the correlation between the absolute value of opinions and the average path length when tie-deletion is high. Because the network co-evolves with opinions, when the average distance between opinions increase, the average distance in the network will increase as well. When opinions polarize, negative ties will tend to be deleted. Because of positive assortment, long-range ties will suffer especially when the network polarizes. This will make highways of information which connects distant parts of the network much less likely, which increases the average path length substantially. When the network depolarizes, the opposite happens. Some long range ties will be made by random, and because the network is depolarized, these will stay intact. This will make further connections more  
+It is important to understand why the results found here are in so stark contrast to the recent opinion dynamics models, which proposes that unfollowing dissimilar individuals accelerates polarization \cite{sasahara_social_2021}. First, the network they are considering is a directed network, meaning that relations need not be reciprocal. This could have important effects for the effects observed here, because it allows for social influence to be asymmetric. Secondly, the number of agents considered is only 100 instead of the 500 considered here. This could also be consequential. Tie-deletions can only facilitate cooperation if there are "middlemen", that can reunite the different clusters. Having enough diversity in opinions is critical for bridging the gap between distant opinions. Having more agents in the situations increases the number of expected agents with values close to 0, which can help in facilitating cooperation between agents of too different opinions. Finally, a critical difference between the model proposed here and the model that they considered is that this model includes negative social influence, $\beta$. Because of this, social relations that are outside of your boundary of confidence have no influence on you opinion. In other words, there are no “costs” associated with negative social interactions. For the parameter values considered in the model of this paper, tie-deletion is only effectively facilitating cooperation when there is negative social influence in the system. The reason for this is primarily that this paper does not consider very low values of the confidence boundary as it somewhat obscures the analysis, as the system’s behavior changes qualitatively below these values. Although their model is also a variation of a classic confidence boundary model \cite{flache_models_2017, sirbu2017opinion}, like the one proposed in this paper, they analyze much lower levels of boundaries of confidence. This has benefits and drawbacks. First, this allows more than two clusters of opinions. Second, it allows for the clusters of opinion to be centered at other values than the extreme of the opinion spectrum \cite{sasahara_social_2021}. These are definite positives, and similar features can also be generated by the model of this paper. However, the behavior of the system changes drastically when values of very low levels of boundary thresholds are studied, which makes a comprehensive review of the system as a whole much more complex to study.  
+This echoes previous findings from two different literatures. First, facilitating cooperation via tie deletion recapitulates findings from computational biology, which states that positive assortment leads to increased levels of cooperation \cite{boyd_coordinated_2010,dakin_dynamic_2018, pepper_mechanism_2002,santos_cooperation_2006}. Second, more random new connections leading to more polarization is a stable finding in opinion dynamics models which include negative influence \cite{flache_why_2006,flache_small_2011,turner_paths_2018}. Here we show that these processes are interlinked.  
+
 \subsection{Distance in opinion and network space}
+
+To further appreciate why tie-deletion facilitates cooperation, it is beneficial to examine representative simulations in more detail. Here we investigate one of the conditions, where threshold is relatively low (0.8), there is some negative social influence (0.1) and positive social influence (0.15). Conditions with the parameter values polarize in all cases when tie-deletion is low. So why do they reach consensus when the probability is high? The mechanism that facilitates reaching consensus is the same mechanism that facilitates cooperation in the computational biology literature; positive assortment \cite{boyd_coordinated_2010,dakin_dynamic_2018, pepper_mechanism_2002,santos_cooperation_2006}. In this model, positive assortment is achieved directly by deleting ties to dissimilar neighbors. But it is also achieved indirectly by creating new ties via triadic closure when the tie-deletion probability is high. It is likely to presume that any mechanism that will increase positive assortment in these kinds of models will decrease polarization. This is also why reaching consensus is more likely for simulations where most connections are formed via triadic closure instead of randomness. The reason for this effect is that random connections decrease positive assortment. As a network co-evolves with the opinions of its agents, communities of agents with similar opinions will be created. Just as we saw was the case in the empirical studies of dynamical social networks, distance in opinion space is a strong correlate for distance in opinion space \cite{kossinets_origins_2009}. In the model, the tie-deletion probability is the same for all agents. Because of this, closing ties via triadic closure will most likely result in positive interactions, because of the link between opinion and network distance. A friend of a friend is likely also a friend. Connecting randomly rather than via triadic closure will relatively often connect dissimilar. In other words, these interactions will be negative and result increased polarization. Counterintuitively, tie deletion in combination with triadic closure facilitates cooperation because it isolates groups, not despite it. This also explains why average path length and polarization correlates when tie deletion is high. When tie-deletion is high, the network behaves analogous to a spring. Because location in network space is correlated with location in opinion space, there will be less long-range connections as the opinions become more extreme. Long range ties will often be broken, because they are far apart in the network, and therefore very likely far apart in opinions. In these cases, the tension in the spring rises, and the network starts to be better characterized by as a network of two factions, connected mostly by a group of agents with values around 0. When polarization decreases, it is more plausible of these long range connections to stay intact and not be broken, which lowers the path length akin to the effect of classic small world networks \cite{watts_collective_1998}. When polarization increases, there will be less of these long-range ties, but there might also be fewer middlemen to facilitate cooperation across the aisle. This increases the path length considerably, because fewer highways of information exist in the system. 
+In this view, it is also possible to give an alternative interpretation of what the probability of tie-deletion represents. The probability of tie-deletion can also be seen as how quickly the structure of the network is adjusted by opinions. In this interpretation, consensus can be achieved if the social network adjusts fast enough. Having faster adjustment of the structure of social interactions is critical, because the system is highly path dependent \cite{turner_paths_2018}.  When the network doesn’t adjust fast enough, agents will already have had several negative interactions, which will have pushed them further towards an extreme value of opinions. This will make them more likely to polarize other agents in the future.  
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.8\linewidth]{../plots/example/Lineplot_Over_Time.png}
+  \caption{Lineplot of opinions over time. X-axis shows time-steps of the simulation, y-axis shows the opinion of agents in the simulation. Colors show different values of $R$. All simulations were $T = 0.8$, $\alpha = 0.15$, $\beta = 0.1$, $P(D) = 1$ and with the same random seed.}
+  \label{fig:sfig1}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.8\linewidth]{../plots/example/Example_Absolute_Opinion.png}
+  \caption{Correlations between absolute opinion and average path length. The Pearson Correlation Coefficient between the initial and final opinion of agents was calculated for all simulations. Boxes indicate the quartiles, whiskers indicate the 1.5 of the inter-quartile range outside of the quartiles. Points outside this range is depicted as diamonds. Smaller dark dots show the correlation coefficient for individual simulations. First plot has negative learning rate on the x-axis. Second plot shows the threshold on the x-axis. }
+  \label{fig:sfig1}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.8\linewidth]{../plots/example/Example_Average_Path_Length.png}
+  \caption{Correlations between absolute opinion and average path length. The Pearson Correlation Coefficient between the initial and final opinion of agents was calculated for all simulations. Boxes indicate the quartiles, whiskers indicate the 1.5 of the inter-quartile range outside of the quartiles. Points outside this range is depicted as diamonds. Smaller dark dots show the correlation coefficient for individual simulations. First plot has negative learning rate on the x-axis. Second plot shows the threshold on the x-axis. }
+  \label{fig:sfig1}
+\end{figure}
+
+\newpage
+\begin{center} 
+    \begin{figure}[H]
+        \centering
+    \begin{tabular}{ccc} 
+        $R = 0.1$ & $R = 0.3$ & $R = 0.5$ \\
+    \includegraphics[width=.2\linewidth]{../plots/networks/network_example_R0.1_0.png} & \includegraphics[width=.2\linewidth]{../plots/networks/network_example_R0.3_0.png} & \includegraphics[width=.2\linewidth]{../plots/networks/network_example_R0.5_0.png}\\ 
+    %\\\hline\\ 
+    \includegraphics[width=.2\linewidth]{../plots/networks/network_example_R0.1_2000.png} & \includegraphics[width=.2\linewidth]{../plots/networks/network_example_R0.3_2000.png} & \includegraphics[width=.2\linewidth]{../plots/networks/network_example_R0.5_2000.png}\\ 
+    %\\\hline\\ 
+    \includegraphics[width=.2\linewidth]{../plots/networks/network_example_R0.1_4000.png} & \includegraphics[width=.2\linewidth]{../plots/networks/network_example_R0.3_4000.png} & \includegraphics[width=.2\linewidth]{../plots/networks/network_example_R0.5_4000.png}\\ 
+    %\\\hline\\ 
+    \includegraphics[width=.2\linewidth]{../plots/networks/network_example_R0.1_6000.png} & \includegraphics[width=.2\linewidth]{../plots/networks/network_example_R0.3_6000.png} & \includegraphics[width=.2\linewidth]{../plots/networks/network_example_R0.5_6000.png}\\  
+    %\\\hline\\ 
+    \includegraphics[width=.2\linewidth]{../plots/networks/network_example_R0.1_8000.png} & \includegraphics[width=.2\linewidth]{../plots/networks/network_example_R0.3_8000.png} & \includegraphics[width=.2\linewidth]{../plots/networks/network_example_R0.5_8000.png}\\  
+    \includegraphics[width=.2\linewidth]{../plots/networks/network_example_R0.1_10000.png} & \includegraphics[width=.2\linewidth]{../plots/networks/network_example_R0.3_10000.png} & \includegraphics[width=.2\linewidth]{../plots/networks/network_example_R0.5_10000.png}\\  
+    \end{tabular} 
+    \caption{Network evolutions for different levels of randomness. Columns show different values of randomness, $R$. Rows are different time-steps of the simulations, increasing in increments of 2500. Agents are colored by their opinion. Dark blue colors represent values close to -1, and lighter colors represent opinions close to 1.} 
+    \label{fig:1} 
+    \end{figure} 
+\end{center} 
 
 \section{Short comings and future work}
 

@@ -156,25 +156,39 @@ sns.set_context(
     font_scale=2,
 )
 
-sns.boxplot(
+g = sns.boxplot(
     data=correlations,
     x="tie_dissolution",
     y="average_path_length",
+    hue="randomness",
     dodge=True,
-    palette=sns.cubehelix_palette(8, rot=-0.25, light=0.9),
+    palette=sns.cubehelix_palette(5, rot=-0.25, light=0.9),
     linewidth=3,
-).set(ylabel=r"$\rho_{|O|, APL}$", xlabel=r"$P(D)$")
+)  # .set(ylabel=r"$\rho_{|O|, APL}$", xlabel=r"$P(D)$")
 sns.stripplot(
     data=correlations,
     x="tie_dissolution",
     y="average_path_length",
+    hue="randomness",
     dodge=True,
     color="black",
     alpha=0.4,
-    size=3
+    size=3,
     # palette=sns.cubehelix_palette(8, rot=-0.25, light=0.9),
 ).set(ylabel=r"$\rho_{|O|, APL}$", xlabel=r"$P(D)$")
-plt.savefig("plots/overall/Tie_Dissolution_Correlations_Boxplot_Full.png")
+
+# .set(ylabel=r"$\rho_{|O|, APL}$", xlabel=r"$P(D)$")
+
+handles, labels = g.get_legend_handles_labels()
+
+# When creating the legend, only use the first two elements
+# to effectively remove the last two.
+l = plt.legend(handles[0:3], labels[0:3], bbox_to_anchor=(1.01, 0.6), title=r"$R$")
+plt.savefig(
+    "plots/overall/Tie_Dissolution_Correlations_Boxplot_Full.png",
+    dpi=300,
+    bbox_inches="tight",
+)
 
 sns.boxplot(
     data=correlations.query("tie_dissolution > 0"),

@@ -800,6 +800,65 @@ Flache, A.%
 
 \bibitem [\protect \citeauthoryear {%
 Flache%
+\ \BBA {} Macy%
+}{%
+Flache%
+\ \BBA {} Macy%
+}{%
+{\protect \APACyear {2006}}%
+}]{%
+flache_why_2006}
+\APACinsertmetastar {%
+flache_why_2006}%
+\begin{APACrefauthors}%
+Flache, A.%
+\BCBT {}\ \BBA {} Macy, M\BPBI W.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2006}{{\APACmonth{04}}}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Why more contact may increase cultural polarization}
+  {Why more contact may increase cultural polarization}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{arXiv:physics/0604196}{}{}{}.
+\newblock
+\begin{APACrefURL} [{2022-03-20}]\url{http://arxiv.org/abs/physics/0604196}
+  \end{APACrefURL}
+\newblock
+\APACrefnote{arXiv: physics/0604196}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Flache%
+\ \BBA {} Macy%
+}{%
+Flache%
+\ \BBA {} Macy%
+}{%
+{\protect \APACyear {2011}}%
+}]{%
+flache_small_2011}
+\APACinsertmetastar {%
+flache_small_2011}%
+\begin{APACrefauthors}%
+Flache, A.%
+\BCBT {}\ \BBA {} Macy, M\BPBI W.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2011}{{\APACmonth{01}}}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Small {Worlds} and {Cultural} {Polarization}} {Small
+  {Worlds} and {Cultural} {Polarization}}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Journal of Mathematical Sociology}{35}{1-2}{146--176}.
+\newblock
+\begin{APACrefDOI} \doi{10.1080/0022250X.2010.532261} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Flache%
 \ \protect \BOthers {.}}{%
 Flache%
 \ \protect \BOthers {.}}{%
@@ -1676,6 +1735,39 @@ Sasahara, K.%
   \end{APACrefURL}
 \newblock
 \begin{APACrefDOI} \doi{10.1007/s42001-020-00084-7} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+S{\^\i}rbu%
+, Loreto%
+, Servedio%
+\BCBL {}\ \BBA {} Tria%
+}{%
+S{\^\i}rbu%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2017}}%
+}]{%
+sirbu2017opinion}
+\APACinsertmetastar {%
+sirbu2017opinion}%
+\begin{APACrefauthors}%
+S{\^\i}rbu, A.%
+, Loreto, V.%
+, Servedio, V\BPBI D.%
+\BCBL {}\ \BBA {} Tria, F.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2017}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Opinion dynamics: models, extensions and external
+  effects} {Opinion dynamics: models, extensions and external effects}.{\BBCQ}
+\newblock
+\BIn{} \APACrefbtitle {Participatory sensing, opinions and collective
+  awareness} {Participatory sensing, opinions and collective awareness}\
+  (\BPGS\ 363--401).
+\newblock
+\APACaddressPublisher{}{Springer}.
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
