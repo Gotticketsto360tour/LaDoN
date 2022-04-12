@@ -140,7 +140,8 @@ To limit the combinations of different values, we limit the possible values of t
     \alpha \in & \{0.05, 0.10, 0.15, 0.20, 0.25\} \\
     \beta \in & \{0.00, 0.05, 0.10, 0.15, 0.20, 0.25\}\\
     T \in & \{0.8, 0.9, 1.0, 1.1, 1.2\}\\
-    D \in & \{0.0, 0.2, 0.4, 0.6, 0.8, 1.0\}
+    D \in & \{0.0, 0.2, 0.4, 0.6, 0.8, 1.0\}\\
+    R \in & \{0.1, 0.3, 0.5\}
 \end{align*}
 
 
@@ -281,6 +282,13 @@ Parameter importance shows that the randomness parameter was the most important 
   \label{fig:sfig1}
 \end{figure}
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.8\linewidth]{../plots/overall/Parameter_Importance.png}
+  \caption{Parameter Importance}
+  \label{fig:sfig1}
+\end{figure}
+
 
 \begin{table}[H]
 \begin{center}
@@ -339,7 +347,63 @@ This second notion points to the fact that the effects of network and opinion dy
 
 \subsection{Alpha, beta, threshold, tie-deletion and chaotic systems}
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.8\linewidth]{../plots/overall/Absolute_Opinion_Threshold.png}
+  \caption{Polarization and thresholds}
+  \label{fig:sfig1}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.8\linewidth]{../plots/overall/Absolute_Opinion_Positive_Learning_Rate.png}
+  \caption{Polarization and alphas}
+  \label{fig:sfig1}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.8\linewidth]{../plots/overall/Absolute_Opinion_Negative_Learning_Rate.png}
+  \caption{Polarization and betas}
+  \label{fig:sfig1}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.8\linewidth]{../plots/overall/Absolute_Opinion_Tie_Dissolution.png}
+  \caption{Polarization and probability of tie-deletion}
+  \label{fig:sfig1}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.8\linewidth]{../plots/overall/Absolute_Opinion_Tie_Deletion_Without_Negative.png}
+  \caption{Polarization and probability of tie-deletion}
+  \label{fig:sfig1}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.8\linewidth]{../plots/overall/Radicalization.png}
+  \caption{Radicalization}
+  \label{fig:sfig1}
+\end{figure}
+
 \subsection{Correlations}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.8\linewidth]{../plots/overall/Correlation_Initial_Opinions.png}
+  \caption{Correlations of initial opinions and final opinions}
+  \label{fig:sfig1}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.8\linewidth]{../plots/overall/Tie_Dissolution_Correlations_Boxplot_Full.png}
+  \caption{Correlation of average path length and probability of tie-deletion}
+  \label{fig:sfig1}
+\end{figure}
 
 \section{Discussion}
 

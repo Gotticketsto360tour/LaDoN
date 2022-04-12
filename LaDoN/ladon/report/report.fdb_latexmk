@@ -1,14 +1,23 @@
 # Fdb version 3
-["bibtex report"] 1649711918 "report.aux" "report.bbl" "report" 1649711919
+["bibtex report"] 1649720991 "report.aux" "report.bbl" "report" 1649720996
   "/usr/local/texlive/2021/texmf-dist/bibtex/bst/apacite/apacite.bst" 1374530685 141073 9d7b79dbf9d91133318126032cff8c27 ""
   "References.bib" 1649555571 191467 307d7946ceee2c48e8055b2e3883b499 ""
-  "report.aux" 1649711919 26810 8c087aee0d44632c1e11ca0d04da0523 "pdflatex"
+  "report.aux" 1649720996 28392 d85077af52ed8a4e880c7b2cbb392ccf "pdflatex"
   (generated)
   "report.bbl"
   "report.blg"
-["pdflatex"] 1649711918 "/Users/mikkelwerling/Documents/LaDoN/LaDoN/ladon/report/report.tex" "report.pdf" "report" 1649711919
+["pdflatex"] 1649720991 "/Users/mikkelwerling/Documents/LaDoN/LaDoN/ladon/report/report.tex" "report.pdf" "report" 1649720996
+  "../plots/overall/Absolute_Opinion_Negative_Learning_Rate.png" 1649369765 440200 b077b14f9613d835b8672031ad9a0d62 ""
+  "../plots/overall/Absolute_Opinion_Positive_Learning_Rate.png" 1649369637 613663 96925baab0bd979640aa90f60cc79459 ""
+  "../plots/overall/Absolute_Opinion_Threshold.png" 1649369512 594686 e651746afed2941dc303a460b52c7c97 ""
+  "../plots/overall/Absolute_Opinion_Tie_Deletion_Without_Negative.png" 1649369382 417028 ab3edd605a5eb43e0cda628f81c589c8 ""
+  "../plots/overall/Absolute_Opinion_Tie_Dissolution.png" 1649369939 1098244 14d6fbcc57a824ef1a67b267a1ddbfe9 ""
+  "../plots/overall/Correlation_Initial_Opinions.png" 1649370231 119945 f4dff53873dcb7799478622807b34c56 ""
   "../plots/overall/Model_Evaluation.png" 1649711588 194644 15aba77ca7aea1cc97e93255e77f450c ""
-  "/Users/mikkelwerling/Documents/LaDoN/LaDoN/ladon/report/report.tex" 1649711915 55882 857cdbd53580158d607b8624ef834c44 ""
+  "../plots/overall/Parameter_Importance.png" 1649710667 167750 fc58edd01d5fbb993b5813a826be5405 ""
+  "../plots/overall/Radicalization.png" 1648685200 2091124 1f819b00c6de379eb930df5431d019c5 ""
+  "../plots/overall/Tie_Dissolution_Correlations_Boxplot_Full.png" 1648670057 98138 623539253e5d465c5b63c16b87dfa1dc ""
+  "/Users/mikkelwerling/Documents/LaDoN/LaDoN/ladon/report/report.tex" 1649720985 57806 bdc81ba435d66184a8cef32b223f3470 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/local/texlive/2021/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/tfm/adobe/symbol/psyr.tfm" 1136768653 1408 5937f58aa508ea2cea4901c07d10f5fe ""
@@ -95,10 +104,10 @@
   "/usr/local/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1643323655 4379201 880d78f4a2bde4f491e7d718ab91f390 ""
   "/usr/local/texlive/2021/texmf-var/web2c/pdftex/pdflatex.fmt" 1643323721 2796779 5d118f325eff48385f25df8d5c174017 ""
   "/usr/local/texlive/2021/texmf.cnf" 1616695596 577 4c1911a7228e554c6032256d3cf5567d ""
-  "report.aux" 1649711919 26810 8c087aee0d44632c1e11ca0d04da0523 "pdflatex"
-  "report.bbl" 1649711918 56495 1e364014d25db522d319d72ee12c7ced "bibtex report"
-  "report.tex" 1649711915 55882 857cdbd53580158d607b8624ef834c44 ""
-  "report.toc" 1649711919 3356 691739a7cb29b8ac641d764d808d0f6b "pdflatex"
+  "report.aux" 1649720996 28392 d85077af52ed8a4e880c7b2cbb392ccf "pdflatex"
+  "report.bbl" 1649720991 56495 1e364014d25db522d319d72ee12c7ced "bibtex report"
+  "report.tex" 1649720985 57806 bdc81ba435d66184a8cef32b223f3470 ""
+  "report.toc" 1649720996 3356 69b85b2adc73c46ebdc9b82e14652440 "pdflatex"
   (generated)
   "report.aux"
   "report.log"

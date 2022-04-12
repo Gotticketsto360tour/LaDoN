@@ -32,15 +32,15 @@
 \contentsline {subsection}{\numberline {8.5}Why is co-evolution a better explanation?}{19}{}%
 \contentsline {section}{\numberline {9}Results}{21}{}%
 \contentsline {subsection}{\numberline {9.1}Alpha, beta, threshold, tie-deletion and chaotic systems}{21}{}%
-\contentsline {subsection}{\numberline {9.2}Correlations}{21}{}%
-\contentsline {section}{\numberline {10}Discussion}{21}{}%
-\contentsline {subsection}{\numberline {10.1}Reiterating previous literature}{21}{}%
-\contentsline {subsection}{\numberline {10.2}Tie-deletion facilitates cooperation}{21}{}%
-\contentsline {subsection}{\numberline {10.3}The effect of initial opinions}{21}{}%
-\contentsline {subsection}{\numberline {10.4}Distance in opinion and network space}{21}{}%
-\contentsline {section}{\numberline {11}Short comings and future work}{21}{}%
-\contentsline {subsection}{\numberline {11.1}Accurate perceptions of opinions}{21}{}%
-\contentsline {subsection}{\numberline {11.2}Social influence exclusively}{21}{}%
-\contentsline {section}{\numberline {12}A broader perspective}{21}{}%
-\contentsline {section}{\numberline {13}Conclusion}{21}{}%
-\contentsline {section}{References}{21}{}%
+\contentsline {subsection}{\numberline {9.2}Correlations}{24}{}%
+\contentsline {section}{\numberline {10}Discussion}{25}{}%
+\contentsline {subsection}{\numberline {10.1}Reiterating previous literature}{25}{}%
+\contentsline {subsection}{\numberline {10.2}Tie-deletion facilitates cooperation}{25}{}%
+\contentsline {subsection}{\numberline {10.3}The effect of initial opinions}{25}{}%
+\contentsline {subsection}{\numberline {10.4}Distance in opinion and network space}{25}{}%
+\contentsline {section}{\numberline {11}Short comings and future work}{25}{}%
+\contentsline {subsection}{\numberline {11.1}Accurate perceptions of opinions}{25}{}%
+\contentsline {subsection}{\numberline {11.2}Social influence exclusively}{25}{}%
+\contentsline {section}{\numberline {12}A broader perspective}{25}{}%
+\contentsline {section}{\numberline {13}Conclusion}{25}{}%
+\contentsline {section}{References}{25}{}%
