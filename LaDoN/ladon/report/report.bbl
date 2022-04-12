@@ -43,6 +43,40 @@ Akiba, T.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
+Allahverdyan%
+\ \BBA {} Galstyan%
+}{%
+Allahverdyan%
+\ \BBA {} Galstyan%
+}{%
+{\protect \APACyear {2014}}%
+}]{%
+allahverdyan_opinion_2014}
+\APACinsertmetastar {%
+allahverdyan_opinion_2014}%
+\begin{APACrefauthors}%
+Allahverdyan, A\BPBI E.%
+\BCBT {}\ \BBA {} Galstyan, A.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2014}{{\APACmonth{07}}}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Opinion {Dynamics} with {Confirmation} {Bias}} {Opinion
+  {Dynamics} with {Confirmation} {Bias}}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{PLOS ONE}{9}{7}{e99557}.
+\newblock
+\begin{APACrefURL}
+  [{2022-03-31}]\url{https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0099557}
+  \end{APACrefURL}
+\newblock
+\APACrefnote{Publisher: Public Library of Science}
+\newblock
+\begin{APACrefDOI} \doi{10.1371/journal.pone.0099557} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
 Andris%
 \ \protect \BOthers {.}}{%
 Andris%
@@ -78,6 +112,40 @@ Andris, C.%
 \APACrefnote{Publisher: Public Library of Science}
 \newblock
 \begin{APACrefDOI} \doi{10.1371/journal.pone.0123507} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Arceneaux%
+}{%
+Arceneaux%
+}{%
+{\protect \APACyear {2012}}%
+}]{%
+arceneaux_cognitive_2012}
+\APACinsertmetastar {%
+arceneaux_cognitive_2012}%
+\begin{APACrefauthors}%
+Arceneaux, K.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2012}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Cognitive {Biases} and the {Strength} of {Political}
+  {Arguments}} {Cognitive {Biases} and the {Strength} of {Political}
+  {Arguments}}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{American Journal of Political
+  Science}{56}{2}{271--285}.
+\newblock
+\begin{APACrefURL}
+  [{2022-03-31}]\url{https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1540-5907.2011.00573.x}
+  \end{APACrefURL}
+\newblock
+\APACrefnote{\_eprint:
+  https://onlinelibrary.wiley.com/doi/pdf/10.1111/j.1540-5907.2011.00573.x}
+\newblock
+\begin{APACrefDOI} \doi{10.1111/j.1540-5907.2011.00573.x} \end{APACrefDOI}
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
@@ -301,6 +369,39 @@ Bener, A\BPBI B.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
+Bhagat%
+, Burke%
+, Diuk%
+, Edunov%
+\BCBL {}\ \BBA {} Filiz%
+}{%
+Bhagat%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2016}}%
+}]{%
+bhagat_three_2016}
+\APACinsertmetastar {%
+bhagat_three_2016}%
+\begin{APACrefauthors}%
+Bhagat, S.%
+, Burke, M.%
+, Diuk, C.%
+, Edunov, S.%
+\BCBL {}\ \BBA {} Filiz, I\BPBI O.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2016}{{\APACmonth{02}}}{}.
+\newblock
+\APACrefbtitle {Three and a half degrees of separation - {Meta} {Research}.}
+  {Three and a half degrees of separation - {Meta} {Research}.}
+\newblock
+\begin{APACrefURL}
+  [{2022-04-01}]\url{https://research.facebook.com/blog/2016/2/three-and-a-half-degrees-of-separation/}
+  \end{APACrefURL}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
 Bianconi%
 , Darst%
 , Iacovacci%
@@ -479,7 +580,32 @@ Center%
 Center%
 }{%
 {\protect \APACyear {2014}}%
-}]{%
+{\protect \APACexlab {{\protect \BCnt {1}}}}}]{%
+pew_research_center_political_2014}
+\APACinsertmetastar {%
+pew_research_center_political_2014}%
+\begin{APACrefauthors}%
+Center, P\BPBI R.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2014{\protect \BCnt {1}}}{{\APACmonth{06}}}{}.
+\newblock
+\APACrefbtitle {Political {Polarization} and {Growing} {Partisan} {Antipathy}.}
+  {Political {Polarization} and {Growing} {Partisan} {Antipathy}.}
+\newblock
+\begin{APACrefURL}
+  [{2022-03-11}]\url{https://www.pewresearch.org/politics/2014/06/12/section-2-growing-partisan-antipathy/}
+  \end{APACrefURL}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Center%
+}{%
+Center%
+}{%
+{\protect \APACyear {2014}}%
+{\protect \APACexlab {{\protect \BCnt {2}}}}}]{%
 pew_research_center_political_2014-1}
 \APACinsertmetastar {%
 pew_research_center_political_2014-1}%
@@ -488,7 +614,7 @@ Center, P\BPBI R.%
 \end{APACrefauthors}%
 \unskip\
 \newblock
-\APACrefYearMonthDay{2014}{{\APACmonth{06}}}{}.
+\APACrefYearMonthDay{2014{\protect \BCnt {2}}}{{\APACmonth{06}}}{}.
 \newblock
 \APACrefbtitle {Political {Polarization} in the {American} {Public}.}
   {Political {Polarization} in the {American} {Public}.}
@@ -1036,6 +1162,39 @@ Galesic, M.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
+Ghaderi%
+\ \BBA {} Srikant%
+}{%
+Ghaderi%
+\ \BBA {} Srikant%
+}{%
+{\protect \APACyear {2014}}%
+}]{%
+ghaderi_opinion_2014}
+\APACinsertmetastar {%
+ghaderi_opinion_2014}%
+\begin{APACrefauthors}%
+Ghaderi, J.%
+\BCBT {}\ \BBA {} Srikant, R.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2014}{{\APACmonth{12}}}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Opinion dynamics in social networks with stubborn
+  agents: {Equilibrium} and convergence rate} {Opinion dynamics in social
+  networks with stubborn agents: {Equilibrium} and convergence rate}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Automatica}{50}{12}{3209--3215}.
+\newblock
+\begin{APACrefURL}
+  [{2022-03-31}]\url{https://www.sciencedirect.com/science/article/pii/S0005109814004154}
+  \end{APACrefURL}
+\newblock
+\begin{APACrefDOI} \doi{10.1016/j.automatica.2014.10.034} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
 Holme%
 \ \BBA {} Newman%
 }{%
@@ -1263,6 +1422,42 @@ Jalili, M.%
   {Society} (i-{Society})}\ (\BPGS\ 79--83).
 \newblock
 \begin{APACrefDOI} \doi{10.1109/i-Society.2015.7366863} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Jussim%
+\ \BBA {} Osgood%
+}{%
+Jussim%
+\ \BBA {} Osgood%
+}{%
+{\protect \APACyear {1989}}%
+}]{%
+jussim_influence_1989}
+\APACinsertmetastar {%
+jussim_influence_1989}%
+\begin{APACrefauthors}%
+Jussim, L.%
+\BCBT {}\ \BBA {} Osgood, D\BPBI W.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{1989}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Influence and {Similarity} {Among} {Friends}: {An}
+  {Integrative} {Model} {Applied} to {Incarcerated} {Adolescents}} {Influence
+  and {Similarity} {Among} {Friends}: {An} {Integrative} {Model} {Applied} to
+  {Incarcerated} {Adolescents}}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Social Psychology Quarterly}{52}{2}{98--112}.
+\newblock
+\begin{APACrefURL} [{2022-04-08}]\url{https://www.jstor.org/stable/2786910}
+  \end{APACrefURL}
+\newblock
+\APACrefnote{Publisher: [Sage Publications, Inc., American Sociological
+  Association]}
+\newblock
+\begin{APACrefDOI} \doi{10.2307/2786910} \end{APACrefDOI}
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
@@ -1630,6 +1825,40 @@ Peixoto, T\BPBI P.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
+Pennycook%
+\ \BBA {} Rand%
+}{%
+Pennycook%
+\ \BBA {} Rand%
+}{%
+{\protect \APACyear {2019}}%
+}]{%
+pennycook_lazy_2019}
+\APACinsertmetastar {%
+pennycook_lazy_2019}%
+\begin{APACrefauthors}%
+Pennycook, G.%
+\BCBT {}\ \BBA {} Rand, D\BPBI G.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2019}{{\APACmonth{07}}}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Lazy, not biased: {Susceptibility} to partisan fake news
+  is better explained by lack of reasoning than by motivated reasoning} {Lazy,
+  not biased: {Susceptibility} to partisan fake news is better explained by
+  lack of reasoning than by motivated reasoning}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Cognition}{188}{}{39--50}.
+\newblock
+\begin{APACrefURL}
+  [{2022-04-01}]\url{https://www.sciencedirect.com/science/article/pii/S001002771830163X}
+  \end{APACrefURL}
+\newblock
+\begin{APACrefDOI} \doi{10.1016/j.cognition.2018.06.011} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
 Pepper%
 \ \BBA {} Smuts%
 }{%
@@ -1888,6 +2117,75 @@ Spears, R.%
 \APACrefnote{\_eprint: https://doi.org/10.1146/annurev-psych-070620-111818}
 \newblock
 \begin{APACrefDOI} \doi{10.1146/annurev-psych-070620-111818} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Strömbäck%
+, Djerf-Pierre%
+\BCBL {}\ \BBA {} Shehata%
+}{%
+Strömbäck%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2013}}%
+}]{%
+stromback_dynamics_2013}
+\APACinsertmetastar {%
+stromback_dynamics_2013}%
+\begin{APACrefauthors}%
+Strömbäck, J.%
+, Djerf-Pierre, M.%
+\BCBL {}\ \BBA {} Shehata, A.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2013}{{\APACmonth{12}}}{}.
+\newblock
+{\BBOQ}\APACrefatitle {The {Dynamics} of {Political} {Interest} and {News}
+  {Media} {Consumption}: {A} {Longitudinal} {Perspective}} {The {Dynamics} of
+  {Political} {Interest} and {News} {Media} {Consumption}: {A} {Longitudinal}
+  {Perspective}}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{International Journal of Public Opinion
+  Research}{25}{4}{414--435}.
+\newblock
+\begin{APACrefURL} [{2022-04-01}]\url{https://doi.org/10.1093/ijpor/eds018}
+  \end{APACrefURL}
+\newblock
+\begin{APACrefDOI} \doi{10.1093/ijpor/eds018} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Su%
+, Chen%
+\BCBL {}\ \BBA {} Hong%
+}{%
+Su%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2017}}%
+}]{%
+su_noise_2017}
+\APACinsertmetastar {%
+su_noise_2017}%
+\begin{APACrefauthors}%
+Su, W.%
+, Chen, G.%
+\BCBL {}\ \BBA {} Hong, Y.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2017}{{\APACmonth{11}}}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Noise leads to quasi-consensus of
+  {Hegselmann}–{Krause} opinion dynamics} {Noise leads to quasi-consensus of
+  {Hegselmann}–{Krause} opinion dynamics}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Automatica}{85}{}{448--454}.
+\newblock
+\begin{APACrefURL}
+  [{2022-03-31}]\url{https://www.sciencedirect.com/science/article/pii/S0005109817304296}
+  \end{APACrefURL}
+\newblock
+\begin{APACrefDOI} \doi{10.1016/j.automatica.2017.08.008} \end{APACrefDOI}
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
@@ -2203,6 +2501,43 @@ Wu, J.%
   \end{APACrefURL}
 \newblock
 \begin{APACrefDOI} \doi{10.11989/JEST.1674-862X.80904120} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Yildiz%
+, Ozdaglar%
+, Acemoglu%
+, Saberi%
+\BCBL {}\ \BBA {} Scaglione%
+}{%
+Yildiz%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2013}}%
+}]{%
+yildiz_binary_2013}
+\APACinsertmetastar {%
+yildiz_binary_2013}%
+\begin{APACrefauthors}%
+Yildiz, E.%
+, Ozdaglar, A.%
+, Acemoglu, D.%
+, Saberi, A.%
+\BCBL {}\ \BBA {} Scaglione, A.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2013}{{\APACmonth{12}}}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Binary {Opinion} {Dynamics} with {Stubborn} {Agents}}
+  {Binary {Opinion} {Dynamics} with {Stubborn} {Agents}}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{ACM Transactions on Economics and
+  Computation}{1}{4}{19:1--19:30}.
+\newblock
+\begin{APACrefURL} [{2022-03-31}]\url{https://doi.org/10.1145/2538508}
+  \end{APACrefURL}
+\newblock
+\begin{APACrefDOI} \doi{10.1145/2538508} \end{APACrefDOI}
 \PrintBackRefs{\CurrentBib}
 
 \end{thebibliography}
