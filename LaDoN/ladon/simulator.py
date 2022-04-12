@@ -10,14 +10,6 @@ import matplotlib.pyplot as plt
 sns.set(rc={"figure.figsize": (11.7, 8.27)})
 sns.set_context("talk")
 
-from selenium import webdriver
-from selenium.webdriver.firefox.options import Options
-
-options = Options()
-options.binary_location = r"/Applications/Firefox.app/Contents/MacOS/firefox-bin"
-driver = webdriver.Firefox(options=options)
-driver.get("http://google.com/")
-
 
 def make_network_by_seed(dictionary, run):
     random.seed(run)
@@ -89,24 +81,23 @@ for _ in range(500):
 
 plot_graph(my_network, plot_type="agent_type")
 
-for randomness in [0.1, 0.3, 0.5]:
-    dictionary = {
-        "THRESHOLD": 0.8,
-        "N_TARGET": 500,
-        "RANDOMNESS": randomness,
-        "N_TIMESTEPS": 10000,
-        "POSITIVE_LEARNING_RATE": 0.15,
-        "NEGATIVE_LEARNING_RATE": 0.1,
-        "P": 0.5,
-        "K": 7,
-        "TIE_DISSOLUTION": 1,
-        "RECORD": False,
-    }
-    my_network = make_network_by_seed(dictionary, run=7)
-
-    generate_network_plots(
-        my_network,
-        plot_type="agent_type",
-        # save_path=f"plots/networks/network_example_R{randomness}",
-        run=7,
-    )
+randomness = 0.5
+dictionary = {
+    "THRESHOLD": 0.8,
+    "N_TARGET": 500,
+    "RANDOMNESS": randomness,
+    "N_TIMESTEPS": 10000,
+    "POSITIVE_LEARNING_RATE": 0.15,
+    "NEGATIVE_LEARNING_RATE": 0.1,
+    "P": 0.5,
+    "K": 7,
+    "TIE_DISSOLUTION": 1,
+    "RECORD": False,
+}
+my_network = make_network_by_seed(dictionary, run=5)
+generate_network_plots(
+    my_network,
+    plot_type="agent_type",
+    # save_path=f"plots/networks/network_example_R{randomness}",
+    run=5,
+)
