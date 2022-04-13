@@ -1,33 +1,32 @@
 \babel@toc {english}{}\relax 
 \contentsline {section}{\numberline {1}Introduction}{4}{}%
 \contentsline {subsection}{\numberline {1.1}Polarization, echo chambers and the threat to democracy}{4}{}%
-\contentsline {section}{\numberline {2}Motivation of the framework}{5}{}%
-\contentsline {subsection}{\numberline {2.1}Agent-based models of complex issues}{5}{}%
+\contentsline {section}{\numberline {2}Why choose agent-based modelling}{6}{}%
 \contentsline {section}{\numberline {3}Central Mechanisms}{6}{}%
 \contentsline {subsection}{\numberline {3.1}Homophily}{6}{}%
 \contentsline {subsubsection}{\numberline {3.1.1}Explaining Homophily}{7}{}%
-\contentsline {subsection}{\numberline {3.2}Social Influence}{7}{}%
+\contentsline {subsection}{\numberline {3.2}Social Influence}{8}{}%
 \contentsline {section}{\numberline {4}Opinion Dynamics}{8}{}%
-\contentsline {section}{\numberline {5}Network Formation}{8}{}%
+\contentsline {section}{\numberline {5}Network Formation}{9}{}%
 \contentsline {subsection}{\numberline {5.1}Triadic Closure}{9}{}%
 \contentsline {section}{\numberline {6}Co-evolution via tie-deletion}{10}{}%
-\contentsline {subsection}{\numberline {6.1}Tie-deletions effect on cooperation}{10}{}%
-\contentsline {section}{\numberline {7}Model Description}{11}{}%
-\contentsline {subsection}{\numberline {7.1}Conceptual overview}{11}{}%
-\contentsline {subsection}{\numberline {7.2}Assumptions}{11}{}%
+\contentsline {subsection}{\numberline {6.1}Tie-deletions effect on cooperation}{11}{}%
+\contentsline {section}{\numberline {7}Model Description}{12}{}%
+\contentsline {subsection}{\numberline {7.1}Conceptual overview}{12}{}%
+\contentsline {subsection}{\numberline {7.2}Assumptions}{12}{}%
 \contentsline {subsection}{\numberline {7.3}Components and their properties}{12}{}%
-\contentsline {subsection}{\numberline {7.4}Initialization}{12}{}%
-\contentsline {subsection}{\numberline {7.5}Dynamics}{12}{}%
-\contentsline {subsubsection}{\numberline {7.5.1}Sampling agents and interactions}{12}{}%
-\contentsline {subsubsection}{\numberline {7.5.2}Interaction between neighbors}{13}{}%
-\contentsline {subsubsection}{\numberline {7.5.3}Tie-dissolution}{14}{}%
-\contentsline {subsection}{\numberline {7.6}Outcome metrics}{14}{}%
-\contentsline {subsubsection}{\numberline {7.6.1}Time-dependent Metrics}{14}{}%
-\contentsline {subsubsection}{\numberline {7.6.2}Final State Metrics}{14}{}%
-\contentsline {section}{\numberline {8}Model Evaluation}{15}{}%
-\contentsline {subsection}{\numberline {8.1}Fitting the model}{15}{}%
-\contentsline {subsection}{\numberline {8.2}Data}{16}{}%
-\contentsline {subsection}{\numberline {8.3}Hyperparameter Optimization}{16}{}%
+\contentsline {subsection}{\numberline {7.4}Initialization}{13}{}%
+\contentsline {subsection}{\numberline {7.5}Dynamics}{13}{}%
+\contentsline {subsubsection}{\numberline {7.5.1}Sampling agents and interactions}{13}{}%
+\contentsline {subsubsection}{\numberline {7.5.2}Interaction between neighbors}{14}{}%
+\contentsline {subsubsection}{\numberline {7.5.3}Tie-dissolution}{15}{}%
+\contentsline {subsection}{\numberline {7.6}Outcome metrics}{15}{}%
+\contentsline {subsubsection}{\numberline {7.6.1}Time-dependent Metrics}{15}{}%
+\contentsline {subsubsection}{\numberline {7.6.2}Final State Metrics}{15}{}%
+\contentsline {section}{\numberline {8}Model Evaluation}{16}{}%
+\contentsline {subsection}{\numberline {8.1}Fitting the model}{16}{}%
+\contentsline {subsection}{\numberline {8.2}Data}{17}{}%
+\contentsline {subsection}{\numberline {8.3}Hyperparameter Optimization}{17}{}%
 \contentsline {subsection}{\numberline {8.4}Results}{18}{}%
 \contentsline {subsection}{\numberline {8.5}Why is co-evolution a better explanation?}{20}{}%
 \contentsline {section}{\numberline {9}Results}{21}{}%

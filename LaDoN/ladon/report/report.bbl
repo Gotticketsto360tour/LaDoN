@@ -1238,9 +1238,9 @@ Hutter%
 \ \protect \BOthers {.}}{%
 {\protect \APACyear {2014}}%
 }]{%
-hutter_efficient_2014}
+hutter2014efficient}
 \APACinsertmetastar {%
-hutter_efficient_2014}%
+hutter2014efficient}%
 \begin{APACrefauthors}%
 Hutter, F.%
 , Hoos, H.%
@@ -1248,23 +1248,14 @@ Hutter, F.%
 \end{APACrefauthors}%
 \unskip\
 \newblock
-\APACrefYearMonthDay{2014}{{\APACmonth{01}}}{}.
+\APACrefYearMonthDay{2014}{}{}.
 \newblock
-{\BBOQ}\APACrefatitle {An {Efficient} {Approach} for {Assessing}
-  {Hyperparameter} {Importance}} {An {Efficient} {Approach} for {Assessing}
-  {Hyperparameter} {Importance}}.{\BBCQ}
+{\BBOQ}\APACrefatitle {An efficient approach for assessing hyperparameter
+  importance} {An efficient approach for assessing hyperparameter
+  importance}.{\BBCQ}
 \newblock
-\BIn{} \APACrefbtitle {Proceedings of the 31st {International} {Conference} on
-  {Machine} {Learning}} {Proceedings of the 31st {International} {Conference}
-  on {Machine} {Learning}}\ (\BPGS\ 754--762).
-\newblock
-\APACaddressPublisher{}{PMLR}.
-\newblock
-\begin{APACrefURL}
-  [{2022-04-09}]\url{https://proceedings.mlr.press/v32/hutter14.html}
-  \end{APACrefURL}
-\newblock
-\APACrefnote{ISSN: 1938-7228}
+\BIn{} \APACrefbtitle {International conference on machine learning}
+  {International conference on machine learning}\ (\BPGS\ 754--762).
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%

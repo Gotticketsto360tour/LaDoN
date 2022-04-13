@@ -17,43 +17,43 @@ Warning--No journal in jackson_search_2004
 Warning--No journal in jackson_meeting_2007
 You've used 75 entries,
             6951 wiz_defined-function locations,
-            1862 strings with 31285 characters,
-and the built_in function-call counts, 158638 in all, are:
-= -- 19135
+            1860 strings with 31179 characters,
+and the built_in function-call counts, 158504 in all, are:
+= -- 19128
 > -- 1368
-< -- 7753
-+ -- 7934
+< -- 7747
++ -- 7930
 - -- 151
-* -- 10932
-:= -- 28910
+* -- 10914
+:= -- 28888
 add.period$ -- 320
 call.type$ -- 75
-change.case$ -- 1422
+change.case$ -- 1420
 chr.to.int$ -- 0
 cite$ -- 152
-duplicate$ -- 4445
-empty$ -- 6298
+duplicate$ -- 4437
+empty$ -- 6283
 format.name$ -- 2312
-if$ -- 29664
+if$ -- 29642
 int.to.chr$ -- 0
 int.to.str$ -- 229
 missing$ -- 0
-newline$ -- 2249
+newline$ -- 2243
 num.names$ -- 600
-pop$ -- 2357
+pop$ -- 2356
 preamble$ -- 1
-purify$ -- 422
+purify$ -- 420
 quote$ -- 0
-skip$ -- 9829
+skip$ -- 9827
 stack$ -- 0
-substring$ -- 8688
-swap$ -- 2645
-text.length$ -- 342
+substring$ -- 8684
+swap$ -- 2640
+text.length$ -- 340
 text.prefix$ -- 0
 top$ -- 1
 type$ -- 6704
 warning$ -- 2
-while$ -- 901
+while$ -- 899
 width$ -- 0
-write$ -- 2797
+write$ -- 2791
 (There were 2 warnings)
