@@ -61,15 +61,19 @@ g = sns.barplot(
         "Politicians",
         "Political Blogs",
     ],
+    capsize=0.07,
+    hue_order=["With Opinion Dynamics", "Without Opinion Dynamics", "Target"],
 )
 g.set(xlabel="Average Clustering Coefficient", ylabel="")
 plt.legend(
     title="Network",
-    bbox_to_anchor=(
-        1.45,
-        0.6,
-    ),
 )
+plt.savefig(
+    "plots/overall/Model_Evaluation_Average_Clustering.png",
+    dpi=300,
+    bbox_inches="tight",
+)
+
 
 g = sns.barplot(
     data=data,
@@ -85,15 +89,15 @@ g = sns.barplot(
         "Politicians",
         "Political Blogs",
     ],
+    capsize=0.07,
+    hue_order=["With Opinion Dynamics", "Without Opinion Dynamics", "Target"],
 )
-g.set(xlabel="Average Path Length", ylabel="")
+g.set(xlabel=r"$APL$", ylabel="")
 plt.legend(
     title="Network",
-    bbox_to_anchor=(
-        1.45,
-        0.6,
-    ),
 )
+plt.savefig("plots/overall/Model_Evaluation_APL.png", dpi=300, bbox_inches="tight")
+
 g = sns.barplot(
     data=data.query("type != 'Target'"),
     y="network",
@@ -108,15 +112,14 @@ g = sns.barplot(
         "Politicians",
         "Political Blogs",
     ],
+    capsize=0.07,
 )
-g.set(xlabel="JSD", ylabel="")
+g.set(xlabel=r"$JSD$", ylabel="")
 plt.legend(
     title="Network",
-    bbox_to_anchor=(
-        1.45,
-        0.6,
-    ),
 )
+plt.savefig("plots/overall/Model_Evaluation_JSD.png", dpi=300, bbox_inches="tight")
+
 
 g = sns.barplot(
     data=data.query("type != 'Target'"),
