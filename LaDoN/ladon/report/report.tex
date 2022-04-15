@@ -15,6 +15,8 @@
 \usepackage{fancyhdr}
 \usepackage{listings}
 \usepackage{mathtools, nccmath}
+\usepackage{algorithm}
+\usepackage{algorithmic}
 
 \DeclarePairedDelimiter{\nint}\lfloor\rceil
 \DeclarePairedDelimiter{\abs}\lvert\rvert
@@ -80,6 +82,13 @@ This is what is refered to as observed homophily in the literature \cite{kossine
 Kossinets \& Watts (2009) seeked to estimate how observed homophily manifested in real dynamical social networks. They recorded social interactions on a large university over the course of a year. Their findings not only suggests that this intuitive notion is true, but that it is a special case of a more general phenomenon. The findings suggests that distance in similarity is a function of distance in the social network (see Fig 1). The further you are removed from someone in the social network, the less you will have in common \cite{kossinets_origins_2009}. The connection between distance in similarity and distance in the social network seems to be a robust finding of social networks \cite{bener_empirical_2016,crandall_feedback_2008}.
 But why is this the case? The normal explanation includes two central dynamics. The first is that people tend to choose new friends that are similiar to themselves. The second is that friends tends to become more similar as a result of social interactions \cite{crandall_feedback_2008}. 
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.8\linewidth]{../plots/references/kossinets_watts_distance.jpeg}
+  \caption{The link between distance and similarity. Adapted from \protect\citeauthor{kossinets_origins_2009} \protect\citeyear{kossinets_origins_2009}. X-axis shows the distance in the network to other agents. Y-axis shows the average similarity between agents.}
+  \label{fig:sfig1}
+\end{figure}
+
 \subsubsection{Explaining Homophily}
 Homophily is traditionally explained as a psychological preference for similar people \cite{asikainen_cumulative_2020,mcpherson_birds_2001,winter_you_2020}. Interacting primarily with similar people ensures easier communication and enhances the individual’s ability to predict the other person’s behavior \cite{kossinets_origins_2009,winter_you_2020}. Assorting based on similarity might facilitate cooperation, because coordination between similar individuals is simpler and less costly for the individual \cite{winter_you_2020}. This psychological explanation of the homophilic preference of individuals seems sufficient to explain the phenomenon of homophily, but structural constraints could also limit how dissimilar choices of interactions are available to a person \cite{peixoto_disentangling_2022}. If you work as a female nurse, chances are that most of your interactions at work will be with other females. In this case, even if you do not have a strong psychological preference for interacting with people like yourself, the social interactions available to you might primarily be people like yourself. In this scenario, there will be high observed homophily by sheer chance. The existing assortment in the network makes the probability of interacting with similar individuals much higher than with non-similar individuals \cite{peixoto_disentangling_2022}. These structural constrains are of course not exclusive to gender or workplaces. Other examples include socio-economic status and the neighborhood you live in and preference in music and what concerts you attend \cite{mcpherson_birds_2001}. In other words, the psychological and the structural factor contributing to observed homophilic interactions are not mutually exclusive but might instead facilitate each other \cite{asikainen_cumulative_2020}. Even a little psychological homophilic preference could turn into structural factors over the course of time \cite{asikainen_cumulative_2020,kossinets_origins_2009,taylor_exploring_2018}. Empirical work points to both psychological and structural homophily being important mechanisms, but suggests that structural homophily might be a more powerful mechanism for finding new connections in a social network \cite{bener_empirical_2016,kossinets_origins_2009}.
 As mentioned, the observed general finding of assortment in networks are not only based on selecting friends based on similarity. It is also due to the fact that humans interact with their social ties, which typically increases similarity (Friedkin \& Johnsen, 1990; Spears, 2021). The combined mechanism of social interactions in shaping opinions is called social influence and is what we turn our attention to next. 
@@ -107,6 +116,13 @@ An alternative to the preferential attachment of scale-free networks and the rew
 Using triadic closure as the generating principle for network formation has shown great promise in explaining some of the key characteristics of social networks. In formal models, this is implemented by making new connections predominantly by triadic closure while letting a small percent of new ties be formed at random \cite{ilany_social_2016,jackson_search_2004,jackson_meeting_2007}. These models can generate the important characteristic findings of high average clustering coefficient, low average path length and lognormal degree distributions \cite{jackson_search_2004,jackson_meeting_2007}. 
 It is worthwhile to take time to understand why these measures are important and why these models generate the patterns that they do. Average clustering coefficient is a measure of connected local communities are in the network \cite{watts_collective_1998}. Models of triadic closure are likely to exhibit high average clustering coefficients as triadic closure will increase the number of local links. This is closely linked to the fact that social networks are often made of tight-knitted, well-connected local communities \cite{peixoto_disentangling_2022}. Average path length refers to average length of the shortest path between any node in the network. Here, the implemented formal models of triadic closure benefit from similar mechanisms of randomness as small-world networks to achieve low average path lengths \cite{jackson_meeting_2007,watts_collective_1998}. Having even a small amount of randomness can create long-range connections, that acts like shortcuts between nodes, decreasing the average path length substantially \cite{watts_networks_1999}. Path length is important for how fast information or contagious diseases can spread between individuals in a network. Finally, triadic closure will lead to lognormal or scale free degree distributions, as high degree nodes have more possibilities for being selected for tie generation simply because they have larger degrees \cite{jackson_meeting_2007}. The principle of triadic closure seems to not only characterize human social networks, but could be a robust organizing principle for many different social species \cite{ilany_social_2016}. 
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.8\linewidth]{../plots/references/kossinets_watts.jpeg}
+  \caption{Tie closure. Taken from \protect\citeauthor{kossinets_origins_2009} \protect\citeyear{kossinets_origins_2009}. Panels show different possible tie-closures. The first panel (A) depicts closing ties with a friend of a friend. This type of tie-closure is called triadic closure. Panel B and C shows longer cycles of closure.}
+  \label{fig:sfig1}
+\end{figure}
+
 \section{Co-evolution via tie-deletion}
 Now that we have established the fundamental principles of opinion and network dynamics, we now turn to the mechanisms that could enable them to co-evolve. 
 It is easy to see how opinions could be influenced by network dynamics. 
@@ -126,8 +142,23 @@ Understanding the previous findings concerning co-evolution and the effect of ti
 In addition to the empirical work investigating the interplay between social networks and the opinions of their constituents, theoretical work also points to the primacy of the co-evolution of networks \cite{holme_nonequilibrium_2006}. 
 These studies come specifically from another field than opinion dynamics interest in identifying the mechanisms that facilitate cooperation. The field I am reffering to is the field of computational biology. In many ways, this field should be considered an adjacent field to opinion dynamics, as they share much in their interests and in their methods. The literature from computational biology suggests that co-evolution can play a vital role in facilitating cooperation \cite{dakin_dynamic_2018,melamed_strong_2016,pepper_mechanism_2002,santos_cooperation_2006}. Intuitively, one might expect that when connectivity increases in such a network, cooperation increases as well. However, the opposite effect is observed. In their paper, Santos et al. (2006) considers agents playing game-theoretic games, where agents either cooperate or defect. In relation to the mechanism of tie-deletion, Santos et al. (2006) proposes a way for agents to adjust their ties based on interactions made with other agents. When cooperators interact with defectors, the social tie between cooperators and defectors has a chance of being rewired to a different agent. This keeps the number of edges constant, but decreases connectivity \cite{santos_cooperation_2006}. Their results indicate that as the propensity for deleting ties between cooperators and defectors increases, cooperation flourishes. The more likely tie-deletion is, the more cooperation evolves in the system. The reason given for this result is that removing ties between cooperators and defectors increases positive assortment between cooperators and decreases positive assortment between defectors and cooperators. One of the striking attributes of this finding is that without any propensity for tie-removal, cooperation does not evolve for conditions equivalent to the Prisoner’s Dilemma \cite{santos_cooperation_2006}. More generally, positive assortment has been found to be a robust facilitator of cooperation in computational biology \cite{boyd_coordinated_2010,dakin_dynamic_2018,melamed_strong_2016,pepper_mechanism_2002}. The results also indicate that even relatively simple topological network dynamics that reflect the individual agent’s reaction to their social interactions can produce realistic networks \cite{santos_cooperation_2006}. 
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.5\linewidth]{../plots/references/santos.png}
+  \caption{Tie closure. Taken from \protect\citeauthor{kossinets_origins_2009} \protect\citeyear{kossinets_origins_2009}. Panels show different possible tie-closures. The first panel (A) depicts closing ties with a friend of a friend. This type of tie-closure is called triadic closure. Panel B and C shows longer cycles of closure.}
+  \label{fig:sfig1}
+\end{figure}
+
 Although positive assortments effect on cooperation seems general in the computational biology literature, the opinion dynamics literature points to an opposite result. When combined with social influence, they report that tie deletion can lead to echo chambers, that stifle cooperation \cite{sasahara_social_2021}. This is more in line with a more intuitive explanation, where a decrease in the communication between agents leads to a decrease in cooperation. Obviously, computational biology and opinion dynamics are not same field, but it is still noticeable that the same underlying mechanism gives rise to effects of opposite directions on a networks ability to cooperate. Both studies are interested in how the dynamics of the network influences how well agents cooperate in the network, and they both find that tie-deletion is critical to developing cooperation \cite{santos_cooperation_2006,sasahara_social_2021}. It is precisely because of this dispute that this paper is especially interested in how the deletion of negative ties can impact cooperation. Like the work of Santos et al. (2006), the probability of deleting negative ties will therefore be a key aspect of our model.  
 
+REMEMBER THIS ARTICLE - SUPER RELEVANT: \cite{geschke2019triple}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.8\linewidth]{../plots/references/echo_chambers.png}
+  \caption{Tie closure. Taken from \protect\citeauthor{kossinets_origins_2009} \protect\citeyear{kossinets_origins_2009}. Panels show different possible tie-closures. The first panel (A) depicts closing ties with a friend of a friend. This type of tie-closure is called triadic closure. Panel B and C shows longer cycles of closure.}
+  \label{fig:sfig1}
+\end{figure}
 
 \section{Model Description}
 \subsection{Conceptual overview}
@@ -254,6 +285,33 @@ For every agent in the network, I record:
 \end{itemize}
 
 The measures related to the opinion of agents can then be correlated with clustering, centrality and degrees to see how changes in network topology relate to changes in opinions. 
+
+HEJ MOR
+
+\begin{algorithm}
+    \caption{Calculate $y = x^n$}
+    \begin{algorithmic} 
+    \REQUIRE $n \geq 0 \vee x \neq 0$
+    \ENSURE $y = x^n$
+    \STATE $y \leftarrow 1$
+    \IF{$n < 0$}
+    \STATE $X \leftarrow 1 / x$
+    \STATE $N \leftarrow -n$
+    \ELSE
+    \STATE $X \leftarrow x$
+    \STATE $N \leftarrow n$
+    \ENDIF
+    \WHILE{$N \neq 0$}
+    \IF{$N$ is even}
+    \STATE $X \leftarrow X \times X$
+    \STATE $N \leftarrow N / 2$
+    \ELSE[$N$ is odd]
+    \STATE $y \leftarrow y \times X$
+    \STATE $N \leftarrow N - 1$
+    \ENDIF
+    \ENDWHILE
+    \end{algorithmic}
+    \end{algorithm}
 
 \section{Model Evaluation}
 
@@ -424,6 +482,13 @@ Notably, when $P(D) = 0$ and $\beta > 0$, the network almost always polarizes.
 
 \begin{figure}[H]
     \centering
+    \includegraphics[width=.8\linewidth]{../plots/overall/Negative_Tie_Deleted.png}
+  \caption{Negative ties deleted. X-axis shows the time-step and the y-axis show the average cumulative frequency of deleted ties. Colors indicate different probabilities of tie-deletion of dissimilar agents. Lines indicate the mean value of each time-step, aggregated over all parameters excluding the probability of tie-deletion and randomness. Shaded regions are the 95\% confidence intervals. The three different plots show the different values of probability of new connections to be generated randomly. Notice that when $P(D) = 0$, no ties are deleted.}
+  \label{fig:sfig1}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
     \includegraphics[width=.8\linewidth]{../plots/overall/Absolute_Opinion_Tie_Deletion_Without_Negative.png}
   \caption{The effect of $P(D)$ without negative learning. X-axis shows the time-step and the y-axis shows the absolute value of the opinions of agents. Colors indicate different probabilities of tie-deletion of dissimilar agents. Lines indicate the mean value of each time-step, aggregated over all parameters with $\beta = 0$, excluding the probability of tie-deletion. Shaded regions are the 95\% confidence intervals.}
   \label{fig:sfig1}
@@ -498,6 +563,13 @@ It is also possible to give an alternative interpretation of what the probabilit
 \begin{figure}[H]
     \centering
     \includegraphics[width=.8\linewidth]{../plots/example/Example_Average_Path_Length.png}
+  \caption{Correlations between absolute opinion and average path length. The Pearson Correlation Coefficient between the initial and final opinion of agents was calculated for all simulations. Boxes indicate the quartiles, whiskers indicate the 1.5 of the inter-quartile range outside of the quartiles. Points outside this range is depicted as diamonds. Smaller dark dots show the correlation coefficient for individual simulations. First plot has negative learning rate on the x-axis. Second plot shows the threshold on the x-axis. }
+  \label{fig:sfig1}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.8\linewidth]{../plots/example/Example_Negative_Ties_Deleted.png}
   \caption{Correlations between absolute opinion and average path length. The Pearson Correlation Coefficient between the initial and final opinion of agents was calculated for all simulations. Boxes indicate the quartiles, whiskers indicate the 1.5 of the inter-quartile range outside of the quartiles. Points outside this range is depicted as diamonds. Smaller dark dots show the correlation coefficient for individual simulations. First plot has negative learning rate on the x-axis. Second plot shows the threshold on the x-axis. }
   \label{fig:sfig1}
 \end{figure}

@@ -131,6 +131,20 @@ g.savefig(
     "plots/overall/Absolute_Opinion_Tie_Dissolution.png", dpi=300, bbox_inches="tight"
 )
 
+g = sns.relplot(
+    data=data.query,
+    x="timestep",
+    y="negative_ties_dissoluted",
+    hue="tie_dissolution",
+    kind="line",
+    col="randomness",
+    palette=blue_pallette,
+).set(ylabel=r"$NTD$", xlabel=r"$t$")
+
+rename_plot(g, titles=[r"$R = 0.1$", r"$R = 0.3$", r"$R = 0.5$"], legend=r"$P(D)$")
+g.savefig("plots/overall/Negative_Tie_Deleted.png", dpi=300, bbox_inches="tight")
+
+
 correlations = (
     data.groupby(
         [
@@ -261,6 +275,19 @@ g = sns.lineplot(
 plt.legend(title=r"$R$", bbox_to_anchor=(1.15, 0.6))
 plt.savefig(
     "plots/example/Example_Average_Path_Length.png", dpi=300, bbox_inches="tight"
+)
+
+g = sns.lineplot(
+    data=data_specific_random,
+    x="timestep",
+    y="negative_ties_dissoluted",
+    hue="randomness",
+    palette=blue_pallette,
+).set(ylabel=r"$NTD$", xlabel=r"$t$")
+
+plt.legend(title=r"$R$", bbox_to_anchor=(1.15, 0.6))
+plt.savefig(
+    "plots/example/Example_Negative_Ties_Deleted.png", dpi=300, bbox_inches="tight"
 )
 
 data_polarized = (
