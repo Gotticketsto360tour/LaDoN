@@ -225,13 +225,13 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {7.6}Outcome metrics}{17}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {7.6.1}Time-dependent Metrics}{17}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {7.6.2}Final State Metrics}{17}{}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Flowchart of a single timestep.\relax }}{18}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Flowchart of a single timestep. Numbers indicate different parts of the process of a single time-step. Blue bubbles show what model parameters are relevant to the particular step in the process. A random agent, $A_t$ is sampled from the network. Next, the network dynamic process begins (1). With a probability of $R$, a new connection is made to made to another randomly sampled agent. With a probability of $1-R$, a new connection is made via triadic closure. Then the opinion dynamic stage begins (2). $A_t$ pushes and pulls iteratively on all the opinions of her neighboring agents. Whether opinions are pushed or pulled is determined by whether the distance between them is further than $T$ apart. How much they are pulled or pushed is determined by $\alpha $ and $\beta $ respectively. After this process, the co-evolutionary step begins (3). With a probability of $P(D)$, ties to agents with opinions further than $T$ apart from $A_t$'s opinion are deleted. This concludes one time-step of the model.\relax }}{18}{}\protected@file@percent }
 \newlabel{fig:sfig1}{{5}{18}}
 \@writefile{toc}{\contentsline {section}{\numberline {8}Model Evaluation}{18}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {8.1}Fitting the model}{18}{}\protected@file@percent }
 \@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces Calculate $y = x^n$\relax }}{19}{}\protected@file@percent }
-\citation{fuglede_jensen-shannon_2004}
 \@writefile{toc}{\contentsline {subsection}{\numberline {8.2}Data}{20}{}\protected@file@percent }
+\citation{fuglede_jensen-shannon_2004}
 \citation{akiba_optuna_2019}
 \citation{wu_hyperparameter_2019}
 \@writefile{toc}{\contentsline {subsection}{\numberline {8.3}Hyperparameter Optimization}{21}{}\protected@file@percent }

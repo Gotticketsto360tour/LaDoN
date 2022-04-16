@@ -295,7 +295,7 @@ The measures related to the opinion of agents can then be correlated with cluste
 \begin{figure}[H]
     \centering
     \includegraphics[width=.8\linewidth]{../plots/schematics/model_representation.png}
-  \caption{Flowchart of a single timestep.}
+  \caption{Flowchart of a single timestep. Numbers indicate different parts of the process of a single time-step. Blue bubbles show what model parameters are relevant to the particular step in the process. A random agent, $A_t$ is sampled from the network. Next, the network dynamic process begins (1). With a probability of $R$, a new connection is made to made to another randomly sampled agent. With a probability of $1-R$, a new connection is made via triadic closure. Then the opinion dynamic stage begins (2). $A_t$ pushes and pulls iteratively on all the opinions of her neighboring agents. Whether opinions are pushed or pulled is determined by whether the distance between them is further than $T$ apart. How much they are pulled or pushed is determined by $\alpha$ and $\beta$ respectively. After this process, the co-evolutionary step begins (3). With a probability of $P(D)$, ties to agents with opinions further than $T$ apart from $A_t$'s opinion are deleted. This concludes one time-step of the model.}
   \label{fig:sfig1}
 \end{figure}
 
