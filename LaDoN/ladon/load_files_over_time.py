@@ -47,6 +47,26 @@ def combine_data():
 data = combine_data()
 
 g = sns.lineplot(
+    data=data,
+    x="timestep",
+    y="mean_distance",
+    hue="tie_dissolution",
+    palette=blue_pallette,
+).set(ylabel=r"$|O|$", xlabel=r"$t$")
+
+g = sns.relplot(
+    data=data,
+    x="timestep",
+    y="mean_distance",
+    hue="tie_dissolution",
+    kind="line",
+    col="threshold",
+    row="negative_learning_rate",
+    palette=blue_pallette,
+).set(ylabel=r"$D$", xlabel=r"$t$")
+
+
+g = sns.lineplot(
     data=data.query("negative_learning_rate == 0"),
     x="timestep",
     y="mean_absolute_opinion",

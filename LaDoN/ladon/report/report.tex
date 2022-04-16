@@ -71,7 +71,13 @@ This paper seeks to investigating the co-evolution of the dynamics of opinions a
 
 
 \section{Why choose agent-based modelling}
-In order to get sufficiently good answers to our questions, we need to build sufficiently good models. When it comes to models of opinion dynamics, this is no easy task. The social systems underlying opinion dynamics are complex and complicated. The change of opinions is both a cognitive matter of updating one’s belief, but also a social matter of being exposed to different perspectives \cite{flache_models_2017,friedkin_social_1990,spears_social_2021}. Models that do incorporate realistic social and cognitive mechanisms are typically verbal models. Although these verbal models often provide rich and detailed accounts with realistic mechanisms, they lack the precision of formal models \cite{fogarty_ten_2022,galesic_integrating_2021,smaldino_how_2020}. Agent-based models are well-equipped to strike a balance between the two types of models \cite{flache_between_2018,galesic_integrating_2021,epstein1999agent,mas2014cultural} . This is done by investigating the macro-behaviors of a system, where the micro-behaviors are specified \cite{bruch_agent-based_2015,epstein1999agent,flache_between_2018}. As is the case with any model, the results critically hinge on the assumptions of the model. It is therefore the role of the modeler to provide as empirically plausible mechanisms as possible for the system of study \cite{crooks2012introduction,epstein1999agent,page2010diversity}. At the same time, the value of a model is in its simplification of reality. The model should be as simple as it can be and as complicated as it needs to be in order to answer the questions of interest \cite{smaldino_how_2020}. The hope is that by simplifying the system to a sufficient extent, we can observe and understand some important features of even extremely complex systems \cite{fogarty_ten_2022,smaldino_how_2020}. The modeler’s job is to strike this balance between realism and simplicity by including only the most central mechanisms of the system in their model \cite{smaldino_models_2016}. 
+In order to get sufficiently good answers to our questions, we need to build sufficiently good models. 
+When it comes to models of opinion dynamics, this is no easy task. 
+The social systems underlying opinion dynamics are complex and complicated. 
+The change of opinions is both a cognitive matter of updating one’s belief, but also a social matter of being exposed to different perspectives \cite{flache_models_2017,friedkin_social_1990,spears_social_2021}. 
+Models that do incorporate realistic social and cognitive mechanisms are typically verbal models. 
+Although these verbal models often provide rich and detailed accounts with realistic mechanisms, they lack the precision of formal models \cite{fogarty_ten_2022,galesic_integrating_2021,smaldino_how_2020}. 
+Agent-based models are well-equipped to strike a balance between the two types of models \cite{flache_between_2018,galesic_integrating_2021,epstein1999agent,mas2014cultural}. This is done by investigating the macro-behaviors of a system, where the micro-behaviors are specified \cite{bruch_agent-based_2015,epstein1999agent,flache_between_2018}. In particular, agent-based models are well suited for analyzing interactions between individuals instead of between variables \cite{geschke2019triple}.As is the case with any model, the results critically hinge on the assumptions of the model. It is therefore the role of the modeler to provide as empirically plausible mechanisms as possible for the system of study \cite{crooks2012introduction,epstein1999agent,page2010diversity}. At the same time, the value of a model is in its simplification of reality. The model should be as simple as it can be and as complicated as it needs to be in order to answer the questions of interest \cite{smaldino_how_2020}. The hope is that by simplifying the system to a sufficient extent, we can observe and understand some important features of even extremely complex systems \cite{fogarty_ten_2022,smaldino_how_2020}. The modeler’s job is to strike this balance between realism and simplicity by including only the most central mechanisms of the system in their model \cite{smaldino_models_2016}. 
 
 The rest of the introduction will review the empirical literature and try to find the central mechanisms that needs to be included in the agent-based model. To incorporate these mechanisms in the model of this paper, we turn to identifying key aspects of how social interactions shape opinions and how networks change over time. We start by considering key features of social interactions. Here, we will focus on homophily as well as positive and negative social influence. Thereafter, we turn to network dynamics and discuss the central role of triadic closure in how networks are shaped over time.
 
@@ -286,7 +292,12 @@ For every agent in the network, I record:
 
 The measures related to the opinion of agents can then be correlated with clustering, centrality and degrees to see how changes in network topology relate to changes in opinions. 
 
-HEJ MOR
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.8\linewidth]{../plots/schematics/model_representation.png}
+  \caption{Flowchart of a single timestep.}
+  \label{fig:sfig1}
+\end{figure}
 
 \begin{algorithm}
     \caption{Calculate $y = x^n$}
@@ -601,6 +612,12 @@ It is important to understand why the results found here are in so stark contras
 This echoes previous findings from two different literatures. First, facilitating cooperation via tie deletion recapitulates findings from computational biology, which states that positive assortment leads to increased levels of cooperation \cite{boyd_coordinated_2010,dakin_dynamic_2018, pepper_mechanism_2002,santos_cooperation_2006}. Second, more random new connections leading to more polarization is a stable finding in opinion dynamics models which include negative influence \cite{flache_why_2006,flache_small_2011,turner_paths_2018}. Here we show that these processes are interlinked.  
 
 \section{Short comings and future work}
+
+\subsection{On agent-based modelling}
+A typical retort for agent-based models in general is that the researcher can generate any type of outcome which is congruent with their theory \cite{geschke2019triple}. 
+I do not agree with this general conclusion. To allow for full transparency of the model and its conclusion, the entire code is available for anyone to reproduce. The code is fully documented and specifically designed to be easily readable.
+The hope is that other researchers will be able to build, expand, validate or refute the proposed framework.
+
 
 \subsection{Including Empirical Data}
 

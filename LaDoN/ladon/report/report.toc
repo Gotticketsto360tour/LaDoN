@@ -23,26 +23,27 @@
 \contentsline {subsection}{\numberline {7.6}Outcome metrics}{17}{}%
 \contentsline {subsubsection}{\numberline {7.6.1}Time-dependent Metrics}{17}{}%
 \contentsline {subsubsection}{\numberline {7.6.2}Final State Metrics}{17}{}%
-\contentsline {section}{\numberline {8}Model Evaluation}{19}{}%
-\contentsline {subsection}{\numberline {8.1}Fitting the model}{19}{}%
+\contentsline {section}{\numberline {8}Model Evaluation}{18}{}%
+\contentsline {subsection}{\numberline {8.1}Fitting the model}{18}{}%
 \contentsline {subsection}{\numberline {8.2}Data}{20}{}%
-\contentsline {subsection}{\numberline {8.3}Hyperparameter Optimization}{20}{}%
-\contentsline {subsection}{\numberline {8.4}Results}{21}{}%
-\contentsline {subsection}{\numberline {8.5}Why is co-evolution a better explanation?}{25}{}%
-\contentsline {section}{\numberline {9}Results}{26}{}%
-\contentsline {subsection}{\numberline {9.1}Alpha, beta, threshold, tie-deletion and chaotic systems}{26}{}%
-\contentsline {subsection}{\numberline {9.2}Correlations}{30}{}%
-\contentsline {section}{\numberline {10}Discussion}{32}{}%
-\contentsline {subsection}{\numberline {10.1}Reiterating previous literature}{32}{}%
-\contentsline {subsection}{\numberline {10.2}The effect of initial opinions}{32}{}%
-\contentsline {subsection}{\numberline {10.3}Tie-deletion facilitates cooperation}{32}{}%
-\contentsline {subsection}{\numberline {10.4}Distance in opinion and network space}{34}{}%
-\contentsline {section}{\numberline {11}Contrast to previous work}{38}{}%
-\contentsline {section}{\numberline {12}Short comings and future work}{39}{}%
-\contentsline {subsection}{\numberline {12.1}Including Empirical Data}{39}{}%
-\contentsline {subsection}{\numberline {12.2}Accurate perceptions of opinions}{39}{}%
-\contentsline {subsection}{\numberline {12.3}Shrinking Variance}{40}{}%
-\contentsline {subsection}{\numberline {12.4}Social influence exclusively}{40}{}%
-\contentsline {section}{\numberline {13}A broader perspective}{41}{}%
-\contentsline {section}{\numberline {14}Conclusion}{41}{}%
-\contentsline {section}{References}{41}{}%
+\contentsline {subsection}{\numberline {8.3}Hyperparameter Optimization}{21}{}%
+\contentsline {subsection}{\numberline {8.4}Results}{22}{}%
+\contentsline {subsection}{\numberline {8.5}Why is co-evolution a better explanation?}{26}{}%
+\contentsline {section}{\numberline {9}Results}{27}{}%
+\contentsline {subsection}{\numberline {9.1}Alpha, beta, threshold, tie-deletion and chaotic systems}{27}{}%
+\contentsline {subsection}{\numberline {9.2}Correlations}{31}{}%
+\contentsline {section}{\numberline {10}Discussion}{33}{}%
+\contentsline {subsection}{\numberline {10.1}Reiterating previous literature}{33}{}%
+\contentsline {subsection}{\numberline {10.2}The effect of initial opinions}{33}{}%
+\contentsline {subsection}{\numberline {10.3}Tie-deletion facilitates cooperation}{33}{}%
+\contentsline {subsection}{\numberline {10.4}Distance in opinion and network space}{35}{}%
+\contentsline {section}{\numberline {11}Contrast to previous work}{39}{}%
+\contentsline {section}{\numberline {12}Short comings and future work}{40}{}%
+\contentsline {subsection}{\numberline {12.1}On agent-based modelling}{40}{}%
+\contentsline {subsection}{\numberline {12.2}Including Empirical Data}{40}{}%
+\contentsline {subsection}{\numberline {12.3}Accurate perceptions of opinions}{40}{}%
+\contentsline {subsection}{\numberline {12.4}Shrinking Variance}{41}{}%
+\contentsline {subsection}{\numberline {12.5}Social influence exclusively}{41}{}%
+\contentsline {section}{\numberline {13}A broader perspective}{42}{}%
+\contentsline {section}{\numberline {14}Conclusion}{42}{}%
+\contentsline {section}{References}{42}{}%

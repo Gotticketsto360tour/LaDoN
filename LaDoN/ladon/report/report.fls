@@ -527,6 +527,11 @@ INPUT /usr/local/texlive/2021/texmf-dist/tex/latex/psnfss/ts1ptm.fd
 INPUT /usr/local/texlive/2021/texmf-dist/tex/latex/psnfss/ts1ptm.fd
 INPUT /usr/local/texlive/2021/texmf-dist/tex/latex/psnfss/ts1ptm.fd
 INPUT /usr/local/texlive/2021/texmf-dist/fonts/tfm/adobe/times/ptmr8c.tfm
+INPUT ../plots/schematics/model_representation.png
+INPUT ../plots/schematics/model_representation.png
+INPUT ../plots/schematics/model_representation.png
+INPUT ../plots/schematics/model_representation.png
+INPUT ../plots/schematics/model_representation.png
 INPUT /usr/local/texlive/2021/texmf-dist/tex/latex/psnfss/omsptm.fd
 INPUT /usr/local/texlive/2021/texmf-dist/tex/latex/psnfss/omsptm.fd
 INPUT /usr/local/texlive/2021/texmf-dist/tex/latex/psnfss/omsptm.fd
