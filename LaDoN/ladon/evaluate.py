@@ -93,9 +93,7 @@ g = sns.barplot(
     hue_order=["With Opinion Dynamics", "Without Opinion Dynamics", "Target"],
 )
 g.set(xlabel=r"$APL$", ylabel="")
-plt.legend(
-    title="Network",
-)
+plt.legend(title="Network", loc="upper right")
 plt.savefig("plots/overall/Model_Evaluation_APL.png", dpi=300, bbox_inches="tight")
 
 g = sns.barplot(

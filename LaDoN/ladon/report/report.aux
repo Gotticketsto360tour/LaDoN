@@ -113,7 +113,7 @@
 \citation{kossinets_origins_2009}
 \@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces The link between distance and similarity. Adapted from \citeauthor {kossinets_origins_2009} \citeyear {kossinets_origins_2009}. X-axis shows the distance in the network to other agents. Y-axis shows the average similarity between agents.\relax }}{7}{}\protected@file@percent }
 \providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
-\newlabel{fig:sfig1}{{1}{7}}
+\newlabel{fig:distance_similarity}{{1}{7}}
 \citation{chacoma_opinion_2015}
 \citation{flache_models_2017}
 \citation{levin_dynamics_2021}
@@ -194,7 +194,7 @@
 \citation{pepper_mechanism_2002}
 \citation{santos_cooperation_2006}
 \@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Tie closure. Taken from \citeauthor {kossinets_origins_2009} \citeyear {kossinets_origins_2009}. Panels show different possible tie-closures. The first panel (A) depicts closing ties with a friend of a friend. This type of tie-closure is called triadic closure. Panel B and C shows longer cycles of closure.\relax }}{11}{}\protected@file@percent }
-\newlabel{fig:sfig1}{{2}{11}}
+\newlabel{fig:tie_closure}{{2}{11}}
 \@writefile{toc}{\contentsline {section}{\numberline {6}Co-evolution via tie-deletion}{11}{}\protected@file@percent }
 \citation{kossinets_origins_2009}
 \citation{kossinets_origins_2009}
@@ -210,94 +210,99 @@
 \citation{kossinets_origins_2009}
 \citation{kossinets_origins_2009}
 \@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Tie closure. Taken from \citeauthor {kossinets_origins_2009} \citeyear {kossinets_origins_2009}. Panels show different possible tie-closures. The first panel (A) depicts closing ties with a friend of a friend. This type of tie-closure is called triadic closure. Panel B and C shows longer cycles of closure.\relax }}{13}{}\protected@file@percent }
-\newlabel{fig:sfig1}{{3}{13}}
+\newlabel{fig:santos}{{3}{13}}
 \@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Tie closure. Taken from \citeauthor {kossinets_origins_2009} \citeyear {kossinets_origins_2009}. Panels show different possible tie-closures. The first panel (A) depicts closing ties with a friend of a friend. This type of tie-closure is called triadic closure. Panel B and C shows longer cycles of closure.\relax }}{14}{}\protected@file@percent }
-\newlabel{fig:sfig1}{{4}{14}}
+\newlabel{fig:echo_chambers}{{4}{14}}
 \@writefile{toc}{\contentsline {section}{\numberline {7}Model Description}{14}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {7.1}Conceptual overview}{14}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {7.2}Assumptions}{14}{}\protected@file@percent }
+\citation{takacs_is_2014}
+\citation{kossinets_origins_2009}
+\citation{watts_collective_1998}
 \@writefile{toc}{\contentsline {subsection}{\numberline {7.3}Components and their properties}{15}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {7.4}Initialization}{15}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.5}Dynamics}{15}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.5.1}Sampling agents and interactions}{15}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.5}Dynamics}{16}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.5.1}Sampling agents and interactions}{16}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {7.5.2}Interaction between neighbors}{16}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {7.5.3}Tie-dissolution}{17}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.6}Outcome metrics}{17}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.6.1}Time-dependent Metrics}{17}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.6.2}Final State Metrics}{17}{}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Flowchart of a single timestep. Numbers indicate different parts of the process of a single time-step. Blue bubbles show what model parameters are relevant to the particular step in the process. A random agent, $A_t$ is sampled from the network. Next, the network dynamic process begins (1). With a probability of $R$, a new connection is made to made to another randomly sampled agent. With a probability of $1-R$, a new connection is made via triadic closure. Then the opinion dynamic stage begins (2). $A_t$ pushes and pulls iteratively on all the opinions of her neighboring agents. Whether opinions are pushed or pulled is determined by whether the distance between them is further than $T$ apart. How much they are pulled or pushed is determined by $\alpha $ and $\beta $ respectively. After this process, the co-evolutionary step begins (3). With a probability of $P(D)$, ties to agents with opinions further than $T$ apart from $A_t$'s opinion are deleted. This concludes one time-step of the model.\relax }}{18}{}\protected@file@percent }
-\newlabel{fig:sfig1}{{5}{18}}
-\@writefile{toc}{\contentsline {section}{\numberline {8}Model Evaluation}{18}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {8.1}Fitting the model}{18}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.6}Outcome metrics}{18}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.6.1}Time-dependent Metrics}{18}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.6.2}Final State Metrics}{18}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Flowchart of a single timestep. Numbers indicate different parts of the process of a single time-step. Blue bubbles show what model parameters are relevant to the particular step in the process. A random agent, $A_t$ is sampled from the network. Next, the network dynamic process begins (1). With a probability of $R$, a new connection is made to made to another randomly sampled agent. With a probability of $1-R$, a new connection is made via triadic closure. Then the opinion dynamic stage begins (2). $A_t$ pushes and pulls iteratively on all the opinions of her neighboring agents. Whether opinions are pushed or pulled is determined by whether the distance between them is further than $T$ apart. How much they are pulled or pushed is determined by $\alpha $ and $\beta $ respectively. After this process, the co-evolutionary step begins (3). With a probability of $P(D)$, ties to agents with opinions further than $T$ apart from $A_t$'s opinion are deleted. This concludes one time-step of the model.\relax }}{19}{}\protected@file@percent }
+\newlabel{fig:flowchart}{{5}{19}}
 \@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces Calculate $y = x^n$\relax }}{19}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {8.2}Data}{20}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {8}Model Evaluation}{20}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.1}Fitting the model}{20}{}\protected@file@percent }
 \citation{fuglede_jensen-shannon_2004}
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.2}Data}{21}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.3}Hyperparameter Optimization}{21}{}\protected@file@percent }
 \citation{akiba_optuna_2019}
 \citation{wu_hyperparameter_2019}
-\@writefile{toc}{\contentsline {subsection}{\numberline {8.3}Hyperparameter Optimization}{21}{}\protected@file@percent }
 \citation{hutter2014efficient}
 \@writefile{toc}{\contentsline {subsection}{\numberline {8.4}Results}{22}{}\protected@file@percent }
 \@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Difference between models and target regarding average clustering coefficient. X-axis shows the average correlation coefficient of the different networks. Y-axis shows the different empirical networks considered. Colors shows the different models as well as the target value. Black lines indicate 95\% confidence intervals.\relax }}{23}{}\protected@file@percent }
-\newlabel{fig:sfig1}{{6}{23}}
+\newlabel{fig:eval_clustering}{{6}{23}}
 \@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Difference between models and target regarding average path length. X-axis shows the estimated average path length of the different networks. Y-axis shows the different empirical networks considered. Colors shows the different models as well as the target value. Black lines indicate 95\% confidence intervals.\relax }}{23}{}\protected@file@percent }
-\newlabel{fig:sfig1}{{7}{23}}
+\newlabel{fig:eval_path}{{7}{23}}
 \citation{hutter2014efficient}
 \citation{hutter2014efficient}
 \@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Difference between models and target regarding Jensen Shannon Divergence. X-axis shows the Jensen Shannon Divergence of the degree distribution between the generated and the target network. Notice that as Jensen Shannon Divergence is a distance metric, lower values indicate less difference in degree distributions. Y-axis shows the different empirical networks considered. Colors shows the different models. Black lines indicate 95\% confidence intervals.\relax }}{24}{}\protected@file@percent }
-\newlabel{fig:sfig1}{{8}{24}}
+\newlabel{fig:eval_divergence}{{8}{24}}
 \@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Difference in model performance. X-axis shows the mean difference between the generated network and actual networks, ($O(A, G)$). Y-axis shows the different empirical networks considered. Colors indicate whether the model includes or excludes opinion dynamics. Black lines indicate 95\% confidence intervals.\relax }}{24}{}\protected@file@percent }
-\newlabel{fig:sfig1}{{9}{24}}
+\newlabel{fig:eval_mean}{{9}{24}}
 \@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Hyper Parameter Importance. X-axis shows different hyperparameters. Y-axis shows parameter importance. Colors indicate different networks. Parameter importance is calculated using an fANOVA \cite {hutter2014efficient}.\relax }}{25}{}\protected@file@percent }
-\newlabel{fig:sfig1}{{10}{25}}
+\newlabel{fig:eval_importance}{{10}{25}}
 \@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Table of best parameter values\relax }}{25}{}\protected@file@percent }
+\newlabel{table:best_params}{{1}{25}}
 \@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Table of network characteristics. $N$ is the number of nodes, $E$ is the number of edges, $D_{\mu }$ is the mean degree, $D_{\sigma }$ is the standard deviation of the degree distribution, $C$ is the average clustering coefficient, and $L_G$ is the average path length. \relax }}{26}{}\protected@file@percent }
+\newlabel{table:characteristics}{{2}{26}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {8.5}Why is co-evolution a better explanation?}{26}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {9}Results}{27}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {9.1}Alpha, beta, threshold, tie-deletion and chaotic systems}{27}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {9}Results}{28}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.1}Alpha, beta, threshold, tie-deletion and chaotic systems}{28}{}\protected@file@percent }
 \@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces $T$'s effect on polarization over time. X-axis shows the time-step and the y-axis shows the absolute value of the opinions of agents. Colors indicate different values of $T$. Lines indicate the mean value of each time-step, aggregated over all parameters excluding $T$. Shaded regions are the 95\% confidence intervals.\relax }}{28}{}\protected@file@percent }
-\newlabel{fig:sfig1}{{11}{28}}
-\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces $\alpha $'s effect on polarization over time. X-axis shows the time-step and the y-axis shows the absolute value of the opinions of agents. Colors indicate different values of $\alpha $. Lines indicate the mean value of each time-step, aggregated over all parameters excluding $\alpha $. Shaded regions are the 95\% confidence intervals.\relax }}{28}{}\protected@file@percent }
-\newlabel{fig:sfig1}{{12}{28}}
+\newlabel{fig:threshold}{{11}{28}}
+\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces $\alpha $'s effect on polarization over time. X-axis shows the time-step and the y-axis shows the absolute value of the opinions of agents. Colors indicate different values of $\alpha $. Lines indicate the mean value of each time-step, aggregated over all parameters excluding $\alpha $. Shaded regions are the 95\% confidence intervals.\relax }}{29}{}\protected@file@percent }
+\newlabel{fig:alpha}{{12}{29}}
 \@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces $\beta $'s effect on polarization over time. X-axis shows the time-step and the y-axis shows the absolute value of the opinions of agents. Colors indicate different values of $\beta $. Lines indicate the mean value of each time-step, aggregated over all parameters excluding $\beta $. Shaded regions are the 95\% confidence intervals.\relax }}{29}{}\protected@file@percent }
-\newlabel{fig:sfig1}{{13}{29}}
-\@writefile{lof}{\contentsline {figure}{\numberline {14}{\ignorespaces $P(D)$'s effect of polarization over time. X-axis shows the time-step and the y-axis shows the absolute value of the opinions of agents. Colors indicate different probabilities of tie-deletion of dissimilar agents. Lines indicate the mean value of each time-step, aggregated over all parameters excluding the probability of tie-deletion and randomness. Shaded regions are the 95\% confidence intervals. The three different plots show the different values of probability of new connections to be generated randomly. \relax }}{29}{}\protected@file@percent }
-\newlabel{fig:sfig1}{{14}{29}}
+\newlabel{fig:beta}{{13}{29}}
+\@writefile{lof}{\contentsline {figure}{\numberline {14}{\ignorespaces $P(D)$'s effect of polarization over time. X-axis shows the time-step and the y-axis shows the absolute value of the opinions of agents. Colors indicate different probabilities of tie-deletion of dissimilar agents. Lines indicate the mean value of each time-step, aggregated over all parameters excluding the probability of tie-deletion and randomness. Shaded regions are the 95\% confidence intervals. The three different plots show the different values of probability of new connections to be generated randomly. \relax }}{30}{}\protected@file@percent }
+\newlabel{fig:pd}{{14}{30}}
 \@writefile{lof}{\contentsline {figure}{\numberline {15}{\ignorespaces Negative ties deleted. X-axis shows the time-step and the y-axis show the average cumulative frequency of deleted ties. Colors indicate different probabilities of tie-deletion of dissimilar agents. Lines indicate the mean value of each time-step, aggregated over all parameters excluding the probability of tie-deletion and randomness. Shaded regions are the 95\% confidence intervals. The three different plots show the different values of probability of new connections to be generated randomly. Notice that when $P(D) = 0$, no ties are deleted.\relax }}{30}{}\protected@file@percent }
-\newlabel{fig:sfig1}{{15}{30}}
-\@writefile{lof}{\contentsline {figure}{\numberline {16}{\ignorespaces The effect of $P(D)$ without negative learning. X-axis shows the time-step and the y-axis shows the absolute value of the opinions of agents. Colors indicate different probabilities of tie-deletion of dissimilar agents. Lines indicate the mean value of each time-step, aggregated over all parameters with $\beta = 0$, excluding the probability of tie-deletion. Shaded regions are the 95\% confidence intervals.\relax }}{30}{}\protected@file@percent }
-\newlabel{fig:sfig1}{{16}{30}}
-\@writefile{lof}{\contentsline {figure}{\numberline {17}{\ignorespaces Distribution of opinion changes across different conditions. Rows display different values of thresholds, columns indicate different values of negative influence. Different colors show different values of probability of tie-deletion. X-axis shows the difference between the absolute value of the final and initial opinions of agents. This measure can be thought of as a measure of “radicalization”. Higher values indicate that the final value of agents is more extreme than the initial values, and vice versa. Y-axis exhibit the percent of values within each bin. \relax }}{31}{}\protected@file@percent }
-\newlabel{fig:sfig1}{{17}{31}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {9.2}Correlations}{31}{}\protected@file@percent }
+\newlabel{fig:ntd}{{15}{30}}
+\@writefile{lof}{\contentsline {figure}{\numberline {16}{\ignorespaces The effect of $P(D)$ without negative learning. X-axis shows the time-step and the y-axis shows the absolute value of the opinions of agents. Colors indicate different probabilities of tie-deletion of dissimilar agents. Lines indicate the mean value of each time-step, aggregated over all parameters with $\beta = 0$, excluding the probability of tie-deletion. Shaded regions are the 95\% confidence intervals.\relax }}{31}{}\protected@file@percent }
+\newlabel{fig:pd_no_negative}{{16}{31}}
+\@writefile{lof}{\contentsline {figure}{\numberline {17}{\ignorespaces Distribution of opinion changes across different conditions. Rows display different values of thresholds, columns indicate different values of negative influence. Different colors show different values of probability of tie-deletion. X-axis shows the difference between the absolute value of the final and initial opinions of agents. This measure can be thought of as a measure of “radicalization”. Higher values indicate that the final value of agents is more extreme than the initial values, and vice versa. Y-axis exhibit the percent of values within each bin. \relax }}{32}{}\protected@file@percent }
+\newlabel{fig:radicalization}{{17}{32}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.2}Correlations}{33}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {18}{\ignorespaces Correlations between initial opinions and final opinions. X-axis shows different values of threshold and the y-axis shows the Pearson Correlation Coefficient between the initial and final opinion of agents. Boxes indicate the quartiles, whiskers indicate the 1.5 of the inter-quartile range outside of the quartiles. Points outside this range is depicted as diamonds. Smaller dark dots show the correlation coefficient for individual simulations. Columns show low, medium and high values of $\beta $. \relax }}{33}{}\protected@file@percent }
+\newlabel{fig:corr_initial_final}{{18}{33}}
+\@writefile{lof}{\contentsline {figure}{\numberline {19}{\ignorespaces Correlations between absolute opinion and average path length. The Pearson Correlation Coefficient between the initial and final opinion of agents was calculated for all simulations. Boxes indicate the quartiles, whiskers indicate the 1.5 of the inter-quartile range outside of the quartiles. Points outside this range is depicted as diamonds. Smaller dark dots show the correlation coefficient for individual simulations. First plot has negative learning rate on the x-axis. Second plot shows the threshold on the x-axis. \relax }}{33}{}\protected@file@percent }
+\newlabel{fig:corr_abs_path}{{19}{33}}
 \citation{flache_models_2017}
 \citation{flache_models_2017}
 \citation{sasahara_social_2021}
-\@writefile{lof}{\contentsline {figure}{\numberline {18}{\ignorespaces Correlations between initial opinions and final opinions. X-axis shows different values of threshold and the y-axis shows the Pearson Correlation Coefficient between the initial and final opinion of agents. Boxes indicate the quartiles, whiskers indicate the 1.5 of the inter-quartile range outside of the quartiles. Points outside this range is depicted as diamonds. Smaller dark dots show the correlation coefficient for individual simulations. Columns show low, medium and high values of $\beta $. \relax }}{32}{}\protected@file@percent }
-\newlabel{fig:sfig1}{{18}{32}}
-\@writefile{lof}{\contentsline {figure}{\numberline {19}{\ignorespaces Correlations between absolute opinion and average path length. The Pearson Correlation Coefficient between the initial and final opinion of agents was calculated for all simulations. Boxes indicate the quartiles, whiskers indicate the 1.5 of the inter-quartile range outside of the quartiles. Points outside this range is depicted as diamonds. Smaller dark dots show the correlation coefficient for individual simulations. First plot has negative learning rate on the x-axis. Second plot shows the threshold on the x-axis. \relax }}{32}{}\protected@file@percent }
-\newlabel{fig:sfig1}{{19}{32}}
+\@writefile{toc}{\contentsline {section}{\numberline {10}Discussion}{34}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.1}Reiterating previous literature}{34}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.2}The effect of initial opinions}{34}{}\protected@file@percent }
 \citation{kossinets_origins_2009}
 \citation{flache_why_2006}
 \citation{flache_small_2011}
 \citation{turner_paths_2018}
-\@writefile{toc}{\contentsline {section}{\numberline {10}Discussion}{33}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {10.1}Reiterating previous literature}{33}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {10.2}The effect of initial opinions}{33}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {10.3}Tie-deletion facilitates cooperation}{33}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.3}Tie-deletion facilitates cooperation}{35}{}\protected@file@percent }
 \citation{asikainen_cumulative_2020}
 \citation{peixoto_disentangling_2022}
 \citation{turner_paths_2018}
-\@writefile{toc}{\contentsline {subsection}{\numberline {10.4}Distance in opinion and network space}{35}{}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {20}{\ignorespaces Lineplot of opinions over time. X-axis shows time-steps of the simulation, y-axis shows the opinion of agents in the simulation. Colors show different values of $R$. All simulations were $T = 0.8$, $\alpha = 0.15$, $\beta = 0.1$, $P(D) = 1$ and with the same random seed.\relax }}{35}{}\protected@file@percent }
-\newlabel{fig:sfig1}{{20}{35}}
-\@writefile{lof}{\contentsline {figure}{\numberline {21}{\ignorespaces Correlations between absolute opinion and average path length. The Pearson Correlation Coefficient between the initial and final opinion of agents was calculated for all simulations. Boxes indicate the quartiles, whiskers indicate the 1.5 of the inter-quartile range outside of the quartiles. Points outside this range is depicted as diamonds. Smaller dark dots show the correlation coefficient for individual simulations. First plot has negative learning rate on the x-axis. Second plot shows the threshold on the x-axis. \relax }}{36}{}\protected@file@percent }
-\newlabel{fig:sfig1}{{21}{36}}
-\@writefile{lof}{\contentsline {figure}{\numberline {22}{\ignorespaces Correlations between absolute opinion and average path length. The Pearson Correlation Coefficient between the initial and final opinion of agents was calculated for all simulations. Boxes indicate the quartiles, whiskers indicate the 1.5 of the inter-quartile range outside of the quartiles. Points outside this range is depicted as diamonds. Smaller dark dots show the correlation coefficient for individual simulations. First plot has negative learning rate on the x-axis. Second plot shows the threshold on the x-axis. \relax }}{37}{}\protected@file@percent }
-\newlabel{fig:sfig1}{{22}{37}}
-\@writefile{lof}{\contentsline {figure}{\numberline {23}{\ignorespaces Correlations between absolute opinion and average path length. The Pearson Correlation Coefficient between the initial and final opinion of agents was calculated for all simulations. Boxes indicate the quartiles, whiskers indicate the 1.5 of the inter-quartile range outside of the quartiles. Points outside this range is depicted as diamonds. Smaller dark dots show the correlation coefficient for individual simulations. First plot has negative learning rate on the x-axis. Second plot shows the threshold on the x-axis. \relax }}{37}{}\protected@file@percent }
-\newlabel{fig:sfig1}{{23}{37}}
-\@writefile{lof}{\contentsline {figure}{\numberline {24}{\ignorespaces Network evolutions for different levels of randomness. Columns show different values of randomness, $R$. Rows are different time-steps of the simulations, increasing in increments of 2000. Agents are colored by their opinion. Dark blue colors represent values close to -1, and lighter colors represent opinions close to 1.\relax }}{38}{}\protected@file@percent }
-\newlabel{fig:1}{{24}{38}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.4}Distance in opinion and network space}{36}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {20}{\ignorespaces Lineplot of opinions over time. X-axis shows time-steps of the simulation, y-axis shows the opinion of agents in the simulation. Colors show different values of $R$. All simulations were $T = 0.8$, $\alpha = 0.15$, $\beta = 0.1$, $P(D) = 1$ and with the same random seed.\relax }}{36}{}\protected@file@percent }
+\newlabel{fig:lineplot}{{20}{36}}
+\@writefile{lof}{\contentsline {figure}{\numberline {21}{\ignorespaces Absolute opinions of representative simulations over time. X-axis shows time-steps, and the y-axis shows the absolute opinion of agents. Colors indicate different levels of randomness. Lines show single simulations over time which were simulated using the same random seed. These simulations had parameter values of $T = 0.8$, $\alpha = 0.15$, $\beta = 0.1$ and $P(D)=1$.\relax }}{37}{}\protected@file@percent }
+\newlabel{fig:example_abs_opinion}{{21}{37}}
+\@writefile{lof}{\contentsline {figure}{\numberline {22}{\ignorespaces Average path length of representative simulations over time. X-axis shows time-steps, and the y-axis shows the average path length of the network. Colors indicate different levels of randomness. Lines show single simulations over time which were simulated using the same random seed. These simulations had parameter values of $T = 0.8$, $\alpha = 0.15$, $\beta = 0.1$ and $P(D)=1$.\relax }}{38}{}\protected@file@percent }
+\newlabel{fig:example_path}{{22}{38}}
+\@writefile{lof}{\contentsline {figure}{\numberline {23}{\ignorespaces Negative ties deleted in representative simulations over time. X-axis shows time-steps, and the y-axis shows the cumulative frequency of negative ties deleted. Colors indicate different levels of randomness. Lines show single simulations over time which were simulated using the same random seed. These simulations had parameter values of $T = 0.8$, $\alpha = 0.15$, $\beta = 0.1$ and $P(D)=1$.\relax }}{38}{}\protected@file@percent }
+\newlabel{fig:example_ntd}{{23}{38}}
+\@writefile{lof}{\contentsline {figure}{\numberline {24}{\ignorespaces Network evolutions for different levels of randomness. Columns show different values of randomness, $R$. Rows are different time-steps of the simulations, increasing in increments of 2000. Agents are colored by their opinion. Dark blue colors represent values close to -1, and lighter colors represent opinions close to 1.\relax }}{39}{}\protected@file@percent }
+\newlabel{fig:networks}{{24}{39}}
 \citation{sasahara_social_2021}
 \citation{flache_models_2017}
 \citation{sirbu2017opinion}
@@ -310,7 +315,7 @@
 \citation{flache_small_2011}
 \citation{turner_paths_2018}
 \citation{geschke2019triple}
-\@writefile{toc}{\contentsline {section}{\numberline {11}Contrast to previous work}{39}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {11}Contrast to previous work}{40}{}\protected@file@percent }
 \citation{flache_models_2017}
 \citation{noorazar_classical_2020}
 \citation{sirbu2017opinion}
@@ -319,10 +324,10 @@
 \citation{ghaderi_opinion_2014}
 \citation{yildiz_binary_2013}
 \citation{turner_paths_2018}
-\@writefile{toc}{\contentsline {section}{\numberline {12}Short comings and future work}{40}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {12.1}On agent-based modelling}{40}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {12.2}Including Empirical Data}{40}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {12.3}Accurate perceptions of opinions}{40}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {12}Short comings and future work}{41}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {12.1}On agent-based modelling}{41}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {12.2}Including Empirical Data}{41}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {12.3}Accurate perceptions of opinions}{41}{}\protected@file@percent }
 \citation{jussim_influence_1989}
 \citation{arceneaux_cognitive_2012}
 \citation{allahverdyan_opinion_2014}
@@ -336,8 +341,8 @@
 \citation{pennycook_lazy_2019}
 \citation{bener_empirical_2016}
 \citation{stromback_dynamics_2013}
-\@writefile{toc}{\contentsline {subsection}{\numberline {12.4}Shrinking Variance}{41}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {12.5}Social influence exclusively}{41}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {12.4}Shrinking Variance}{42}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {12.5}Social influence exclusively}{42}{}\protected@file@percent }
 \citation{boxell_cross-country_2020}
 \citation{pew_research_center_political_2014}
 \citation{bhagat_three_2016}
@@ -349,9 +354,9 @@
 \APACbibcite{akiba_optuna_2019}{\citeauthoryear {Akiba, Sano, Yanase, Ohta,{}\ \BBA{} Koyama}{Akiba\ \BOthers {.}}{{\APACyear {2019}}}}
 \bibcite{allahverdyan_opinion_2014}{\citeauthoryear {Allahverdyan\ \BBA{} Galstyan}{Allahverdyan\ \BBA{} Galstyan}{{\APACyear {2014}}}}
 \APACbibcite{allahverdyan_opinion_2014}{\citeauthoryear {Allahverdyan\ \BBA{} Galstyan}{Allahverdyan\ \BBA{} Galstyan}{{\APACyear {2014}}}}
-\@writefile{toc}{\contentsline {section}{\numberline {13}A broader perspective}{42}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {14}Conclusion}{42}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{References}{42}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {13}A broader perspective}{43}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {14}Conclusion}{43}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{References}{43}{}\protected@file@percent }
 \bibcite{andris_rise_2015}{\citeauthoryear {Andris\ \BOthers {.}}{Andris\ \BOthers {.}}{{\APACyear {2015}}}}
 \APACbibcite{andris_rise_2015}{\citeauthoryear {Andris\ \BOthers {.}}{Andris\ \BOthers {.}}{{\APACyear {2015}}}}
 \bibcite{arceneaux_cognitive_2012}{\citeauthoryear {Arceneaux}{Arceneaux}{{\APACyear {2012}}}}
@@ -500,4 +505,4 @@
 \APACbibcite{wu_hyperparameter_2019}{\citeauthoryear {Wu\ \BOthers {.}}{Wu\ \BOthers {.}}{{\APACyear {2019}}}}
 \bibcite{yildiz_binary_2013}{\citeauthoryear {Yildiz, Ozdaglar, Acemoglu, Saberi,{}\ \BBA{} Scaglione}{Yildiz\ \BOthers {.}}{{\APACyear {2013}}}}
 \APACbibcite{yildiz_binary_2013}{\citeauthoryear {Yildiz, Ozdaglar, Acemoglu, Saberi,{}\ \BBA{} Scaglione}{Yildiz\ \BOthers {.}}{{\APACyear {2013}}}}
-\gdef \@abspage@last{49}
+\gdef \@abspage@last{50}

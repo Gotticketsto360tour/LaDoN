@@ -16,34 +16,34 @@
 \contentsline {subsection}{\numberline {7.2}Assumptions}{14}{}%
 \contentsline {subsection}{\numberline {7.3}Components and their properties}{15}{}%
 \contentsline {subsection}{\numberline {7.4}Initialization}{15}{}%
-\contentsline {subsection}{\numberline {7.5}Dynamics}{15}{}%
-\contentsline {subsubsection}{\numberline {7.5.1}Sampling agents and interactions}{15}{}%
+\contentsline {subsection}{\numberline {7.5}Dynamics}{16}{}%
+\contentsline {subsubsection}{\numberline {7.5.1}Sampling agents and interactions}{16}{}%
 \contentsline {subsubsection}{\numberline {7.5.2}Interaction between neighbors}{16}{}%
 \contentsline {subsubsection}{\numberline {7.5.3}Tie-dissolution}{17}{}%
-\contentsline {subsection}{\numberline {7.6}Outcome metrics}{17}{}%
-\contentsline {subsubsection}{\numberline {7.6.1}Time-dependent Metrics}{17}{}%
-\contentsline {subsubsection}{\numberline {7.6.2}Final State Metrics}{17}{}%
-\contentsline {section}{\numberline {8}Model Evaluation}{18}{}%
-\contentsline {subsection}{\numberline {8.1}Fitting the model}{18}{}%
-\contentsline {subsection}{\numberline {8.2}Data}{20}{}%
+\contentsline {subsection}{\numberline {7.6}Outcome metrics}{18}{}%
+\contentsline {subsubsection}{\numberline {7.6.1}Time-dependent Metrics}{18}{}%
+\contentsline {subsubsection}{\numberline {7.6.2}Final State Metrics}{18}{}%
+\contentsline {section}{\numberline {8}Model Evaluation}{20}{}%
+\contentsline {subsection}{\numberline {8.1}Fitting the model}{20}{}%
+\contentsline {subsection}{\numberline {8.2}Data}{21}{}%
 \contentsline {subsection}{\numberline {8.3}Hyperparameter Optimization}{21}{}%
 \contentsline {subsection}{\numberline {8.4}Results}{22}{}%
 \contentsline {subsection}{\numberline {8.5}Why is co-evolution a better explanation?}{26}{}%
-\contentsline {section}{\numberline {9}Results}{27}{}%
-\contentsline {subsection}{\numberline {9.1}Alpha, beta, threshold, tie-deletion and chaotic systems}{27}{}%
-\contentsline {subsection}{\numberline {9.2}Correlations}{31}{}%
-\contentsline {section}{\numberline {10}Discussion}{33}{}%
-\contentsline {subsection}{\numberline {10.1}Reiterating previous literature}{33}{}%
-\contentsline {subsection}{\numberline {10.2}The effect of initial opinions}{33}{}%
-\contentsline {subsection}{\numberline {10.3}Tie-deletion facilitates cooperation}{33}{}%
-\contentsline {subsection}{\numberline {10.4}Distance in opinion and network space}{35}{}%
-\contentsline {section}{\numberline {11}Contrast to previous work}{39}{}%
-\contentsline {section}{\numberline {12}Short comings and future work}{40}{}%
-\contentsline {subsection}{\numberline {12.1}On agent-based modelling}{40}{}%
-\contentsline {subsection}{\numberline {12.2}Including Empirical Data}{40}{}%
-\contentsline {subsection}{\numberline {12.3}Accurate perceptions of opinions}{40}{}%
-\contentsline {subsection}{\numberline {12.4}Shrinking Variance}{41}{}%
-\contentsline {subsection}{\numberline {12.5}Social influence exclusively}{41}{}%
-\contentsline {section}{\numberline {13}A broader perspective}{42}{}%
-\contentsline {section}{\numberline {14}Conclusion}{42}{}%
-\contentsline {section}{References}{42}{}%
+\contentsline {section}{\numberline {9}Results}{28}{}%
+\contentsline {subsection}{\numberline {9.1}Alpha, beta, threshold, tie-deletion and chaotic systems}{28}{}%
+\contentsline {subsection}{\numberline {9.2}Correlations}{33}{}%
+\contentsline {section}{\numberline {10}Discussion}{34}{}%
+\contentsline {subsection}{\numberline {10.1}Reiterating previous literature}{34}{}%
+\contentsline {subsection}{\numberline {10.2}The effect of initial opinions}{34}{}%
+\contentsline {subsection}{\numberline {10.3}Tie-deletion facilitates cooperation}{35}{}%
+\contentsline {subsection}{\numberline {10.4}Distance in opinion and network space}{36}{}%
+\contentsline {section}{\numberline {11}Contrast to previous work}{40}{}%
+\contentsline {section}{\numberline {12}Short comings and future work}{41}{}%
+\contentsline {subsection}{\numberline {12.1}On agent-based modelling}{41}{}%
+\contentsline {subsection}{\numberline {12.2}Including Empirical Data}{41}{}%
+\contentsline {subsection}{\numberline {12.3}Accurate perceptions of opinions}{41}{}%
+\contentsline {subsection}{\numberline {12.4}Shrinking Variance}{42}{}%
+\contentsline {subsection}{\numberline {12.5}Social influence exclusively}{42}{}%
+\contentsline {section}{\numberline {13}A broader perspective}{43}{}%
+\contentsline {section}{\numberline {14}Conclusion}{43}{}%
+\contentsline {section}{References}{43}{}%
