@@ -24,11 +24,11 @@ dictionary = {
     "N_TARGET": 500,
     "RANDOMNESS": 0.01,
     "N_TIMESTEPS": 10000,
-    "POSITIVE_LEARNING_RATE": 0.05,
-    "NEGATIVE_LEARNING_RATE": 0.007,
+    "POSITIVE_LEARNING_RATE": 0.1,
+    "NEGATIVE_LEARNING_RATE": 0.0,
     "P": 0.5,
     "K": 7,
-    "TIE_DISSOLUTION": 0.2,
+    "TIE_DISSOLUTION": 1,
     "RECORD": True,
 }
 
@@ -44,7 +44,7 @@ sns.lineplot(data=my_network.MEAN_DISTANCE)
 sns.lineplot(data=my_network.SD_ABSOLUTE_OPINIONS)
 
 
-plot_graph(my_network, plot_type="agent_type", save_path="MyHtmlPlot.html")
+plot_graph(my_network, plot_type="agent_type")
 
 opinions = my_network.get_opinion_distribution()
 

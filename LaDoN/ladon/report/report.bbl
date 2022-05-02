@@ -575,6 +575,33 @@ Bruch, E.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
+Carter%
+, Lee%
+\BCBL {}\ \BBA {} Marshall%
+}{%
+Carter%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2015}}%
+}]{%
+carter2015phenotypic}
+\APACinsertmetastar {%
+carter2015phenotypic}%
+\begin{APACrefauthors}%
+Carter, A\BPBI J.%
+, Lee, A\BPBI E.%
+\BCBL {}\ \BBA {} Marshall, H\BPBI H.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2015}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Phenotypic assortment in wild primate networks}
+  {Phenotypic assortment in wild primate networks}.{\BBCQ}
+\newblock
+
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
 Center%
 }{%
 Center%
@@ -1517,6 +1544,39 @@ Kossinets, G.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
+Krivorotko%
+, Sosnovskaia%
+, Vashchenko%
+, Kerr%
+\BCBL {}\ \BBA {} Lesnic%
+}{%
+Krivorotko%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2022}}%
+}]{%
+krivorotko2022agent}
+\APACinsertmetastar {%
+krivorotko2022agent}%
+\begin{APACrefauthors}%
+Krivorotko, O.%
+, Sosnovskaia, M.%
+, Vashchenko, I.%
+, Kerr, C.%
+\BCBL {}\ \BBA {} Lesnic, D.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2022}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Agent-based modeling of COVID-19 outbreaks for New York
+  state and UK: Parameter identification algorithm} {Agent-based modeling of
+  covid-19 outbreaks for new york state and uk: Parameter identification
+  algorithm}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Infectious Disease Modelling}{7}{1}{30--44}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
 Levin%
 , Milner%
 \BCBL {}\ \BBA {} Perrings%
@@ -1612,6 +1672,34 @@ Levy, R.%
   \end{APACrefURL}
 \newblock
 \begin{APACrefDOI} \doi{10.1257/aer.20191777} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+M{\"a}s%
+}{%
+M{\"a}s%
+}{%
+{\protect \APACyear {2019}}%
+}]{%
+mas2019challenges}
+\APACinsertmetastar {%
+mas2019challenges}%
+\begin{APACrefauthors}%
+M{\"a}s, M.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2019}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Challenges to Simulation Validation in the Social
+  Sciences. A Critical Rationalist Perspective} {Challenges to simulation
+  validation in the social sciences. a critical rationalist
+  perspective}.{\BBCQ}
+\newblock
+\BIn{} \APACrefbtitle {Computer Simulation Validation} {Computer simulation
+  validation}\ (\BPGS\ 857--879).
+\newblock
+\APACaddressPublisher{}{Springer}.
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
