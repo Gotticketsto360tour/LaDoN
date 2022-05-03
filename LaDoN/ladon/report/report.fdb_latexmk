@@ -1,12 +1,12 @@
 # Fdb version 3
-["bibtex report"] 1651505444 "report.aux" "report.bbl" "report" 1651505473
+["bibtex report"] 1651575725 "report.aux" "report.bbl" "report" 1651575753
   "/usr/local/texlive/2021/texmf-dist/bibtex/bst/apacite/apacite.bst" 1374530685 141073 9d7b79dbf9d91133318126032cff8c27 ""
   "References.bib" 1651504159 188526 95a21e3e199c79463c84df46a113f52d ""
-  "report.aux" 1651505473 48191 7119edb10680d9c23527e8fb5fb3b99b "pdflatex"
+  "report.aux" 1651575753 48637 0da155721c82877d02881ea6c0031d71 "pdflatex"
   (generated)
   "report.bbl"
   "report.blg"
-["pdflatex"] 1651505444 "/Users/mikkelwerling/Documents/LaDoN/LaDoN/ladon/report/report.tex" "report.pdf" "report" 1651505473
+["pdflatex"] 1651575725 "/Users/mikkelwerling/Documents/LaDoN/LaDoN/ladon/report/report.tex" "report.pdf" "report" 1651575753
   "../plots/example/Example_Absolute_Opinion.png" 1648673771 200333 8abb2aa8b30c3ffe4b7b7f3b7ac53c10 ""
   "../plots/example/Example_Average_Path_Length.png" 1648673778 478755 5165a19de4e0ca17ba506ed5668d3a3b ""
   "../plots/example/Example_Negative_Ties_Deleted.png" 1649980426 224024 fcb68fb8c04b77a879bc6bf2bbe2d34c ""
@@ -47,8 +47,8 @@
   "../plots/references/kossinets_watts.jpeg" 1649978337 30389 9a243c184cf37b76dfde009d94744fa3 ""
   "../plots/references/kossinets_watts_distance.jpeg" 1649978571 30035 b68c3e1ba384be7455a4e8fbcc84095d ""
   "../plots/references/santos.png" 1649979100 3970260 bc6f3af5708da7ab83e174a89c2c5d67 ""
-  "../plots/schematics/model_representation.png" 1650124512 101304 d2a6f54b58efb73b23d4959236387060 ""
-  "/Users/mikkelwerling/Documents/LaDoN/LaDoN/ladon/report/report.tex" 1651505386 105377 b33e151ffe680976574e21da86b32478 ""
+  "../plots/schematics/model_representation.png" 1651575188 141674 d09f6f9f3c9c46c2646a40cdc5a3adb1 ""
+  "/Users/mikkelwerling/Documents/LaDoN/LaDoN/ladon/report/report.tex" 1651575695 105823 f2641a226d8ba33c5f6eb5fdd435addd ""
   "/usr/local/texlive/2021/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/local/texlive/2021/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/tfm/adobe/symbol/psyr.tfm" 1136768653 1408 5937f58aa508ea2cea4901c07d10f5fe ""
@@ -140,10 +140,10 @@
   "/usr/local/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1643323655 4379201 880d78f4a2bde4f491e7d718ab91f390 ""
   "/usr/local/texlive/2021/texmf-var/web2c/pdftex/pdflatex.fmt" 1643323721 2796779 5d118f325eff48385f25df8d5c174017 ""
   "/usr/local/texlive/2021/texmf.cnf" 1616695596 577 4c1911a7228e554c6032256d3cf5567d ""
-  "report.aux" 1651505473 48191 7119edb10680d9c23527e8fb5fb3b99b "pdflatex"
-  "report.bbl" 1651505444 70434 e0876d96681bc388f144ab84ea3d934f "bibtex report"
-  "report.tex" 1651505386 105377 b33e151ffe680976574e21da86b32478 ""
-  "report.toc" 1651505473 3590 e174e4ba35f9e8db995563272902d5ca "pdflatex"
+  "report.aux" 1651575753 48637 0da155721c82877d02881ea6c0031d71 "pdflatex"
+  "report.bbl" 1651575725 70434 e0876d96681bc388f144ab84ea3d934f "bibtex report"
+  "report.tex" 1651575695 105823 f2641a226d8ba33c5f6eb5fdd435addd ""
+  "report.toc" 1651575753 3590 5723ab8874baf8f2075b8f5e08f115f3 "pdflatex"
   (generated)
   "report.aux"
   "report.log"
