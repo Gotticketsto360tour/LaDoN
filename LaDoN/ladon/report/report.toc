@@ -1,0 +1,54 @@
+\babel@toc {english}{}\relax 
+\contentsline {section}{\numberline {1}Introduction}{5}{}%
+\contentsline {subsection}{\numberline {1.1}Polarization, echo chambers and the threat to democracy}{5}{}%
+\contentsline {section}{\numberline {2}Agent-based modelling of complex phenomena}{7}{}%
+\contentsline {section}{\numberline {3}Central Mechanisms}{8}{}%
+\contentsline {subsection}{\numberline {3.1}Homophily}{8}{}%
+\contentsline {subsubsection}{\numberline {3.1.1}Explaining Homophily}{9}{}%
+\contentsline {subsection}{\numberline {3.2}Social Influence}{10}{}%
+\contentsline {section}{\numberline {4}Opinion Dynamics}{10}{}%
+\contentsline {section}{\numberline {5}Network Formation}{11}{}%
+\contentsline {subsection}{\numberline {5.1}Triadic Closure}{11}{}%
+\contentsline {section}{\numberline {6}Co-evolution via tie-deletion}{13}{}%
+\contentsline {subsection}{\numberline {6.1}Tie-deletions effect on cooperation}{13}{}%
+\contentsline {section}{\numberline {7}Model Description}{16}{}%
+\contentsline {subsection}{\numberline {7.1}Conceptual overview}{16}{}%
+\contentsline {subsection}{\numberline {7.2}Assumptions}{16}{}%
+\contentsline {subsection}{\numberline {7.3}The stages of the model}{17}{}%
+\contentsline {subsection}{\numberline {7.4}Initialization}{19}{}%
+\contentsline {subsection}{\numberline {7.5}Dynamics}{20}{}%
+\contentsline {subsubsection}{\numberline {7.5.1}Network dynamic stage }{20}{}%
+\contentsline {subsubsection}{\numberline {7.5.2}Opinion dynamic stage}{20}{}%
+\contentsline {subsubsection}{\numberline {7.5.3}Co-evolutionary stage}{21}{}%
+\contentsline {subsection}{\numberline {7.6}Outcome metrics}{21}{}%
+\contentsline {subsubsection}{\numberline {7.6.1}Time-dependent Metrics}{21}{}%
+\contentsline {subsubsection}{\numberline {7.6.2}Final State Metrics}{22}{}%
+\contentsline {subsubsection}{\numberline {7.6.3}Correlations}{22}{}%
+\contentsline {section}{\numberline {8}Model Evaluation}{22}{}%
+\contentsline {subsection}{\numberline {8.1}Fitting the model}{22}{}%
+\contentsline {subsection}{\numberline {8.2}Data}{23}{}%
+\contentsline {subsection}{\numberline {8.3}Hyperparameter Optimization}{23}{}%
+\contentsline {subsection}{\numberline {8.4}Results}{25}{}%
+\contentsline {subsection}{\numberline {8.5}Discussion of hyperparameter optimization results}{29}{}%
+\contentsline {subsubsection}{\numberline {8.5.1}Why the Co-evolutionary model is a better explanation}{29}{}%
+\contentsline {subsubsection}{\numberline {8.5.2}The impact of neighborhoods}{30}{}%
+\contentsline {subsubsection}{\numberline {8.5.3}Including empirical data in agent-based models}{31}{}%
+\contentsline {section}{\numberline {9}Results}{32}{}%
+\contentsline {subsection}{\numberline {9.1}The main effects of the different model parameters}{32}{}%
+\contentsline {subsection}{\numberline {9.2}Correlations}{36}{}%
+\contentsline {section}{\numberline {10}Discussion}{38}{}%
+\contentsline {subsection}{\numberline {10.1}Reiterating previous literature}{38}{}%
+\contentsline {subsection}{\numberline {10.2}The importance of co-evolution}{38}{}%
+\contentsline {subsection}{\numberline {10.3}The effect of initial opinions}{39}{}%
+\contentsline {subsection}{\numberline {10.4}Tie-deletion facilitates cooperation}{39}{}%
+\contentsline {subsection}{\numberline {10.5}Distance in opinion and network space}{40}{}%
+\contentsline {section}{\numberline {11}Contrast to previous work}{44}{}%
+\contentsline {section}{\numberline {12}Short comings and future work}{45}{}%
+\contentsline {subsection}{\numberline {12.1}On agent-based modelling}{45}{}%
+\contentsline {subsection}{\numberline {12.2}Including Empirical Data}{45}{}%
+\contentsline {subsection}{\numberline {12.3}Accurate perceptions of opinions}{45}{}%
+\contentsline {subsection}{\numberline {12.4}Shrinking Variance}{46}{}%
+\contentsline {subsection}{\numberline {12.5}Social influence exclusively}{46}{}%
+\contentsline {section}{\numberline {13}A broader perspective}{47}{}%
+\contentsline {section}{\numberline {14}Conclusion}{47}{}%
+\contentsline {section}{References}{47}{}%

@@ -64,7 +64,7 @@ g = sns.barplot(
     capsize=0.07,
     hue_order=["Co-evolutionary model", "Network Formation model", "Empirical network"],
 )
-g.set(xlabel="Average Clustering Coefficient", ylabel="")
+g.set(xlabel=r"$\overline{C}$", ylabel="")
 plt.legend(
     title="Network",
 )
@@ -92,7 +92,7 @@ g = sns.barplot(
     capsize=0.07,
     hue_order=["Co-evolutionary model", "Network Formation model", "Empirical network"],
 )
-g.set(xlabel=r"$APL$", ylabel="")
+g.set(xlabel=r"$APL*$", ylabel="")
 plt.legend(title="Network", loc="upper right")
 plt.savefig("plots/overall/Model_Evaluation_APL.png", dpi=300, bbox_inches="tight")
 
@@ -135,7 +135,7 @@ g = sns.barplot(
     ],
     capsize=0.07,
 )
-g.set(xlabel="Mean Difference", ylabel="")
+g.set(xlabel=r"$O(A,G)$", ylabel="")
 plt.legend(title="Network", bbox_to_anchor=(0.5, 0.5, 0.5, 0.5))
 plt.savefig("plots/overall/Model_Evaluation.png", dpi=300, bbox_inches="tight")
 

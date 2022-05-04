@@ -126,11 +126,12 @@ g = sns.catplot(
 g.map(sns.stripplot, "threshold", "opinions", color="black", alpha=0.55, size=4)
 
 g.set(ylabel=r"$\rho_{O_I, O_F}$", xlabel="Threshold")
-for ax, title in zip(
+for ax, titles in zip(
     g.axes.flatten(),
     [r"$\beta < 0.10$", r"$0.10 \leq \beta \leq 0.15$", r"$0.20 \leq \beta$"],
 ):
-    ax.set_title(title)
+    ax.set_title(titles)
+    ax.set_xlabel(r"$T$")
 
 g.savefig("plots/overall/Correlation_Initial_Opinions.png")
 
