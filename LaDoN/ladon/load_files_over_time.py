@@ -101,7 +101,7 @@ g = sns.lineplot(
     palette=blue_pallette,
 ).set(ylabel=r"$|O|$", xlabel=r"$t$")
 
-plt.legend(title=r"$Threshold$", bbox_to_anchor=(1.0, 0.65))
+plt.legend(title=r"$T$", bbox_to_anchor=(1.0, 0.65))
 plt.savefig(
     "plots/overall/Absolute_Opinion_Threshold.png", dpi=300, bbox_inches="tight"
 )

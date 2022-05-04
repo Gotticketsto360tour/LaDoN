@@ -17,11 +17,11 @@ blue_pallette = sns.dark_palette("#69d", reverse=True, as_cmap=True)
 
 def change_labels(string: str):
     if string == "Opinion_Model":
-        return "With Opinion Dynamics"
+        return "Co-evolutionary model"
     if string == "No_Opinion_Model":
-        return "Without Opinion Dynamics"
+        return "Network Formation model"
     else:
-        return string
+        return "Empirical network"
 
 
 def change_network_labels(string: str):
@@ -62,7 +62,7 @@ g = sns.barplot(
         "Political Blogs",
     ],
     capsize=0.07,
-    hue_order=["With Opinion Dynamics", "Without Opinion Dynamics", "Target"],
+    hue_order=["Co-evolutionary model", "Network Formation model", "Empirical network"],
 )
 g.set(xlabel="Average Clustering Coefficient", ylabel="")
 plt.legend(
@@ -90,14 +90,14 @@ g = sns.barplot(
         "Political Blogs",
     ],
     capsize=0.07,
-    hue_order=["With Opinion Dynamics", "Without Opinion Dynamics", "Target"],
+    hue_order=["Co-evolutionary model", "Network Formation model", "Empirical network"],
 )
 g.set(xlabel=r"$APL$", ylabel="")
 plt.legend(title="Network", loc="upper right")
 plt.savefig("plots/overall/Model_Evaluation_APL.png", dpi=300, bbox_inches="tight")
 
 g = sns.barplot(
-    data=data.query("type != 'Target'"),
+    data=data.query("type != 'Empirical network'"),
     y="network",
     x="JSD",
     hue="type",
@@ -120,7 +120,7 @@ plt.savefig("plots/overall/Model_Evaluation_JSD.png", dpi=300, bbox_inches="tigh
 
 
 g = sns.barplot(
-    data=data.query("type != 'Target'"),
+    data=data.query("type != 'Empirical network'"),
     y="network",
     x="mean",
     hue="type",
@@ -136,7 +136,7 @@ g = sns.barplot(
     capsize=0.07,
 )
 g.set(xlabel="Mean Difference", ylabel="")
-plt.legend(title="Network", bbox_to_anchor=(0.5, 0.5, 0.52, 0.52))
+plt.legend(title="Network", bbox_to_anchor=(0.5, 0.5, 0.5, 0.5))
 plt.savefig("plots/overall/Model_Evaluation.png", dpi=300, bbox_inches="tight")
 
 pio.renderers.default = "notebook"

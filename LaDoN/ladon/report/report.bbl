@@ -2649,4 +2649,36 @@ Yildiz, E.%
 \begin{APACrefDOI} \doi{10.1145/2538508} \end{APACrefDOI}
 \PrintBackRefs{\CurrentBib}
 
+\bibitem [\protect \citeauthoryear {%
+Zachary%
+}{%
+Zachary%
+}{%
+{\protect \APACyear {1977}}%
+}]{%
+zachary_information_1977}
+\APACinsertmetastar {%
+zachary_information_1977}%
+\begin{APACrefauthors}%
+Zachary, W\BPBI W.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{1977}{{\APACmonth{12}}}{}.
+\newblock
+{\BBOQ}\APACrefatitle {An {Information} {Flow} {Model} for {Conflict} and
+  {Fission} in {Small} {Groups}} {An {Information} {Flow} {Model} for
+  {Conflict} and {Fission} in {Small} {Groups}}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Journal of Anthropological Research}{33}{4}{452--473}.
+\newblock
+\begin{APACrefURL}
+  [{2022-04-06}]\url{https://www.journals.uchicago.edu/doi/abs/10.1086/jar.33.4.3629752}
+  \end{APACrefURL}
+\newblock
+\APACrefnote{Publisher: The University of Chicago Press}
+\newblock
+\begin{APACrefDOI} \doi{10.1086/jar.33.4.3629752} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
 \end{thebibliography}

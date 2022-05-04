@@ -171,7 +171,7 @@ In relation to the mechanism of tie-deletion, Santos et al. (2006) proposes a wa
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=.5\linewidth]{../plots/references/santos.png}
+    \includegraphics[width=.4\linewidth]{../plots/references/santos.png}
   \caption{Tie-deletions facilitates cooperation. Taken from \protect\citeauthor{santos_cooperation_2006} \protect\citeyear{santos_cooperation_2006}. Panels show simulations of different values of $W$. In this model, $W$ controls the propensity to delete ties between defectors and cooperators. Y-axis shows the disadvantage of being cheated, x-axis shows the pay-off of cheating. Letters on the panel represent well-known game theoretic dilemmas (Prisoners Dilemma, Stag Hunt and Snow Drift Game). Colors show the final fraction of cooperators after simulations are completed. When $W = 4.0$, cooperation effectively wipes out defectors completely. }
   \label{fig:santos}
 \end{figure}
@@ -188,58 +188,71 @@ REMEMBER THIS ARTICLE - SUPER RELEVANT: \cite{geschke2019triple}
 \end{figure}
 
 \section{Model Description}
+Next, I present the description for the agent-based model used to investigate the co-evolution of opinion and network dynamics. 
+The description first introduces the key assumptions of the model. Afterwards, the specifics of the underlying behavior of the agents at every stage of a time-step is explained. 
 \subsection{Conceptual overview}
-The model consists of agents situated in an undirected network. Nodes on the network represent social agents. Edges represent social ties to other agents. 
-The model simulates social interactions between the agents without agents having any strategy or task. 
+This agent-based model consists of agents situated in an undirected network. Nodes of the network represent social agents. Edges represent social ties to other agents. As the network is undirected, all relations between agents are assumed to be reciprocal.
+The model does not have agents with tasks to perform or strategies to follow. The system the model is trying to represent is a system where social agents interact with their friends and discuss their opinions with each other. Such a system is constantly changing, as social agents create ties with new friends, sever ties to old ones and change their opinions. 
 
 \subsection{Assumptions}
-It is assumed that the opinion of an agent is shaped only by her initial opinion and the influence of her peers. 
-The model assumes that agents will compromise their opinion when interacting with agents with similar opinions. 
-When agents interact with agents dissimilar from them, the model assumes that agents will either not change their opinion or they will become more opposed by the interactions.
-Furthermore, it is assumed that connections between agents are not static but dynamic in nature. 
-Specifically, the model assumes that agents will find new connections primarily through their already existing connections via triadic closure. Finally, it is assumed that agents will tend to relinguish ties to agents too dissimilar from themselves.
+To investigate such a complex system as outlined above, several assumptions must be made in the agent-based model. It is assumed that the opinion of an agent is shaped only by her initial opinion and the influence of her peers. 
+Agents are not trying to find any "true opinion" or act in a way to hide their own opinion from their peers. Instead, agents are assumed to share their opinions truthfully to other agents, and to be able to perceive the exact opinion of their peers. 
+In line with previous models of opinion dynamics, the model assumes positive social influence between agents of similar opinions. In other words, agents of similar opinions will reach a compromise, drawing their opinions closer together. Similarly, the model assumes negative or no social influence between dissimilar agents. Agents will either not be influenced at all, or will further distance themselves from agents of dissimilar opinions from their own.
+Regarding the social network of the model, it is assumed that connections between agents are not static but dynamic in nature. 
+The model assumes that agents will find new connections primarily through their already existing connections via the mechanism of triadic closure. Finally, it is assumed that agents will tend to delete ties to dissimilar agents.
 All these assumptions can vary in the strength of the proposed effect. For instance, similar agents could reach a perfect compromise or only convince each other slightly. 
-As the results of the model critically hinges on the strength of these assumptions, I introduce model parameters that control the strength of these mechanisms.
+As the results of the model critically hinges on the strength of these assumptions, the model parameters which control the strength of these effects are varied to allow the investigation of their influence on each other. 
 
+\subsection{The stages of the model}
+The agent-based model is divided into three distinct and sequential stages that are executed at every time-step.
+These stages is referred to as the network dynamic stage, the opinion dynamic stage and the co-evolutionary stage respectively.
+The network dynamic stage specifies how new edges are created in the social network of the model. The behavior of this stage of the model is controlled by one parameter, $R$. $R$ specifies the probability of generating random ties rather than ties via triadic closure.
+The opinion dynamic stage describes how interactions between agents change the opinions. The opinion dynamics are controlled by three parameters: $T$ specifies the threshold for what contitudes a similar agent, $\alpha$ specifies the power of positive social influence and $\beta$ specifies the power of negative social influence.
+Finally, the co-evolutionary stage specifies the tendency for agents to delete connections that are dissimilar from themselves. This is controlled by the parameter $P(D)$, which describes the probability of deleting ties to dissimilar agents. The specifics of each stage of the process is introduced in detail in the section called "Dynamics".  
 
-\subsection{Components and their properties}
-The model is specified by five different parameters. 
-The first three parameters are the opinion dynamics parameters. They describe how interactions change opinions ($\alpha$, $\beta$, $T$). 
-The fourth parameter is the network dynamics parameter. It specifies how the probability of generating random ties rather than ties via triadic closure ($R$).
-The fifth parameter is the co-evolutionary parameter. It specifies the probability of dissoluting negative ties ($P(D)$).
-The specifics of how they influence the model is specified in "Dynamics".  
-
-In order for the model to be computationally feasible, only a subset of the possible values of each parameter of the model is considered. All different possible combinations of each parameters are considered, resulting in 3780 different parameter combinations. The considered parameter values are:
+Before specifying the details of these stages, it is important to mention that while this paper mainly focuses on one agent-based models, it develops and compares two models. This is done to be able to investigate how the co-evolution of opinion and network dynamics differs from only considering network dynamics. 
+One the models considered is therefore an agent-based model which only contains the network dynamic stage as described above. This model therefore doesn't include opinion dynamics and is best considered an algorithm of network formation. The aim of this model is to serve as a baseline for the full model, which includes all three stages described above. The comparison between these two models will become important in evaluating the agent-based model with empirical data. I will refer to the model that only includes the network dynamic stage as the Network Formation Model and the model with all three stages as the Co-evolutionary Model.
+In order for the Co-evolutionary model to be computationally feasible, only a subset of the possible values of each of the five parameter of the model is considered. All different possible combinations of each parameters are simulated, resulting in 3780 different parameter combinations. The considered parameter values are:
 
 
 \begin{align*}
+    R \in & \{0.1, 0.3, 0.5\} \\
     \alpha \in & \{0.05, 0.10, 0.15, 0.20, 0.25\} \\
     \beta \in & \{0.00, 0.05, 0.10, 0.15, 0.20, 0.25\}\\
-    T \in & \{06, 0.7, 0.8, 0.9, 1.0, 1.1, 1.2\}\\
-    R \in & \{0.1, 0.3, 0.5\} \\
+    T \in & \{0.6, 0.7, 0.8, 0.9, 1.0, 1.1, 1.2\}\\
     P(D) \in & \{0.0, 0.2, 0.4, 0.6, 0.8, 1.0\}\\
 \end{align*}
 
-Some justification of the different parameters are in order. 
+\noindent Some justification of the different parameters are in order. 
 First, it is fair to assume that $\alpha$ and $\beta$ are powerful because social interactions are so frequent, but not because of the strength of social interactions themselves.
 One rarely reaches a perfect compromise when debating other people, which is what $\alpha = 1$ would be. It therefore makes sense to assume that realistic values $\alpha$ will be fairly low. 
-The same argument applies to $\beta$. Negative social influence is as mentioned less empirically validated than positive social influence \cite{takacs_is_2014}. We therefore also include the possibility of simulations with $\beta = 0$. 
-$T$ was chosen as these parameters gave the most interesting results. For $T > 1.2$, the model more or less always converges to consensus no matter what. In the same vein, only very few simulations avoid polarization for $T < 0.6$. The interesting parameters for this paper's interest are in between these two parameters. 
-For values of randomness, we have good reason to believe that most interactions are made via triadic closure and are not random \cite{kossinets_origins_2009}. It is therefore fair to assume that randomness will at most be half ($R = 0.5$).
-Finally, we want to study the whole range of the co-evolutionary force of $P(D)$, the probability of tie-deletion. We therefore consider values where the network doesn't co-evolve at all ($P(D) = 0$), to values where the network perfectly evolves with opinions ($P(D) = 1$).
+The same argument applies to $\beta$. Negative social influence is as mentioned less empirically validated than positive social influence \cite{takacs_is_2014}. I therefore also include simulations with $\beta = 0$. 
+$T$ was chosen as these parameters gave the most interesting results in preliminary analyses. For $T > 1.2$, the model more or less always converges to consensus no matter what the values of all other parameters are. In the same vein, only very few simulations avoid polarization for $T < 0.6$. The parameters of interest for this paper are therefore in between these two values, where $0.6 \leq T \leq 1.2$. 
+For values of $R$, we have good reason to believe based on previous empirical work that most interactions are made via triadic closure and are not random \cite{kossinets_origins_2009}. It is therefore fair to assume that new connections are primarily generated via triadic closure and are atmost randomly generated 50\% of the time ($R = 0.5$).
+Finally, as co-evolution is one of this papers primary interests, I study the whole range of the co-evolutionary force of $P(D)$, the probability of tie-deletion. I therefore consider a range of values resulting in different levels of co-evolution in the system. Values of interest range from no co-evolution to perfect co-evolution i.e. $0 \leq P(D) \leq 1$.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=.9\linewidth]{../plots/schematics/model_representation.png}
+\caption{Flowchart of a single timestep. Numbers indicate different parts of the process of a single time-step. Squares of different colors indicate time-steps of different models. The blue square depicts a single time-step for the Network Formation Model, which does not include any opinion dynamics. The red square indicates the Co-evolutionary Model, which includes both network and opinion dynamics. Blue bubbles show what model parameters are relevant to the particular step in the process. A random agent, $A_t$ is sampled from the network. Next, the network dynamic stage begins (1). With a probability of $R$, a new connection is made to made to another randomly sampled agent. With a probability of $1-R$, a new connection is made via triadic closure. This is the only stage included in the Network Formation Model. After the network dynamics stage, the Co-evolutionary Model starts the opinion dynamic stage (2). The sampled agent, $A_t$, pushes and pulls iteratively on all the opinions of her neighboring agents. Whether opinions are pushed or pulled is determined by whether the distance between them is further than $T$ apart. How much they are pulled or pushed is determined by $\alpha$ and $\beta$ respectively. After this process, the co-evolutionary stage begins (3). With a probability of $P(D)$, ties to agents with opinions further than $T$ apart from $A_t$'s opinion are deleted. This concludes one time-step of the Co-evolutionary Model.}
+\label{fig:flowchart}
+\end{figure}
 
 
 \subsection{Initialization}
-A random Watts-Strogatz small-world graph is created 
-with $N=500$, $k=7$, and $p=0.5$ \cite{watts_collective_1998}. For each node in the network,
-an agent is initialized with a value ($O_i$) which is taken to represent the opinion of the agent. The opinion is modelled as a continous number between -1 and 1. 
-The idea is to represent that opinions can be anywhere inbetween extremely pro and extremely against a proposition.
-To initialize the model, we start of with a diverse set of opinions. All values of $O_i$ are initialized by drawing from a uniform distribution between -1 and 1: 
+The agent-based model initializes with first making a random Watts-Strogatz small-world graph
+with $N=500$, $k=7$, and $p=0.5$ \cite{watts_collective_1998}. This acts as the initial social network of the agents. For each node in the network,
+an agent is initialized with a value ($O_i$) which is taken to represent the opinion of the agent. The opinion is modelled as a continuous number between -1 and 1. 
+This is done to reflect that opinions are rarely binary, but are instead better represented as a spectrum between opinions that are extremely pro some notion and opinions that are extremely against some notion.
+In line with previous research the initial opinions of agents are assumed to be diverse. To implement diversity of initial opinions, all values of $O_i$ are initialized by drawing from a uniform distribution between -1 and 1: 
+
 $$O_i \sim U(-1, 1)$$
+
+\noindent As a consequence, no agent will be initialized with an opinion lower than -1 or higher than 1. Additionally, the expected mean of the distribution of initial opinions is 0.
 
 \subsection{Dynamics}
 
-\subsubsection{Sampling agents and interactions}
+\subsubsection{Network dynamic stage }
 
 The model is an attempt at representing social encounters and their change over time. 
 To represent this idea, agents interact with each other over a certain amount of time-steps. 
@@ -250,19 +263,17 @@ To keep the number of edges in the network approximately constant, edges are eit
 To do this, let $E_1$ be the number of edges of $N_1$ and let $E_t$ be the number of edges of $N_t$. 
 If $E_t < E_1$, $A_t$ will not rewire one of its existing edges, but instead create a new edge. If $E_t \geq E_1$, $A_t$ will rewire one of its existing connections to the new agents.
 With a probability of $R$, $A_t$ connects to a random agent, that $A_t$ is not currently connected to. 
-With a probability of $1-R$, $A_t$ connects to one of its edge's edges. Regardless of whether the connection was sampled randomly or through an edge's edges, let $C_t$ define the newly connected agent.
-
-In order to calculate the average path length of the network, the model is restricted to being only one component. 
+With a probability of $1-R$, $A_t$ connects to one of its edge's edges. Regardless of whether the connection was sampled randomly or through an edge's edges, let $C_t$ define the newly connected agent. In order to calculate the average path length of the network, the model is restricted to being only one component. 
 Simply put, having only one component guarantees that there exists a path between any two nodes of the network.
-To ensure this property, we check the degree of $A_t$ and $C_t$. If the degree of either $A_t$ or $C_t$ is 0, a new edge is created randomly to a new node from $N_t$.
+To ensure this property of the network, we check the degree of $A_t$ and $C_t$. If the degree of either $A_t$ or $C_t$ is 0, a new edge is created randomly to a new node from $N_t$.
 If both $A_t$ and $C_t$ have degrees larger than 0, and the network has more than one component, a new edge is created to restore the network. Specifically, we restore the edge that $A_t$ rewired to $C_t$, while keeping the edge from $A_t$ to $C_t$.
-I will refer to the process of ensuring only one connected component simply as component ensurance. 
+I will refer to the process of ensuring only one connected component simply as component insurance. 
 
-\subsubsection{Interaction between neighbors}
+\subsubsection{Opinion dynamic stage}
 After finding a new connection, the agents interact with each other. This is meant to represent 
 discussion or other social interactions between agents. 
 Social interactions between similar individuals will lead to compromise between their initial opinion and their opinion after the encounter.
-As a consequence, the more you disagree with a person, the more mallable your opinion is. If you reach a compromise with a person with a very different opinion than yours,
+As a consequence, the more you disagree with a person, the more maliable your opinion is. If you reach a compromise with a person with a very different opinion than yours,
 you will change your opinion more dramatically than if you reached a compromise with someone that you almost agree with. 
 To model this kind of behavior, the randomly sampled agent, $A_t$, interacts with all its connected agents and changes its opinions according to the opinion of the connected agents.
 This is done by iteratively interacting with every edge of $A_t$. Let $B$ denote an edge of $A_t$. Let $O(\cdot)$ define a function with agents as inputs and their opinions as outputs.
@@ -287,15 +298,15 @@ $$O'_{min} = O_{min} - V_n$$
 
 This process concludes when $A_t$ has updated her values for all her edges.
 
-\subsubsection{Tie-dissolution}
+\subsubsection{Co-evolutionary stage}
 After interacting with her connected agents, $A_t$ might delete the connection to some of these agents based on their similarity.
 In this model, social interactions can result in opinions becoming more distant than they were initially. 
 This can be because what the agents are discussing is divisive or controversial. When this happens, connections can be severed.
-I call this process tie-dissolution. 
-If $T < \abs{O(A_t) - O(B)}$, there is a chance that their tie is dissoluted after interacting. This probability of dissolution between dissimilar agents in the model is described by the parameter $D$.
-When $D = 1$, all dissimilar ties are severed. When $D = 0.5$, there is 50\% chance that dissimilar ties will be deleted. 
-After ties are dissoluted, the process of component ensurance is performed where $C_t$ is replaced with $B$.
-When all edges of $A_t$ have been evaluated, the time-step concludes. This process is repeated for 10.000 time-steps.
+I call this process tie-deletion. 
+If $T < \abs{O(A_t) - O(B)}$, there is a chance that their tie is deleted after interacting. This probability of tie deletion between dissimilar agents in the model is described by the parameter $P(D)$.
+When $P(D) = 1$, all dissimilar ties are severed. When $P(D) = 0.5$, there is 50\% chance that dissimilar ties will be deleted. 
+After ties are deleted, the process of component insurance is performed where $C_t$ is replaced with $B$.
+When all edges of $A_t$ are evaluated, the time-step concludes. This process repeats for 10.000 time-steps.
 
 \subsection{Outcome metrics} 
 
@@ -320,13 +331,6 @@ For every agent in the network, I record:
 \end{itemize}
 
 The measures related to the opinion of agents can then be correlated with clustering, centrality and degrees to see how changes in network topology relate to changes in opinions. 
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=.8\linewidth]{../plots/schematics/model_representation.png}
-  \caption{Flowchart of a single timestep. Numbers indicate different parts of the process of a single time-step. Squares of different colors indicate time-steps of different models. The blue square depicts a single time-step for the Network Formation Model, which does not include any opinion dynamics. The red square indicates the Co-evolutionary model, which includes both network and opinion dynamics. Blue bubbles show what model parameters are relevant to the particular step in the process. A random agent, $A_t$ is sampled from the network. Next, the network dynamic stage begins (1). With a probability of $R$, a new connection is made to made to another randomly sampled agent. With a probability of $1-R$, a new connection is made via triadic closure. This is the only stage included in the Network Formation Model. After the network dynamics stage, the Co-evolutionary Model starts the opinion dynamic stage (2). The sampled agent, $A_t$, pushes and pulls iteratively on all the opinions of her neighboring agents. Whether opinions are pushed or pulled is determined by whether the distance between them is further than $T$ apart. How much they are pulled or pushed is determined by $\alpha$ and $\beta$ respectively. After this process, the co-evolutionary stage begins (3). With a probability of $P(D)$, ties to agents with opinions further than $T$ apart from $A_t$'s opinion are deleted. This concludes one time-step of the Co-evolutionary Model.}
-  \label{fig:flowchart}
-\end{figure}
 
 \begin{algorithm}
     \caption{Calculate $y = x^n$}
@@ -362,7 +366,7 @@ Although these steps are analogous to model fitting and model comparison, there 
 
 
 \subsection{Data}
-To fit the model to data, we consider 6 empirical social networks; a network of representing social networks of Dolphins (Lusseau, 2003), the Karate Club Network (Zachary, 1977), a citation network (Newman, 2006), co-purchase network of political books on Amazon (Shi et al., 2017), political blogs (Adamic \& Glance, 2005) and network of politicians based on shared likes on Facebook (Rozemberczki et al., 2018). For all networks, only the main component of the network was considered. This was done as average path length is not well-defined for unconnected graphs. As the model assumes undirected networks, the network of political blogs was transformed from a directed to an undirected network. This was done by making any directed link between two agents be undirected. 
+To fit the model to data, we consider 7 empirical social networks; a network of representing social networks of Dolphins (Lusseau, 2003), the Karate Club Network (Zachary, 1977), a citation network (Newman, 2006), co-purchase network of political books on Amazon (Shi et al., 2017), political blogs (Adamic \& Glance, 2005) and network of politicians based on shared likes on Facebook (Rozemberczki et al., 2018). For all networks, only the main component of the network was considered. This was done as average path length is not well-defined for unconnected graphs. As the model assumes undirected networks, the network of political blogs was transformed from a directed to an undirected network. This was done by making any directed link between two agents be undirected. 
 
 \subsection{Hyperparameter Optimization}
 To evaluate how closely the generated networks resemble the real networks, we must first define a distance metric between networks. Although many features are important for characterizing a network, we will follow previous suggestions that identify the average path length, the average clustering coefficient and the degree distribution as the most defining aspects of a network (Jackson \& Rogers, 2004, 2007). We therefore seek to minimize the mean difference on these parameters between the generated and the real networks. 
@@ -378,7 +382,7 @@ With this in place, the final distance metric considered between the actual netw
 
 $$ O(A, G) = \frac{1}{3} \cdot \left(JSD(D(A), D(G)) + \abs{C(A) - C(G)} + APL*\right)$$
 
-where $O(A, G)$ is the distance between distance between the two networks, $JSD$ is the Jensen Shannon Divergence, $D(A)$ is the degree distribution of $A$, $D(G)$ is the degree distibution of $G$, $C(A)$ is the average clustering coefficient of $A$ and $C(G)$ is the average clustering coefficient of $G$. This distance metric is just the average difference on the considered network characteristics between $A$ and $G$. This is also why the sum of the difference is multiplied by $\frac{1}{3}$. This distance metric between networks, $O(A, G)$ will serve as the objective function that we want to minimize. The hyperparameter optimization algorithm search the parameter space for the combination of parameters that results in the lowest values of $O(A, G)$ \cite{akiba_optuna_2019,wu_hyperparameter_2019}.
+where $O(A, G)$ is the distance between the two networks, $JSD$ is the Jensen Shannon Divergence, $D(A)$ is the degree distribution of $A$, $D(G)$ is the degree distibution of $G$, $C(A)$ is the average clustering coefficient of $A$ and $C(G)$ is the average clustering coefficient of $G$. This distance metric is just the average difference on the considered network characteristics between $A$ and $G$. This is also why the sum of the difference is multiplied by $\frac{1}{3}$. This distance metric between networks, $O(A, G)$ will serve as the objective function that we want to minimize. The hyperparameter optimization algorithm search the parameter space for the combination of parameters that results in the lowest values of $O(A, G)$ \cite{akiba_optuna_2019,wu_hyperparameter_2019}.
 
 All models were fit by first calculating the ratio between edges, $E$, and vertices, $V$, and calculating $K = \nint{(2 \cdot \frac{E}{V})}$. The value $K$ is then used as the $K$-parameter in the initially generated small world network to ensure that the generated network has approximately the same number of edges per vertex as the target network. 
 For both models, we let randomness be a free parameter between 0 and 1. For the co-evolutionary model, we restrict the threshold to be between 0.1 and 1.3. The lower limit is chosen as values of threshold close to 0 results in agents that don’t agree with anyone else but themselves. The upper limit was chosen to ensure that the behavior of the model differs significantly from the model without opinion dynamics. 
@@ -389,8 +393,9 @@ After finding the best parameter values, the importance of each parameter value 
 
 \subsection{Results}
 
-The results indicate that the network formation algorithm of triadic closure can explain many of the considered characteristics of social networks. The model without opinion dynamics performs well on most networks and is on par with the model with opinion dynamics. It even performs better than the model with opinion dynamics in the Karate Club network. On the political networks investigated here, the model with opinion dynamics performs much better.
-Parameter importance shows that the randomness parameter was the most important parameter for all networks except for the network of politicians and political blogs.  In these networks, the most important parameter is instead the threshold. 
+The results indicate that the network formation algorithm of triadic closure can explain many of the considered characteristics of social networks. This is argued by the fact that the distance between simulated and empirical networks are below 0.25 for six out of seven considered empirical networks (see Fig ~\ref{fig:eval_mean}). The Network Formation Model is on par with the Co-evolutionary Model for only the two smallest networks considered, the Dolphins network and the Karate Club Network (see Fig ~\ref{fig:eval_mean} \& Table ~\ref{table:characteristics}). The Co-evolutionary Model drastically outperforms the Network Formation model on larger networks, especially when large networks are expected to be highly opinionated. This is the case for the two networks Politicians and Political Blogs (see Fig ~\ref{fig:eval_mean} \& Table ~\ref{table:characteristics}). These two networks outperform the Network Formation Model primarily due to lower Jensen-Shannon Divergence as well as lower difference in average clustering coefficient between simulated and empirical networks (see Fig ~\ref{fig:eval_clustering}, ~\ref{fig:eval_divergence}).  
+A fANOVA was performed for all considered networks of the Co-evolutionary Model. The fANOVA indicates that the $R$-parameter was the most important parameter for all networks except for the Political Blogs network. The Political Blogs network has the $T$-parameter as the most important instead. The parameter importance of $T$ are highest for the three political networks (Political Books, Political Blogs, Politicians) (see Fig ~\ref{fig:eval_importance}).
+The best parameters of the models show that all networks except the Karate Club network are characterized by low values of $R$. Similarly, we see that most networks show low values of $\beta$ and relatively low values of $T$. This is especially the case for the Politicians and Political Blogs networks, who have $T \approx 0.1$ and $\beta \approx 0.01$ (see Table ~\ref{table:best_params}).  
 
 \begin{figure}[H]
     \centering
@@ -447,7 +452,7 @@ Parameter importance shows that the randomness parameter was the most important 
     \hline
 \end{tabular}
 \end{center}
-\caption{Table of best parameter values}
+\caption{Table of best parameter values for the Co-evolutionary model.}
 \label{table:best_params}
 \end{table}
 
@@ -474,70 +479,53 @@ Parameter importance shows that the randomness parameter was the most important 
     \label{table:characteristics}
     \end{table}
 
-\subsection{Why is co-evolution a better explanation?}
+\subsection{Discussion of hyperparameter optimization results}
+The results from the hyperparameter optimization reiterates the point that triadic closure works well as a basic generating principle of social networks \cite{jackson_meeting_2007,kossinets_origins_2009,bianconi_triadic_2014}. 
+Considering that the Network Formation Model only has one parameter, $R$, it is able to explain the patterns of social networks fairly well. 
+It seems that this is true especially when the size of the network is small as it is in the Dolphins network and the Karate Club network. 
+It is interesting in its own right that the Network Formation model is on par with the Co-evolutionary model on the Karate Club network, as this network is notoriously a polarized network \cite{zachary_information_1977}. 
+The fact that the two models show similar performance on this network seems to suggest that the Karate Club network is not large enough for the two models to perform significantly different. 
+This is argued by the fact that the size of the network seems to be an important attribute difference between the networks where the models achieve similar performance and where the Co-evolutionary model performs better than the Network Formation model. 
 
-Of particular interest is the political networks, as these networks are likely to be highly opinionated. As the model performance shows, these are also the networks where the difference in performance between the network formation and the co-evolutionary model become most stark. Most notably, the difference in performance for the network of politicians and of political blogs is drastic. It is therefore worthwhile to consider why the co-evolutionary model fits these types of networks so much better than the network formation model.
-One of the primary reasons for why the co-evolutionary model performs so much better on political social networks is that it enables the network to have multiple central hubs. By letting the threshold, B, be relatively low, the network balkanizes into different communities, exhibiting connected caveman properties (Watts, 1999). This is also in line with the fact that these two networks are the only networks considered, where threshold is the most important parameter. This suggests that the political networks are organized by clearly delineated communities. The balkanization obviously affects all the considered network characteristics considerably. Having low values of thresholds makes for networks with a much larger average path length than if all nodes were in one cluster.  As the communities become smaller in size, this affects the degree distribution as well. When the network is no longer organized around one central cluster, the resulting degree distribution will exhibit a shorter tail, as agents cannot connect to a large portion of the agents in the network. When a network is characterized by larger average path length and shorter tail degree distributions, the co-evolutionary model can outperform the model without opinion dynamics. Because of the co-evolutionary model’s ability to create multiple hubs, it can capture these phenomena well. In contrast, the network formation model only has one parameter, R. It has no way of reliably creating multiple clusters in the network, and therefore it fails when it encounters networks with clearly separated communities. The network formation model has to balance average path length and high clustering coefficient, as it can only vary how random new connections are, similar to small world networks (Watts \& Strogatz, 1998). The co-evolutionary model can change the size of different clusters by adjusting the confidence boundary and the tie-deletion parameter. 
-This explanation seems to be in line with the importance of the different parameters for the model fit. A congruent point comes from considered the best parameters for the different political social networks. Most of them are characterized by very low confidence boundaries, very low amount of randomness, very low negative learning rate and moderate values for tie-deletion. As we’ve established, low confidence boundaries reflect that the political scene consists of different groups, that are locally very well connected, but doesn’t have much to do with each other. To achieve the high average clustering coefficients, the randomness must be low. For the network to not just become two clusters, negative learning rate must be low, so that opinions do not cluster around 1 and -1. Finally, to ensure that there is still some global connectivity between the different clusters, tie deletion is not high enough to limit the network to only have one or two informational highways. 
+\subsubsection{Why the Co-evolutionary model is a better explanation}
+As the Co-evolutionary model is a more complicated model, it is to be expected that it can fit more complicated patterns. The important question to answer is what the added capabilities of the more complicated model is. In other words, what has the model gained at the cost of higher complexity?
+The most plausible answer seems to be that it enables the Co-evolutionary model to have multiple neighborhoods within the network. By neighborhoods, I mean a set of nodes that a well-connected locally but not globally. The Co-evolutionary model can achieve because of the co-evolution between opinion and network dynamics. 
+When there is a propensity to delete ties to dissimilar neighbors ($P(D) \gg 0$), neighborhoods of like-minded individuals will be created. This is especially the case when new ties are primarily generated via triadic closure ($R \ll 0.5$), as this will make new connections primarily between agents of the same neighborhood. 
+If these two conditions are met, the Co-evolutionary model can in effect manipulate how many neighborhoods the network contains by adjust the parameter $T$. 
+The lower $T$ is, the less open-minded agents are as they will have stricter criteria for who to maintain ties with. With lower values of $T$, the resulting network will therefore contain more neighborhoods, where each neighborhoods contains fewer agents. Notice that for all large networks ($N > 1000$), the best parameters of the Co-evolutionary model have $P(D) \gg 0$, ($R \ll 0.5$) and ($T < 0.2$).
 
-In conclusion, the agent-based model fitting and model comparison suggests two important notions. The first notion is that triadic closure alone seems to be able to generate many of the characteristic patterns of social network. This echoes previous findings concluding the same (Ilany \& Akçay, 2016; Jackson \& Rogers, 2004, 2007). The second notion is that when opinions are central to the social networks, including opinion dynamics makes for a markedly better model of why social networks are like they are. 
-This second notion points to the fact that the effects of network and opinion dynamics are largely interdependent. We have seen that opinion dynamics can drastically alter the dynamics of networks. We now turn to the other side of this interplay by considering how network dynamics can change opinions.
+\subsubsection{The impact of neighborhoods}
+The ability to systematically create neighborhoods is important because it is highly unlikely that larger networks only contain one neighborhoods. It is far more likely that it contains several neighborhoods or subgroups, where social agents mostly interact with a small subset of all the agents of the network. 
+This might explain the large difference between the Co-evolutionary model and the Network Formation model, as this ability to generate neigborhoods is something that the Network Formation model doesn't have. This will obviously have large effect on the performance of the model, as having more multiple neighborhoods in the network will have a strong influence on all the considered network metrics. 
+Let's start by considering the impact of neighborhoods on the average path length. Having more neighborhoods will increase the average path length of the network. Neighborhoods are very well-connected locally, but not very well-connected globally. Reaching distant neighborhoods will therefore require more jumps than if there had been no neighborhoods at all. This is also evident from the results. On all networks considered, the average path length of the Co-evolutionary model is consistently higher than the average path length of the Network Formation model (see Fig ~\ref{fig:eval_path}).
+Next, let us turn our attention to the degree distributions of the networks. Having multiple neighborhoods within the network will most likely have a large effect on the degree distribution of a network. Having multiple neighborhoods in a network will tend to cause fewer very low and very high deree nodes. In other words, the network will have less extreme disparity in degrees of its nodes. Extremely high degree nodes become less plausible simply due to the fact, that an agent is very unlikely to be part of many neighborhoods at the same time. It will therefore sever connections to more agents than had there not been any neighborhoods. Having multiple neighborhoods will tend to reduce the number of extremely low degree nodes, because these neighborhoods are locally very well-connected. Low degree nodes will have more connections within these neighborhoods than they would have if there had not been any neighborhoods at all. 
+These two effects combined will tend to make the degree distribution of the network less scale-free and more log-normal, which is more in-line with the degree distribution of most social networks \cite{broido_scale-free_2019}. It should be expected that the separation between groups becomes more stark in highly opinionated networks. This is also congruent with the much lower Jensen Shannon Divergence of the Co-evolutionary model, where the large political networks (Political Blogs and Politicians) show large disparities between the Network Formation model and the Co-evolutionary model in Jensen Shannon Divergence of the degree distributions (see Fig ~\ref{fig:eval_divergence}).
+Finally, the clustering coefficient is also affected by the development of neighborhoods. For large networks, one should expect the average clustering coefficient to increase for networks with neighborhoods. This is because the neighborhoods are well-connected locally, and exhibit very similar features to that of caveman-networks \cite{watts_networks_1999}. Again, the difference between the Network Formation model and the Co-evolutionary model is most vivid for the large, opinionated networks of Political Blogs and Politicians. Surprisingly, the average clustering coefficient for the TV Shows network is almost identical (see Fig ~\ref{fig:eval_clustering}).
+
+This neighborhood explanation for the difference in performance between the two models is also supported by the fANOVA analysis, which specifies the importance of each model parameter \cite{hutter2014efficient}. 
+Here we see that the political networks have $T$ as a more important parameter than all other networks. This suggests that clearly delineated neighborhoods are a more important part of the explanation for political networks than they are for the other considered networks. 
+
+\subsubsection{Including empirical data in agent-based models}
+Although this explanation should be considered highly plausible, the results of this analysis should not be considered completely exhaustive of the possible explanations for what the underlying difference between the models are.
+Mostly, this is due to the fact that although an attempt to integrate more empirical data is made, we can always do better. 
+For instance, we should improve in regards to the quantity of data. Only 7 empirical networks are considered. Moreover, controlling for size was done by including only one network, namely the TV Show network. This was done as it was created in the same way that the Politicians network was made, and was of a similar size. 
+This doesn't however control the variable of size explicitly. This could potentially be done by varying the size of a network by for instance sampling a subset of the nodes of the network. However, it is not clear how such sampling should be done while maintaining the patterns of the original social network. 
+The analysis would also be exhaustive by improving the quality of the data. In this analysis, we are comparing a static network to the final result of a generative model. In essence, we are only really interested in the match between the end result of the generative process and the static empirical social network, because it lends credence to the idea that these empirical networks could be generated by the principles of the generative model. 
+If we had dynamic data over time, where the network changes and warps, we could get closer to how well the proposed mechanisms describe the dynamics of real world networks. In the case of the model proposed in this paper, a dynamical dataset containing the network evolution over time as well as the change of opinions of each agent would allow for a much better integration of model and empirical data. 
+However, such data is of course extremely hard to come by. Although most researchers lack such high resolution in their data, there is still ample possibility to include empirical data in theoretical models. 
+The analysis of this paper shows that we can use recent insights from the field of data science to not only answer how well our models match up to reality but also why they perform well or not. 
+This is possible specifically through the use of frontier methods such as the hyperparameter optimization used here. To the authors knowledge, the use of a fANOVA to investigate the importance of each parameter has not previously been done with agent-based models.
+It is the hope of this paper that future papers will make use of this method, as it dramatically increases the interpretability of the results of hyperparameter estimation.
+
+In conclusion, the agent-based model fitting and model comparison suggests two important notions. The first notion is that triadic closure alone seems to be able to generate many of the characteristic patterns of social network. This echoes previous findings concluding the same \cite{ilany_social_2016,jackson_meeting_2007, jackson_search_2004}. The second notion is that including co-evolutionary mechanisms makes for a much better model of social networks, especially when these networks are large and opinionated. 
+This second notion points to the fact that there is a clear interdependence between the effects of network and opinion dynamics. We have seen that opinion dynamics can drastically alter the dynamics of networks. We now turn to the other side of this interplay by considering how network dynamics can change opinions.
 
 \section{Results}
 
-\subsection{Alpha, beta, threshold, tie-deletion and chaotic systems}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=.8\linewidth]{../plots/overall/Absolute_Opinion_Threshold.png}
-  \caption{$T$'s effect on polarization over time. X-axis shows the time-step and the y-axis shows the absolute value of the opinions of agents. Colors indicate different values of $T$. Lines indicate the mean value of each time-step, aggregated over all parameters excluding $T$. Shaded regions are the 95\% confidence intervals.}
-  \label{fig:threshold}
-\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=.8\linewidth]{../plots/overall/Absolute_Opinion_Positive_Learning_Rate.png}
-  \caption{$\alpha$'s effect on polarization over time. X-axis shows the time-step and the y-axis shows the absolute value of the opinions of agents. Colors indicate different values of $\alpha$. Lines indicate the mean value of each time-step, aggregated over all parameters excluding $\alpha$. Shaded regions are the 95\% confidence intervals.}
-  \label{fig:alpha}
-\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=.8\linewidth]{../plots/overall/Absolute_Opinion_Negative_Learning_Rate.png}
-  \caption{$\beta$'s effect on polarization over time. X-axis shows the time-step and the y-axis shows the absolute value of the opinions of agents. Colors indicate different values of $\beta$. Lines indicate the mean value of each time-step, aggregated over all parameters excluding $\beta$. Shaded regions are the 95\% confidence intervals.}
-  \label{fig:beta}
-\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=.8\linewidth]{../plots/overall/Absolute_Opinion_Tie_Dissolution.png}
-  \caption{$P(D)$'s effect of polarization over time. X-axis shows the time-step and the y-axis shows the absolute value of the opinions of agents. Colors indicate different probabilities of tie-deletion of dissimilar agents. Lines indicate the mean value of each time-step, aggregated over all parameters excluding the probability of tie-deletion and randomness. Shaded regions are the 95\% confidence intervals. The three different plots show the different values of probability of new connections to be generated randomly. }
-  \label{fig:pd}
-\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=.8\linewidth]{../plots/overall/Negative_Tie_Deleted.png}
-  \caption{Negative ties deleted. X-axis shows the time-step and the y-axis show the average cumulative frequency of deleted ties. Colors indicate different probabilities of tie-deletion of dissimilar agents. Lines indicate the mean value of each time-step, aggregated over all parameters excluding the probability of tie-deletion and randomness. Shaded regions are the 95\% confidence intervals. The three different plots show the different values of probability of new connections to be generated randomly. Notice that when $P(D) = 0$, no ties are deleted.}
-  \label{fig:ntd}
-\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=.8\linewidth]{../plots/overall/Absolute_Opinion_Tie_Deletion_Without_Negative.png}
-  \caption{The effect of $P(D)$ without negative learning. X-axis shows the time-step and the y-axis shows the absolute value of the opinions of agents. Colors indicate different probabilities of tie-deletion of dissimilar agents. Lines indicate the mean value of each time-step, aggregated over all parameters with $\beta = 0$, excluding the probability of tie-deletion. Shaded regions are the 95\% confidence intervals.}
-  \label{fig:pd_no_negative}
-\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=.8\linewidth]{../plots/overall/Radicalization.png}
-  \caption{Distribution of opinion changes across different conditions. Rows display different values of thresholds, columns indicate different values of negative influence. Different colors show different values of probability of tie-deletion. X-axis shows the difference between the absolute value of the final and initial opinions of agents. This measure can be thought of as a measure of “radicalization”. Higher values indicate that the final value of agents is more extreme than the initial values, and vice versa. Y-axis exhibit the percent of values within each bin. }
-  \label{fig:radicalization}
-\end{figure}
+\subsection{The main effects of the different model parameters}
 
 Higher values of the threshold decrease polarization (see Figure ~\ref{fig:threshold}). Higher values of alpha decreases polarization (see Figure ~\ref{fig:alpha}). Higher values of beta increases polarization(see Figure ~\ref{fig:beta}). Notably, when beta is zero, almost all simulations reach consensus, regardless of all other parameters (see Figure ~\ref{fig:radicalization}). Similarly, the is no effect of negative tie-deletion when $\beta = 0$ (see Figure ~\ref{fig:pd_no_negative}). 
-The drivers of polarization is low values of $T$ and high values of $\beta$. When $T$ is sufficiently small and $\beta$ is sufficiently large, all agents will have more extreme opinions at the end of the simulations than they had in the beginning. With intermediate values of $\beta$ and $T$, whether the opinions of a simulation becomes polarized or not is largely dictated by $P(D)$ (see Figure ~\ref{fig:radicalization}). 
+The drivers of polarization are low values of $T$ and high values of $\beta$. When $T$ is sufficiently small and $\beta$ is sufficiently large, all agents will have more extreme opinions at the end of the simulations than they had in the beginning. With intermediate values of $\beta$ and $T$, whether the opinions of a simulation becomes polarized or not is largely dictated by $P(D)$ (see Figure ~\ref{fig:radicalization}). 
 The results indicate that higher values of $P(D)$ results in lower values of $|O|$ on average. 
 The strength of the effect is modulated by how random new connections are made in the network. 
 When randomness is higher, the effect of cooperation facilitation by high tie-deletion is diminished (see Figure ~\ref{fig:pd}). 
@@ -546,26 +534,74 @@ The effect of how random new ties are, is also critical for how many negative ti
 The more random new ties are, the more ties will be deleted on average. Of course, the probability of negative tie-deletion, $P(D)$, also has a large impact on the number of deleted ties. 
 Interestingly, higher probabilities of tie-deletion almost always result in a lower frequency of deleted ties over time (see Figure ~\ref{fig:ntd}).
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.7\linewidth]{../plots/overall/Absolute_Opinion_Threshold.png}
+  \caption{$T$'s effect on polarization over time. The x-axis shows the time-steps and the y-axis shows the absolute value of the opinions of agents. Colors indicate different values of $T$. Lines indicate the mean value of each time-step, aggregated over all parameters excluding $T$. Shaded regions are the 95\% confidence intervals.}
+  \label{fig:threshold}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.7\linewidth]{../plots/overall/Absolute_Opinion_Positive_Learning_Rate.png}
+  \caption{$\alpha$'s effect on polarization over time. The x-axis shows the time-steps and the y-axis shows the absolute value of the opinions of agents. Colors indicate different values of $\alpha$. Lines indicate the mean value of each time-step, aggregated over all parameters excluding $\alpha$. Shaded regions are the 95\% confidence intervals.}
+  \label{fig:alpha}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.7\linewidth]{../plots/overall/Absolute_Opinion_Negative_Learning_Rate.png}
+  \caption{$\beta$'s effect on polarization over time. The x-axis shows the time-step and the y-axis shows the absolute value of the opinions of agents. Colors indicate different values of $\beta$. Lines indicate the mean value of each time-step, aggregated over all parameters excluding $\beta$. Shaded regions are the 95\% confidence intervals.}
+  \label{fig:beta}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.9\linewidth]{../plots/overall/Absolute_Opinion_Tie_Dissolution.png}
+  \caption{$P(D)$'s effect of polarization over time. The x-axis shows the time-steps and the y-axis shows the absolute value of the opinions of agents. Colors indicate different probabilities of tie-deletion of dissimilar agents. Lines indicate the mean value of each time-step, aggregated over all parameters excluding the probability of tie-deletion and randomness. Shaded regions are the 95\% confidence intervals. The three different plots show the different values of probability of new connections to be generated randomly. }
+  \label{fig:pd}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.9\linewidth]{../plots/overall/Negative_Tie_Deleted.png}
+  \caption{Negative ties deleted. The x-axis shows the time-steps and the y-axis shows the average cumulative frequency of deleted ties. Colors indicate different probabilities of tie-deletion of dissimilar agents. Lines indicate the mean value of each time-step, aggregated over all parameters excluding the probability of tie-deletion and randomness. Shaded regions are the 95\% confidence intervals. The three different plots show the different values of probability of new connections being generated randomly. Notice that when $P(D) = 0$, no ties are deleted, which results in a bright blue line on the X-axis on all of the plots.}
+  \label{fig:ntd}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.7\linewidth]{../plots/overall/Absolute_Opinion_Tie_Deletion_Without_Negative.png}
+  \caption{The effect of $P(D)$ without negative learning. The x-axis shows the time-steps and the y-axis shows the absolute value of the opinions of agents. Colors indicate different probabilities of tie-deletion of dissimilar agents. Lines indicate the mean value of each time-step, aggregated over all parameters with $\beta = 0$, excluding the probability of tie-deletion. Shaded regions are the 95\% confidence intervals.}
+  \label{fig:pd_no_negative}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.9\linewidth]{../plots/overall/Radicalization.png}
+  \caption{Distribution of opinion changes across different conditions. Rows display different values of thresholds and columns indicate different values of negative influence. Different colors show different values of the probability of tie-deletion. The x-axis shows the difference between the absolute value of the final and initial opinions of agents. Higher values indicate that the final value of agents is more extreme than the initial values, and vice versa. Y-axis exhibits the percent of values within each bin. }
+  \label{fig:radicalization}
+\end{figure}
+
 \subsection{Correlations}
+
+We calculate two Pearson Correlation Coefficients of interest for all simulations. The first of which is the correlation coefficient between the initial opinions and the final opinions of agents, $\rho_{O_I, O_F}$. The second is the correlation between the absolute value of opinions and the average path length, $\rho_{|O|, APL}$.
+We start by reporting the findings for $\rho_{O_I, O_F}$. When $\beta$ is low and $T$ is high, there is little correlation between initial and final opinions. When the opposite is true, final and initial values are highly correlated (see Figure ~\ref{fig:corr_initial_final}). 
+Next, we turn to $\rho_{|O|, APL}$. As the probability of tie-deletion increases, so does the correlation between the average path length of the network and the absolute value of opinions. When the probability of tie-deletion is 0, there is no consistent correlation between the two variables (see Figure ~\ref{fig:corr_abs_path}). 
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=.8\linewidth]{../plots/overall/Correlation_Initial_Opinions.png}
-  \caption{Correlations between initial opinions and final opinions. X-axis shows different values of threshold and the y-axis shows the Pearson Correlation Coefficient between the initial and final opinion of agents. Boxes indicate the quartiles, whiskers indicate the 1.5 of the inter-quartile range outside of the quartiles. Points outside this range is depicted as diamonds. Smaller dark dots show the correlation coefficient for individual simulations. Columns show low, medium and high values of $\beta$. }
+  \caption{Correlations between initial opinions and final opinions. X-axis shows different values of threshold and the y-axis shows the Pearson Correlation Coefficient between the initial and final opinion of agents. Boxes indicate the quartiles and whiskers indicate the 1.5 of the inter-quartile range outside of the quartiles. Points outside this range is depicted as diamonds. Smaller dark dots show the correlation coefficient for individual simulations. Columns show low, medium and high values of $\beta$. }
   \label{fig:corr_initial_final}
 \end{figure}
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=.8\linewidth]{../plots/overall/Tie_Dissolution_Correlations_Boxplot_Full.png}
-  \caption{Correlations between absolute opinion and average path length. The Pearson Correlation Coefficient between the initial and final opinion of agents was calculated for all simulations. Boxes indicate the quartiles, whiskers indicate the 1.5 of the inter-quartile range outside of the quartiles. Points outside this range is depicted as diamonds. Smaller dark dots show the correlation coefficient for individual simulations. First plot has negative learning rate on the x-axis. Second plot shows the threshold on the x-axis. }
+  \caption{Correlations between absolute opinion and average path length. The Pearson Correlation Coefficient between the initial and final opinion of agents was calculated for all simulations. Boxes indicate the quartiles and whiskers indicate the 1.5 of the inter-quartile range outside of the quartiles. Points outside this range is depicted as diamonds. Smaller dark dots show the correlation coefficient for individual simulations. First plot has negative learning rate on the x-axis. Second plot shows the threshold on the x-axis. }
   \label{fig:corr_abs_path}
 \end{figure}
-
-We calculate two Pearson Correlation Coefficients of interest for all simulations. The first of which is the correlation coefficient between the initial opinions and the final opinions of agents, $\rho_{O_I, O_F}$. The second is the correlation between the absolute value of opinions and the average path length, $\rho_{|O|, APL}$.
-We start by reporting the findings for $\rho_{O_I, O_F}$. When $\beta$ is low and threshold is high, there is little correlation between initial and final opinions. When the opposite is true, final and initial values are highly correlated (see Figure ~\ref{fig:corr_initial_final}). 
-Next, we turn to $\rho_{|O|, APL}$. As the probability of tie-deletion increases, so does the correlation between the average path length of the network and the absolute value of opinions. When the probability of tie-deletion is 0, there is no consistent correlation between the two variables (see Figure ~\ref{fig:corr_abs_path}). 
-
 
 \section{Discussion}
 
@@ -638,7 +674,7 @@ It is also possible to give an alternative interpretation of what the probabilit
     \includegraphics[width=.2\linewidth]{../plots/networks/network_example_R0.1_8000.png} & \includegraphics[width=.2\linewidth]{../plots/networks/network_example_R0.3_8000.png} & \includegraphics[width=.2\linewidth]{../plots/networks/network_example_R0.5_8000.png}\\  
     \includegraphics[width=.2\linewidth]{../plots/networks/network_example_R0.1_10000.png} & \includegraphics[width=.2\linewidth]{../plots/networks/network_example_R0.3_10000.png} & \includegraphics[width=.2\linewidth]{../plots/networks/network_example_R0.5_10000.png}\\  
     \end{tabular} 
-    \caption{Network evolutions for different levels of randomness. Columns show different values of randomness, $R$. Rows are different time-steps of the simulations, increasing in increments of 2000. Agents are colored by their opinion. Dark blue colors represent values close to -1, and lighter colors represent opinions close to 1.} 
+    \caption{Network evolutions for different levels of randomness. Columns show different values of randomness, $R$. Rows are different time-steps of the simulations, increasing in increments of 2000. Nodes represent agents, lines represent edges between agents. Agents are colored by their opinion. Dark blue colors represent values close to -1, and lighter colors represent opinions close to 1. The size of the nodes of agents reflects their degree. The larger an agent's degree is, the larger their node is.} 
     \label{fig:networks} 
     \end{figure} 
 \end{center} 
@@ -675,7 +711,7 @@ A perhaps more critical flaw in the assumptions of the underlying mechanisms of 
 It is highly unlikely that humans perceive or share opinions accurately. 
 Instead, it is more reasonable to assume that people will sometimes misunderstand or misrepresent opinions \cite{jussim_influence_1989}. 
 Opinion formation is likely skewed by the same cognitive heuristics and biases that shape other parts of how we include information into our decisions \cite{arceneaux_cognitive_2012}. This includes effects such as confirmation bias, which might play a vital role in how we update our opinions \cite{allahverdyan_opinion_2014}. 
-Typically, models include noise in the interactions between agents to emulate imperfect communication \cite{sirbu2017opinion,su_noise_2017}. Noisy interactions could potentially play a vital role in facilitating cooperation, as it can allow agents that would not normally interact positively to perceive each other as more similar by chance \cite{allahverdyan_opinion_2014,su_noise_2017}. Including more realistic cognitive mechanisms might chance the dynamics of the system in important ways which are not considered in this model. 
+Typically, models include noise in the interactions between agents to emulate imperfect communication \cite{sirbu2017opinion,su_noise_2017}. Noisy interactions could potentially play a vital role in facilitating cooperation, as it can allow agents that would not normally interact positively to perceive each other as more similar by chance \cite{allahverdyan_opinion_2014,su_noise_2017}. Including more realistic cognitive mechanisms might change the dynamics of the system in important ways which are not considered in this model. 
 One way of implementing this would be to reimagine updating one’s opinion as Bayesian updating considering other’s opinions as new evidence \cite{allahverdyan_opinion_2014}. This can be done by letting the opinion of an agent be described by a distribution instead of a single number. The distribution could be a normal distribution, where the mean gives the general opinion of an agent, and the standard deviation describes the certainty of the agent’s opinion.  
 
 \subsection{Shrinking Variance}
