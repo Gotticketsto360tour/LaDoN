@@ -19,6 +19,7 @@ sns.set_context(
     },
     font_scale=2,
 )
+sns.set_style("whitegrid")
 blue_pallette = sns.dark_palette("#69d", reverse=True, as_cmap=True)
 
 list_of_simulations = glob.glob("analysis/data/simulations/opinions/*")
@@ -71,7 +72,7 @@ def plot_trajectory_over_time(
         aspect=1.5,
     ).set(xlabel=r"$t$", ylabel=r"$O$")
     plotting._legend.remove()
-    plt.legend(title=r"$R$", bbox_to_anchor=(1.15, 0.65))
+    plt.legend(title=r"$R$", bbox_to_anchor=(1.15, 0.65), facecolor="white")
 
 
 def plot_distribution_over_time(
@@ -156,15 +157,26 @@ plot_distribution_over_time(
 
 plt.savefig("plots/Distribution_Over_Time.png")
 
+sns.set_context(
+    "paper",
+    rc={
+        "figure.figsize": (11.7, 8.27),
+        "font.size": 17,
+        "axes.titlesize": 50,
+        "axes.labelsize": 25,
+    },
+    font_scale=2.5,
+)
+
 plot_trajectory_over_time(
     df,
     threshold=0.8,
     positive_learning_rate=0.15,
     negative_learning_rate=0.1,
     tie_dissolution=1,
-    randomness=0.1,
     run=6,
 )
+
 plt.savefig(
     "plots/Lineplot_Over_Time.png",
     dpi=300,
