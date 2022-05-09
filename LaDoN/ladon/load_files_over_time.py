@@ -47,6 +47,36 @@ def combine_data():
 
 data = combine_data()
 
+sns.lineplot(
+    data=data,
+    x="timestep",
+    y="mean_distance",
+    hue="tie_dissolution",
+    palette=blue_pallette,
+).set(ylabel=r"$d_{O}$", xlabel=r"$t$", xlim=(0, 10000), ylim=(0, None))
+
+plt.legend(title=r"$P(D)$", bbox_to_anchor=(1.15, 0.65))
+plt.savefig(
+    "plots/overall/Distance_Tie_Deletion.png",
+    dpi=300,
+    bbox_inches="tight",
+)
+
+sns.lineplot(
+    data=data,
+    x="timestep",
+    y="sd_absolute_opinion",
+    hue="tie_dissolution",
+    palette=blue_pallette,
+).set(ylabel=r"$SD_{|O|}$", xlabel=r"$t$", xlim=(0, 10000), ylim=(0, None))
+
+plt.legend(title=r"$P(D)$", bbox_to_anchor=(1.15, 0.65))
+plt.savefig(
+    "plots/overall/Standard_Deviation_Absolute_Opinion_Tie_Deletion.png",
+    dpi=300,
+    bbox_inches="tight",
+)
+
 g = sns.lineplot(
     data=data.query("negative_learning_rate == 0"),
     x="timestep",
