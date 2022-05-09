@@ -178,7 +178,7 @@ plot_trajectory_over_time(
 )
 
 plt.savefig(
-    "plots/Lineplot_Over_Time.png",
+    "plots/example/Lineplot_Over_Time.png",
     dpi=300,
     bbox_inches="tight",
 )
