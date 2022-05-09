@@ -4,11 +4,10 @@
 \contentsline {section}{\numberline {2}Agent-based modelling of complex phenomena}{7}{}%
 \contentsline {section}{\numberline {3}Central Mechanisms}{8}{}%
 \contentsline {subsection}{\numberline {3.1}Homophily}{8}{}%
-\contentsline {subsubsection}{\numberline {3.1.1}Explaining Homophily}{9}{}%
 \contentsline {subsection}{\numberline {3.2}Social Influence}{10}{}%
-\contentsline {section}{\numberline {4}Opinion Dynamics}{10}{}%
+\contentsline {section}{\numberline {4}Opinion Dynamics}{11}{}%
 \contentsline {section}{\numberline {5}Network Formation}{11}{}%
-\contentsline {subsection}{\numberline {5.1}Triadic Closure}{11}{}%
+\contentsline {subsection}{\numberline {5.1}Triadic Closure}{12}{}%
 \contentsline {section}{\numberline {6}Co-evolution via tie-deletion}{13}{}%
 \contentsline {subsection}{\numberline {6.1}Tie-deletions effect on cooperation}{13}{}%
 \contentsline {section}{\numberline {7}Model Description}{16}{}%

@@ -24,6 +24,7 @@ sns.set_context(
     },
     font_scale=5,
 )
+sns.set_style("whitegrid")
 blue_pallette = sns.dark_palette("#69d", reverse=True, as_cmap=True)
 
 list_of_simulations = glob.glob("analysis/data/simulations/final_state/*")
@@ -134,7 +135,6 @@ for ax, titles in zip(
     ax.set_xlabel(r"$T$")
 
 g.savefig("plots/overall/Correlation_Initial_Opinions.png")
-
 
 sns.boxplot(
     data=correlations,

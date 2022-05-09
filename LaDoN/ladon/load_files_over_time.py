@@ -14,6 +14,7 @@ from helpers import rename_plot
 sns.set(rc={"figure.figsize": (11.7, 8.27)}, font_scale=1.5)
 # Set the font to be serif, rather than sans
 # sns.set_context("talk")
+sns.set_style("whitegrid")
 sns.set_context(
     "paper",
     rc={
@@ -47,32 +48,12 @@ def combine_data():
 data = combine_data()
 
 g = sns.lineplot(
-    data=data,
-    x="timestep",
-    y="mean_distance",
-    hue="tie_dissolution",
-    palette=blue_pallette,
-).set(ylabel=r"$|O|$", xlabel=r"$t$")
-
-g = sns.relplot(
-    data=data,
-    x="timestep",
-    y="mean_distance",
-    hue="tie_dissolution",
-    kind="line",
-    col="threshold",
-    row="negative_learning_rate",
-    palette=blue_pallette,
-).set(ylabel=r"$D$", xlabel=r"$t$")
-
-
-g = sns.lineplot(
     data=data.query("negative_learning_rate == 0"),
     x="timestep",
     y="mean_absolute_opinion",
     hue="tie_dissolution",
     palette=blue_pallette,
-).set(ylabel=r"$|O|$", xlabel=r"$t$")
+).set(ylabel=r"$|O|$", xlabel=r"$t$", xlim=(0, 10000), ylim=(0, None))
 
 plt.legend(title=r"$P(D)$", bbox_to_anchor=(1.15, 0.65))
 plt.savefig(
@@ -81,16 +62,16 @@ plt.savefig(
     bbox_inches="tight",
 )
 
-sns.set_context(
-    "paper",
-    rc={
-        "figure.figsize": (11.7, 8.27),
-        "font.size": 13,
-        "axes.titlesize": 17,
-        "axes.labelsize": 15,
-    },
-    font_scale=1.7,
-)
+# sns.set_context(
+#     "paper",
+#     rc={
+#         "figure.figsize": (11.7, 8.27),
+#         "font.size": 13,
+#         "axes.titlesize": 17,
+#         "axes.labelsize": 20,
+#     },
+#     font_scale=1.7,
+# )
 
 g = sns.lineplot(
     data=data,
@@ -99,7 +80,7 @@ g = sns.lineplot(
     hue="threshold",
     legend="full",
     palette=blue_pallette,
-).set(ylabel=r"$|O|$", xlabel=r"$t$")
+).set(ylabel=r"$|O|$", xlabel=r"$t$", xlim=(0, 10000))
 
 plt.legend(title=r"$T$", bbox_to_anchor=(1.0, 0.65))
 plt.savefig(
@@ -112,7 +93,7 @@ g = sns.lineplot(
     y="mean_absolute_opinion",
     hue="positive_learning_rate",
     palette=blue_pallette,
-).set(ylabel=r"$|O|$", xlabel=r"$t$")
+).set(ylabel=r"$|O|$", xlabel=r"$t$", xlim=(0, 10000))
 
 plt.legend(title=r"$\alpha$", bbox_to_anchor=(1.0, 0.65))
 plt.savefig(
@@ -127,7 +108,7 @@ g = sns.lineplot(
     y="mean_absolute_opinion",
     hue="negative_learning_rate",
     palette=blue_pallette,
-).set(ylabel=r"$|O|$", xlabel=r"$t$")
+).set(ylabel=r"$|O|$", xlabel=r"$t$", xlim=(0, 10000), ylim=(0, None))
 
 plt.legend(title=r"$\beta$", bbox_to_anchor=(1.0, 0.65))
 plt.savefig(
@@ -144,7 +125,7 @@ g = sns.relplot(
     kind="line",
     col="randomness",
     palette=blue_pallette,
-).set(ylabel=r"$|O|$", xlabel=r"$t$")
+).set(ylabel=r"$|O|$", xlabel=r"$t$", xlim=(0, 10000))
 
 rename_plot(g, titles=[r"$R = 0.1$", r"$R = 0.3$", r"$R = 0.5$"], legend=r"$P(D)$")
 g.savefig(
@@ -152,14 +133,14 @@ g.savefig(
 )
 
 g = sns.relplot(
-    data=data.query,
+    data=data,
     x="timestep",
     y="negative_ties_dissoluted",
     hue="tie_dissolution",
     kind="line",
     col="randomness",
     palette=blue_pallette,
-).set(ylabel=r"$NTD$", xlabel=r"$t$")
+).set(ylabel=r"$NTD$", xlabel=r"$t$", xlim=(0, 10000))
 
 rename_plot(g, titles=[r"$R = 0.1$", r"$R = 0.3$", r"$R = 0.5$"], legend=r"$P(D)$")
 g.savefig("plots/overall/Negative_Tie_Deleted.png", dpi=300, bbox_inches="tight")
@@ -278,7 +259,7 @@ g = sns.lineplot(
     y="mean_absolute_opinion",
     hue="randomness",
     palette=blue_pallette,
-).set(ylabel=r"$|O|$", xlabel=r"$t$")
+).set(ylabel=r"$|O|$", xlabel=r"$t$", xlim=(0, 10000))
 
 plt.legend(title=r"$R$", bbox_to_anchor=(1.15, 0.6))
 plt.savefig("plots/example/Example_Absolute_Opinion.png", dpi=300, bbox_inches="tight")
@@ -290,7 +271,7 @@ g = sns.lineplot(
     y="average_path_length",
     hue="randomness",
     palette=blue_pallette,
-).set(ylabel=r"$APL$", xlabel=r"$t$")
+).set(ylabel=r"$APL$", xlabel=r"$t$", xlim=(0, 10000))
 
 plt.legend(title=r"$R$", bbox_to_anchor=(1.15, 0.6))
 plt.savefig(
