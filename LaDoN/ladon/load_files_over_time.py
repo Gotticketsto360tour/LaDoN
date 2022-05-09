@@ -50,6 +50,16 @@ data = combine_data()
 sns.lineplot(
     data=data,
     x="timestep",
+    y="average_clustering",
+    hue="tie_dissolution",
+    palette=blue_pallette,
+).set(ylabel=r"$\overline{C}$", xlabel=r"$t$", xlim=(0, 10000), ylim=(0, None))
+
+plt.legend(title=r"$P(D)$", bbox_to_anchor=(1.15, 0.65))
+
+sns.lineplot(
+    data=data,
+    x="timestep",
     y="mean_distance",
     hue="tie_dissolution",
     palette=blue_pallette,
@@ -147,6 +157,32 @@ plt.savefig(
     bbox_inches="tight",
 )
 
+sns.set_context(
+    "paper",
+    rc={
+        "figure.figsize": (11.7, 8.27),
+        "font.size": 10,
+        "axes.titlesize": 17,
+        "axes.labelsize": 20,
+    },
+    font_scale=1.7,
+)
+
+g = sns.relplot(
+    data=data,
+    x="timestep",
+    y="average_path_length",
+    hue="tie_dissolution",
+    kind="line",
+    col="randomness",
+    palette=blue_pallette,
+).set(ylabel=r"$APL*$", xlabel=r"$t$")
+
+rename_plot(g, titles=[r"$R = 0.1$", r"$R = 0.3$", r"$R = 0.5$"], legend=r"$P(D)$")
+g.savefig(
+    "plots/overall/Average_Path_Length_Ties_Deleted.png", dpi=300, bbox_inches="tight"
+)
+
 g = sns.relplot(
     data=data,
     x="timestep",
@@ -155,7 +191,7 @@ g = sns.relplot(
     kind="line",
     col="randomness",
     palette=blue_pallette,
-).set(ylabel=r"$|O|$", xlabel=r"$t$", xlim=(0, 10000))
+).set(ylabel=r"$|O|$", xlabel=r"$t$")
 
 rename_plot(g, titles=[r"$R = 0.1$", r"$R = 0.3$", r"$R = 0.5$"], legend=r"$P(D)$")
 g.savefig(
@@ -170,7 +206,7 @@ g = sns.relplot(
     kind="line",
     col="randomness",
     palette=blue_pallette,
-).set(ylabel=r"$NTD$", xlabel=r"$t$", xlim=(0, 10000))
+).set(ylabel=r"$NTD$", xlabel=r"$t$")
 
 rename_plot(g, titles=[r"$R = 0.1$", r"$R = 0.3$", r"$R = 0.5$"], legend=r"$P(D)$")
 g.savefig("plots/overall/Negative_Tie_Deleted.png", dpi=300, bbox_inches="tight")
