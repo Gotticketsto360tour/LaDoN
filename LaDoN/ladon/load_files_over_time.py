@@ -171,6 +171,23 @@ sns.set_context(
 g = sns.relplot(
     data=data,
     x="timestep",
+    y="average_clustering",
+    hue="tie_dissolution",
+    kind="line",
+    col="randomness",
+    palette=blue_pallette,
+).set(ylabel=r"$\overline{C}$", xlabel=r"$t$")
+
+rename_plot(g, titles=[r"$R = 0.1$", r"$R = 0.3$", r"$R = 0.5$"], legend=r"$P(D)$")
+g.savefig(
+    "plots/overall/Average_Clustering_Coefficient_Ties_Deleted.png",
+    dpi=300,
+    bbox_inches="tight",
+)
+
+g = sns.relplot(
+    data=data,
+    x="timestep",
     y="average_path_length",
     hue="tie_dissolution",
     kind="line",
@@ -413,77 +430,46 @@ data_polarized["Final State"].value_counts()
 
 data_merged = data.merge(data_polarized)
 
-g = sns.lineplot(
-    data=data_merged,
-    x="timestep",
-    y="mean_absolute_opinion",
-    hue="Final State",
-    # palette=blue_pallette,
-).set(ylabel=r"$|O|$", xlabel=r"$t$")
+data_min_max = (
+    data_merged.groupby(["Final State", "timestep"])
+    .agg(min_y=("mean_absolute_opinion", "min"), max_y=("mean_absolute_opinion", "max"))
+    .reset_index()
+)
+
+data_merged = data_merged.merge(data_min_max)
+
+data_merged = data_merged[
+    (data_merged["mean_absolute_opinion"] == data_merged["min_y"])
+    | (data_merged["mean_absolute_opinion"] == data_merged["max_y"])
+]
+
+sns.set_context(
+    "paper",
+    rc={
+        "figure.figsize": (20.7, 8.27),
+        "font.size": 17,
+        "axes.titlesize": 17,
+        "axes.labelsize": 22,
+    },
+    font_scale=2.2,
+)
 
 g = sns.relplot(
     data=data_merged,
     x="timestep",
     y="mean_absolute_opinion",
-    col="Final State",
-    # hue="Final State",
-    alpha=0.1,
-    kind="line",
-    units="run",
-    estimator=None,
-    # linewidth = 0.1
-    # palette=blue_pallette,
-).set(ylabel=r"$|O|$", xlabel=r"$t$")
-
-g = sns.relplot(
-    data=data_merged,
-    x="timestep",
-    y="mean_absolute_opinion",
+    # col="Final State",
     hue="Final State",
-    # hue="polarized",
-    alpha=0.1,
+    alpha=0.8,
     kind="line",
-    units="unique_condition",
+    units="Final State",
+    hue_order=["Polarized", "Inbetween", "Consensus"],
     estimator=None,
+    aspect=1.2,
+    height=10
     # linewidth = 0.1
     # palette=blue_pallette,
-).set(ylabel=r"$|O|$", xlabel=r"$t$")
-
-sns.lineplot(
-    data=data_merged,
-    x="timestep",
-    y="mean_absolute_opinion",
-    hue="polarized",
-    hue_order=["Polarized", "Inbetween", "Consensus"],
-    estimator=None,
-    alpha=0.05,
-    ci=None,
-    linewidth=3,
-    err_style=None,
-    units="unique_condition",
-    palette=sns.color_palette("deep", n_colors=3),
-).set(ylabel=r"$|O|$", xlabel=r"$t$")
-plt.legend(
-    title="Final State",
-    bbox_to_anchor=(1.0, 0.6),
 )
+g.set(ylabel=r"$|O|$", xlabel=r"$t$")
 
-sns.lineplot(
-    data=data_merged,
-    x="timestep",
-    y="average_path_length",
-    hue="polarized",
-    hue_order=["Polarized", "Inbetween", "Consensus"],
-    estimator=None,
-    alpha=0.5,
-    ci=None,
-    # linewidth=0.1,
-    err_style=None,
-    palette=sns.color_palette("deep", n_colors=3),
-).set(ylabel=r"$APL$", xlabel=r"$t$")
-plt.legend(
-    title="Final State",
-    bbox_to_anchor=(1.0, 0.5),
-)
-
-sns.boxplot(data=data_polarized, x="polarized", y="final_polarization")
+g.savefig("plots/overall/Point_Of_No_Return.png", dpi=300, bbox_inches="tight")
