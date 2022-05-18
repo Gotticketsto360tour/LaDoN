@@ -253,7 +253,6 @@ sns.set_context(
     },
     font_scale=2.5,
 )
-
 g = sns.catplot(
     data=correlations,
     x="tie_dissolution",
@@ -281,7 +280,6 @@ for ax, titles in zip(
 ):
     ax.set_title(titles)
     ax.set_xlabel(r"$P(D)$")
-
 
 g.savefig(
     "plots/overall/Correlation_Average_Path_Length_Absolute_Opinions.png", dpi=300
