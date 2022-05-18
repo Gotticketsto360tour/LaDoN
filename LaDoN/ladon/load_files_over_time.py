@@ -247,11 +247,44 @@ sns.set_context(
     "paper",
     rc={
         "figure.figsize": (11.7, 8.27),
-        "font.size": 13,
-        "axes.titlesize": 17,
-        "axes.labelsize": 22,
+        "font.size": 16,
+        "axes.titlesize": 22,
+        "axes.labelsize": 24,
     },
-    font_scale=2,
+    font_scale=2.5,
+)
+
+g = sns.catplot(
+    data=correlations,
+    x="tie_dissolution",
+    y="average_path_length",
+    kind="box",
+    col="randomness",
+    height=7,
+    # hue="threshold",
+    palette=sns.cubehelix_palette(8, rot=-0.25, light=0.9),
+)
+
+g.map(
+    sns.stripplot,
+    "tie_dissolution",
+    "average_path_length",
+    color="black",
+    alpha=0.33,
+    size=4,
+)
+
+g.set(ylabel=r"$\rho_{APL, |O|}$", xlabel=r"$P(D)$")
+for ax, titles in zip(
+    g.axes.flatten(),
+    [r"$R = 0.1$", r"$R = 0.3$", r"$R = 0.5$"],
+):
+    ax.set_title(titles)
+    ax.set_xlabel(r"$P(D)$")
+
+
+g.savefig(
+    "plots/overall/Correlation_Average_Path_Length_Absolute_Opinions.png", dpi=300
 )
 
 g = sns.boxplot(
@@ -453,6 +486,25 @@ sns.set_context(
     },
     font_scale=2.2,
 )
+
+consensus = data_min_max[data_min_max["Final State"] == "Consensus"]
+inbetween = data_min_max[data_min_max["Final State"] == "Inbetween"]
+polarized = data_min_max[data_min_max["Final State"] == "Polarized"]
+
+time = consensus["timestep"].values
+consensus_min, consensus_max = consensus["min_y"].values, consensus["max_y"].values
+inbetween_min, inbetween_max = inbetween["min_y"].values, inbetween["max_y"].values
+polarized_min, polarized_max = polarized["min_y"].values, polarized["max_y"].values
+
+plt.figure(figsize=(20.7, 8.27))
+
+plt.fill_between(time, polarized_min, polarized_max, alpha=0.7, label="Polarized")
+plt.fill_between(time, inbetween_min, inbetween_max, alpha=0.7, label="In-between")
+plt.fill_between(time, consensus_min, consensus_max, alpha=0.7, label="Consensus")
+plt.legend(title="Final State", bbox_to_anchor=(1.12, 0.66))
+plt.xlabel(r"$t$")
+plt.ylabel(r"$|O|$")
+plt.savefig("plots/overall/Point_Of_No_Return.png", dpi=300, bbox_inches="tight")
 
 g = sns.relplot(
     data=data_merged,

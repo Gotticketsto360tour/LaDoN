@@ -10,9 +10,29 @@ import networkx as nx
 from helpers import find_average_path, get_main_component
 from config import NAME_DICTIONARY
 
+import plotly.io as pio
+
+pio.renderers
+
 sns.set(rc={"figure.figsize": (11.7, 8.27)})
 sns.set_style("whitegrid")
 sns.set_context("talk")
+
+sns.set(rc={"figure.figsize": (11.7, 8.27)}, font_scale=1.5)
+# Set the font to be serif, rather than sans
+# sns.set_context("talk")
+sns.set_style("whitegrid")
+sns.set_context(
+    "paper",
+    rc={
+        "figure.figsize": (11.7, 8.27),
+        "font.size": 13,
+        "axes.titlesize": 17,
+        "axes.labelsize": 20,
+    },
+    font_scale=1.7,
+)
+
 blue_pallette = sns.dark_palette("#69d", reverse=True, as_cmap=True)
 
 
@@ -371,16 +391,44 @@ pd.DataFrame(
         for name, network in NAME_DICTIONARY.items()
     ]
 )
+NAME_DICTIONARY
 
 
-fig = optuna.visualization.plot_param_importances(study)
-fig.show()
+def rename_plot(g, titles):
+    for ax, title in zip(g, titles):
+        ax.set(xlabel=title)
+    return g
 
-fig = optuna.visualization.plot_optimization_history(study)
-fig.show()
 
-fig = optuna.visualization.plot_edf(study)
-fig.show()
+study = joblib.load(f"analysis/data/optimization/tvshows_study.pkl")
 
-fig = optuna.visualization.plot_slice(study)
-fig.show()
+pio.renderers.default = "notebook_connected"
+
+list_of_names = [
+    "Karate Club",
+    "Dolphins",
+    "Political Books",
+    "Citation Network",
+    "Political Blogs",
+    "Politicians",
+    "TV Shows",
+]
+
+for name_file, name_list in zip(NAME_DICTIONARY, list_of_names):
+    study = joblib.load(f"analysis/data/optimization/{name_file}_study.pkl")
+
+    fig = optuna.visualization.matplotlib.plot_optimization_history(study)
+    fig.set(title="")
+    plt.savefig(
+        f"plots/overall/Optimization_History_{name_file}.png",
+        dpi=300,
+        bbox_inches="tight",
+    )
+
+    fig = optuna.visualization.matplotlib.plot_slice(study)
+    rename_plot(fig, titles=[r"$\beta$", r"$\alpha$", r"$R$", r"$T$", r"$P(D)$"])
+    plt.savefig(
+        f"plots/overall/Plot_Slice_{name_file}.png",
+        dpi=300,
+        bbox_inches="tight",
+    )
