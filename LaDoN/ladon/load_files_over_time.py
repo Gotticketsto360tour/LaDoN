@@ -285,6 +285,17 @@ g.savefig(
     "plots/overall/Correlation_Average_Path_Length_Absolute_Opinions.png", dpi=300
 )
 
+sns.set_context(
+    "paper",
+    rc={
+        "figure.figsize": (11.7, 8.27),
+        "font.size": 16,
+        "axes.titlesize": 22,
+        "axes.labelsize": 20,
+    },
+    font_scale=2,
+)
+
 g = sns.boxplot(
     data=correlations,
     x="tie_dissolution",
@@ -292,7 +303,7 @@ g = sns.boxplot(
     hue="randomness",
     dodge=True,
     palette=sns.cubehelix_palette(5, rot=-0.25, light=0.9),
-    linewidth=3,
+    linewidth=1,
 )  # .set(ylabel=r"$\rho_{|O|, APL}$", xlabel=r"$P(D)$")
 sns.stripplot(
     data=correlations,
@@ -301,8 +312,8 @@ sns.stripplot(
     hue="randomness",
     dodge=True,
     color="black",
-    alpha=0.4,
-    size=3,
+    alpha=0.5,
+    size=2,
     # palette=sns.cubehelix_palette(8, rot=-0.25, light=0.9),
 ).set(ylabel=r"$\rho_{|O|, APL}$", xlabel=r"$P(D)$")
 
