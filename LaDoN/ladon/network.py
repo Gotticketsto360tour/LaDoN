@@ -256,3 +256,18 @@ class NoOpinionNetwork(Network):
             self.add_new_connection_through_neighbors(sampled_agent)
         else:
             self.add_new_connection_randomly(sampled_agent)
+
+
+class ScaleFreeNetwork(Network):
+    def __init__(self, dictionary):
+        self.__dict__.update(dictionary)
+        self.N_AGENTS = 0
+        self.agent_number = 0
+        self.EDGE_SURPLUS = 0
+        self.N_TIE_DISSOLUTIONS = 0
+        self.agents = {}
+        self.graph = nx.generators.random_graphs.barabasi_albert_graph(
+            n=self.N_TARGET, m=self.K
+        )
+        self.initialize_network()
+        self.initialize_vectors()

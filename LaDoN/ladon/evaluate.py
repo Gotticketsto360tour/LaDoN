@@ -1,5 +1,6 @@
 import pickle as pkl
 import pandas as pd
+from pyparsing import alphas
 import seaborn as sns
 import numpy as np
 import matplotlib.pyplot as plt
@@ -28,7 +29,7 @@ sns.set_context(
         "figure.figsize": (11.7, 8.27),
         "font.size": 13,
         "axes.titlesize": 17,
-        "axes.labelsize": 20,
+        "axes.labelsize": 18,
     },
     font_scale=1.7,
 )
@@ -39,10 +40,12 @@ blue_pallette = sns.dark_palette("#69d", reverse=True, as_cmap=True)
 def change_labels(string: str):
     if string == "Opinion_Model":
         return "Co-evolutionary model"
-    if string == "No_Opinion_Model":
+    elif string == "No_Opinion_Model":
         return "Network Formation model"
-    else:
+    elif string == "Target":
         return "Empirical network"
+    else:
+        return string
 
 
 def change_network_labels(string: str):
@@ -100,9 +103,9 @@ g = sns.boxplot(
         "Political Books",
         "Politicians",
         "Political Blogs",
-    ],
+    ][::-1],
     # capsize=0.07,
-    hue_order=["Co-evolutionary model", "Network Formation model"],
+    # hue_order=["Co-evolutionary model", "Network Formation model"],
 )
 sns.stripplot(
     data=data.query("type != 'Empirical network'"),
@@ -118,32 +121,42 @@ sns.stripplot(
         "Political Books",
         "Politicians",
         "Political Blogs",
-    ],
+    ][::-1],
     edgecolor="gray",
     linewidth=1.5,
     jitter=1,
     # color="black",
     alpha=0.8,
     size=7,
-    hue_order=["Co-evolutionary model", "Network Formation model"],
+    # hue_order=["Co-evolutionary model", "Network Formation model"],
     # palette=sns.cubehelix_palette(8, rot=-0.25, light=0.9),
 )
 plt.xlabel(r"$\overline{C}$")
 plt.ylabel("")
 plt.axvline(x=0, color="black", ls="--")
+plt.xlim(-0.8, 0.3)
+g.hlines(
+    [-0.5, 0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5],
+    xmin=-0.8,
+    xmax=0.3,
+    colors="gray",
+    linestyles="dotted",
+)
 # plt.ylim(0,5)
+plt.ylim(-0.5, 6.5)
 handles, labels = g.get_legend_handles_labels()
 
 # When creating the legend, only use the first two elements
 # to effectively remove the last two.
-l = plt.legend(handles[0:2], labels[0:2], title="Type of Model")
+l = plt.legend(
+    handles[0:4], labels[0:4], title="Type of Model", bbox_to_anchor=(1.4, 0.6)
+)
 
 plt.savefig(
     "plots/overall/Model_Evaluation_Average_Clustering.png",
     dpi=300,
     bbox_inches="tight",
 )
-
 
 g = sns.boxplot(
     data=data.query("type != 'Empirical network'"),
@@ -158,9 +171,9 @@ g = sns.boxplot(
         "Political Books",
         "Politicians",
         "Political Blogs",
-    ],
+    ][::-1],
     # capsize=0.07,
-    hue_order=["Co-evolutionary model", "Network Formation model"],
+    # hue_order=["Co-evolutionary model", "Network Formation model"],
 )
 sns.stripplot(
     data=data.query("type != 'Empirical network'"),
@@ -176,26 +189,35 @@ sns.stripplot(
         "Political Books",
         "Politicians",
         "Political Blogs",
-    ],
+    ][::-1],
     edgecolor="gray",
     linewidth=1.5,
     jitter=1,
     # color="black",
     alpha=0.8,
     size=7,
-    hue_order=["Co-evolutionary model", "Network Formation model"],
+    # hue_order=["Co-evolutionary model", "Network Formation model"],
     # palette=sns.cubehelix_palette(8, rot=-0.25, light=0.9),
 )
 plt.xlabel(r"$APL*$")
 plt.ylabel("")
 plt.axvline(x=0, color="black", ls="--")
+plt.xlim(-3, 2.2)
+g.hlines(
+    [-0.5, 0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5],
+    xmin=-3,
+    xmax=2.2,
+    colors="gray",
+    linestyles="dotted",
+)
 # plt.ylim(0,5)
+plt.ylim(-0.5, 6.5)
 handles, labels = g.get_legend_handles_labels()
 
 # When creating the legend, only use the first two elements
 # to effectively remove the last two.
 l = plt.legend(
-    handles[0:2], labels[0:2], title="Type of Model", bbox_to_anchor=(0.6, 0.6)
+    handles[0:4], labels[0:4], title="Type of Model", bbox_to_anchor=(1.4, 0.6)
 )
 
 plt.savefig("plots/overall/Model_Evaluation_APL.png", dpi=300, bbox_inches="tight")
@@ -213,9 +235,9 @@ g = sns.boxplot(
         "Political Books",
         "Politicians",
         "Political Blogs",
-    ],
+    ][::-1],
     # capsize=0.07,
-    hue_order=["Co-evolutionary model", "Network Formation model"],
+    # hue_order=["Co-evolutionary model", "Network Formation model"],
 )
 sns.stripplot(
     data=data.query("type != 'Empirical network'"),
@@ -231,26 +253,36 @@ sns.stripplot(
         "Political Books",
         "Politicians",
         "Political Blogs",
-    ],
+    ][::-1],
     edgecolor="gray",
     linewidth=1.5,
     jitter=1,
     # color="black",
     alpha=0.8,
     size=7,
-    hue_order=["Co-evolutionary model", "Network Formation model"],
+    # hue_order=["Co-evolutionary model", "Network Formation model"],
     # palette=sns.cubehelix_palette(8, rot=-0.25, light=0.9),
 )
 plt.xlabel(r"$JSD$")
 plt.ylabel("")
+plt.xlim(0, 0.8)
+g.hlines(
+    [-0.5, 0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5],
+    xmin=0,
+    xmax=0.8,
+    colors="gray",
+    linestyles="dotted",
+)
 # plt.axvline(x=0, color = "black", ls="--")
 # plt.ylim(0,5)
+plt.ylim(-0.5, 6.5)
 handles, labels = g.get_legend_handles_labels()
 
 # When creating the legend, only use the first two elements
 # to effectively remove the last two.
-l = plt.legend(handles[0:2], labels[0:2], title="Type of Model")
-
+l = plt.legend(
+    handles[0:4], labels[0:4], title="Type of Model", bbox_to_anchor=(1.4, 0.6)
+)
 
 plt.savefig("plots/overall/Model_Evaluation_JSD.png", dpi=300, bbox_inches="tight")
 
@@ -267,9 +299,9 @@ g = sns.boxplot(
         "Political Books",
         "Politicians",
         "Political Blogs",
-    ],
+    ][::-1],
     # capsize=0.07,
-    hue_order=["Co-evolutionary model", "Network Formation model"],
+    # hue_order=["Co-evolutionary model", "Network Formation model"],
 )
 sns.stripplot(
     data=data.query("type != 'Empirical network'"),
@@ -285,25 +317,36 @@ sns.stripplot(
         "Political Books",
         "Politicians",
         "Political Blogs",
-    ],
+    ][::-1],
     edgecolor="gray",
     linewidth=1.5,
     jitter=1,
     # color="black",
     alpha=0.8,
     size=7,
-    hue_order=["Co-evolutionary model", "Network Formation model"],
+    # hue_order=["Co-evolutionary model", "Network Formation model"],
     # palette=sns.cubehelix_palette(8, rot=-0.25, light=0.9),
 )
 plt.xlabel(r"$O(A,G)$")
 plt.ylabel("")
+plt.xlim(0.05, 0.45)
 # plt.axvline(x=0, color = "black", ls="--")
-# plt.ylim(0,5)
+plt.ylim(-0.5, 6.5)
 handles, labels = g.get_legend_handles_labels()
 
 # When creating the legend, only use the first two elements
 # to effectively remove the last two.
-l = plt.legend(handles[0:2], labels[0:2], title="Type of Model")
+l = plt.legend(
+    handles[0:4], labels[0:4], title="Type of Model", bbox_to_anchor=(1.4, 0.6)
+)
+
+g.hlines(
+    [-0.5, 0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5],
+    xmin=0.05,
+    xmax=0.45,
+    colors="gray",
+    linestyles="dotted",
+)
 
 plt.savefig("plots/overall/Model_Evaluation.png", dpi=300, bbox_inches="tight")
 
