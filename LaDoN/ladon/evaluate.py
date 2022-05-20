@@ -90,6 +90,50 @@ data["network"] = data["network"].apply(lambda x: change_network_labels(x))
 
 data = find_difference(data)
 
+data.query("type != 'Empirical network'").groupby("type").agg(
+    clustering_med=("clustering", "median"),
+    clustering_iqr=("clustering", lambda x: x.quantile(0.75) - x.quantile(0.25)),
+    average_path_med=("average_path", "median"),
+    average_path_iqr=("average_path", lambda x: x.quantile(0.75) - x.quantile(0.25)),
+    JSD_med=("JSD", "median"),
+    JSD_iqr=("JSD", lambda x: x.quantile(0.75) - x.quantile(0.25)),
+    mean_med=("mean", "median"),
+    mean_iqr=("mean", lambda x: x.quantile(0.75) - x.quantile(0.25)),
+).reset_index()
+
+data_melt = data.melt(id_vars=["type", "assortativity", "network", "run"])
+
+g = sns.catplot(
+    data=data_melt.query("type != 'Empirical network'"),
+    y="type",
+    x="value",
+    col="variable",
+    sharex=False,
+    kind="violin",
+)
+g.map(
+    sns.stripplot,
+    "value",
+    "type",
+    "type",
+    # color="black",
+    edgecolor="gray",
+    linewidth=1.5,
+    jitter=1,
+    # color="black",
+    alpha=0.8,
+    size=1,
+)
+g.set_ylabels("")
+g.set_titles("")
+for ax, name in zip(
+    g.axes.flatten(), [r"$\overline{C}$", r"$APL*$", r"$JSD$", r"$O(A,G)$"]
+):
+    ax.set_xlabel(name)
+
+g.savefig("plots/overall/Model_Evaluation_Overview", dpi=300)
+# g.set_xticklabels(rotation=80)
+
 g = sns.boxplot(
     data=data.query("type != 'Empirical network'"),
     y="network",
