@@ -69,7 +69,7 @@ def objective(trial, target, repeats, target_dictionary) -> float:
     # N_EDGES = target.number_of_edges()
     # K = round(N_EDGES / N_TARGET)
     # threshold = trial.suggest_float("threshold", 0.5, 2)
-    K = trial.suggest_int("K", 3, 20)
+    K = trial.suggest_int("K", 1, 20)
     # positive_learning_rate = trial.suggest_float("positive_learning_rate", 0, 0.5)
     # negative_learning_rate = trial.suggest_float("negative_learning_rate", 0, 0.5)
     # tie_dissolution = trial.suggest_float("tie_dissolution", 0.1, 1)

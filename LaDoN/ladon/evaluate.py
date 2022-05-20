@@ -123,7 +123,7 @@ g = sns.FacetGrid(
     col="variable",
     sharex=False,
     height=4,
-    gridspec_kws={"wspace": 0.1},
+    gridspec_kws={"wspace": 0.2},
     legend_out=True,
 )
 # f, ax = plt.subplots(figsize=(7, 5))
@@ -157,8 +157,9 @@ for ax, name in zip(
 ):
     ax.set_xlabel(name)
 g.axes[0][2].set(xlim=(0, 0.8))
+g.axes[0][1].set(xlim=(-3, 2))
 
-g.tight_layout()
+# g.tight_layout()
 
 g.savefig("plots/overall/Model_Evaluation_Overview", dpi=300)
 
