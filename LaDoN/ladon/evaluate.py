@@ -44,8 +44,10 @@ def change_labels(string: str):
         return "Network Formation model"
     elif string == "Target":
         return "Empirical network"
-    else:
-        return string
+    elif string == "Small-world Network":
+        return "Small-world network"
+    elif string == "Scale-free Network":
+        return "Scale-free network"
 
 
 def change_network_labels(string: str):
@@ -103,36 +105,73 @@ data.query("type != 'Empirical network'").groupby("type").agg(
 
 data_melt = data.melt(id_vars=["type", "assortativity", "network", "run"])
 
-g = sns.catplot(
+sns.set_context(
+    "paper",
+    rc={
+        "figure.figsize": (11.7, 8.27),
+        "font.size": 13,
+        "axes.titlesize": 17,
+        "axes.labelsize": 14,
+    },
+    font_scale=1.3,
+)
+
+import ptitprince as pt
+
+g = sns.FacetGrid(
     data=data_melt.query("type != 'Empirical network'"),
-    y="type",
-    x="value",
     col="variable",
     sharex=False,
-    kind="violin",
+    height=4,
+    gridspec_kws={"wspace": 0.1},
+    legend_out=True,
+)
+# f, ax = plt.subplots(figsize=(7, 5))
+
+g.map(
+    pt.half_violinplot,
+    "value",
+    "type",
+    bw=0.2,
+    cut=0.0,
+    scale="area",
+    width=0.6,
+    inner=None,
+    palette=sns.color_palette(n_colors=4),
 )
 g.map(
     sns.stripplot,
     "value",
     "type",
-    "type",
-    # color="black",
     edgecolor="gray",
-    linewidth=1.5,
+    size=2,
     jitter=1,
-    # color="black",
-    alpha=0.8,
-    size=1,
+    zorder=0,
+    palette=sns.color_palette(n_colors=4),
 )
+
 g.set_ylabels("")
 g.set_titles("")
 for ax, name in zip(
     g.axes.flatten(), [r"$\overline{C}$", r"$APL*$", r"$JSD$", r"$O(A,G)$"]
 ):
     ax.set_xlabel(name)
+g.axes[0][2].set(xlim=(0, 0.8))
+
+g.tight_layout()
 
 g.savefig("plots/overall/Model_Evaluation_Overview", dpi=300)
-# g.set_xticklabels(rotation=80)
+
+sns.set_context(
+    "paper",
+    rc={
+        "figure.figsize": (11.7, 8.27),
+        "font.size": 13,
+        "axes.titlesize": 17,
+        "axes.labelsize": 18,
+    },
+    font_scale=1.7,
+)
 
 g = sns.boxplot(
     data=data.query("type != 'Empirical network'"),
