@@ -156,6 +156,7 @@ for ax, name in zip(
     g.axes.flatten(), [r"$\overline{C}$", r"$APL*$", r"$JSD$", r"$O(A,G)$"]
 ):
     ax.set_xlabel(name)
+g.axes[0][0].set(xlim=(-0.75, 0.25))
 g.axes[0][2].set(xlim=(0, 0.8))
 g.axes[0][1].set(xlim=(-3, 2))
 
