@@ -22,7 +22,7 @@ sns.set_context(
 sns.set_style("whitegrid")
 blue_pallette = sns.dark_palette("#69d", reverse=True, as_cmap=True)
 
-list_of_simulations = glob.glob("analysis/data/simulations/opinions/*")
+list_of_simulations = glob.glob("../analysis/data/simulations/opinions/*")
 
 
 def make_one_data_frame(path: str):
@@ -155,7 +155,7 @@ plot_distribution_over_time(
     run=6,
 )
 
-plt.savefig("plots/Distribution_Over_Time.png")
+plt.savefig("../plots/Distribution_Over_Time.png")
 
 sns.set_context(
     "paper",
@@ -178,7 +178,7 @@ plot_trajectory_over_time(
 )
 
 plt.savefig(
-    "plots/example/Lineplot_Over_Time.png",
+    "../plots/example/Lineplot_Over_Time.png",
     dpi=300,
     bbox_inches="tight",
 )

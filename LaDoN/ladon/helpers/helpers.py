@@ -1,5 +1,5 @@
 import numpy as np
-from agent import Agent
+from ladon.classes.agent import Agent
 import networkx as nx
 import random
 from statistics import mean

@@ -1,9 +1,9 @@
 from statistics import mean
 import networkx as nx
-from agent import Agent
+from ladon.classes.agent import Agent
 from random import sample
 from random import random
-from helpers import find_distance, find_average_path
+from ladon.helpers.helpers import find_distance, find_average_path
 from tqdm import tqdm
 import numpy as np
 

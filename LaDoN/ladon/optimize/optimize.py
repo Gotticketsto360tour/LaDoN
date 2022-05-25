@@ -1,7 +1,7 @@
 from statistics import mean
 from typing import Dict
-from helpers import get_main_component, find_average_path
-from network import Network
+from ladon.helpers.helpers import get_main_component, find_average_path
+from ladon.classes.network import Network
 import networkx as nx
 import numpy as np
 import optuna
@@ -13,23 +13,7 @@ import multiprocessing as mp
 import joblib
 import plotly.io as pio
 import math
-from config import NAME_DICTIONARY
-
-pio.renderers.default = "notebook"
-
-# study = joblib.load("analysis/data/optimization/polbooks_study.pkl")
-
-# fig = optuna.visualization.plot_param_importances(study)
-# fig.show()
-
-# fig = optuna.visualization.plot_optimization_history(study)
-# fig.show()
-
-# fig = optuna.visualization.plot_edf(study)
-# fig.show()
-
-# fig = optuna.visualization.plot_slice(study)
-# fig.show()
+from ladon.config import NAME_DICTIONARY
 
 
 def make_network_by_seed(dictionary, run) -> Network:
@@ -63,10 +47,6 @@ def run_single_simulation(
         nx.algorithms.cluster.average_clustering(my_network.graph)
         - (target_dictionary.get("clustering"))
     )
-    # assortativity_diff = abs(
-    #     nx.algorithms.assortativity.degree_assortativity_coefficient(my_network.graph)
-    #     - (target_dictionary.get("assortativity"))
-    # )
     network_avg_path = find_average_path(my_network.graph)
 
     average_path_diff = abs(
@@ -145,9 +125,9 @@ if __name__ == "__main__":
             lambda trial: objective(trial, network, 1, target_dictionary), n_trials=500
         )
         resulting_dictionary[name] = study.best_params
-        joblib.dump(study, f"analysis/data/optimization/{name}_study.pkl")
+        joblib.dump(study, f"../analysis/data/optimization/{name}_study.pkl")
     with open(
-        f"analysis/data/optimization/best_optimization_results.pkl",
+        f"../analysis/data/optimization/best_optimization_results.pkl",
         "wb",
     ) as handle:
         pkl.dump(resulting_dictionary, handle, protocol=pkl.HIGHEST_PROTOCOL)

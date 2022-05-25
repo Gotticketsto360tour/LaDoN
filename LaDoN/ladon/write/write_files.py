@@ -1,9 +1,9 @@
 from typing import Dict
 from scipy import rand
-from network import Network
+from ladon.classes.network import Network
 import networkx as nx
 import numpy as np
-from config import (
+from ladon.config import (
     THRESHOLDS,
     RANDOMNESS,
     POSITIVE_LEARNING_RATES,
@@ -147,19 +147,19 @@ def make_one_simulation(
     )
 
     with open(
-        f"analysis/data/simulations/opinions/T{threshold}-R{randomness}-P{positive_learning_rate}-N{negative_learning_rate}-D{tie_dissolution}.pkl",
+        f"../analysis/data/simulations/opinions/T{threshold}-R{randomness}-P{positive_learning_rate}-N{negative_learning_rate}-D{tie_dissolution}.pkl",
         "wb",
     ) as handle:
         pkl.dump(df, handle, protocol=pkl.HIGHEST_PROTOCOL)
 
     with open(
-        f"analysis/data/simulations/final_state/T{threshold}-R{randomness}-P{positive_learning_rate}-N{negative_learning_rate}-D{tie_dissolution}.pkl",
+        f"../analysis/data/simulations/final_state/T{threshold}-R{randomness}-P{positive_learning_rate}-N{negative_learning_rate}-D{tie_dissolution}.pkl",
         "wb",
     ) as handle:
         pkl.dump(out_dict_final_state, handle, protocol=pkl.HIGHEST_PROTOCOL)
 
     with open(
-        f"analysis/data/simulations/over_time/T{threshold}-R{randomness}-P{positive_learning_rate}-N{negative_learning_rate}-D{tie_dissolution}.pkl",
+        f"../analysis/data/simulations/over_time/T{threshold}-R{randomness}-P{positive_learning_rate}-N{negative_learning_rate}-D{tie_dissolution}.pkl",
         "wb",
     ) as handle:
         pkl.dump(out_dict_over_time, handle, protocol=pkl.HIGHEST_PROTOCOL)
@@ -180,7 +180,7 @@ def make_all_simulations() -> None:
         one_combination
         for one_combination in combinations
         if not os.path.exists(
-            f"analysis/data/simulations/over_time/T{one_combination[0]}-R{one_combination[1]}-P{one_combination[2]}-N{one_combination[3]}_D{one_combination[4]}.pkl"
+            f"../analysis/data/simulations/over_time/T{one_combination[0]}-R{one_combination[1]}-P{one_combination[2]}-N{one_combination[3]}_D{one_combination[4]}.pkl"
         )
     ]
 

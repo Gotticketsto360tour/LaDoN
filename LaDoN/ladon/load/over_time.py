@@ -9,7 +9,7 @@ from numpy import size
 import pandas as pd
 import seaborn as sns
 import matplotlib.patches as patches
-from helpers import rename_plot
+from ladon.helpers.helpers import rename_plot
 
 sns.set(rc={"figure.figsize": (11.7, 8.27)}, font_scale=1.5)
 # Set the font to be serif, rather than sans
@@ -28,7 +28,7 @@ sns.set_context(
 
 blue_pallette = sns.dark_palette("#69d", reverse=True, as_cmap=True)
 
-list_of_simulations = glob.glob("analysis/data/simulations/over_time/*")
+list_of_simulations = glob.glob("../analysis/data/simulations/over_time/*")
 
 # make fraction of alpha / beta and plot the effect
 
@@ -67,7 +67,7 @@ sns.lineplot(
 
 plt.legend(title=r"$P(D)$", bbox_to_anchor=(1.15, 0.65))
 plt.savefig(
-    "plots/overall/Distance_Tie_Deletion.png",
+    "../plots/overall/Distance_Tie_Deletion.png",
     dpi=300,
     bbox_inches="tight",
 )
@@ -82,7 +82,7 @@ sns.lineplot(
 
 plt.legend(title=r"$P(D)$", bbox_to_anchor=(1.15, 0.65))
 plt.savefig(
-    "plots/overall/Standard_Deviation_Absolute_Opinion_Tie_Deletion.png",
+    "../plots/overall/Standard_Deviation_Absolute_Opinion_Tie_Deletion.png",
     dpi=300,
     bbox_inches="tight",
 )
@@ -97,7 +97,7 @@ g = sns.lineplot(
 
 plt.legend(title=r"$P(D)$", bbox_to_anchor=(1.15, 0.65))
 plt.savefig(
-    "plots/overall/Absolute_Opinion_Tie_Deletion_Without_Negative.png",
+    "../plots/overall/Absolute_Opinion_Tie_Deletion_Without_Negative.png",
     dpi=300,
     bbox_inches="tight",
 )
@@ -124,7 +124,7 @@ g = sns.lineplot(
 
 plt.legend(title=r"$T$", bbox_to_anchor=(1.0, 0.65))
 plt.savefig(
-    "plots/overall/Absolute_Opinion_Threshold.png", dpi=300, bbox_inches="tight"
+    "../plots/overall/Absolute_Opinion_Threshold.png", dpi=300, bbox_inches="tight"
 )
 
 g = sns.lineplot(
@@ -137,7 +137,7 @@ g = sns.lineplot(
 
 plt.legend(title=r"$\alpha$", bbox_to_anchor=(1.0, 0.65))
 plt.savefig(
-    "plots/overall/Absolute_Opinion_Positive_Learning_Rate.png",
+    "../plots/overall/Absolute_Opinion_Positive_Learning_Rate.png",
     dpi=300,
     bbox_inches="tight",
 )
@@ -152,7 +152,7 @@ g = sns.lineplot(
 
 plt.legend(title=r"$\beta$", bbox_to_anchor=(1.0, 0.65))
 plt.savefig(
-    "plots/overall/Absolute_Opinion_Negative_Learning_Rate.png",
+    "../plots/overall/Absolute_Opinion_Negative_Learning_Rate.png",
     dpi=300,
     bbox_inches="tight",
 )
@@ -180,7 +180,7 @@ g = sns.relplot(
 
 rename_plot(g, titles=[r"$R = 0.1$", r"$R = 0.3$", r"$R = 0.5$"], legend=r"$P(D)$")
 g.savefig(
-    "plots/overall/Average_Clustering_Coefficient_Ties_Deleted.png",
+    "../plots/overall/Average_Clustering_Coefficient_Ties_Deleted.png",
     dpi=300,
     bbox_inches="tight",
 )
@@ -197,7 +197,9 @@ g = sns.relplot(
 
 rename_plot(g, titles=[r"$R = 0.1$", r"$R = 0.3$", r"$R = 0.5$"], legend=r"$P(D)$")
 g.savefig(
-    "plots/overall/Average_Path_Length_Ties_Deleted.png", dpi=300, bbox_inches="tight"
+    "../plots/overall/Average_Path_Length_Ties_Deleted.png",
+    dpi=300,
+    bbox_inches="tight",
 )
 
 g = sns.relplot(
@@ -212,7 +214,9 @@ g = sns.relplot(
 
 rename_plot(g, titles=[r"$R = 0.1$", r"$R = 0.3$", r"$R = 0.5$"], legend=r"$P(D)$")
 g.savefig(
-    "plots/overall/Absolute_Opinion_Tie_Dissolution.png", dpi=300, bbox_inches="tight"
+    "../plots/overall/Absolute_Opinion_Tie_Dissolution.png",
+    dpi=300,
+    bbox_inches="tight",
 )
 
 g = sns.relplot(
@@ -226,7 +230,7 @@ g = sns.relplot(
 ).set(ylabel=r"$NTD$", xlabel=r"$t$")
 
 rename_plot(g, titles=[r"$R = 0.1$", r"$R = 0.3$", r"$R = 0.5$"], legend=r"$P(D)$")
-g.savefig("plots/overall/Negative_Tie_Deleted.png", dpi=300, bbox_inches="tight")
+g.savefig("../plots/overall/Negative_Tie_Deleted.png", dpi=300, bbox_inches="tight")
 
 
 correlations = (
@@ -282,7 +286,7 @@ for ax, titles in zip(
     ax.set_xlabel(r"$P(D)$")
 
 g.savefig(
-    "plots/overall/Correlation_Average_Path_Length_Absolute_Opinions.png", dpi=300
+    "../plots/overall/Correlation_Average_Path_Length_Absolute_Opinions.png", dpi=300
 )
 
 sns.set_context(
@@ -325,7 +329,7 @@ handles, labels = g.get_legend_handles_labels()
 # to effectively remove the last two.
 l = plt.legend(handles[0:3], labels[0:3], bbox_to_anchor=(1.01, 0.6), title=r"$R$")
 plt.savefig(
-    "plots/overall/Tie_Dissolution_Correlations_Boxplot_Full.png",
+    "../plots/overall/Tie_Dissolution_Correlations_Boxplot_Full.png",
     dpi=300,
     bbox_inches="tight",
 )
@@ -348,7 +352,7 @@ sns.stripplot(
     size=3
     # palette=sns.cubehelix_palette(8, rot=-0.25, light=0.9),
 ).set(ylabel=r"$\rho_{|O|, APL}$", xlabel=r"$P(D)$")
-plt.savefig("plots/overall/Tie_Dissolution_Correlations_Boxplot_Over_Zero.png")
+plt.savefig("../plots/overall/Tie_Dissolution_Correlations_Boxplot_Over_Zero.png")
 
 data_specific = data[
     (data["threshold"] == 0.8)
@@ -387,7 +391,9 @@ g = sns.lineplot(
 ).set(ylabel=r"$|O|$", xlabel=r"$t$", xlim=(0, 10000))
 
 plt.legend(title=r"$R$", bbox_to_anchor=(1.15, 0.6))
-plt.savefig("plots/example/Example_Absolute_Opinion.png", dpi=300, bbox_inches="tight")
+plt.savefig(
+    "../plots/example/Example_Absolute_Opinion.png", dpi=300, bbox_inches="tight"
+)
 
 
 g = sns.lineplot(
@@ -400,7 +406,7 @@ g = sns.lineplot(
 
 plt.legend(title=r"$R$", bbox_to_anchor=(1.15, 0.6))
 plt.savefig(
-    "plots/example/Example_Average_Path_Length.png", dpi=300, bbox_inches="tight"
+    "../plots/example/Example_Average_Path_Length.png", dpi=300, bbox_inches="tight"
 )
 
 g = sns.lineplot(
@@ -413,7 +419,7 @@ g = sns.lineplot(
 
 plt.legend(title=r"$R$", bbox_to_anchor=(1.15, 0.6))
 plt.savefig(
-    "plots/example/Example_Negative_Ties_Deleted.png", dpi=300, bbox_inches="tight"
+    "../plots/example/Example_Negative_Ties_Deleted.png", dpi=300, bbox_inches="tight"
 )
 
 data_polarized = (
@@ -513,7 +519,7 @@ plt.fill_between(time, consensus_min, consensus_max, alpha=0.7, label="Consensus
 plt.legend(title="Final State", bbox_to_anchor=(1.12, 0.66))
 plt.xlabel(r"$t$")
 plt.ylabel(r"$|O|$")
-plt.savefig("plots/overall/Point_Of_No_Return.png", dpi=300, bbox_inches="tight")
+plt.savefig("../plots/overall/Point_Of_No_Return.png", dpi=300, bbox_inches="tight")
 
 g = sns.relplot(
     data=data_merged,
@@ -533,4 +539,4 @@ g = sns.relplot(
 )
 g.set(ylabel=r"$|O|$", xlabel=r"$t$")
 
-g.savefig("plots/overall/Point_Of_No_Return.png", dpi=300, bbox_inches="tight")
+g.savefig("../plots/overall/Point_Of_No_Return.png", dpi=300, bbox_inches="tight")

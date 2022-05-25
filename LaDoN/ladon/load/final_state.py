@@ -8,7 +8,7 @@ from numpy import negative
 import pandas as pd
 import seaborn as sns
 import ptitprince as pt
-from helpers import rename_plot
+from ladon.helpers.helpers import rename_plot
 import itertools
 
 sns.set(rc={"figure.figsize": (11.7, 8.27)}, font_scale=1.5)
@@ -27,7 +27,7 @@ sns.set_context(
 sns.set_style("whitegrid")
 blue_pallette = sns.dark_palette("#69d", reverse=True, as_cmap=True)
 
-list_of_simulations = glob.glob("analysis/data/simulations/final_state/*")
+list_of_simulations = glob.glob("../analysis/data/simulations/final_state/*")
 
 
 def make_one_data_frame(path: str):
@@ -72,7 +72,7 @@ rename_plot(
     legend=r"$P(D)$",
 )
 
-plotting.savefig("plots/overall/Radicalization.png")
+plotting.savefig("../plots/overall/Radicalization.png")
 
 correlations = (
     data.groupby(
@@ -134,7 +134,7 @@ for ax, titles in zip(
     ax.set_title(titles)
     ax.set_xlabel(r"$T$")
 
-g.savefig("plots/overall/Correlation_Initial_Opinions.png")
+g.savefig("../plots/overall/Correlation_Initial_Opinions.png")
 
 sns.boxplot(
     data=correlations,
@@ -158,7 +158,7 @@ sns.stripplot(
     ylabel=r"$\rho_{O_I, O_F}$",
     xlabel=r"$\beta$",
 )
-plt.savefig("plots/overall/Correlation_Initial_Opinions_Negative_Learning_Rate.png")
+plt.savefig("../plots/overall/Correlation_Initial_Opinions_Negative_Learning_Rate.png")
 
 sns.boxplot(
     data=correlations,
@@ -183,4 +183,4 @@ sns.stripplot(
     xlabel="Threshold",
 )
 
-plt.savefig("plots/overall/Correlation_Initial_Opinions_Threshold.png")
+plt.savefig("../plots/overall/Correlation_Initial_Opinions_Threshold.png")

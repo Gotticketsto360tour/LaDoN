@@ -30,7 +30,7 @@ import colorcet
 from colorcet import b_glasbey_bw_minc_20
 from selenium import webdriver
 
-from network import Network
+from ladon.classes.network import Network
 import random
 
 output_notebook()

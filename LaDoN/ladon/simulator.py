@@ -1,5 +1,5 @@
-from visualize import plot_graph, generate_network_plots
-from network import Network
+from ladon.visualize import plot_graph, generate_network_plots
+from ladon.classes.network import Network
 import networkx as nx
 import numpy as np
 import seaborn as sns

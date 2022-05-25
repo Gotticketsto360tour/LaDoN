@@ -2,17 +2,17 @@ import pickle as pkl
 from typing import Dict, List
 import networkx as nx
 import pandas as pd
-from helpers import get_main_component, find_average_path
-from optimize import make_network_by_seed
-from optimize_no_opinion import make_no_opinion_network_by_seed
-from optimize_theoretical import make_theoretical_network_by_seed
-from optimize_barabasi import make_barabasi_network_by_seed
+from ladon.helpers.helpers import get_main_component, find_average_path
+from ladon.optimize.optimize import make_network_by_seed
+from ladon.optimize.optimize_no_opinion import make_no_opinion_network_by_seed
+from ladon.optimize.optimize_theoretical import make_theoretical_network_by_seed
+from ladon.optimize.optimize_barabasi import make_barabasi_network_by_seed
 import joblib
-from network import Network, NoOpinionNetwork
+from ladon.classes.network import Network, NoOpinionNetwork
 import netrd
 import seaborn as sns
 import numpy as np
-from config import NAME_DICTIONARY
+from ladon.config import NAME_DICTIONARY
 
 sns.set(rc={"figure.figsize": (11.7, 8.27)})
 sns.set_context("talk")
@@ -77,7 +77,7 @@ def generate_network_dataframe(repeats: int) -> List[Dict]:
         }
         list_of_dictionaries.append(target_dictionary)
         best_study_opinions = joblib.load(
-            f"analysis/data/optimization/{name}_study.pkl"
+            f"../analysis/data/optimization/{name}_study.pkl"
         )
 
         best_parameters = best_study_opinions.best_params
@@ -136,7 +136,7 @@ def generate_network_dataframe(repeats: int) -> List[Dict]:
         list_of_dictionaries.extend(opinion_dictionaries)
 
         best_study_non_opinions = joblib.load(
-            f"analysis/data/optimization/{name}_study_no_opinion.pkl"
+            f"../analysis/data/optimization/{name}_study_no_opinion.pkl"
         )
 
         best_parameters = best_study_non_opinions.best_params
@@ -185,7 +185,7 @@ def generate_network_dataframe(repeats: int) -> List[Dict]:
         list_of_dictionaries.extend(no_opinion_dictionaries)
 
         best_study_theoretical = joblib.load(
-            f"analysis/data/optimization/{name}_study_no_theoretical.pkl"
+            f"../analysis/data/optimization/{name}_study_no_theoretical.pkl"
         )
 
         best_parameters = best_study_theoretical.best_params
@@ -234,7 +234,7 @@ def generate_network_dataframe(repeats: int) -> List[Dict]:
         list_of_dictionaries.extend(theoretical_dictionaries)
 
         best_study_barabasi = joblib.load(
-            f"analysis/data/optimization/{name}_study_no_barabasi.pkl"
+            f"../analysis/data/optimization/{name}_study_no_barabasi.pkl"
         )
 
         best_parameters = best_study_barabasi.best_params
@@ -288,7 +288,7 @@ def generate_network_dataframe(repeats: int) -> List[Dict]:
 if __name__ == "__main__":
     data = generate_network_dataframe(repeats=10)
     with open(
-        f"analysis/data/optimization/data_from_all_runs.pkl",
+        f"../analysis/data/optimization/data_from_all_runs.pkl",
         "wb",
     ) as handle:
         pkl.dump(data, handle, protocol=pkl.HIGHEST_PROTOCOL)

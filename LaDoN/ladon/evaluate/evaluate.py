@@ -8,12 +8,10 @@ import plotly.io as pio
 import optuna
 import joblib
 import networkx as nx
-from helpers import find_average_path, get_main_component
-from config import NAME_DICTIONARY
-
+from ladon.helpers.helpers import find_average_path, get_main_component
+from ladon.config import NAME_DICTIONARY
 import plotly.io as pio
 
-pio.renderers
 
 sns.set(rc={"figure.figsize": (11.7, 8.27)})
 sns.set_style("whitegrid")
