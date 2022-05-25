@@ -144,7 +144,6 @@ if __name__ == "__main__":
         study.optimize(
             lambda trial: objective(trial, network, 1, target_dictionary), n_trials=500
         )
-        study.best_params
         resulting_dictionary[name] = study.best_params
         joblib.dump(study, f"analysis/data/optimization/{name}_study.pkl")
     with open(

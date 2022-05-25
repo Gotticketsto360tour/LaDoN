@@ -1,6 +1,42 @@
 \begin{thebibliography}{}
 
 \bibitem [\protect \citeauthoryear {%
+Adamic%
+\ \BBA {} Glance%
+}{%
+Adamic%
+\ \BBA {} Glance%
+}{%
+{\protect \APACyear {2005}}%
+}]{%
+adamic_political_2005}
+\APACinsertmetastar {%
+adamic_political_2005}%
+\begin{APACrefauthors}%
+Adamic, L\BPBI A.%
+\BCBT {}\ \BBA {} Glance, N.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2005}{{\APACmonth{08}}}{}.
+\newblock
+{\BBOQ}\APACrefatitle {The political blogosphere and the 2004 {U}.{S}.
+  election: divided they blog} {The political blogosphere and the 2004 {U}.{S}.
+  election: divided they blog}.{\BBCQ}
+\newblock
+\BIn{} \APACrefbtitle {Proceedings of the 3rd international workshop on {Link}
+  discovery} {Proceedings of the 3rd international workshop on {Link}
+  discovery}\ (\BPGS\ 36--43).
+\newblock
+\APACaddressPublisher{New York, NY, USA}{Association for Computing Machinery}.
+\newblock
+\begin{APACrefURL} [{2022-04-06}]\url{https://doi.org/10.1145/1134271.1134277}
+  \end{APACrefURL}
+\newblock
+\begin{APACrefDOI} \doi{10.1145/1134271.1134277} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
 Akiba%
 , Sano%
 , Yanase%
@@ -189,6 +225,39 @@ Asikainen, A.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
+Backstrom%
+, Boldi%
+, Rosa%
+, Ugander%
+\BCBL {}\ \BBA {} Vigna%
+}{%
+Backstrom%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2012}}%
+}]{%
+backstrom2012four}
+\APACinsertmetastar {%
+backstrom2012four}%
+\begin{APACrefauthors}%
+Backstrom, L.%
+, Boldi, P.%
+, Rosa, M.%
+, Ugander, J.%
+\BCBL {}\ \BBA {} Vigna, S.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2012}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Four degrees of separation} {Four degrees of
+  separation}.{\BBCQ}
+\newblock
+\BIn{} \APACrefbtitle {Proceedings of the 4th Annual ACM Web Science
+  Conference} {Proceedings of the 4th annual acm web science conference}\
+  (\BPGS\ 33--42).
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
 Bail%
 \ \protect \BOthers {.}}{%
 Bail%
@@ -259,12 +328,39 @@ Barabási, A\BHBI L.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
-F.~Baumann%
+Baumann%
+}{%
+Baumann%
+}{%
+{\protect \APACyear {2021}}%
+}]{%
+baumann2021modeling}
+\APACinsertmetastar {%
+baumann2021modeling}%
+\begin{APACrefauthors}%
+Baumann, F.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYear{2021}.
+\unskip\
+\newblock
+\APACrefbtitle {Modeling Opinion Dynamics on Networks: How Social Influence
+  Shapes the Formation of Consensus and Polarization} {Modeling opinion
+  dynamics on networks: How social influence shapes the formation of consensus
+  and polarization}\ \APACtypeAddressSchool {\BUPhD}{}{}.
+\unskip\
+\newblock
+\APACaddressSchool {}{Humboldt Universitaet zu Berlin (Germany)}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Baumann%
 , Lorenz-Spreen%
 , Sokolov%
 \BCBL {}\ \BBA {} Starnini%
 }{%
-F.~Baumann%
+Baumann%
 \ \protect \BOthers {.}}{%
 {\protect \APACyear {2020}}%
 }]{%
@@ -294,40 +390,6 @@ Baumann, F.%
 \APACrefnote{Publisher: American Physical Society}
 \newblock
 \begin{APACrefDOI} \doi{10.1103/PhysRevLett.124.048301} \end{APACrefDOI}
-\PrintBackRefs{\CurrentBib}
-
-\bibitem [\protect \citeauthoryear {%
-F\BPBI T\BPBI W.~Baumann%
-}{%
-F\BPBI T\BPBI W.~Baumann%
-}{%
-{\protect \APACyear {2021}}%
-}]{%
-baumann_modeling_2021}
-\APACinsertmetastar {%
-baumann_modeling_2021}%
-\begin{APACrefauthors}%
-Baumann, F\BPBI T\BPBI W.%
-\end{APACrefauthors}%
-\unskip\
-\newblock
-\APACrefYear{2021}.
-\unskip\
-\newblock
-\APACrefbtitle {Modeling {Opinion} {Dynamics} on {Networks}: {How} {Social}
-  {Influence} {Shapes} the {Formation} of {Consensus} and {Polarization}}
-  {Modeling {Opinion} {Dynamics} on {Networks}: {How} {Social} {Influence}
-  {Shapes} the {Formation} of {Consensus} and {Polarization}}\
-  \APACtypeAddressSchool {Ph.{D}.}{Germany}{Humboldt Universitaet zu Berlin
-  (Germany)}.
-\unskip\
-\newblock
-\begin{APACrefURL}
-  [{2022-01-26}]\url{https://www.proquest.com/docview/2578182483/abstract/A3837AF8EFD40DAPQ/1}
-  \end{APACrefURL}
-\unskip\
-\newblock
-\APACrefnote{ISBN: 9798544276395}
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
@@ -366,6 +428,41 @@ Bener, A\BPBI B.%
 \APACrefnote{Publisher: Public Library of Science}
 \newblock
 \begin{APACrefDOI} \doi{10.1371/journal.pone.0160307} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Bergstra%
+, Bardenet%
+, Bengio%
+\BCBL {}\ \BBA {} Kégl%
+}{%
+Bergstra%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2011}}%
+}]{%
+bergstra_algorithms_2011}
+\APACinsertmetastar {%
+bergstra_algorithms_2011}%
+\begin{APACrefauthors}%
+Bergstra, J.%
+, Bardenet, R.%
+, Bengio, Y.%
+\BCBL {}\ \BBA {} Kégl, B.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2011}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Algorithms for {Hyper}-{Parameter} {Optimization}}
+  {Algorithms for {Hyper}-{Parameter} {Optimization}}.{\BBCQ}
+\newblock
+\BIn{} \APACrefbtitle {Advances in {Neural} {Information} {Processing}
+  {Systems}} {Advances in {Neural} {Information} {Processing} {Systems}}\
+  (\BVOL~24).
+\newblock
+\APACaddressPublisher{}{Curran Associates, Inc.}
+\newblock
+\begin{APACrefURL} [{2022-04-04}]\url{shorturl.at/euO47} \end{APACrefURL}
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
@@ -621,9 +718,7 @@ Center, P\BPBI R.%
 \APACrefbtitle {Political {Polarization} and {Growing} {Partisan} {Antipathy}.}
   {Political {Polarization} and {Growing} {Partisan} {Antipathy}.}
 \newblock
-\begin{APACrefURL}
-  [{2022-03-11}]\url{https://www.pewresearch.org/politics/2014/06/12/section-2-growing-partisan-antipathy/}
-  \end{APACrefURL}
+\begin{APACrefURL} [{2022-03-11}]\url{shorturl.at/kuyMZ} \end{APACrefURL}
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
@@ -646,9 +741,7 @@ Center, P\BPBI R.%
 \APACrefbtitle {Political {Polarization} in the {American} {Public}.}
   {Political {Polarization} in the {American} {Public}.}
 \newblock
-\begin{APACrefURL}
-  [{2022-03-11}]\url{https://www.pewresearch.org/politics/2014/06/12/political-polarization-in-the-american-public/}
-  \end{APACrefURL}
+\begin{APACrefURL} [{2022-03-11}]\url{shorturl.at/qxCD3} \end{APACrefURL}
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
@@ -684,6 +777,33 @@ Chacoma, A.%
 \APACrefnote{Publisher: Public Library of Science}
 \newblock
 \begin{APACrefDOI} \doi{10.1371/journal.pone.0140406} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Cowan%
+\ \BBA {} Jonard%
+}{%
+Cowan%
+\ \BBA {} Jonard%
+}{%
+{\protect \APACyear {2004}}%
+}]{%
+cowan2004network}
+\APACinsertmetastar {%
+cowan2004network}%
+\begin{APACrefauthors}%
+Cowan, R.%
+\BCBT {}\ \BBA {} Jonard, N.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2004}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Network structure and the diffusion of knowledge}
+  {Network structure and the diffusion of knowledge}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Journal of economic Dynamics and
+  Control}{28}{8}{1557--1575}.
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
@@ -794,6 +914,35 @@ Dakin, R.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
+de Arruda%
+\ \protect \BOthers {.}}{%
+de Arruda%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2022}}%
+}]{%
+de2022modelling}
+\APACinsertmetastar {%
+de2022modelling}%
+\begin{APACrefauthors}%
+de Arruda, H\BPBI F.%
+, Cardoso, F\BPBI M.%
+, de Arruda, G\BPBI F.%
+, Hern{\'a}ndez, A\BPBI R.%
+, da Fontoura~Costa, L.%
+\BCBL {}\ \BBA {} Moreno, Y.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2022}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Modelling how social network algorithms can influence
+  opinion polarization} {Modelling how social network algorithms can influence
+  opinion polarization}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Information Sciences}{588}{}{265--278}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
 Del~Vicario%
 \ \protect \BOthers {.}}{%
 Del~Vicario%
@@ -854,9 +1003,36 @@ Dimock, M.%
 \APACrefbtitle {America is exceptional in the nature of its political divide.}
   {America is exceptional in the nature of its political divide.}
 \newblock
-\begin{APACrefURL}
-  [{2022-03-11}]\url{https://www.pewresearch.org/fact-tank/2020/11/13/america-is-exceptional-in-the-nature-of-its-political-divide/}
-  \end{APACrefURL}
+\begin{APACrefURL} [{2022-03-11}]\url{shorturl.at/wKMR4} \end{APACrefURL}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Emiliano%
+, Vivanco%
+\BCBL {}\ \BBA {} De~Menezes%
+}{%
+Emiliano%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2014}}%
+}]{%
+emiliano2014information}
+\APACinsertmetastar {%
+emiliano2014information}%
+\begin{APACrefauthors}%
+Emiliano, P\BPBI C.%
+, Vivanco, M\BPBI J.%
+\BCBL {}\ \BBA {} De~Menezes, F\BPBI S.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2014}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Information criteria: How do they behave in different
+  models?} {Information criteria: How do they behave in different
+  models?}{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Computational Statistics \& Data
+  Analysis}{69}{}{141--153}.
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
@@ -881,41 +1057,6 @@ Epstein, J\BPBI M.%
   science}.{\BBCQ}
 \newblock
 \APACjournalVolNumPages{Complexity}{4}{5}{41--60}.
-\PrintBackRefs{\CurrentBib}
-
-\bibitem [\protect \citeauthoryear {%
-Ferraz~de Arruda%
-\ \protect \BOthers {.}}{%
-Ferraz~de Arruda%
-\ \protect \BOthers {.}}{%
-{\protect \APACyear {2022}}%
-}]{%
-ferraz_de_arruda_modelling_2022}
-\APACinsertmetastar {%
-ferraz_de_arruda_modelling_2022}%
-\begin{APACrefauthors}%
-Ferraz~de Arruda, H.%
-, Maciel~Cardoso, F.%
-, Ferraz~de Arruda, G.%
-, R.~Hernández, A.%
-, da Fontoura~Costa, L.%
-\BCBL {}\ \BBA {} Moreno, Y.%
-\end{APACrefauthors}%
-\unskip\
-\newblock
-\APACrefYearMonthDay{2022}{{\APACmonth{04}}}{}.
-\newblock
-{\BBOQ}\APACrefatitle {Modelling how social network algorithms can influence
-  opinion polarization} {Modelling how social network algorithms can influence
-  opinion polarization}.{\BBCQ}
-\newblock
-\APACjournalVolNumPages{Information Sciences}{588}{}{265--278}.
-\newblock
-\begin{APACrefURL}
-  [{2022-03-11}]\url{https://www.sciencedirect.com/science/article/pii/S0020025521012901}
-  \end{APACrefURL}
-\newblock
-\begin{APACrefDOI} \doi{10.1016/j.ins.2021.12.069} \end{APACrefDOI}
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
@@ -1509,6 +1650,36 @@ Jussim, L.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
+Kerr%
+\ \protect \BOthers {.}}{%
+Kerr%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2021}}%
+}]{%
+kerr2021covasim}
+\APACinsertmetastar {%
+kerr2021covasim}%
+\begin{APACrefauthors}%
+Kerr, C\BPBI C.%
+, Stuart, R\BPBI M.%
+, Mistry, D.%
+, Abeysuriya, R\BPBI G.%
+, Rosenfeld, K.%
+, Hart, G\BPBI R.%
+\BDBL {}others%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2021}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Covasim: an agent-based model of COVID-19 dynamics and
+  interventions} {Covasim: an agent-based model of covid-19 dynamics and
+  interventions}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{PLOS Computational Biology}{17}{7}{e1009149}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
 Kossinets%
 \ \BBA {} Watts%
 }{%
@@ -1544,6 +1715,34 @@ Kossinets, G.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
+Kozma%
+\ \BBA {} Barrat%
+}{%
+Kozma%
+\ \BBA {} Barrat%
+}{%
+{\protect \APACyear {2008}}%
+}]{%
+kozma2008consensus}
+\APACinsertmetastar {%
+kozma2008consensus}%
+\begin{APACrefauthors}%
+Kozma, B.%
+\BCBT {}\ \BBA {} Barrat, A.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2008}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Consensus formation on coevolving networks: groups'
+  formation and structure} {Consensus formation on coevolving networks: groups'
+  formation and structure}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Journal of Physics A: Mathematical and
+  Theoretical}{41}{22}{224020}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
 Krivorotko%
 , Sosnovskaia%
 , Vashchenko%
@@ -1574,6 +1773,33 @@ Krivorotko, O.%
   algorithm}.{\BBCQ}
 \newblock
 \APACjournalVolNumPages{Infectious Disease Modelling}{7}{1}{30--44}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Kurzban%
+, Burton-Chellew%
+\BCBL {}\ \BBA {} West%
+}{%
+Kurzban%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2015}}%
+}]{%
+kurzban2015evolution}
+\APACinsertmetastar {%
+kurzban2015evolution}%
+\begin{APACrefauthors}%
+Kurzban, R.%
+, Burton-Chellew, M\BPBI N.%
+\BCBL {}\ \BBA {} West, S\BPBI A.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2015}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {The evolution of altruism in humans} {The evolution of
+  altruism in humans}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Annual review of psychology}{66}{}{575--599}.
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
@@ -1675,6 +1901,75 @@ Levy, R.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
+Lusseau%
+\ \protect \BOthers {.}}{%
+Lusseau%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2003}}%
+}]{%
+lusseau_bottlenose_2003}
+\APACinsertmetastar {%
+lusseau_bottlenose_2003}%
+\begin{APACrefauthors}%
+Lusseau, D.%
+, Schneider, K.%
+, Boisseau, O\BPBI J.%
+, Haase, P.%
+, Slooten, E.%
+\BCBL {}\ \BBA {} Dawson, S\BPBI M.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2003}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {The bottlenose dolphin community of {Doubtful} {Sound}
+  features a large proportion of long-lasting associations - {Can} geographic
+  isolation explain this unique trait?} {The bottlenose dolphin community of
+  {Doubtful} {Sound} features a large proportion of long-lasting associations -
+  {Can} geographic isolation explain this unique trait?}{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Behavioral Ecology and Sociobiology}{54}{}{396--405}.
+\newblock
+\begin{APACrefURL} [{2022-04-07}]\url{shorturl.at/hiqIL} \end{APACrefURL}
+\newblock
+\APACrefnote{Publisher: Springer}
+\newblock
+\begin{APACrefDOI} \doi{10.1007/s00265-003-0651-y} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Macy%
+, Ma%
+, Tabin%
+, Gao%
+\BCBL {}\ \BBA {} Szymanski%
+}{%
+Macy%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2021}}%
+}]{%
+macy2021polarization}
+\APACinsertmetastar {%
+macy2021polarization}%
+\begin{APACrefauthors}%
+Macy, M\BPBI W.%
+, Ma, M.%
+, Tabin, D\BPBI R.%
+, Gao, J.%
+\BCBL {}\ \BBA {} Szymanski, B\BPBI K.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2021}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Polarization and tipping points} {Polarization and
+  tipping points}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Proceedings of the National Academy of
+  Sciences}{118}{50}{}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
 M{\"a}s%
 }{%
 M{\"a}s%
@@ -1731,6 +2026,41 @@ M{\"a}s, M.%
   {Perspectives on culture and agent-based simulations}\ (\BPGS\ 71--90).
 \newblock
 \APACaddressPublisher{}{Springer}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Matsumura%
+, Iwasaki%
+\BCBL {}\ \BBA {} Shudo%
+}{%
+Matsumura%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2018}}%
+}]{%
+matsumura_average_2018}
+\APACinsertmetastar {%
+matsumura_average_2018}%
+\begin{APACrefauthors}%
+Matsumura, T.%
+, Iwasaki, K.%
+\BCBL {}\ \BBA {} Shudo, K.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2018}{{\APACmonth{01}}}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Average {Path} {Length} {Estimation} of {Social}
+  {Networks} by {Random} {Walk}} {Average {Path} {Length} {Estimation} of
+  {Social} {Networks} by {Random} {Walk}}.{\BBCQ}
+\newblock
+\BIn{} \APACrefbtitle {2018 {IEEE} {International} {Conference} on {Big} {Data}
+  and {Smart} {Computing} ({BigComp})} {2018 {IEEE} {International}
+  {Conference} on {Big} {Data} and {Smart} {Computing} ({BigComp})}\ (\BPGS\
+  611--614).
+\newblock
+\APACrefnote{ISSN: 2375-9356}
+\newblock
+\begin{APACrefDOI} \doi{10.1109/BigComp.2018.00107} \end{APACrefDOI}
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
@@ -1837,6 +2167,101 @@ Melamed, D.%
   \end{APACrefURL}
 \newblock
 \begin{APACrefDOI} \doi{10.1016/j.socnet.2015.11.001} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Mäs%
+, Flache%
+\BCBL {}\ \BBA {} Helbing%
+}{%
+Mäs%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2010}}%
+}]{%
+mas_individualization_2010}
+\APACinsertmetastar {%
+mas_individualization_2010}%
+\begin{APACrefauthors}%
+Mäs, M.%
+, Flache, A.%
+\BCBL {}\ \BBA {} Helbing, D.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2010}{{\APACmonth{10}}}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Individualization as {Driving} {Force} of {Clustering}
+  {Phenomena} in {Humans}} {Individualization as {Driving} {Force} of
+  {Clustering} {Phenomena} in {Humans}}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{PLOS Computational Biology}{6}{10}{e1000959}.
+\newblock
+\begin{APACrefURL}
+  [{2022-01-26}]\url{https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1000959}
+  \end{APACrefURL}
+\newblock
+\APACrefnote{Publisher: Public Library of Science}
+\newblock
+\begin{APACrefDOI} \doi{10.1371/journal.pcbi.1000959} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Newman%
+}{%
+Newman%
+}{%
+{\protect \APACyear {2006}}%
+}]{%
+newman_finding_2006}
+\APACinsertmetastar {%
+newman_finding_2006}%
+\begin{APACrefauthors}%
+Newman, M\BPBI E\BPBI J.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2006}{{\APACmonth{09}}}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Finding community structure in networks using the
+  eigenvectors of matrices} {Finding community structure in networks using the
+  eigenvectors of matrices}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Physical Review E}{74}{3}{036104}.
+\newblock
+\begin{APACrefURL} [{2022-04-06}]\url{http://arxiv.org/abs/physics/0605087}
+  \end{APACrefURL}
+\newblock
+\APACrefnote{arXiv: physics/0605087}
+\newblock
+\begin{APACrefDOI} \doi{10.1103/PhysRevE.74.036104} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Noel%
+\ \BBA {} Nyhan%
+}{%
+Noel%
+\ \BBA {} Nyhan%
+}{%
+{\protect \APACyear {2011}}%
+}]{%
+noel2011unfriending}
+\APACinsertmetastar {%
+noel2011unfriending}%
+\begin{APACrefauthors}%
+Noel, H.%
+\BCBT {}\ \BBA {} Nyhan, B.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2011}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {The “unfriending” problem: The consequences of
+  homophily in friendship retention for causal estimates of social influence}
+  {The “unfriending” problem: The consequences of homophily in friendship
+  retention for causal estimates of social influence}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Social Networks}{33}{3}{211--218}.
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
@@ -2004,6 +2429,95 @@ Pepper, J\BPBI W.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
+Poli%
+}{%
+Poli%
+}{%
+{\protect \APACyear {2013}}%
+}]{%
+poli2013note}
+\APACinsertmetastar {%
+poli2013note}%
+\begin{APACrefauthors}%
+Poli, R.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2013}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {A note on the difference between complicated and complex
+  social systems} {A note on the difference between complicated and complex
+  social systems}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Cadmus}{}{}{}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Rossi%
+\ \BBA {} Ahmed%
+}{%
+Rossi%
+\ \BBA {} Ahmed%
+}{%
+{\protect \APACyear {2015}}%
+}]{%
+rossi_network_2015}
+\APACinsertmetastar {%
+rossi_network_2015}%
+\begin{APACrefauthors}%
+Rossi, R.%
+\BCBT {}\ \BBA {} Ahmed, N.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2015}{{\APACmonth{03}}}{}.
+\newblock
+{\BBOQ}\APACrefatitle {The {Network} {Data} {Repository} with {Interactive}
+  {Graph} {Analytics} and {Visualization}} {The {Network} {Data} {Repository}
+  with {Interactive} {Graph} {Analytics} and {Visualization}}.{\BBCQ}
+\newblock
+\BIn{} \APACrefbtitle {Twenty-{Ninth} {AAAI} {Conference} on {Artificial}
+  {Intelligence}.} {Twenty-{Ninth} {AAAI} {Conference} on {Artificial}
+  {Intelligence}.}
+\newblock
+\begin{APACrefURL}
+  [{2022-03-31}]\url{https://www.aaai.org/ocs/index.php/AAAI/AAAI15/paper/view/9553}
+  \end{APACrefURL}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Rozemberczki%
+, Davies%
+, Sarkar%
+\BCBL {}\ \BBA {} Sutton%
+}{%
+Rozemberczki%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2019}}%
+}]{%
+rozemberczki2019gemsec}
+\APACinsertmetastar {%
+rozemberczki2019gemsec}%
+\begin{APACrefauthors}%
+Rozemberczki, B.%
+, Davies, R.%
+, Sarkar, R.%
+\BCBL {}\ \BBA {} Sutton, C.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2019}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Gemsec: Graph embedding with self clustering} {Gemsec:
+  Graph embedding with self clustering}.{\BBCQ}
+\newblock
+\BIn{} \APACrefbtitle {Proceedings of the 2019 IEEE/ACM international
+  conference on advances in social networks analysis and mining} {Proceedings
+  of the 2019 ieee/acm international conference on advances in social networks
+  analysis and mining}\ (\BPGS\ 65--72).
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
 Santos%
 , Pacheco%
 \BCBL {}\ \BBA {} Lenaerts%
@@ -2076,6 +2590,70 @@ Sasahara, K.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
+Schelling%
+}{%
+Schelling%
+}{%
+{\protect \APACyear {1971}}%
+}]{%
+schelling1971dynamic}
+\APACinsertmetastar {%
+schelling1971dynamic}%
+\begin{APACrefauthors}%
+Schelling, T\BPBI C.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{1971}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Dynamic models of segregation} {Dynamic models of
+  segregation}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Journal of mathematical sociology}{1}{2}{143--186}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Shi%
+, Shi%
+, Dokshin%
+, Evans%
+\BCBL {}\ \BBA {} Macy%
+}{%
+Shi%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2017}}%
+}]{%
+shi_millions_2017}
+\APACinsertmetastar {%
+shi_millions_2017}%
+\begin{APACrefauthors}%
+Shi, F.%
+, Shi, Y.%
+, Dokshin, F\BPBI A.%
+, Evans, J\BPBI A.%
+\BCBL {}\ \BBA {} Macy, M\BPBI W.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2017}{{\APACmonth{04}}}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Millions of online book co-purchases reveal partisan
+  differences in the consumption of science} {Millions of online book
+  co-purchases reveal partisan differences in the consumption of
+  science}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Nature Human Behaviour}{1}{4}{1--9}.
+\newblock
+\begin{APACrefURL}
+  [{2022-04-07}]\url{https://www.nature.com/articles/s41562-017-0079}
+  \end{APACrefURL}
+\newblock
+\APACrefnote{Number: 4 Publisher: Nature Publishing Group}
+\newblock
+\begin{APACrefDOI} \doi{10.1038/s41562-017-0079} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
 S{\^\i}rbu%
 , Loreto%
 , Servedio%
@@ -2109,9 +2687,9 @@ S{\^\i}rbu, A.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
-P.~Smaldino%
+Smaldino%
 }{%
-P.~Smaldino%
+Smaldino%
 }{%
 {\protect \APACyear {2016}}%
 }]{%
@@ -2119,7 +2697,7 @@ smaldino_models_2016}
 \APACinsertmetastar {%
 smaldino_models_2016}%
 \begin{APACrefauthors}%
-Smaldino, P.%
+Smaldino, P\BPBI E.%
 \end{APACrefauthors}%
 \unskip\
 \newblock
@@ -2132,9 +2710,32 @@ Smaldino, P.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
-P\BPBI E.~Smaldino%
+Smaldino%
 }{%
-P\BPBI E.~Smaldino%
+Smaldino%
+}{%
+{\protect \APACyear {2019}}%
+}]{%
+smaldino2019social}
+\APACinsertmetastar {%
+smaldino2019social}%
+\begin{APACrefauthors}%
+Smaldino, P\BPBI E.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2019}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Social identity and cooperation in cultural evolution}
+  {Social identity and cooperation in cultural evolution}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Behavioural Processes}{161}{}{108--116}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Smaldino%
+}{%
+Smaldino%
 }{%
 {\protect \APACyear {2020}}%
 }]{%
@@ -2161,6 +2762,36 @@ Smaldino, P\BPBI E.%
 \APACrefnote{Publisher: Hogrefe Publishing}
 \newblock
 \begin{APACrefDOI} \doi{10.1027/1864-9335/a000425} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Smaldino%
+}{%
+Smaldino%
+}{%
+{\protect \APACyear {2022}}%
+}]{%
+smaldino_models_2022}
+\APACinsertmetastar {%
+smaldino_models_2022}%
+\begin{APACrefauthors}%
+Smaldino, P\BPBI E.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2022}{{\APACmonth{01}}}{}.
+\newblock
+\APACrefbtitle {Models of {Identity} {Signaling}} {Models of {Identity}
+  {Signaling}}\ \APACbVolEdTR{}{\BTR{}}.
+\newblock
+\APACaddressInstitution{}{PsyArXiv}.
+\newblock
+\begin{APACrefURL} [{2022-01-10}]\url{https://psyarxiv.com/xv9j8/}
+  \end{APACrefURL}
+\newblock
+\APACrefnote{type: article}
+\newblock
+\begin{APACrefDOI} \doi{10.31234/osf.io/xv9j8} \end{APACrefDOI}
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
@@ -2442,6 +3073,39 @@ Turner, M\BPBI A.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
+Vrieze%
+}{%
+Vrieze%
+}{%
+{\protect \APACyear {2012}}%
+}]{%
+vrieze_model_2012}
+\APACinsertmetastar {%
+vrieze_model_2012}%
+\begin{APACrefauthors}%
+Vrieze, S\BPBI I.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2012}{{\APACmonth{06}}}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Model selection and psychological theory: {A} discussion
+  of the differences between the {Akaike} {Information} {Criterion} ({AIC}) and
+  the {Bayesian} {Information} {Criterion} ({BIC})} {Model selection and
+  psychological theory: {A} discussion of the differences between the {Akaike}
+  {Information} {Criterion} ({AIC}) and the {Bayesian} {Information}
+  {Criterion} ({BIC})}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Psychological Methods}{17}{2}{228--243}.
+\newblock
+\begin{APACrefURL}
+  [{2019-05-30}]\url{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3366160/}
+  \end{APACrefURL}
+\newblock
+\begin{APACrefDOI} \doi{10.1037/a0027127} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
 Watts%
 }{%
 Watts%
@@ -2573,43 +3237,6 @@ Winter, F.%
 \APACrefnote{Publisher: SAGE Publications Ltd}
 \newblock
 \begin{APACrefDOI} \doi{10.1177/1043463120919380} \end{APACrefDOI}
-\PrintBackRefs{\CurrentBib}
-
-\bibitem [\protect \citeauthoryear {%
-Wu%
-\ \protect \BOthers {.}}{%
-Wu%
-\ \protect \BOthers {.}}{%
-{\protect \APACyear {2019}}%
-}]{%
-wu_hyperparameter_2019}
-\APACinsertmetastar {%
-wu_hyperparameter_2019}%
-\begin{APACrefauthors}%
-Wu, J.%
-, Chen, X\BHBI Y.%
-, Zhang, H.%
-, Xiong, L\BHBI D.%
-, Lei, H.%
-\BCBL {}\ \BBA {} Deng, S\BHBI H.%
-\end{APACrefauthors}%
-\unskip\
-\newblock
-\APACrefYearMonthDay{2019}{{\APACmonth{03}}}{}.
-\newblock
-{\BBOQ}\APACrefatitle {Hyperparameter {Optimization} for {Machine} {Learning}
-  {Models} {Based} on {Bayesian} {Optimizationb}} {Hyperparameter
-  {Optimization} for {Machine} {Learning} {Models} {Based} on {Bayesian}
-  {Optimizationb}}.{\BBCQ}
-\newblock
-\APACjournalVolNumPages{Journal of Electronic Science and
-  Technology}{17}{1}{26--40}.
-\newblock
-\begin{APACrefURL}
-  [{2022-04-04}]\url{https://www.sciencedirect.com/science/article/pii/S1674862X19300047}
-  \end{APACrefURL}
-\newblock
-\begin{APACrefDOI} \doi{10.11989/JEST.1674-862X.80904120} \end{APACrefDOI}
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%

@@ -1,53 +1,63 @@
 \babel@toc {english}{}\relax 
-\contentsline {section}{\numberline {1}Introduction}{5}{}%
-\contentsline {subsection}{\numberline {1.1}Polarization, echo chambers and the threat to democracy}{5}{}%
-\contentsline {section}{\numberline {2}Agent-based modelling of complex phenomena}{7}{}%
-\contentsline {section}{\numberline {3}Central Mechanisms}{8}{}%
-\contentsline {subsection}{\numberline {3.1}Homophily}{8}{}%
-\contentsline {subsection}{\numberline {3.2}Social Influence}{10}{}%
-\contentsline {section}{\numberline {4}Opinion Dynamics}{11}{}%
-\contentsline {section}{\numberline {5}Network Formation}{11}{}%
-\contentsline {subsection}{\numberline {5.1}Triadic Closure}{12}{}%
-\contentsline {section}{\numberline {6}Co-evolution via tie-deletion}{13}{}%
-\contentsline {subsection}{\numberline {6.1}Tie-deletions effect on cooperation}{13}{}%
-\contentsline {section}{\numberline {7}Model Description}{16}{}%
-\contentsline {subsection}{\numberline {7.1}Conceptual overview}{16}{}%
-\contentsline {subsection}{\numberline {7.2}Assumptions}{16}{}%
-\contentsline {subsection}{\numberline {7.3}The stages of the model}{17}{}%
-\contentsline {subsection}{\numberline {7.4}Initialization}{19}{}%
-\contentsline {subsection}{\numberline {7.5}Dynamics}{20}{}%
-\contentsline {subsubsection}{\numberline {7.5.1}Network dynamic stage }{20}{}%
-\contentsline {subsubsection}{\numberline {7.5.2}Opinion dynamic stage}{20}{}%
-\contentsline {subsubsection}{\numberline {7.5.3}Co-evolutionary stage}{21}{}%
-\contentsline {subsection}{\numberline {7.6}Outcome metrics}{21}{}%
-\contentsline {subsubsection}{\numberline {7.6.1}Time-dependent Metrics}{21}{}%
-\contentsline {subsubsection}{\numberline {7.6.2}Final State Metrics}{22}{}%
-\contentsline {subsubsection}{\numberline {7.6.3}Correlations}{22}{}%
-\contentsline {section}{\numberline {8}Model Evaluation}{22}{}%
-\contentsline {subsection}{\numberline {8.1}Fitting the model}{22}{}%
-\contentsline {subsection}{\numberline {8.2}Data}{23}{}%
-\contentsline {subsection}{\numberline {8.3}Hyperparameter Optimization}{23}{}%
-\contentsline {subsection}{\numberline {8.4}Results}{25}{}%
-\contentsline {subsection}{\numberline {8.5}Discussion of hyperparameter optimization results}{29}{}%
-\contentsline {subsubsection}{\numberline {8.5.1}Why the Co-evolutionary model is a better explanation}{29}{}%
-\contentsline {subsubsection}{\numberline {8.5.2}The impact of neighborhoods}{30}{}%
-\contentsline {subsubsection}{\numberline {8.5.3}Including empirical data in agent-based models}{31}{}%
-\contentsline {section}{\numberline {9}Results}{32}{}%
-\contentsline {subsection}{\numberline {9.1}The main effects of the different model parameters}{32}{}%
-\contentsline {subsection}{\numberline {9.2}Correlations}{36}{}%
-\contentsline {section}{\numberline {10}Discussion}{38}{}%
-\contentsline {subsection}{\numberline {10.1}Reiterating previous literature}{38}{}%
-\contentsline {subsection}{\numberline {10.2}The importance of co-evolution}{38}{}%
-\contentsline {subsection}{\numberline {10.3}The effect of initial opinions}{39}{}%
-\contentsline {subsection}{\numberline {10.4}Tie-deletion facilitates cooperation}{39}{}%
-\contentsline {subsection}{\numberline {10.5}Distance in opinion and network space}{40}{}%
-\contentsline {section}{\numberline {11}Contrast to previous work}{44}{}%
-\contentsline {section}{\numberline {12}Short comings and future work}{45}{}%
-\contentsline {subsection}{\numberline {12.1}On agent-based modelling}{45}{}%
-\contentsline {subsection}{\numberline {12.2}Including Empirical Data}{45}{}%
-\contentsline {subsection}{\numberline {12.3}Accurate perceptions of opinions}{45}{}%
-\contentsline {subsection}{\numberline {12.4}Shrinking Variance}{46}{}%
-\contentsline {subsection}{\numberline {12.5}Social influence exclusively}{46}{}%
-\contentsline {section}{\numberline {13}A broader perspective}{47}{}%
-\contentsline {section}{\numberline {14}Conclusion}{47}{}%
-\contentsline {section}{References}{47}{}%
+\contentsline {part}{I\hspace {1em}Introduction}{6}{part.1}%
+\contentsline {section}{\numberline {1}Agent-based modelling of complex phenomena}{10}{section.1}%
+\contentsline {section}{\numberline {2}Central Mechanisms}{11}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Homophily}{11}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Social Influence}{13}{subsection.2.2}%
+\contentsline {section}{\numberline {3}Opinion Dynamics}{14}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Dynamical networks}{14}{subsection.3.1}%
+\contentsline {section}{\numberline {4}Network Dynamics}{15}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Triadic Closure}{16}{subsection.4.1}%
+\contentsline {section}{\numberline {5}Co-evolution via tie-deletion}{18}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Tie-deletions effect on cooperation}{18}{subsection.5.1}%
+\contentsline {section}{\numberline {6}Model Description}{20}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Conceptual overview}{21}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Assumptions}{21}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}The stages of the model}{22}{subsection.6.3}%
+\contentsline {subsection}{\numberline {6.4}Initialization}{23}{subsection.6.4}%
+\contentsline {subsection}{\numberline {6.5}Dynamics}{24}{subsection.6.5}%
+\contentsline {subsubsection}{\numberline {6.5.1}Network dynamic stage}{24}{subsubsection.6.5.1}%
+\contentsline {subsubsection}{\numberline {6.5.2}Opinion dynamic stage}{25}{subsubsection.6.5.2}%
+\contentsline {subsubsection}{\numberline {6.5.3}Co-evolutionary stage}{27}{subsubsection.6.5.3}%
+\contentsline {subsection}{\numberline {6.6}Data availability}{27}{subsection.6.6}%
+\contentsline {part}{II\hspace {1em}Integrating empirical data}{28}{part.2}%
+\contentsline {section}{\numberline {7}Data}{30}{section.7}%
+\contentsline {section}{\numberline {8}Optimization methods}{30}{section.8}%
+\contentsline {subsection}{\numberline {8.1}Specifying model parameters}{32}{subsection.8.1}%
+\contentsline {section}{\numberline {9}Optimization results}{33}{section.9}%
+\contentsline {section}{\numberline {10}Discussion of optimization}{37}{section.10}%
+\contentsline {subsection}{\numberline {10.1}When co-evolution is a better explanation}{37}{subsection.10.1}%
+\contentsline {subsection}{\numberline {10.2}The impact of neighborhoods}{38}{subsection.10.2}%
+\contentsline {subsection}{\numberline {10.3}Including empirical data in agent-based models}{39}{subsection.10.3}%
+\contentsline {part}{III\hspace {1em}Co-evolution's effect on opinion dynamics}{41}{part.3}%
+\contentsline {section}{\numberline {11}Outcome metrics}{41}{section.11}%
+\contentsline {subsection}{\numberline {11.1}Time-dependent Metrics}{42}{subsection.11.1}%
+\contentsline {subsection}{\numberline {11.2}Final State Metrics}{42}{subsection.11.2}%
+\contentsline {subsection}{\numberline {11.3}Correlations}{42}{subsection.11.3}%
+\contentsline {section}{\numberline {12}Model Parameters}{42}{section.12}%
+\contentsline {section}{\numberline {13}Results}{43}{section.13}%
+\contentsline {subsection}{\numberline {13.1}The effect of the different model parameters}{44}{subsection.13.1}%
+\contentsline {subsection}{\numberline {13.2}Correlations}{46}{subsection.13.2}%
+\contentsline {section}{\numberline {14}Discussion}{47}{section.14}%
+\contentsline {subsection}{\numberline {14.1}Reiterating previous literature}{47}{subsection.14.1}%
+\contentsline {subsection}{\numberline {14.2}The importance of co-evolution}{48}{subsection.14.2}%
+\contentsline {subsection}{\numberline {14.3}Tie-deletion facilitates cooperation}{48}{subsection.14.3}%
+\contentsline {subsection}{\numberline {14.4}Distance in opinion and network space}{49}{subsection.14.4}%
+\contentsline {section}{\numberline {15}The point of no return for polarization}{54}{section.15}%
+\contentsline {part}{IV\hspace {1em}Overall Discussion}{54}{part.4}%
+\contentsline {section}{\numberline {16}Contrast to previous work}{56}{section.16}%
+\contentsline {section}{\numberline {17}Lacking realism of the model}{56}{section.17}%
+\contentsline {subsection}{\numberline {17.1}Non-cognitive agents}{57}{subsection.17.1}%
+\contentsline {subsection}{\numberline {17.2}Shrinking Variance}{58}{subsection.17.2}%
+\contentsline {subsection}{\numberline {17.3}Social influence exclusively}{58}{subsection.17.3}%
+\contentsline {section}{\numberline {18}A broader perspective}{58}{section.18}%
+\contentsline {section}{\numberline {19}Conclusion}{59}{section.19}%
+\contentsline {section}{\numberline {20}Acknowledgements}{60}{section.20}%
+\contentsline {section}{References}{60}{section*.22}%
+\contentsline {section}{\numberline {A}Appendix}{71}{appendix.A}%
+\contentsline {subsection}{\numberline {A.1}Supplementary material for hyperparameter optimization}{71}{subsection.A.1}%
+\contentsline {subsubsection}{\numberline {A.1.1}Diagnostic plots}{71}{subsubsection.A.1.1}%
+\contentsline {subsubsection}{\numberline {A.1.2}Metrics of model performance}{78}{subsubsection.A.1.2}%
+\contentsline {subsection}{\numberline {A.2}Supplementary information for co-evolution's effect on opinion dynamics}{80}{subsection.A.2}%
+\contentsline {subsubsection}{\numberline {A.2.1}Negative tie-deletion}{84}{subsubsection.A.2.1}%
+\contentsline {subsection}{\numberline {A.3}The effect of initial opinions}{85}{subsection.A.3}%
