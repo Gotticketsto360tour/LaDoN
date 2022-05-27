@@ -86,23 +86,9 @@ def plot_graph(network: Network, plot_type="community", save_path="", title="") 
             ("Opinion", "$opinions{%0.2f}"),
         ]
     elif plot_type == "agent_type":
-        agent_types = {}
-        agent_types_color = {}
-        for agent in network.agents:
-            agent_type = network.agents[agent].type
-            agent_types[agent] = agent_type
-            agent_types_color[agent] = b_glasbey_bw_minc_20[agent_type]
-
-        networkx.set_node_attributes(G, name="agent_types", values=agent_types)
-        networkx.set_node_attributes(
-            G, name="agent_types_color", values=agent_types_color
-        )
-        color_by_this_attribute = "opinions"  # agent_types_color
+        color_by_this_attribute = "opinions"
         HOVER_TOOLTIPS = [
-            # ("Character", "@index"),
             ("Degree", "@degree"),
-            # ("Agent Type", "@agent_types"),
-            # ("Agent Type Color", "$color[swatch]:agent_types_color"),
             ("Opinion", "@opinions{0.00}"),
         ]
     # Choose colors for node and edge highlighting

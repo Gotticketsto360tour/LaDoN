@@ -13,11 +13,14 @@ import pickle as pkl
 import joblib
 
 
-def make_network_by_seed(dictionary: Dict, run: int) -> Network:
+def make_network_by_seed(
+    dictionary: Dict, run: int, run_simulation: bool = True
+) -> Network:
     random.seed(run)
     np.random.seed(run)
     network = Network(dictionary)
-    network.run_simulation()
+    if run_simulation:
+        network.run_simulation()
     return network
 
 

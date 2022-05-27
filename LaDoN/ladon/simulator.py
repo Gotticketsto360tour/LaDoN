@@ -1,5 +1,6 @@
 from ladon.visualize import plot_graph, generate_network_plots
 from ladon.classes.network import Network
+from ladon.helpers.optimize_helpers import make_network_by_seed
 import networkx as nx
 import numpy as np
 import seaborn as sns
@@ -9,14 +10,6 @@ import matplotlib.pyplot as plt
 
 sns.set(rc={"figure.figsize": (11.7, 8.27)})
 sns.set_context("talk")
-
-
-def make_network_by_seed(dictionary, run):
-    random.seed(run)
-    np.random.seed(run)
-    network = Network(dictionary)
-    # network.run_simulation()
-    return network
 
 
 dictionary = {
@@ -32,7 +25,7 @@ dictionary = {
     "RECORD": True,
 }
 
-my_network = make_network_by_seed(dictionary=dictionary, run=1)
+my_network = make_network_by_seed(dictionary=dictionary, run=1, run_simulation=False)
 my_network.run_simulation()
 
 sns.lineplot(data=my_network.NEGATIVE_TIES_DISSOLUTED)
@@ -94,7 +87,7 @@ dictionary = {
     "TIE_DISSOLUTION": 1,
     "RECORD": False,
 }
-my_network = make_network_by_seed(dictionary, run=5)
+my_network = make_network_by_seed(dictionary, run=5, run_simulation=False)
 generate_network_plots(
     my_network,
     plot_type="agent_type",
