@@ -1,7 +1,7 @@
 from typing import Dict
 from scipy import rand
 from ladon.classes.network import Network
-import networkx as nx
+from ladon.helpers.optimize_helpers import make_network_by_seed
 import numpy as np
 from ladon.config import (
     THRESHOLDS,
@@ -16,24 +16,6 @@ import multiprocessing as mp
 import pickle as pkl
 import os
 import pandas as pd
-
-
-def make_network_by_seed(dictionary: Dict, run: int) -> Network:
-    """Sets a seed and runs the simulation for a network
-
-    Args:
-        dictionary (Dict): Dictionary specifying the network
-        run (int): Random seed
-
-    Returns:
-        Network: Network after simulation
-    """
-
-    random.seed(run)
-    np.random.seed(run)
-    network = Network(dictionary)
-    network.run_simulation()
-    return network
 
 
 def make_one_simulation(
