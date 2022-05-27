@@ -1,22 +1,18 @@
 import pickle as pkl
 from typing import Dict, List
 import networkx as nx
-import pandas as pd
 from ladon.helpers.helpers import get_main_component, find_average_path
-from ladon.optimize.optimize import make_network_by_seed
-from ladon.optimize.optimize_no_opinion import make_no_opinion_network_by_seed
-from ladon.optimize.optimize_theoretical import make_theoretical_network_by_seed
-from ladon.optimize.optimize_barabasi import make_barabasi_network_by_seed
+from ladon.helpers.optimize_helpers import (
+    make_network_by_seed,
+    make_no_opinion_network_by_seed,
+    make_theoretical_network_by_seed,
+    make_barabasi_network_by_seed,
+)
 import joblib
-from ladon.classes.network import Network, NoOpinionNetwork
 import netrd
 import seaborn as sns
 import numpy as np
 from ladon.config import NAME_DICTIONARY
-
-sns.set(rc={"figure.figsize": (11.7, 8.27)})
-sns.set_context("talk")
-blue_pallette = sns.dark_palette("#69d", reverse=True, as_cmap=True)
 
 
 def get_mean(

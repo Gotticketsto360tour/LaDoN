@@ -1,4 +1,5 @@
 from statistics import mean
+from typing import Callable, Dict
 from unittest import result
 from ladon.config import NAME_DICTIONARY
 from ladon.classes.network import Network, NoOpinionNetwork, ScaleFreeNetwork
@@ -12,7 +13,7 @@ import pickle as pkl
 import joblib
 
 
-def make_network_by_seed(dictionary, run) -> Network:
+def make_network_by_seed(dictionary: Dict, run: int) -> Network:
     random.seed(run)
     np.random.seed(run)
     network = Network(dictionary)
@@ -20,7 +21,7 @@ def make_network_by_seed(dictionary, run) -> Network:
     return network
 
 
-def make_barabasi_network_by_seed(dictionary, run):
+def make_barabasi_network_by_seed(dictionary: Dict, run: int) -> ScaleFreeNetwork:
     random.seed(run)
     np.random.seed(run)
     network = ScaleFreeNetwork(dictionary)
@@ -28,7 +29,7 @@ def make_barabasi_network_by_seed(dictionary, run):
     return network
 
 
-def make_no_opinion_network_by_seed(dictionary, run):
+def make_no_opinion_network_by_seed(dictionary: Dict, run: int) -> NoOpinionNetwork:
     random.seed(run)
     np.random.seed(run)
     network = NoOpinionNetwork(dictionary)
@@ -36,14 +37,16 @@ def make_no_opinion_network_by_seed(dictionary, run):
     return network
 
 
-def make_theoretical_network_by_seed(dictionary, run):
+def make_theoretical_network_by_seed(dictionary: Dict, run: int) -> NoOpinionNetwork:
     random.seed(run)
     np.random.seed(run)
     network = NoOpinionNetwork(dictionary)
     return network
 
 
-def run_single_simulation(dictionary, run, target, target_dictionary, type) -> float:
+def run_single_simulation(
+    dictionary: Dict, run: int, target: nx.Graph(), target_dictionary: Dict, type: str
+) -> float:
     """Run a single simulation and return the mean of the vector of differences.
 
     Args:
@@ -84,7 +87,7 @@ def run_single_simulation(dictionary, run, target, target_dictionary, type) -> f
     return mean
 
 
-def run_optimization(objective, type: str):
+def run_optimization(objective: Callable, type: str) -> None:
     resulting_dictionary = {}
 
     for name, network in NAME_DICTIONARY.items():

@@ -11,6 +11,7 @@ import networkx as nx
 from ladon.helpers.helpers import find_average_path, get_main_component
 from ladon.config import NAME_DICTIONARY
 import plotly.io as pio
+import ptitprince as pt
 
 
 sns.set(rc={"figure.figsize": (11.7, 8.27)})
@@ -35,7 +36,7 @@ sns.set_context(
 blue_pallette = sns.dark_palette("#69d", reverse=True, as_cmap=True)
 
 
-def change_labels(string: str):
+def change_labels(string: str) -> str:
     if string == "Opinion_Model":
         return "Co-evolutionary model"
     elif string == "No_Opinion_Model":
@@ -48,7 +49,7 @@ def change_labels(string: str):
         return "Scale-free network"
 
 
-def change_network_labels(string: str):
+def change_network_labels(string: str) -> str:
     translation = {
         "dolphin": "Dolphins",
         "karate": "Karate Club",
@@ -114,8 +115,6 @@ sns.set_context(
     font_scale=1.3,
 )
 
-import ptitprince as pt
-
 g = sns.FacetGrid(
     data=data_melt.query("type != 'Empirical network'"),
     col="variable",
@@ -124,7 +123,6 @@ g = sns.FacetGrid(
     gridspec_kws={"wspace": 0.2},
     legend_out=True,
 )
-# f, ax = plt.subplots(figsize=(7, 5))
 
 g.map(
     pt.half_violinplot,
@@ -511,13 +509,12 @@ def get_important_network_characteristics(name: str, network: nx.Graph()):
     }
 
 
-pd.DataFrame(
+df_network_characteristics = pd.DataFrame(
     [
         get_important_network_characteristics(name, network)
         for name, network in NAME_DICTIONARY.items()
     ]
 )
-NAME_DICTIONARY
 
 
 def rename_plot(g, titles):
