@@ -3,6 +3,7 @@ import networkx as nx
 from ladon.classes.agent import Agent
 from random import sample
 from random import random
+from random import seed
 from ladon.helpers.helpers import find_distance, find_average_path
 from tqdm import tqdm
 import numpy as np
@@ -200,26 +201,35 @@ class Network:
         neighbors_neighbors = list(self.graph.neighbors(neighbor))
         if len(sampled_agents_neighbors) == 0:
             self.add_new_connection_randomly(sampled_agent)
-        elif len(list(self.graph.neighbors(neighbor))) == 0:
+            return False
+        elif len(neighbors_neighbors) == 0:
             self.add_new_connection_randomly(neighbor)
+            return False
         elif not nx.has_path(
             self.graph, sampled_agents_neighbors[0], neighbors_neighbors[0]
         ):
-            self.EDGE_SURPLUS -= 1
             self.graph.add_edge(sampled_agent, neighbor)
+            self.EDGE_SURPLUS -= 1
+            return False
+        else:
+            return True
 
     def take_turn(self):
         sampled_agent = sample(self.graph.nodes, 1)[0]
         list_of_neighbors = list(self.graph.neighbors(sampled_agent))
-        if self.EDGE_SURPLUS < 1 and list_of_neighbors:
+        ensured_no_lone_agents = True
+        if self.EDGE_SURPLUS < 1 and len(list_of_neighbors) > 0:
             self.EDGE_SURPLUS += 1
             removed_edge = sample(list_of_neighbors, 1)[0]
             self.graph.remove_edge(sampled_agent, removed_edge)
-            self.ensure_no_lone_agents(sampled_agent, removed_edge)
-        if random() >= self.RANDOMNESS and list_of_neighbors:
-            self.add_new_connection_through_neighbors(sampled_agent)
-        else:
-            self.add_new_connection_randomly(sampled_agent)
+            ensured_no_lone_agents = self.ensure_no_lone_agents(
+                sampled_agent, removed_edge
+            )
+        if ensured_no_lone_agents:
+            if random() >= self.RANDOMNESS and list_of_neighbors:
+                self.add_new_connection_through_neighbors(sampled_agent)
+            else:
+                self.add_new_connection_randomly(sampled_agent)
 
         self.update_all_values(sampled_agent)
 
@@ -247,15 +257,19 @@ class NoOpinionNetwork(Network):
     def take_turn(self):
         sampled_agent = sample(self.graph.nodes, 1)[0]
         list_of_neighbors = list(self.graph.neighbors(sampled_agent))
+        ensured_no_lone_agents = True
         if self.EDGE_SURPLUS < 1 and list_of_neighbors:
             self.EDGE_SURPLUS += 1
             removed_edge = sample(list_of_neighbors, 1)[0]
             self.graph.remove_edge(sampled_agent, removed_edge)
-            self.ensure_no_lone_agents(sampled_agent, removed_edge)
-        if random() >= self.RANDOMNESS and list_of_neighbors:
-            self.add_new_connection_through_neighbors(sampled_agent)
-        else:
-            self.add_new_connection_randomly(sampled_agent)
+            ensured_no_lone_agents = self.ensure_no_lone_agents(
+                sampled_agent, removed_edge
+            )
+        if ensured_no_lone_agents:
+            if random() >= self.RANDOMNESS and list_of_neighbors:
+                self.add_new_connection_through_neighbors(sampled_agent)
+            else:
+                self.add_new_connection_randomly(sampled_agent)
 
 
 class ScaleFreeNetwork(Network):

@@ -79,7 +79,7 @@ def find_difference(df: pd.DataFrame):
 
 
 with open(
-    f"analysis/data/optimization/data_from_all_runs.pkl",
+    f"../analysis/data/optimization/data_from_all_runs.pkl",
     "rb",
 ) as handle:
     data = pkl.load(handle)
@@ -158,7 +158,7 @@ g.axes[0][1].set(xlim=(-3, 2))
 
 # g.tight_layout()
 
-g.savefig("plots/overall/Model_Evaluation_Overview", dpi=300)
+g.savefig("../plots/overall/Model_Evaluation_Overview", dpi=300)
 
 sns.set_context(
     "paper",
@@ -234,7 +234,7 @@ l = plt.legend(
 )
 
 plt.savefig(
-    "plots/overall/Model_Evaluation_Average_Clustering.png",
+    "../plots/overall/Model_Evaluation_Average_Clustering.png",
     dpi=300,
     bbox_inches="tight",
 )
@@ -301,7 +301,7 @@ l = plt.legend(
     handles[0:4], labels[0:4], title="Type of Model", bbox_to_anchor=(1.4, 0.6)
 )
 
-plt.savefig("plots/overall/Model_Evaluation_APL.png", dpi=300, bbox_inches="tight")
+plt.savefig("../plots/overall/Model_Evaluation_APL.png", dpi=300, bbox_inches="tight")
 
 g = sns.boxplot(
     data=data.query("type != 'Empirical network'"),
@@ -365,7 +365,7 @@ l = plt.legend(
     handles[0:4], labels[0:4], title="Type of Model", bbox_to_anchor=(1.4, 0.6)
 )
 
-plt.savefig("plots/overall/Model_Evaluation_JSD.png", dpi=300, bbox_inches="tight")
+plt.savefig("../plots/overall/Model_Evaluation_JSD.png", dpi=300, bbox_inches="tight")
 
 g = sns.boxplot(
     data=data.query("type != 'Empirical network'"),
@@ -429,13 +429,13 @@ g.hlines(
     linestyles="dotted",
 )
 
-plt.savefig("plots/overall/Model_Evaluation.png", dpi=300, bbox_inches="tight")
+plt.savefig("../plots/overall/Model_Evaluation.png", dpi=300, bbox_inches="tight")
 
 pio.renderers.default = "notebook"
 
 
 def get_important_parameters(network):
-    study = joblib.load(f"analysis/data/optimization/{network}_study.pkl")
+    study = joblib.load(f"../analysis/data/optimization/{network}_study.pkl")
     dict_of_values = dict(optuna.importance.get_param_importances(study))
     dict_of_values["network"] = network
     return dict_of_values
@@ -466,9 +466,9 @@ importance_df["variable"] = importance_df["variable"].apply(
 importance_df["network"] = importance_df["network"].apply(
     lambda x: change_network_labels(x)
 )
-
+# importance_df.sort_values("value", ascending=False)
 sns.barplot(
-    data=importance_df,
+    data=importance_df.sort_values("value", ascending=False),
     x="variable",
     y="value",
     hue="network",
@@ -488,7 +488,7 @@ sns.barplot(
 )
 plt.legend(title=r"Network")
 plt.savefig(
-    "plots/overall/Parameter_Importance.png",
+    "../plots/overall/Parameter_Importance.png",
     dpi=300,
     bbox_inches="tight",
 )
@@ -523,8 +523,8 @@ def rename_plot(g, titles):
     return g
 
 
-study = joblib.load(f"analysis/data/optimization/tvshows_study.pkl")
-
+study = joblib.load(f"../analysis/data/optimization/best_optimization_results_.pkl")
+parameter_values_df = pd.DataFrame(study).round(3)
 pio.renderers.default = "notebook_connected"
 
 list_of_names = [
@@ -538,20 +538,21 @@ list_of_names = [
 ]
 
 for name_file, name_list in zip(NAME_DICTIONARY, list_of_names):
-    study = joblib.load(f"analysis/data/optimization/{name_file}_study.pkl")
+    study = joblib.load(f"../analysis/data/optimization/{name_file}_study.pkl")
 
     fig = optuna.visualization.matplotlib.plot_optimization_history(study)
     fig.set(title="")
     plt.savefig(
-        f"plots/overall/Optimization_History_{name_file}.png",
+        f"../plots/overall/Optimization_History_{name_file}.png",
         dpi=300,
         bbox_inches="tight",
     )
 
     fig = optuna.visualization.matplotlib.plot_slice(study)
     rename_plot(fig, titles=[r"$\beta$", r"$\alpha$", r"$R$", r"$T$", r"$P(D)$"])
+    plt.title("")
     plt.savefig(
-        f"plots/overall/Plot_Slice_{name_file}.png",
+        f"../plots/overall/Plot_Slice_{name_file}.png",
         dpi=300,
         bbox_inches="tight",
     )

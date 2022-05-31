@@ -258,6 +258,39 @@ Backstrom, L.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
+Backstrom%
+, Huttenlocher%
+, Kleinberg%
+\BCBL {}\ \BBA {} Lan%
+}{%
+Backstrom%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2006}}%
+}]{%
+backstrom2006group}
+\APACinsertmetastar {%
+backstrom2006group}%
+\begin{APACrefauthors}%
+Backstrom, L.%
+, Huttenlocher, D.%
+, Kleinberg, J.%
+\BCBL {}\ \BBA {} Lan, X.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2006}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Group formation in large social networks: membership,
+  growth, and evolution} {Group formation in large social networks: membership,
+  growth, and evolution}.{\BBCQ}
+\newblock
+\BIn{} \APACrefbtitle {Proceedings of the 12th ACM SIGKDD international
+  conference on Knowledge discovery and data mining} {Proceedings of the 12th
+  acm sigkdd international conference on knowledge discovery and data mining}\
+  (\BPGS\ 44--54).
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
 Bail%
 \ \protect \BOthers {.}}{%
 Bail%
@@ -463,6 +496,33 @@ Bergstra, J.%
 \APACaddressPublisher{}{Curran Associates, Inc.}
 \newblock
 \begin{APACrefURL} [{2022-04-04}]\url{shorturl.at/euO47} \end{APACrefURL}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Best%
+\ \BBA {} McDermott%
+}{%
+Best%
+\ \BBA {} McDermott%
+}{%
+{\protect \APACyear {2007}}%
+}]{%
+best2007measuring}
+\APACinsertmetastar {%
+best2007measuring}%
+\begin{APACrefauthors}%
+Best, S\BPBI J.%
+\BCBT {}\ \BBA {} McDermott, M\BPBI L.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2007}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Measuring opinions vs. non-opinions: The case of The USA
+  Patriot Act} {Measuring opinions vs. non-opinions: The case of the usa
+  patriot act}.{\BBCQ}
+\newblock
+\BIn{} \APACrefbtitle {The Forum} {The forum}\ (\BVOL~5, \BPG~7).
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
@@ -672,9 +732,37 @@ Bruch, E.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
+Burg%
+\ \BBA {} Seeman%
+}{%
+Burg%
+\ \BBA {} Seeman%
+}{%
+{\protect \APACyear {1994}}%
+}]{%
+burg1994families}
+\APACinsertmetastar {%
+burg1994families}%
+\begin{APACrefauthors}%
+Burg, M\BPBI M.%
+\BCBT {}\ \BBA {} Seeman, T\BPBI E.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{1994}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Families and health: The negative side of social ties}
+  {Families and health: The negative side of social ties}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Annals of Behavioral Medicine}{16}{2}{109--115}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
 Carter%
 , Lee%
-\BCBL {}\ \BBA {} Marshall%
+, Marshall%
+, Tic{\'o}%
+\BCBL {}\ \BBA {} Cowlishaw%
 }{%
 Carter%
 \ \protect \BOthers {.}}{%
@@ -686,16 +774,20 @@ carter2015phenotypic}%
 \begin{APACrefauthors}%
 Carter, A\BPBI J.%
 , Lee, A\BPBI E.%
-\BCBL {}\ \BBA {} Marshall, H\BPBI H.%
+, Marshall, H\BPBI H.%
+, Tic{\'o}, M\BPBI T.%
+\BCBL {}\ \BBA {} Cowlishaw, G.%
 \end{APACrefauthors}%
 \unskip\
 \newblock
 \APACrefYearMonthDay{2015}{}{}.
 \newblock
-{\BBOQ}\APACrefatitle {Phenotypic assortment in wild primate networks}
-  {Phenotypic assortment in wild primate networks}.{\BBCQ}
+{\BBOQ}\APACrefatitle {Phenotypic assortment in wild primate networks:
+  implications for the dissemination of information} {Phenotypic assortment in
+  wild primate networks: implications for the dissemination of
+  information}.{\BBCQ}
 \newblock
-
+\APACjournalVolNumPages{Royal Society Open Science}{2}{5}{140444}.
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
@@ -777,6 +869,66 @@ Chacoma, A.%
 \APACrefnote{Publisher: Public Library of Science}
 \newblock
 \begin{APACrefDOI} \doi{10.1371/journal.pone.0140406} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Chartishvili%
+, Kozitsin%
+, Goiko%
+\BCBL {}\ \BBA {} Saifulin%
+}{%
+Chartishvili%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2019}}%
+}]{%
+chartishvili2019approach}
+\APACinsertmetastar {%
+chartishvili2019approach}%
+\begin{APACrefauthors}%
+Chartishvili, A\BPBI G.%
+, Kozitsin, I\BPBI V.%
+, Goiko, V\BPBI L.%
+\BCBL {}\ \BBA {} Saifulin, E\BPBI R.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2019}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {On an approach to measure the level of polarization of
+  individuals’ opinions} {On an approach to measure the level of polarization
+  of individuals’ opinions}.{\BBCQ}
+\newblock
+\BIn{} \APACrefbtitle {2019 Twelfth International Conference" Management of
+  large-scale system development"(MLSD)} {2019 twelfth international
+  conference" management of large-scale system development"(mlsd)}\ (\BPGS\
+  1--5).
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Cikara%
+\ \BBA {} Van~Bavel%
+}{%
+Cikara%
+\ \BBA {} Van~Bavel%
+}{%
+{\protect \APACyear {2014}}%
+}]{%
+cikara2014neuroscience}
+\APACinsertmetastar {%
+cikara2014neuroscience}%
+\begin{APACrefauthors}%
+Cikara, M.%
+\BCBT {}\ \BBA {} Van~Bavel, J\BPBI J.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2014}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {The neuroscience of intergroup relations: An integrative
+  review} {The neuroscience of intergroup relations: An integrative
+  review}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Perspectives on Psychological Science}{9}{3}{245--274}.
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
@@ -1393,6 +1545,35 @@ Ghaderi, J.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
+Hilmert%
+, Kulik%
+\BCBL {}\ \BBA {} Christenfeld%
+}{%
+Hilmert%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2006}}%
+}]{%
+hilmert2006positive}
+\APACinsertmetastar {%
+hilmert2006positive}%
+\begin{APACrefauthors}%
+Hilmert, C\BPBI J.%
+, Kulik, J\BPBI A.%
+\BCBL {}\ \BBA {} Christenfeld, N\BPBI J.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2006}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Positive and negative opinion modeling: The influence of
+  another's similarity and dissimilarity.} {Positive and negative opinion
+  modeling: The influence of another's similarity and dissimilarity.}{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Journal of personality and social
+  psychology}{90}{3}{440}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
 Holme%
 \ \BBA {} Newman%
 }{%
@@ -1537,23 +1718,25 @@ Jackson%
 }{%
 {\protect \APACyear {2004}}%
 }]{%
-jackson_search_2004}
+jacksonsearch2004}
 \APACinsertmetastar {%
-jackson_search_2004}%
+jacksonsearch2004}%
 \begin{APACrefauthors}%
-Jackson, M.%
-\BCBT {}\ \BBA {} Rogers, B.%
+Jackson, M\BPBI O.%
+\BCBT {}\ \BBA {} Rogers, B\BPBI W.%
 \end{APACrefauthors}%
 \unskip\
 \newblock
-\APACrefYearMonthDay{2004}{{\APACmonth{06}}}{}.
+\APACrefYearMonthDay{2004}{}{}.
 \newblock
-{\BBOQ}\APACrefatitle {Search and the {Strategic} {Formation} of {Large}
-  {Networks}: {When} and {Why} do {We} {See} {Power} {Laws} and {Small}
-  {Worlds}?} {Search and the {Strategic} {Formation} of {Large} {Networks}:
-  {When} and {Why} do {We} {See} {Power} {Laws} and {Small} {Worlds}?}{\BBCQ}
+{\BBOQ}\APACrefatitle {Search and the strategic formation of large networks:
+  when and why do we see power laws and small worlds} {Search and the strategic
+  formation of large networks: when and why do we see power laws and small
+  worlds}.{\BBCQ}
 \newblock
-
+\BIn{} \APACrefbtitle {Proceedings of the 2nd workshop on the economics of
+  peer-to-peer systems, Cambridge.} {Proceedings of the 2nd workshop on the
+  economics of peer-to-peer systems, cambridge.}
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
@@ -1565,24 +1748,22 @@ Jackson%
 }{%
 {\protect \APACyear {2007}}%
 }]{%
-jackson_meeting_2007}
+jacksonmeeting2007}
 \APACinsertmetastar {%
-jackson_meeting_2007}%
+jacksonmeeting2007}%
 \begin{APACrefauthors}%
-Jackson, M.%
+Jackson, M\BPBI O.%
 \BCBT {}\ \BBA {} Rogers, B\BPBI W.%
 \end{APACrefauthors}%
 \unskip\
 \newblock
 \APACrefYearMonthDay{2007}{}{}.
 \newblock
-{\BBOQ}\APACrefatitle {Meeting {Strangers} and {Friends} of {Friends}: {How}
-  {Random} are {Social} {Networks}?} {Meeting {Strangers} and {Friends} of
-  {Friends}: {How} {Random} are {Social} {Networks}?}{\BBCQ}
+{\BBOQ}\APACrefatitle {Meeting strangers and friends of friends: How random are
+  social networks?} {Meeting strangers and friends of friends: How random are
+  social networks?}{\BBCQ}
 \newblock
-
-\newblock
-\begin{APACrefDOI} \doi{10.1257/AER.97.3.890} \end{APACrefDOI}
+\APACjournalVolNumPages{American Economic Review}{97}{3}{890--915}.
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
@@ -2167,42 +2348,6 @@ Melamed, D.%
   \end{APACrefURL}
 \newblock
 \begin{APACrefDOI} \doi{10.1016/j.socnet.2015.11.001} \end{APACrefDOI}
-\PrintBackRefs{\CurrentBib}
-
-\bibitem [\protect \citeauthoryear {%
-Mäs%
-, Flache%
-\BCBL {}\ \BBA {} Helbing%
-}{%
-Mäs%
-\ \protect \BOthers {.}}{%
-{\protect \APACyear {2010}}%
-}]{%
-mas_individualization_2010}
-\APACinsertmetastar {%
-mas_individualization_2010}%
-\begin{APACrefauthors}%
-Mäs, M.%
-, Flache, A.%
-\BCBL {}\ \BBA {} Helbing, D.%
-\end{APACrefauthors}%
-\unskip\
-\newblock
-\APACrefYearMonthDay{2010}{{\APACmonth{10}}}{}.
-\newblock
-{\BBOQ}\APACrefatitle {Individualization as {Driving} {Force} of {Clustering}
-  {Phenomena} in {Humans}} {Individualization as {Driving} {Force} of
-  {Clustering} {Phenomena} in {Humans}}.{\BBCQ}
-\newblock
-\APACjournalVolNumPages{PLOS Computational Biology}{6}{10}{e1000959}.
-\newblock
-\begin{APACrefURL}
-  [{2022-01-26}]\url{https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1000959}
-  \end{APACrefURL}
-\newblock
-\APACrefnote{Publisher: Public Library of Science}
-\newblock
-\begin{APACrefDOI} \doi{10.1371/journal.pcbi.1000959} \end{APACrefDOI}
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
@@ -2795,6 +2940,32 @@ Smaldino, P\BPBI E.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
+Smith-Doerr%
+\ \BBA {} Powell%
+}{%
+Smith-Doerr%
+\ \BBA {} Powell%
+}{%
+{\protect \APACyear {2005}}%
+}]{%
+smith2005networks}
+\APACinsertmetastar {%
+smith2005networks}%
+\begin{APACrefauthors}%
+Smith-Doerr, L.%
+\BCBT {}\ \BBA {} Powell, W\BPBI W.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2005}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Networks and economic life} {Networks and economic
+  life}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{The handbook of economic sociology}{2}{3}{379--402}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
 Somer%
 \ \BBA {} McCoy%
 }{%
@@ -2961,6 +3132,42 @@ Takács, K.%
   \end{APACrefURL}
 \newblock
 \begin{APACrefDOI} \doi{10.2139/ssrn.2445649} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Takács%
+, Flache%
+\BCBL {}\ \BBA {} Mäs%
+}{%
+Takács%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2016}}%
+}]{%
+takacs_discrepancy_2016}
+\APACinsertmetastar {%
+takacs_discrepancy_2016}%
+\begin{APACrefauthors}%
+Takács, K.%
+, Flache, A.%
+\BCBL {}\ \BBA {} Mäs, M.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2016}{{\APACmonth{06}}}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Discrepancy and {Disliking} {Do} {Not} {Induce}
+  {Negative} {Opinion} {Shifts}} {Discrepancy and {Disliking} {Do} {Not}
+  {Induce} {Negative} {Opinion} {Shifts}}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{PLOS ONE}{11}{6}{e0157948}.
+\newblock
+\begin{APACrefURL}
+  [{2022-03-11}]\url{https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0157948}
+  \end{APACrefURL}
+\newblock
+\APACrefnote{Publisher: Public Library of Science}
+\newblock
+\begin{APACrefDOI} \doi{10.1371/journal.pone.0157948} \end{APACrefDOI}
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
@@ -3237,6 +3444,38 @@ Winter, F.%
 \APACrefnote{Publisher: SAGE Publications Ltd}
 \newblock
 \begin{APACrefDOI} \doi{10.1177/1043463120919380} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Yang%
+, Chi%
+, Zhu%
+, Gong%
+\BCBL {}\ \BBA {} Jin%
+}{%
+Yang%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2011}}%
+}]{%
+yang2011detecting}
+\APACinsertmetastar {%
+yang2011detecting}%
+\begin{APACrefauthors}%
+Yang, T.%
+, Chi, Y.%
+, Zhu, S.%
+, Gong, Y.%
+\BCBL {}\ \BBA {} Jin, R.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2011}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Detecting communities and their evolutions in dynamic
+  social networks—a Bayesian approach} {Detecting communities and their
+  evolutions in dynamic social networks—a bayesian approach}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Machine learning}{82}{2}{157--189}.
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%

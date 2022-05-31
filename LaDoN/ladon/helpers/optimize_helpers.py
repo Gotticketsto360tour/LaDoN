@@ -1,6 +1,7 @@
 from statistics import mean
 from typing import Callable, Dict
 from unittest import result
+
 from ladon.config import NAME_DICTIONARY
 from ladon.classes.network import Network, NoOpinionNetwork, ScaleFreeNetwork
 import networkx as nx
@@ -22,6 +23,20 @@ def make_network_by_seed(
     if run_simulation:
         network.run_simulation()
     return network
+
+
+dictionary = {
+    "THRESHOLD": 0.7,
+    "N_TARGET": 500,
+    "RANDOMNESS": 0.01,
+    "N_TIMESTEPS": 10000,
+    "POSITIVE_LEARNING_RATE": 0.1,
+    "NEGATIVE_LEARNING_RATE": 0.05,
+    "P": 0.5,
+    "K": 7,
+    "TIE_DISSOLUTION": 0.4,
+    "RECORD": False,
+}
 
 
 def make_barabasi_network_by_seed(dictionary: Dict, run: int) -> ScaleFreeNetwork:
