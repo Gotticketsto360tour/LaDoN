@@ -63,11 +63,9 @@
     <li>
       <a href="#getting-started">Getting Started</a>
       <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -99,14 +97,6 @@ This repository provides the underlying code for the thesis "Tie-deletion can pr
 
 The code is written in Python with popular libraries. As is always the case, it is recommended to setup a virtual environment for the project to avoid dependency issues. There are a number of good alternatives for creating such virtual environments. This repo was made using [Anaconda](https://www.anaconda.com/python-r-distribution?utm_campaign=python&utm_medium=online-advertising&utm_source=google&utm_content=anaconda-download&gclid=CjwKCAjwyryUBhBSEiwAGN5OCArsHSYImwyYZrXmaMCYQcC4Y3eZtWk7DVazjwohIjHVXORLDGh_4hoCZdgQAvD_BwE), but other virtual environments will work just as well. 
 
-### Prerequisites
-
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
-
 ### Installation
 
 1. Clone the repo
@@ -131,18 +121,21 @@ This is an example of how to list things you need to use the software and how to
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
+## Directories
+| **Directory** | **Description** |
+| :------------ | :-------------- |
+| _ladon/classes_                 | Contains the different network models and agent specifics. This is where the model is specified |
+| _ladon/helpers_ | Helper functions for the repository|
+| _ladon/report_            | Contains the code for generating the written thesis |
+| _ladon/write_             | Scripts for writing files for the project. This includes simulating all the data based on the settings specified in `config.py`|
+| _ladon/optimize_         | Scripts for hyperparameter optimization |
+| _ladon/load_                  | Load the written files for analysis and plotting|
+| _ladon/analysis_              | Folder for data from simulations and optimizations |
+| _ladon/evaluate_        | Evaluation of the hyper-parameter optimization |
+| _ladon/plots_           | Folder for the generated plots of the project |
+| _ladon/simulator_           | Test-script to simulate on the fly |
 
 
-<!-- USAGE EXAMPLES -->
-## Usage
-
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-<!-- CONTRIBUTING -->
 ## Contributing
 
 Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
