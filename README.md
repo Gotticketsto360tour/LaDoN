@@ -33,7 +33,7 @@
     <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a> -->
 
-<h3 align="center">Tie-deletion can facilitate Cooperation</h3>
+<h3 align="center">Tie-deletion can prevent polarization</h3>
 
   <p align="center">
     The underlying code for the LaDoN project
@@ -79,7 +79,7 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-This repository provides the underlying code for the thesis "Tie-deletion can facilitate Cooperation". All the code is made to be as reproducible as possible. To reproduce the results, follow the steps provided bellow.
+This repository provides the underlying code for the thesis "Tie-deletion can prevent polarization". All the code is made to be as reproducible as possible. To reproduce the results, follow the steps provided bellow.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
