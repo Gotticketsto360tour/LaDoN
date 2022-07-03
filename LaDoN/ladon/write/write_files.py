@@ -162,7 +162,7 @@ def make_all_simulations() -> None:
         one_combination
         for one_combination in combinations
         if not os.path.exists(
-            f"../analysis/data/simulations/over_time/T{one_combination[0]}-R{one_combination[1]}-P{one_combination[2]}-N{one_combination[3]}_D{one_combination[4]}.pkl"
+            f"../analysis/data/simulations/over_time/T{one_combination[0]}-R{one_combination[1]}-P{one_combination[2]}-N{one_combination[3]}-D{one_combination[4]}.pkl"
         )
     ]
 

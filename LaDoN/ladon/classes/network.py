@@ -8,6 +8,26 @@ from ladon.helpers.helpers import find_distance, find_average_path
 from tqdm import tqdm
 import numpy as np
 
+import time
+
+
+def decoratortimer(decimal):
+    def decoratorfunction(f):
+        def wrap(*args, **kwargs):
+            time1 = time.monotonic()
+            result = f(*args, **kwargs)
+            time2 = time.monotonic()
+            print(
+                "{:s} function took {:.{}f} ms".format(
+                    f.__name__, ((time2 - time1) * 1000.0), decimal
+                )
+            )
+            return result
+
+        return wrap
+
+    return decoratorfunction
+
 
 class Network:
     def __init__(self, dictionary):
@@ -43,6 +63,7 @@ class Network:
     def record_opinion_distributions(self):
         self.OPINION_DISTRIBUTIONS.append(self.get_opinion_distribution())
 
+    # @decoratortimer(2)
     def record_time_step(self):
         """Records measures of interest over time"""
         absolute_opinions = abs(self.get_opinion_distribution())
@@ -116,6 +137,7 @@ class Network:
             list(nx.algorithms.centrality.betweenness_centrality(self.graph).values())
         )
 
+    # @decoratortimer(2)
     def update_values(self, sampled_agent, neigbor):
         list_of_agents = [self.agents.get(sampled_agent), self.agents.get(neigbor)]
         max_agent, min_agent = max(list_of_agents, key=lambda x: x.opinion), min(
@@ -140,6 +162,7 @@ class Network:
             if min_agent.opinion < -1:
                 min_agent.opinion = -1
 
+    # @decoratortimer(2)
     def add_new_connection_randomly(self, agent_on_turn):
         nodes_without_new_agent = [
             agent
@@ -152,6 +175,7 @@ class Network:
             sampled_agent = sample(nodes_without_new_agent, 1)[0]
             self.graph.add_edge(agent_on_turn, sampled_agent)
 
+    # @decoratortimer(2)
     def add_new_connection_through_neighbors(self, agent_on_turn):
 
         candidate_neighbors = [
@@ -167,6 +191,7 @@ class Network:
             sampled_neigbor = sample(candidate_neighbors, 1)[0]
             self.graph.add_edge(agent_on_turn, sampled_neigbor)
 
+    # @decoratortimer(2)
     def delete_tie(self, agent: int, neighbor: int):
         if random() <= self.TIE_DISSOLUTION:
             self.graph.remove_edge(agent, neighbor)
@@ -177,8 +202,13 @@ class Network:
     def update_all_values(self, agent: int):
 
         neighbor_list = list(self.graph.neighbors(agent))
-        for neighbor in sample(neighbor_list, k=len(neighbor_list)):
-            self.update_values(agent, neighbor)
+
+        list(
+            map(
+                lambda x: self.update_values(agent, x),
+                sample(neighbor_list, k=len(neighbor_list)),
+            )
+        )
 
         negative_relations = [
             neighbor
@@ -186,9 +216,7 @@ class Network:
             if find_distance(self.agents.get(agent), self.agents.get(neighbor))
             > self.THRESHOLD
         ]
-        remove_ties = [
-            self.delete_tie(agent, neighbor) for neighbor in negative_relations
-        ]
+        list(map(lambda x: self.delete_tie(agent, x), negative_relations))
 
     def ensure_no_lone_agents(self, sampled_agent: int, neighbor: int):
         """Function for ensuring that the network only has one component.

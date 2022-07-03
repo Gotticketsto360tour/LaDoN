@@ -25,20 +25,6 @@ def make_network_by_seed(
     return network
 
 
-dictionary = {
-    "THRESHOLD": 0.7,
-    "N_TARGET": 500,
-    "RANDOMNESS": 0.01,
-    "N_TIMESTEPS": 10000,
-    "POSITIVE_LEARNING_RATE": 0.1,
-    "NEGATIVE_LEARNING_RATE": 0.05,
-    "P": 0.5,
-    "K": 7,
-    "TIE_DISSOLUTION": 0.4,
-    "RECORD": False,
-}
-
-
 def make_barabasi_network_by_seed(dictionary: Dict, run: int) -> ScaleFreeNetwork:
     random.seed(run)
     np.random.seed(run)
@@ -122,7 +108,14 @@ def run_optimization(objective: Callable, type: str) -> None:
             "denominator": average_path + 2,
         }
         study.optimize(
-            lambda trial: objective(trial, network, 1, target_dictionary), n_trials=500
+            lambda trial: objective(
+                trial=trial,
+                target=network,
+                target_dictionary=target_dictionary,
+                repeats=3,
+            ),
+            n_trials=400,
+            n_jobs=-1,
         )
         resulting_dictionary[name] = study.best_params
         joblib.dump(study, f"../analysis/data/optimization/{name}_study{type}.pkl")

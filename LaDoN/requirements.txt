@@ -68,7 +68,7 @@ notebook==6.4.8
 numpy @ file:///Users/runner/miniforge3/conda-bld/numpy_1643009384932/work
 numpydoc==1.2
 olefile @ file:///home/conda/feedstock_root/build_artifacts/olefile_1602866521163/work
-optuna==2.10.0
+optuna==2.0.0
 outcome @ file:///home/conda/feedstock_root/build_artifacts/outcome_1606397708505/work
 packaging @ file:///home/conda/feedstock_root/build_artifacts/packaging_1637239678211/work
 pandas==1.4.0
