@@ -15,6 +15,12 @@ import numpy as np
 from ladon.config import NAME_DICTIONARY
 
 
+def load_pickle(string: str) -> dict:
+    with open(string, "rb") as input_file:
+        file = pkl.load(input_file)
+    return file
+
+
 def get_mean(
     model, target_dictionary: Dict, network: nx.Graph(), denominator: float
 ) -> float:
@@ -57,6 +63,13 @@ def generate_network_dataframe(repeats: int) -> List[Dict]:
     """
 
     list_of_dictionaries = []
+    types = ["", "barabasi", "no_opinion", "theoretical"]
+    best_values_dict = {
+        one_type: joblib.load(
+            f"../analysis/data/optimization/best_optimization_results_{one_type}.pkl"
+        )
+        for one_type in types
+    }
     for name, network in NAME_DICTIONARY.items():
         network = get_main_component(network=network)
         target_dictionary = {
@@ -72,11 +85,6 @@ def generate_network_dataframe(repeats: int) -> List[Dict]:
             "mean": [0],
         }
         list_of_dictionaries.append(target_dictionary)
-        best_study_opinions = joblib.load(
-            f"../analysis/data/optimization/{name}_study.pkl"
-        )
-
-        best_parameters = best_study_opinions.best_params
 
         N_TARGET = network.number_of_nodes()
         N_EDGES = network.number_of_edges()
@@ -85,15 +93,21 @@ def generate_network_dataframe(repeats: int) -> List[Dict]:
         denominator = target_dictionary.get("average_path")[0] + 2
 
         dictionary = {
-            "THRESHOLD": best_parameters.get("threshold"),
+            "THRESHOLD": best_values_dict.get("").get(name).get("threshold"),
             "N_TARGET": N_TARGET,
             "RANDOMNESS": 0.1,
             "N_TIMESTEPS": N_TARGET * 20,
-            "POSITIVE_LEARNING_RATE": best_parameters.get("positive_learning_rate"),
-            "NEGATIVE_LEARNING_RATE": best_parameters.get("negative_learning_rate"),
+            "POSITIVE_LEARNING_RATE": best_values_dict.get("")
+            .get(name)
+            .get("positive_learning_rate"),
+            "NEGATIVE_LEARNING_RATE": best_values_dict.get("")
+            .get(name)
+            .get("negative_learning_rate"),
             "P": 0.5,
             "K": 2 * K,
-            "TIE_DISSOLUTION": best_parameters.get("tie_dissolution"),
+            "TIE_DISSOLUTION": best_values_dict.get("")
+            .get(name)
+            .get("tie_dissolution"),
             "RECORD": False,
         }
 
@@ -131,15 +145,11 @@ def generate_network_dataframe(repeats: int) -> List[Dict]:
 
         list_of_dictionaries.extend(opinion_dictionaries)
 
-        best_study_non_opinions = joblib.load(
-            f"../analysis/data/optimization/{name}_study_no_opinion.pkl"
-        )
-
-        best_parameters = best_study_non_opinions.best_params
-
         dictionary = {
             "N_TARGET": N_TARGET,
-            "RANDOMNESS": best_parameters.get("randomness"),
+            "RANDOMNESS": best_values_dict.get("no_opinion")
+            .get(name)
+            .get("randomness"),
             "N_TIMESTEPS": N_TARGET * 20,
             "P": 0.5,
             "K": 2 * K,
@@ -180,17 +190,11 @@ def generate_network_dataframe(repeats: int) -> List[Dict]:
 
         list_of_dictionaries.extend(no_opinion_dictionaries)
 
-        best_study_theoretical = joblib.load(
-            f"../analysis/data/optimization/{name}_study_no_theoretical.pkl"
-        )
-
-        best_parameters = best_study_theoretical.best_params
-
         dictionary = {
             "N_TARGET": N_TARGET,
             # "RANDOMNESS": best_parameters.get("randomness"),
             "N_TIMESTEPS": N_TARGET * 20,
-            "P": best_parameters.get("P"),
+            "P": best_values_dict.get("theoretical").get(name).get("P"),
             "K": 2 * K,
             "RECORD": False,
         }
@@ -229,23 +233,17 @@ def generate_network_dataframe(repeats: int) -> List[Dict]:
 
         list_of_dictionaries.extend(theoretical_dictionaries)
 
-        best_study_barabasi = joblib.load(
-            f"../analysis/data/optimization/{name}_study_no_barabasi.pkl"
-        )
-
-        best_parameters = best_study_barabasi.best_params
-
         dictionary = {
             "N_TARGET": N_TARGET,
             # "RANDOMNESS": best_parameters.get("randomness"),
             "N_TIMESTEPS": N_TARGET * 20,
             # "P": best_parameters.get("randomness"),
-            "K": best_parameters.get("K"),
+            "K": best_values_dict.get("barabasi").get(name).get("K"),
             "RECORD": False,
         }
 
         best_study_barabasi_networks = [
-            make_barabasi_network_by_seed(dictionary=dictionary, run=run)
+            make_barabasi_network_by_seed(dictionary=dictionary, run=run + 3)
             for run in range(repeats)
         ]
 
@@ -282,7 +280,7 @@ def generate_network_dataframe(repeats: int) -> List[Dict]:
 
 
 if __name__ == "__main__":
-    data = generate_network_dataframe(repeats=10)
+    data = generate_network_dataframe(repeats=20)
     with open(
         f"../analysis/data/optimization/data_from_all_runs.pkl",
         "wb",
