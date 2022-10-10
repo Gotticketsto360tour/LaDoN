@@ -100,7 +100,7 @@ data.query("type != 'Empirical network'").groupby("type").agg(
     JSD_iqr=("JSD", lambda x: x.quantile(0.75) - x.quantile(0.25)),
     mean_med=("mean", "median"),
     mean_iqr=("mean", lambda x: x.quantile(0.75) - x.quantile(0.25)),
-).reset_index()
+).reset_index().round(3)
 
 data_melt = data.melt(id_vars=["type", "assortativity", "network", "run"])
 
@@ -158,7 +158,11 @@ g.axes[0][1].set(xlim=(-3, 2))
 
 # g.tight_layout()
 
-g.savefig("../plots/overall/Model_Evaluation_Overview", dpi=300)
+g.savefig("../plots/overall/Model_Evaluation_Overview.png", dpi=300)
+g.savefig("../plots/overall/Model_Evaluation_Overview.pdf", dpi=300)
+
+plt.clf()
+
 
 sns.set_context(
     "paper",
@@ -208,7 +212,7 @@ sns.stripplot(
     jitter=1,
     # color="black",
     alpha=0.8,
-    size=7,
+    size=5,
     # hue_order=["Co-evolutionary model", "Network Formation model"],
     # palette=sns.cubehelix_palette(8, rot=-0.25, light=0.9),
 )
@@ -238,6 +242,13 @@ plt.savefig(
     dpi=300,
     bbox_inches="tight",
 )
+plt.savefig(
+    "../plots/overall/Model_Evaluation_Average_Clustering.pdf",
+    dpi=300,
+    bbox_inches="tight",
+)
+plt.clf()
+
 
 g = sns.boxplot(
     data=data.query("type != 'Empirical network'"),
@@ -276,18 +287,18 @@ sns.stripplot(
     jitter=1,
     # color="black",
     alpha=0.8,
-    size=7,
+    size=5,
     # hue_order=["Co-evolutionary model", "Network Formation model"],
     # palette=sns.cubehelix_palette(8, rot=-0.25, light=0.9),
 )
 plt.xlabel(r"$APL*$")
 plt.ylabel("")
 plt.axvline(x=0, color="black", ls="--")
-plt.xlim(-3, 2.2)
+plt.xlim(-3, 3.5)
 g.hlines(
     [-0.5, 0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5],
     xmin=-3,
-    xmax=2.2,
+    xmax=3.5,
     colors="gray",
     linestyles="dotted",
 )
@@ -302,6 +313,8 @@ l = plt.legend(
 )
 
 plt.savefig("../plots/overall/Model_Evaluation_APL.png", dpi=300, bbox_inches="tight")
+plt.savefig("../plots/overall/Model_Evaluation_APL.pdf", dpi=300, bbox_inches="tight")
+plt.clf()
 
 g = sns.boxplot(
     data=data.query("type != 'Empirical network'"),
@@ -340,7 +353,7 @@ sns.stripplot(
     jitter=1,
     # color="black",
     alpha=0.8,
-    size=7,
+    size=5,
     # hue_order=["Co-evolutionary model", "Network Formation model"],
     # palette=sns.cubehelix_palette(8, rot=-0.25, light=0.9),
 )
@@ -366,6 +379,9 @@ l = plt.legend(
 )
 
 plt.savefig("../plots/overall/Model_Evaluation_JSD.png", dpi=300, bbox_inches="tight")
+plt.savefig("../plots/overall/Model_Evaluation_JSD.pdf", dpi=300, bbox_inches="tight")
+
+plt.clf()
 
 g = sns.boxplot(
     data=data.query("type != 'Empirical network'"),
@@ -404,13 +420,13 @@ sns.stripplot(
     jitter=1,
     # color="black",
     alpha=0.8,
-    size=7,
+    size=5,
     # hue_order=["Co-evolutionary model", "Network Formation model"],
     # palette=sns.cubehelix_palette(8, rot=-0.25, light=0.9),
 )
 plt.xlabel(r"$O(A,G)$")
 plt.ylabel("")
-plt.xlim(0.05, 0.45)
+plt.xlim(0.0, 0.4)
 # plt.axvline(x=0, color = "black", ls="--")
 plt.ylim(-0.5, 6.5)
 handles, labels = g.get_legend_handles_labels()
@@ -423,13 +439,16 @@ l = plt.legend(
 
 g.hlines(
     [-0.5, 0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5],
-    xmin=0.05,
-    xmax=0.45,
+    xmin=0.0,
+    xmax=0.4,
     colors="gray",
     linestyles="dotted",
 )
 
 plt.savefig("../plots/overall/Model_Evaluation.png", dpi=300, bbox_inches="tight")
+plt.savefig("../plots/overall/Model_Evaluation.pdf", dpi=300, bbox_inches="tight")
+
+plt.clf()
 
 pio.renderers.default = "notebook"
 
@@ -466,29 +485,19 @@ importance_df["variable"] = importance_df["variable"].apply(
 importance_df["network"] = importance_df["network"].apply(
     lambda x: change_network_labels(x)
 )
-# importance_df.sort_values("value", ascending=False)
-sns.barplot(
-    data=importance_df.sort_values("value", ascending=False),
-    x="variable",
-    y="value",
-    hue="network",
-    palette="muted",
-    hue_order=[
-        "Karate Club",
-        "Dolphins",
-        "Citation Network",
-        "TV Shows",
-        "Political Books",
-        "Political Blogs",
-        "Politicians",
-    ],
-).set(
-    ylabel="Parameter Importance",
-    xlabel="",
-)
-plt.legend(title=r"Network")
-plt.savefig(
+
+facet = sns.FacetGrid(importance_df, col="network", height=4)
+facet.map(sns.barplot, "variable", "value")
+facet.set_xlabels("")
+facet.set_ylabels("Parameter Importance")
+facet.set_titles(col_template="{col_name}")
+facet.savefig(
     "../plots/overall/Parameter_Importance.png",
+    dpi=300,
+    bbox_inches="tight",
+)
+facet.savefig(
+    "../plots/overall/Parameter_Importance.pdf",
     dpi=300,
     bbox_inches="tight",
 )
@@ -540,19 +549,31 @@ list_of_names = [
 for name_file, name_list in zip(NAME_DICTIONARY, list_of_names):
     study = joblib.load(f"../analysis/data/optimization/{name_file}_study.pkl")
 
-    fig = optuna.visualization.matplotlib.plot_optimization_history(study)
-    fig.set(title="")
-    plt.savefig(
-        f"../plots/overall/Optimization_History_{name_file}.png",
-        dpi=300,
-        bbox_inches="tight",
-    )
+    fig = optuna.visualization.plot_optimization_history(study)
+    fig.update_layout(title={"text": ""})
+    fig.write_image(f"../plots/overall/Optimization_History_{name_file}.png")
+    fig.write_image(f"../plots/overall/Optimization_History_{name_file}.pdf")
+    # plt.savefig(
+    #     f"../plots/overall/Optimization_History_{name_file}.png",
+    #     dpi=300,
+    #     bbox_inches="tight",
+    # )
 
-    fig = optuna.visualization.matplotlib.plot_slice(study)
-    rename_plot(fig, titles=[r"$\beta$", r"$\alpha$", r"$R$", r"$T$", r"$P(D)$"])
-    plt.title("")
-    plt.savefig(
-        f"../plots/overall/Plot_Slice_{name_file}.png",
-        dpi=300,
-        bbox_inches="tight",
+    fig = optuna.visualization.plot_slice(study)
+    # rename_plot(fig, titles=[r"$\beta$", r"$\alpha$", r"$R$", r"$T$", r"$P(D)$"])
+    fig.update_layout(
+        title={"text": ""},
     )
+    titles = [r"$\beta$", r"$\alpha$", r"$R$", r"$T$", r"$P(D)$"]
+    for i in range(1, 6):
+        fig.update_xaxes(col=i, title=titles[i - 1])
+
+    fig.write_image(f"../plots/overall/Plot_Slice_{name_file}.png")
+    fig.write_image(f"../plots/overall/Plot_Slice_{name_file}.pdf")
+
+    # plt.title("")
+    # plt.savefig(
+    #     f"../plots/overall/Plot_Slice_{name_file}.png",
+    #     dpi=300,
+    #     bbox_inches="tight",
+    # )

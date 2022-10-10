@@ -96,7 +96,7 @@ def generate_network_dataframe(repeats: int) -> List[Dict]:
             "THRESHOLD": best_values_dict.get("").get(name).get("threshold"),
             "N_TARGET": N_TARGET,
             "RANDOMNESS": 0.1,
-            "N_TIMESTEPS": N_TARGET * 20,
+            "N_TIMESTEPS": N_TARGET * 10,
             "POSITIVE_LEARNING_RATE": best_values_dict.get("")
             .get(name)
             .get("positive_learning_rate"),
@@ -150,7 +150,7 @@ def generate_network_dataframe(repeats: int) -> List[Dict]:
             "RANDOMNESS": best_values_dict.get("no_opinion")
             .get(name)
             .get("randomness"),
-            "N_TIMESTEPS": N_TARGET * 20,
+            "N_TIMESTEPS": N_TARGET * 10,
             "P": 0.5,
             "K": 2 * K,
             "RECORD": False,
@@ -193,7 +193,7 @@ def generate_network_dataframe(repeats: int) -> List[Dict]:
         dictionary = {
             "N_TARGET": N_TARGET,
             # "RANDOMNESS": best_parameters.get("randomness"),
-            "N_TIMESTEPS": N_TARGET * 20,
+            "N_TIMESTEPS": N_TARGET * 10,
             "P": best_values_dict.get("theoretical").get(name).get("P"),
             "K": 2 * K,
             "RECORD": False,
@@ -236,7 +236,7 @@ def generate_network_dataframe(repeats: int) -> List[Dict]:
         dictionary = {
             "N_TARGET": N_TARGET,
             # "RANDOMNESS": best_parameters.get("randomness"),
-            "N_TIMESTEPS": N_TARGET * 20,
+            "N_TIMESTEPS": N_TARGET * 10,
             # "P": best_parameters.get("randomness"),
             "K": best_values_dict.get("barabasi").get(name).get("K"),
             "RECORD": False,

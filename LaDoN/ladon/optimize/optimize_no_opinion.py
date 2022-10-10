@@ -11,7 +11,7 @@ def objective(trial, target, repeats, target_dictionary) -> float:
     dictionary = {
         "N_TARGET": N_TARGET,
         "RANDOMNESS": randomness,
-        "N_TIMESTEPS": N_TARGET * 20,
+        "N_TIMESTEPS": N_TARGET * 10,
         "P": 0.5,
         "K": 2 * K,
         "RECORD": False,

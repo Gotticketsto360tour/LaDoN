@@ -7,7 +7,7 @@ def objective(trial, target, repeats, target_dictionary) -> float:
     K = trial.suggest_int("K", 1, 20)
     dictionary = {
         "N_TARGET": N_TARGET,
-        "N_TIMESTEPS": N_TARGET * 20,
+        "N_TIMESTEPS": N_TARGET * 10, #10
         "K": K,
         "RECORD": False,
     }

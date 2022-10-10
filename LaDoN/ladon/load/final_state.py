@@ -18,7 +18,7 @@ sns.set_context(
     "paper",
     rc={
         "figure.figsize": (11.7, 8.27),
-        "font.size": 17,
+        "font.size": 16,
         "axes.titlesize": 50,
         "axes.labelsize": 40,
     },
@@ -71,8 +71,13 @@ rename_plot(
     titles=[rf"$T = {x[0]}, \beta = {x[1]}$" for x in combinations],
     legend=r"$P(D)$",
 )
-
+# plotting.set(xlim=(-1, 1))
+# plotting.figure.tick_params(labelsize=20)
+# plt.tight_layout()
 plotting.savefig("../plots/overall/Radicalization.png")
+plotting.savefig("../plots/overall/Radicalization.pdf")
+
+plt.clf()
 
 correlations = (
     data.groupby(
@@ -135,6 +140,9 @@ for ax, titles in zip(
     ax.set_xlabel(r"$T$")
 
 g.savefig("../plots/overall/Correlation_Initial_Opinions.png")
+g.savefig("../plots/overall/Correlation_Initial_Opinions.pdf")
+
+plt.clf()
 
 sns.boxplot(
     data=correlations,
@@ -159,6 +167,9 @@ sns.stripplot(
     xlabel=r"$\beta$",
 )
 plt.savefig("../plots/overall/Correlation_Initial_Opinions_Negative_Learning_Rate.png")
+plt.savefig("../plots/overall/Correlation_Initial_Opinions_Negative_Learning_Rate.pdf")
+
+plt.clf()
 
 sns.boxplot(
     data=correlations,
@@ -184,3 +195,6 @@ sns.stripplot(
 )
 
 plt.savefig("../plots/overall/Correlation_Initial_Opinions_Threshold.png")
+plt.savefig("../plots/overall/Correlation_Initial_Opinions_Threshold.pdf")
+
+plt.clf()

@@ -22,17 +22,17 @@ def objective(
     N_TARGET = target.number_of_nodes()
     N_EDGES = target.number_of_edges()
     K = round(N_EDGES / N_TARGET)
-    threshold = trial.suggest_float("threshold", 0.1, 1.3)
+    threshold = trial.suggest_float("threshold", 0, 2)
     randomness = trial.suggest_float("randomness", 0, 1)
-    positive_learning_rate = trial.suggest_float("positive_learning_rate", 0.05, 0.5)
-    negative_learning_rate = trial.suggest_float("negative_learning_rate", 0.0, 0.5)
-    tie_dissolution = trial.suggest_float("tie_dissolution", 0.1, 1)
+    positive_learning_rate = trial.suggest_float("positive_learning_rate", 0, 0.5)
+    negative_learning_rate = trial.suggest_float("negative_learning_rate", 0, 0.5)
+    tie_dissolution = trial.suggest_float("tie_dissolution", 0, 1)
 
     dictionary = {
         "THRESHOLD": threshold,
         "N_TARGET": N_TARGET,
         "RANDOMNESS": randomness,
-        "N_TIMESTEPS": N_TARGET * 20,
+        "N_TIMESTEPS": N_TARGET * 10,  # 20
         "POSITIVE_LEARNING_RATE": positive_learning_rate,
         "NEGATIVE_LEARNING_RATE": negative_learning_rate,
         "P": 0.5,

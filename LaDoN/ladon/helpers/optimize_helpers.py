@@ -12,6 +12,7 @@ from ladon.helpers.helpers import find_average_path, get_main_component
 import random
 import pickle as pkl
 import joblib
+import os.path
 
 
 def make_network_by_seed(
@@ -92,7 +93,11 @@ def run_single_simulation(
 
 
 def run_optimization(objective: Callable, type: str) -> None:
-    resulting_dictionary = {}
+    file_path = f"../analysis/data/optimization/best_optimization_results_{type}.pkl"
+    if os.path.exists(file_path):
+        resulting_dictionary = joblib.load(file_path)
+    else:
+        resulting_dictionary = {}
 
     for name, network in NAME_DICTIONARY.items():
         network = get_main_component(network=network)
@@ -114,10 +119,12 @@ def run_optimization(objective: Callable, type: str) -> None:
                 target_dictionary=target_dictionary,
                 repeats=3,
             ),
-            n_trials=400,
+            n_trials=800,  # 400
             n_jobs=-1,
         )
+
         resulting_dictionary[name] = study.best_params
+
         joblib.dump(study, f"../analysis/data/optimization/{name}_study{type}.pkl")
     with open(
         f"../analysis/data/optimization/best_optimization_results_{type}.pkl",

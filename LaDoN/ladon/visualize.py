@@ -1,4 +1,4 @@
-from bokeh.io import output_notebook, show, export_png
+from bokeh.io import output_notebook, show, export_png, export_svgs
 from bokeh.models import (
     Range1d,
     Circle,
@@ -29,6 +29,7 @@ import numpy as np
 import colorcet
 from colorcet import b_glasbey_bw_minc_20
 from selenium import webdriver
+from bokeh.io import export_svg
 
 from ladon.classes.network import Network
 import random
@@ -157,30 +158,40 @@ def plot_graph(network: Network, plot_type="community", save_path="", title="") 
     plot.axis.visible = False
 
     plot.renderers.append(network_graph)
+    plot.plot_height = 500
+    plot.plot_width = 500
 
     show(plot)
 
     if save_path:
+        plot.output_backend = "svg"
         driver = webdriver.Firefox()
-        export_png(
-            obj=plot,
-            filename=save_path,
-            webdriver=driver,  # width=2000, height=2000
-        )
+        # driver.maximize_window()
+        # driver.set_window_position(1000, 1000)
+        # driver.set_window_size(1920, 1080)
+        export_svgs(plot, filename=save_path, webdriver=driver, height=1000, width=1000)
+
+        # export_svg(
+        #     obj=plot,
+        #     filename=save_path,
+        #     # width=1000,
+        #     # height=1000,
+        #     webdriver=driver,  # width=2000, height=2000
+        # )
         driver.close()
-        # save(plot)
+        # # save(plot)
 
 
 def generate_network_plots(
     network: Network, plot_type="agent_type", save_path="", title="", run=0
 ) -> None:
-    # random.seed(run)
-    # np.random.seed(run)
+    random.seed(run)
+    np.random.seed(run)
     if save_path:
         plot_graph(
             network=network,
             plot_type=plot_type,
-            save_path=f"{save_path}_0.png",
+            save_path=f"{save_path}_0.svg",
             title="Timestep: 0",
         )
     else:
@@ -198,7 +209,7 @@ def generate_network_plots(
                 network=network,
                 plot_type=plot_type,
                 title=f"Timestep: {turn * run}",
-                save_path=f"{save_path}_{run * turn}.png",
+                save_path=f"{save_path}_{run * turn}.svg",
             )
         else:
             plot_graph(

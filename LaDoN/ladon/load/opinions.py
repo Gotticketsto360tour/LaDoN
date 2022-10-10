@@ -37,7 +37,16 @@ def combine_data():
     )
 
 
-df = combine_data()
+df = pd.concat(
+    [
+        make_one_data_frame(
+            f"../analysis/data/simulations/opinions/T0.9-R{i}-P0.2-N0.2-D1.pkl"
+        )
+        for i in [0.1, 0.3, 0.5]
+    ]
+).reset_index(drop=True)
+
+# df = combine_data()
 
 
 def plot_trajectory_over_time(
@@ -148,14 +157,15 @@ def plot_distribution_over_time(
 
 plot_distribution_over_time(
     df,
-    threshold=0.8,
-    positive_learning_rate=0.15,
-    negative_learning_rate=0.1,
+    threshold=0.9,
+    positive_learning_rate=0.2,
+    negative_learning_rate=0.2,
     tie_dissolution=1,
-    run=6,
+    run=8,
 )
 
-plt.savefig("../plots/Distribution_Over_Time.png")
+plt.savefig("../plots/example/Distribution_Over_Time.pdf")
+plt.clf()
 
 sns.set_context(
     "paper",
@@ -170,11 +180,11 @@ sns.set_context(
 
 plot_trajectory_over_time(
     df,
-    threshold=0.8,
-    positive_learning_rate=0.15,
-    negative_learning_rate=0.1,
+    threshold=0.9,
+    positive_learning_rate=0.2,
+    negative_learning_rate=0.2,
     tie_dissolution=1,
-    run=6,
+    run=8,
 )
 
 plt.savefig(
@@ -182,3 +192,9 @@ plt.savefig(
     dpi=300,
     bbox_inches="tight",
 )
+plt.savefig(
+    "../plots/example/Lineplot_Over_Time.pdf",
+    dpi=300,
+    bbox_inches="tight",
+)
+plt.clf()

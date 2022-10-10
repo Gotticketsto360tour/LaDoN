@@ -1,4 +1,3 @@
-import itertools
 import pickle as pkl
 import glob
 from re import sub
@@ -56,6 +55,7 @@ sns.lineplot(
 ).set(ylabel=r"$\overline{C}$", xlabel=r"$t$", xlim=(0, 10000), ylim=(0, None))
 
 plt.legend(title=r"$P(D)$", bbox_to_anchor=(1.15, 0.65))
+plt.clf()
 
 sns.lineplot(
     data=data,
@@ -71,6 +71,12 @@ plt.savefig(
     dpi=300,
     bbox_inches="tight",
 )
+plt.savefig(
+    "../plots/overall/Distance_Tie_Deletion.pdf",
+    dpi=300,
+    bbox_inches="tight",
+)
+plt.clf()
 
 sns.lineplot(
     data=data,
@@ -86,6 +92,12 @@ plt.savefig(
     dpi=300,
     bbox_inches="tight",
 )
+plt.savefig(
+    "../plots/overall/Standard_Deviation_Absolute_Opinion_Tie_Deletion.pdf",
+    dpi=300,
+    bbox_inches="tight",
+)
+plt.clf()
 
 g = sns.lineplot(
     data=data.query("negative_learning_rate == 0"),
@@ -101,6 +113,12 @@ plt.savefig(
     dpi=300,
     bbox_inches="tight",
 )
+plt.savefig(
+    "../plots/overall/Absolute_Opinion_Tie_Deletion_Without_Negative.pdf",
+    dpi=300,
+    bbox_inches="tight",
+)
+plt.clf()
 
 # sns.set_context(
 #     "paper",
@@ -126,6 +144,10 @@ plt.legend(title=r"$T$", bbox_to_anchor=(1.0, 0.65))
 plt.savefig(
     "../plots/overall/Absolute_Opinion_Threshold.png", dpi=300, bbox_inches="tight"
 )
+plt.savefig(
+    "../plots/overall/Absolute_Opinion_Threshold.pdf", dpi=300, bbox_inches="tight"
+)
+plt.clf()
 
 g = sns.lineplot(
     data=data,
@@ -141,6 +163,12 @@ plt.savefig(
     dpi=300,
     bbox_inches="tight",
 )
+plt.savefig(
+    "../plots/overall/Absolute_Opinion_Positive_Learning_Rate.pdf",
+    dpi=300,
+    bbox_inches="tight",
+)
+plt.clf()
 
 g = sns.lineplot(
     data=data,
@@ -156,6 +184,12 @@ plt.savefig(
     dpi=300,
     bbox_inches="tight",
 )
+plt.savefig(
+    "../plots/overall/Absolute_Opinion_Negative_Learning_Rate.pdf",
+    dpi=300,
+    bbox_inches="tight",
+)
+plt.clf()
 
 sns.set_context(
     "paper",
@@ -184,6 +218,12 @@ g.savefig(
     dpi=300,
     bbox_inches="tight",
 )
+g.savefig(
+    "../plots/overall/Average_Clustering_Coefficient_Ties_Deleted.pdf",
+    dpi=300,
+    bbox_inches="tight",
+)
+plt.clf()
 
 g = sns.relplot(
     data=data,
@@ -201,6 +241,12 @@ g.savefig(
     dpi=300,
     bbox_inches="tight",
 )
+g.savefig(
+    "../plots/overall/Average_Path_Length_Ties_Deleted.pdf",
+    dpi=300,
+    bbox_inches="tight",
+)
+plt.clf()
 
 g = sns.relplot(
     data=data,
@@ -218,6 +264,12 @@ g.savefig(
     dpi=300,
     bbox_inches="tight",
 )
+g.savefig(
+    "../plots/overall/Absolute_Opinion_Tie_Dissolution.pdf",
+    dpi=300,
+    bbox_inches="tight",
+)
+plt.clf()
 
 g = sns.relplot(
     data=data,
@@ -231,7 +283,9 @@ g = sns.relplot(
 
 rename_plot(g, titles=[r"$R = 0.1$", r"$R = 0.3$", r"$R = 0.5$"], legend=r"$P(D)$")
 g.savefig("../plots/overall/Negative_Tie_Deleted.png", dpi=300, bbox_inches="tight")
+g.savefig("../plots/overall/Negative_Tie_Deleted.pdf", dpi=300, bbox_inches="tight")
 
+plt.clf()
 
 correlations = (
     data.groupby(
@@ -288,6 +342,10 @@ for ax, titles in zip(
 g.savefig(
     "../plots/overall/Correlation_Average_Path_Length_Absolute_Opinions.png", dpi=300
 )
+g.savefig(
+    "../plots/overall/Correlation_Average_Path_Length_Absolute_Opinions.pdf", dpi=300
+)
+plt.clf()
 
 sns.set_context(
     "paper",
@@ -333,6 +391,12 @@ plt.savefig(
     dpi=300,
     bbox_inches="tight",
 )
+plt.savefig(
+    "../plots/overall/Tie_Dissolution_Correlations_Boxplot_Full.pdf",
+    dpi=300,
+    bbox_inches="tight",
+)
+plt.clf()
 
 sns.boxplot(
     data=correlations.query("tie_dissolution > 0"),
@@ -353,22 +417,15 @@ sns.stripplot(
     # palette=sns.cubehelix_palette(8, rot=-0.25, light=0.9),
 ).set(ylabel=r"$\rho_{|O|, APL}$", xlabel=r"$P(D)$")
 plt.savefig("../plots/overall/Tie_Dissolution_Correlations_Boxplot_Over_Zero.png")
-
-data_specific = data[
-    (data["threshold"] == 0.8)
-    & (data["positive_learning_rate"] == 0.15)
-    & (data["negative_learning_rate"] == 0.1)
-    & (data["tie_dissolution"] == 1)
-    & (data["run"] == 6)
-    & (data["randomness"] == 0.1)
-]
+plt.savefig("../plots/overall/Tie_Dissolution_Correlations_Boxplot_Over_Zero.pdf")
+plt.clf()
 
 data_specific_random = data[
-    (data["threshold"] == 0.8)
-    & (data["positive_learning_rate"] == 0.15)
-    & (data["negative_learning_rate"] == 0.1)
+    (data["threshold"] == 0.9)
+    & (data["positive_learning_rate"] == 0.2)
+    & (data["negative_learning_rate"] == 0.2)
     & (data["tie_dissolution"] == 1)
-    & (data["run"] == 6)
+    & (data["run"] == 8)
 ]
 
 sns.set_context(
@@ -394,7 +451,10 @@ plt.legend(title=r"$R$", bbox_to_anchor=(1.15, 0.6))
 plt.savefig(
     "../plots/example/Example_Absolute_Opinion.png", dpi=300, bbox_inches="tight"
 )
-
+plt.savefig(
+    "../plots/example/Example_Absolute_Opinion.pdf", dpi=300, bbox_inches="tight"
+)
+plt.clf()
 
 g = sns.lineplot(
     data=data_specific_random,
@@ -408,7 +468,10 @@ plt.legend(title=r"$R$", bbox_to_anchor=(1.15, 0.6))
 plt.savefig(
     "../plots/example/Example_Average_Path_Length.png", dpi=300, bbox_inches="tight"
 )
-
+plt.savefig(
+    "../plots/example/Example_Average_Path_Length.pdf", dpi=300, bbox_inches="tight"
+)
+plt.clf()
 g = sns.lineplot(
     data=data_specific_random,
     x="timestep",
@@ -421,6 +484,10 @@ plt.legend(title=r"$R$", bbox_to_anchor=(1.15, 0.6))
 plt.savefig(
     "../plots/example/Example_Negative_Ties_Deleted.png", dpi=300, bbox_inches="tight"
 )
+plt.savefig(
+    "../plots/example/Example_Negative_Ties_Deleted.pdf", dpi=300, bbox_inches="tight"
+)
+plt.clf()
 
 data_polarized = (
     data.groupby(
@@ -516,27 +583,10 @@ plt.figure(figsize=(20.7, 8.27))
 plt.fill_between(time, polarized_min, polarized_max, alpha=0.7, label="Polarized")
 plt.fill_between(time, inbetween_min, inbetween_max, alpha=0.7, label="In-between")
 plt.fill_between(time, consensus_min, consensus_max, alpha=0.7, label="Consensus")
-plt.legend(title="Final State", bbox_to_anchor=(1.12, 0.66))
+plt.legend(title="Final State", bbox_to_anchor=(1.18, 0.6))
 plt.xlabel(r"$t$")
 plt.ylabel(r"$|O|$")
+plt.xlim(0, 10000)
 plt.savefig("../plots/overall/Point_Of_No_Return.png", dpi=300, bbox_inches="tight")
-
-g = sns.relplot(
-    data=data_merged,
-    x="timestep",
-    y="mean_absolute_opinion",
-    # col="Final State",
-    hue="Final State",
-    alpha=0.8,
-    kind="line",
-    units="Final State",
-    hue_order=["Polarized", "Inbetween", "Consensus"],
-    estimator=None,
-    aspect=1,
-    height=10
-    # linewidth = 0.1
-    # palette=blue_pallette,
-)
-g.set(ylabel=r"$|O|$", xlabel=r"$t$")
-
-g.savefig("../plots/overall/Point_Of_No_Return.png", dpi=300, bbox_inches="tight")
+plt.savefig("../plots/overall/Point_Of_No_Return.pdf", dpi=300, bbox_inches="tight")
+plt.clf()

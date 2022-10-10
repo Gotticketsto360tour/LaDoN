@@ -174,9 +174,7 @@ Arceneaux, K.%
 \APACjournalVolNumPages{American Journal of Political
   Science}{56}{2}{271--285}.
 \newblock
-\begin{APACrefURL}
-  [{2022-03-31}]\url{https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1540-5907.2011.00573.x}
-  \end{APACrefURL}
+\begin{APACrefURL} [{2022-03-31}]\url{shorturl.at/AOQR7} \end{APACrefURL}
 \newblock
 \APACrefnote{\_eprint:
   https://onlinelibrary.wiley.com/doi/pdf/10.1111/j.1540-5907.2011.00573.x}
@@ -788,52 +786,6 @@ Carter, A\BPBI J.%
   information}.{\BBCQ}
 \newblock
 \APACjournalVolNumPages{Royal Society Open Science}{2}{5}{140444}.
-\PrintBackRefs{\CurrentBib}
-
-\bibitem [\protect \citeauthoryear {%
-Center%
-}{%
-Center%
-}{%
-{\protect \APACyear {2014}}%
-{\protect \APACexlab {{\protect \BCnt {1}}}}}]{%
-pew_research_center_political_2014}
-\APACinsertmetastar {%
-pew_research_center_political_2014}%
-\begin{APACrefauthors}%
-Center, P\BPBI R.%
-\end{APACrefauthors}%
-\unskip\
-\newblock
-\APACrefYearMonthDay{2014{\protect \BCnt {1}}}{{\APACmonth{06}}}{}.
-\newblock
-\APACrefbtitle {Political {Polarization} and {Growing} {Partisan} {Antipathy}.}
-  {Political {Polarization} and {Growing} {Partisan} {Antipathy}.}
-\newblock
-\begin{APACrefURL} [{2022-03-11}]\url{shorturl.at/kuyMZ} \end{APACrefURL}
-\PrintBackRefs{\CurrentBib}
-
-\bibitem [\protect \citeauthoryear {%
-Center%
-}{%
-Center%
-}{%
-{\protect \APACyear {2014}}%
-{\protect \APACexlab {{\protect \BCnt {2}}}}}]{%
-pew_research_center_political_2014-1}
-\APACinsertmetastar {%
-pew_research_center_political_2014-1}%
-\begin{APACrefauthors}%
-Center, P\BPBI R.%
-\end{APACrefauthors}%
-\unskip\
-\newblock
-\APACrefYearMonthDay{2014{\protect \BCnt {2}}}{{\APACmonth{06}}}{}.
-\newblock
-\APACrefbtitle {Political {Polarization} in the {American} {Public}.}
-  {Political {Polarization} in the {American} {Public}.}
-\newblock
-\begin{APACrefURL} [{2022-03-11}]\url{shorturl.at/qxCD3} \end{APACrefURL}
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
@@ -2571,6 +2523,52 @@ Pepper, J\BPBI W.%
 \APACrefnote{Publisher: The University of Chicago Press}
 \newblock
 \begin{APACrefDOI} \doi{10.1086/341018} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+{Pew Research Center}%
+}{%
+{Pew Research Center}%
+}{%
+{\protect \APACyear {2014}}%
+{\protect \APACexlab {{\protect \BCnt {1}}}}}]{%
+pew_research_center_political_2014}
+\APACinsertmetastar {%
+pew_research_center_political_2014}%
+\begin{APACrefauthors}%
+{Pew Research Center}.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2014{\protect \BCnt {1}}}{{\APACmonth{06}}}{}.
+\newblock
+\APACrefbtitle {Political {Polarization} and {Growing} {Partisan} {Antipathy}.}
+  {Political {Polarization} and {Growing} {Partisan} {Antipathy}.}
+\newblock
+\begin{APACrefURL} [{2022-03-11}]\url{shorturl.at/kuyMZ} \end{APACrefURL}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+{Pew Research Center}%
+}{%
+{Pew Research Center}%
+}{%
+{\protect \APACyear {2014}}%
+{\protect \APACexlab {{\protect \BCnt {2}}}}}]{%
+pew_research_center_political_2014-1}
+\APACinsertmetastar {%
+pew_research_center_political_2014-1}%
+\begin{APACrefauthors}%
+{Pew Research Center}.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2014{\protect \BCnt {2}}}{{\APACmonth{06}}}{}.
+\newblock
+\APACrefbtitle {Political {Polarization} in the {American} {Public}.}
+  {Political {Polarization} in the {American} {Public}.}
+\newblock
+\begin{APACrefURL} [{2022-03-11}]\url{shorturl.at/qxCD3} \end{APACrefURL}
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%

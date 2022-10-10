@@ -28,7 +28,7 @@ def make_one_simulation(
 
     dictionary = {
         "THRESHOLD": threshold,
-        "N_TARGET": 500,
+        "N_TARGET": 1000,  # 1000
         "RANDOMNESS": randomness,
         "N_TIMESTEPS": 10000,
         "POSITIVE_LEARNING_RATE": positive_learning_rate,
@@ -110,7 +110,7 @@ def make_one_simulation(
                 "positive_learning_rate": positive_learning_rate,
                 "negative_learning_rate": negative_learning_rate,
                 "tie_dissolution": tie_dissolution,
-                "time": (time + 1) * dictionary.get("N_TARGET"),
+                "time": (time + 1) * 500,  # dictionary.get("N_TARGET")
                 "run": run,
                 "agent": [agent for agent in range(dictionary.get("N_TARGET"))],
                 "opinions": opinion,
