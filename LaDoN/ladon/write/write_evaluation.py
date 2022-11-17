@@ -1,7 +1,12 @@
 import pickle as pkl
 from typing import Dict, List
 import networkx as nx
-from ladon.helpers.helpers import get_main_component, find_average_path
+from ladon.helpers.helpers import (
+    get_main_component,
+    find_average_path,
+    get_shortest_path_distribution,
+    calculate_jsd_for_paths,
+)
 from ladon.helpers.optimize_helpers import (
     make_network_by_seed,
     make_no_opinion_network_by_seed,
@@ -10,7 +15,6 @@ from ladon.helpers.optimize_helpers import (
 )
 import joblib
 import netrd
-import seaborn as sns
 import numpy as np
 from ladon.config import NAME_DICTIONARY
 
@@ -22,7 +26,10 @@ def load_pickle(string: str) -> dict:
 
 
 def get_mean(
-    model, target_dictionary: Dict, network: nx.Graph(), denominator: float
+    model,
+    target_dictionary: Dict,
+    target_path_distribution: np.array,
+    network: nx.Graph,
 ) -> float:
     """Returns the mean of the vector of differences
 
@@ -39,15 +46,12 @@ def get_mean(
         nx.algorithms.cluster.average_clustering(model.graph)
         - (target_dictionary.get("clustering")[0])
     )
-    network_avg_path = find_average_path(model.graph)
-
-    average_path_diff = (
-        abs(network_avg_path - target_dictionary.get("average_path")[0]) / denominator
-    )
+    path_distribution = get_shortest_path_distribution(model.graph, 10000)
+    JSD_path = calculate_jsd_for_paths(target_path_distribution, path_distribution)
 
     distance_algorithm = netrd.distance.DegreeDivergence()
-    JSD = distance_algorithm.dist(model.graph, network)
-    minimize_array = np.array([clustering_diff, average_path_diff, JSD])
+    JSD_degree = distance_algorithm.dist(model.graph, network)
+    minimize_array = np.array([clustering_diff, JSD_path, JSD_degree])
     mean = np.mean(minimize_array)
     return mean
 
@@ -75,12 +79,10 @@ def generate_network_dataframe(repeats: int) -> List[Dict]:
         target_dictionary = {
             "type": ["Target"],
             "clustering": [nx.algorithms.cluster.average_clustering(network)],
-            "assortativity": [
-                nx.algorithms.assortativity.degree_assortativity_coefficient(network)
-            ],
             "average_path": [find_average_path(network)],
             "network": [name],
-            "JSD": [0],
+            "JSD_degree": [0],
+            "JSD_paths": [0],
             "run": [0],
             "mean": [0],
         }
@@ -90,7 +92,7 @@ def generate_network_dataframe(repeats: int) -> List[Dict]:
         N_EDGES = network.number_of_edges()
         K = round(N_EDGES / N_TARGET)
 
-        denominator = target_dictionary.get("average_path")[0] + 2
+        target_path_distribution = get_shortest_path_distribution(network, 10000)
 
         dictionary = {
             "THRESHOLD": best_values_dict.get("").get(name).get("threshold"),
@@ -122,21 +124,22 @@ def generate_network_dataframe(repeats: int) -> List[Dict]:
             {
                 "type": ["Opinion_Model"],
                 "clustering": [nx.algorithms.cluster.average_clustering(model.graph)],
-                "assortativity": [
-                    nx.algorithms.assortativity.degree_assortativity_coefficient(
-                        model.graph
-                    )
-                ],
                 "average_path": [find_average_path(model.graph)],
                 "network": [name],
-                "JSD": [distance_algorithm.dist(model.graph, network)],
+                "JSD_degree": [distance_algorithm.dist(model.graph, network)],
+                "JSD_paths": [
+                    calculate_jsd_for_paths(
+                        get_shortest_path_distribution(model.graph, 10000),
+                        target_path_distribution,
+                    )
+                ],
                 "run": [run],
                 "mean": [
                     get_mean(
                         model=model,
                         target_dictionary=target_dictionary,
                         network=network,
-                        denominator=denominator,
+                        target_path_distribution=target_path_distribution,
                     )
                 ],
             }
@@ -167,21 +170,22 @@ def generate_network_dataframe(repeats: int) -> List[Dict]:
             {
                 "type": ["No_Opinion_Model"],
                 "clustering": [nx.algorithms.cluster.average_clustering(model.graph)],
-                "assortativity": [
-                    nx.algorithms.assortativity.degree_assortativity_coefficient(
-                        model.graph
-                    )
-                ],
                 "average_path": [find_average_path(model.graph)],
                 "network": [name],
-                "JSD": [distance_algorithm.dist(model.graph, network)],
+                "JSD_degree": [distance_algorithm.dist(model.graph, network)],
+                "JSD_paths": [
+                    calculate_jsd_for_paths(
+                        get_shortest_path_distribution(model.graph, 10000),
+                        target_path_distribution,
+                    )
+                ],
                 "run": [run],
                 "mean": [
                     get_mean(
                         model=model,
                         target_dictionary=target_dictionary,
                         network=network,
-                        denominator=denominator,
+                        target_path_distribution=target_path_distribution,
                     )
                 ],
             }
@@ -210,21 +214,22 @@ def generate_network_dataframe(repeats: int) -> List[Dict]:
             {
                 "type": ["Small-world Network"],
                 "clustering": [nx.algorithms.cluster.average_clustering(model.graph)],
-                "assortativity": [
-                    nx.algorithms.assortativity.degree_assortativity_coefficient(
-                        model.graph
-                    )
-                ],
                 "average_path": [find_average_path(model.graph)],
                 "network": [name],
-                "JSD": [distance_algorithm.dist(model.graph, network)],
+                "JSD_degree": [distance_algorithm.dist(model.graph, network)],
+                "JSD_paths": [
+                    calculate_jsd_for_paths(
+                        get_shortest_path_distribution(model.graph, 10000),
+                        target_path_distribution,
+                    )
+                ],
                 "run": [run],
                 "mean": [
                     get_mean(
                         model=model,
                         target_dictionary=target_dictionary,
                         network=network,
-                        denominator=denominator,
+                        target_path_distribution=target_path_distribution,
                     )
                 ],
             }
@@ -253,21 +258,22 @@ def generate_network_dataframe(repeats: int) -> List[Dict]:
             {
                 "type": ["Scale-free Network"],
                 "clustering": [nx.algorithms.cluster.average_clustering(model.graph)],
-                "assortativity": [
-                    nx.algorithms.assortativity.degree_assortativity_coefficient(
-                        model.graph
-                    )
-                ],
                 "average_path": [find_average_path(model.graph)],
                 "network": [name],
-                "JSD": [distance_algorithm.dist(model.graph, network)],
+                "JSD_degree": [distance_algorithm.dist(model.graph, network)],
+                "JSD_paths": [
+                    calculate_jsd_for_paths(
+                        get_shortest_path_distribution(model.graph, 10000),
+                        target_path_distribution,
+                    )
+                ],
                 "run": [run],
                 "mean": [
                     get_mean(
                         model=model,
                         target_dictionary=target_dictionary,
                         network=network,
-                        denominator=denominator,
+                        target_path_distribution=target_path_distribution,
                     )
                 ],
             }
@@ -275,7 +281,6 @@ def generate_network_dataframe(repeats: int) -> List[Dict]:
         ]
 
         list_of_dictionaries.extend(barabasi_dictionaries)
-    # pd.concat([pd.DataFrame(data) for data in list_of_dictionaries])
     return list_of_dictionaries
 
 
