@@ -134,14 +134,10 @@ dmypy.json
 
 
 # data 
-data/
+data
 
-analysis/
-
+analysis
 
 # plots
-data*
-
 *.pdf
-
-.png
+*.png
