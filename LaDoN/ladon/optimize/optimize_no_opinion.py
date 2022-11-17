@@ -1,5 +1,5 @@
-from statistics import mean
 from ladon.helpers.optimize_helpers import run_optimization, run_single_simulation
+import numpy as np
 
 
 def objective(trial, target, repeats, target_dictionary) -> float:
@@ -17,12 +17,16 @@ def objective(trial, target, repeats, target_dictionary) -> float:
         "RECORD": False,
     }
 
-    results = [
-        run_single_simulation(dictionary, run, target, target_dictionary, "no_opinion")
-        for run in range(repeats)
-    ]
+    results = np.array(
+        [
+            run_single_simulation(
+                dictionary, run, target, target_dictionary, "no_opinion"
+            )
+            for run in range(repeats)
+        ]
+    )
 
-    return mean(results)
+    return results.mean()
 
 
 if __name__ == "__main__":

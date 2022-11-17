@@ -7,26 +7,7 @@ from random import seed
 from ladon.helpers.helpers import find_distance, find_average_path
 from tqdm import tqdm
 import numpy as np
-
-import time
-
-
-def decoratortimer(decimal):
-    def decoratorfunction(f):
-        def wrap(*args, **kwargs):
-            time1 = time.monotonic()
-            result = f(*args, **kwargs)
-            time2 = time.monotonic()
-            print(
-                "{:s} function took {:.{}f} ms".format(
-                    f.__name__, ((time2 - time1) * 1000.0), decimal
-                )
-            )
-            return result
-
-        return wrap
-
-    return decoratorfunction
+from typing import Dict
 
 
 class Network:
@@ -57,29 +38,24 @@ class Network:
         self.MEAN_DISTANCE = []
         self.AVERAGE_PATH_LENGTH = []
         self.AVERAGE_CLUSTERING = []
-        self.ASSORTATIVITY = []
         self.OPINION_DISTRIBUTIONS = []
 
     def record_opinion_distributions(self):
         self.OPINION_DISTRIBUTIONS.append(self.get_opinion_distribution())
 
-    # @decoratortimer(2)
     def record_time_step(self):
         """Records measures of interest over time"""
         absolute_opinions = abs(self.get_opinion_distribution())
         mean_absolute_opinions = np.mean(absolute_opinions)
         standard_deviation = np.std(absolute_opinions)
         negative_ties_dissoluted = self.N_TIE_DISSOLUTIONS
-        mean_distances = np.mean(self.get_opinion_distances_without_none())
+        mean_distances = np.mean(self.get_opinion_distances())
         self.MEAN_ABSOLUTE_OPINIONS.append(mean_absolute_opinions)
         self.SD_ABSOLUTE_OPINIONS.append(standard_deviation)
         self.NEGATIVE_TIES_DISSOLUTED.append(negative_ties_dissoluted)
         self.MEAN_DISTANCE.append(mean_distances)
         self.AVERAGE_CLUSTERING.append(nx.average_clustering(self.graph))
         self.AVERAGE_PATH_LENGTH.append(find_average_path(self.graph))
-        self.ASSORTATIVITY.append(
-            nx.algorithms.assortativity.degree_assortativity_coefficient(self.graph)
-        )
 
     def get_opinion_distribution(self) -> np.array:
         return np.array(
@@ -106,38 +82,13 @@ class Network:
                         for neighbor in self.graph.neighbors(agent)
                     ]
                 )
-                if list(self.graph.neighbors(agent))
-                else None
                 for agent in self.agents
-            ]
-        )
-
-    def get_opinion_distances_without_none(self) -> np.array:
-        return np.array(
-            [
-                mean(
-                    [
-                        abs(
-                            self.agents.get(agent).opinion
-                            - (self.agents.get(neighbor).opinion)
-                        )
-                        for neighbor in self.graph.neighbors(agent)
-                    ]
-                )
-                for agent in self.agents
-                if list(self.graph.neighbors(agent))
             ]
         )
 
     def get_clustering(self) -> np.array:
         return np.array(list(nx.algorithms.clustering(self.graph).values()))
 
-    def get_centrality(self) -> np.array:
-        return np.array(
-            list(nx.algorithms.centrality.betweenness_centrality(self.graph).values())
-        )
-
-    # @decoratortimer(2)
     def update_values(self, sampled_agent, neigbor):
         list_of_agents = [self.agents.get(sampled_agent), self.agents.get(neigbor)]
         max_agent, min_agent = max(list_of_agents, key=lambda x: x.opinion), min(

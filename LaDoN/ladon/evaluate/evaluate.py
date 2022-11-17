@@ -1,6 +1,5 @@
 import pickle as pkl
 import pandas as pd
-from pyparsing import alphas
 import seaborn as sns
 import numpy as np
 import matplotlib.pyplot as plt
@@ -13,15 +12,7 @@ from ladon.config import NAME_DICTIONARY
 import plotly.io as pio
 import ptitprince as pt
 
-
-sns.set(rc={"figure.figsize": (11.7, 8.27)})
-sns.set_style("whitegrid")
-sns.set_context("talk")
-
 sns.set(rc={"figure.figsize": (11.7, 8.27)}, font_scale=1.5)
-# Set the font to be serif, rather than sans
-# sns.set_context("talk")
-sns.set_style("whitegrid")
 sns.set_context(
     "paper",
     rc={
@@ -32,6 +23,7 @@ sns.set_context(
     },
     font_scale=1.7,
 )
+sns.set_style("whitegrid")
 
 blue_pallette = sns.dark_palette("#69d", reverse=True, as_cmap=True)
 
@@ -96,13 +88,15 @@ data.query("type != 'Empirical network'").groupby("type").agg(
     clustering_iqr=("clustering", lambda x: x.quantile(0.75) - x.quantile(0.25)),
     average_path_med=("average_path", "median"),
     average_path_iqr=("average_path", lambda x: x.quantile(0.75) - x.quantile(0.25)),
-    JSD_med=("JSD", "median"),
-    JSD_iqr=("JSD", lambda x: x.quantile(0.75) - x.quantile(0.25)),
+    JSD_path_med=("JSD_paths", "median"),
+    JSD_path_iqr=("JSD_paths", lambda x: x.quantile(0.75) - x.quantile(0.25)),
+    JSD_med=("JSD_degree", "median"),
+    JSD_iqr=("JSD_degree", lambda x: x.quantile(0.75) - x.quantile(0.25)),
     mean_med=("mean", "median"),
     mean_iqr=("mean", lambda x: x.quantile(0.75) - x.quantile(0.25)),
 ).reset_index().round(3)
 
-data_melt = data.melt(id_vars=["type", "assortativity", "network", "run"])
+data_melt = data.melt(id_vars=["type", "network", "run", "average_path"])
 
 sns.set_context(
     "paper",
@@ -119,7 +113,8 @@ g = sns.FacetGrid(
     data=data_melt.query("type != 'Empirical network'"),
     col="variable",
     sharex=False,
-    height=4,
+    height=4.5,
+    aspect=1,
     gridspec_kws={"wspace": 0.2},
     legend_out=True,
 )
@@ -149,12 +144,12 @@ g.map(
 g.set_ylabels("")
 g.set_titles("")
 for ax, name in zip(
-    g.axes.flatten(), [r"$\overline{C}$", r"$APL*$", r"$JSD$", r"$O(A,G)$"]
+    g.axes.flatten(), [r"$\overline{C}$", r"$JSD(D)$", r"$JSD(P)$", r"$O(A,G)$"]
 ):
     ax.set_xlabel(name)
-g.axes[0][0].set(xlim=(-0.75, 0.25))
-g.axes[0][2].set(xlim=(0, 0.8))
-g.axes[0][1].set(xlim=(-3, 2))
+# g.axes[0][0].set(xlim=(-0.75, 0.25))
+# g.axes[0][1].set(xlim=(-3, 3))
+g.axes[0][2].set(xlim=(0, 0.65))
 
 # g.tight_layout()
 
@@ -181,13 +176,13 @@ g = sns.boxplot(
     x="clustering",
     hue="type",
     order=[
-        "Dolphins",
         "Karate Club",
-        "Citation Network",
-        "TV Shows",
+        "Dolphins",
         "Political Books",
-        "Politicians",
+        "Citation Network",
         "Political Blogs",
+        "TV Shows",
+        "Politicians",
     ][::-1],
     # capsize=0.07,
     # hue_order=["Co-evolutionary model", "Network Formation model"],
@@ -199,13 +194,13 @@ sns.stripplot(
     hue="type",
     dodge=True,
     order=[
-        "Dolphins",
         "Karate Club",
-        "Citation Network",
-        "TV Shows",
+        "Dolphins",
         "Political Books",
-        "Politicians",
+        "Citation Network",
         "Political Blogs",
+        "TV Shows",
+        "Politicians",
     ][::-1],
     edgecolor="gray",
     linewidth=1.5,
@@ -256,13 +251,13 @@ g = sns.boxplot(
     x="average_path",
     hue="type",
     order=[
-        "Dolphins",
         "Karate Club",
-        "Citation Network",
-        "TV Shows",
+        "Dolphins",
         "Political Books",
-        "Politicians",
+        "Citation Network",
         "Political Blogs",
+        "TV Shows",
+        "Politicians",
     ][::-1],
     # capsize=0.07,
     # hue_order=["Co-evolutionary model", "Network Formation model"],
@@ -274,13 +269,13 @@ sns.stripplot(
     hue="type",
     dodge=True,
     order=[
-        "Dolphins",
         "Karate Club",
-        "Citation Network",
-        "TV Shows",
+        "Dolphins",
         "Political Books",
-        "Politicians",
+        "Citation Network",
         "Political Blogs",
+        "TV Shows",
+        "Politicians",
     ][::-1],
     edgecolor="gray",
     linewidth=1.5,
@@ -319,34 +314,34 @@ plt.clf()
 g = sns.boxplot(
     data=data.query("type != 'Empirical network'"),
     y="network",
-    x="JSD",
+    x="JSD_degree",
     hue="type",
     order=[
-        "Dolphins",
         "Karate Club",
-        "Citation Network",
-        "TV Shows",
+        "Dolphins",
         "Political Books",
-        "Politicians",
+        "Citation Network",
         "Political Blogs",
+        "TV Shows",
+        "Politicians",
     ][::-1],
     # capsize=0.07,
     # hue_order=["Co-evolutionary model", "Network Formation model"],
 )
 sns.stripplot(
     data=data.query("type != 'Empirical network'"),
-    x="JSD",
+    x="JSD_degree",
     y="network",
     hue="type",
     dodge=True,
     order=[
-        "Dolphins",
         "Karate Club",
-        "Citation Network",
-        "TV Shows",
+        "Dolphins",
         "Political Books",
-        "Politicians",
+        "Citation Network",
         "Political Blogs",
+        "TV Shows",
+        "Politicians",
     ][::-1],
     edgecolor="gray",
     linewidth=1.5,
@@ -357,7 +352,7 @@ sns.stripplot(
     # hue_order=["Co-evolutionary model", "Network Formation model"],
     # palette=sns.cubehelix_palette(8, rot=-0.25, light=0.9),
 )
-plt.xlabel(r"$JSD$")
+plt.xlabel(r"$JSD(D)$")
 plt.ylabel("")
 plt.xlim(0, 0.8)
 g.hlines(
@@ -383,19 +378,82 @@ plt.savefig("../plots/overall/Model_Evaluation_JSD.pdf", dpi=300, bbox_inches="t
 
 plt.clf()
 
+
+g = sns.boxplot(
+    data=data.query("type != 'Empirical network'"),
+    y="network",
+    x="JSD_paths",
+    hue="type",
+    order=[
+        "Karate Club",
+        "Dolphins",
+        "Political Books",
+        "Citation Network",
+        "Political Blogs",
+        "TV Shows",
+        "Politicians",
+    ][::-1],
+    # capsize=0.07,
+    # hue_order=["Co-evolutionary model", "Network Formation model"],
+)
+sns.stripplot(
+    data=data.query("type != 'Empirical network'"),
+    x="JSD_paths",
+    y="network",
+    hue="type",
+    dodge=True,
+    order=[
+        "Karate Club",
+        "Dolphins",
+        "Political Books",
+        "Citation Network",
+        "Political Blogs",
+        "TV Shows",
+        "Politicians",
+    ][::-1],
+    edgecolor="gray",
+    linewidth=1.5,
+    jitter=1,
+    # color="black",
+    alpha=0.8,
+    size=5,
+    # hue_order=["Co-evolutionary model", "Network Formation model"],
+    # palette=sns.cubehelix_palette(8, rot=-0.25, light=0.9),
+)
+plt.xlabel(r"$JSD(P)$")
+plt.ylabel("")
+plt.xlim(0, 0.8)
+g.hlines(
+    [-0.5, 0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5],
+    xmin=0,
+    xmax=0.8,
+    colors="gray",
+    linestyles="dotted",
+)
+# plt.axvline(x=0, color = "black", ls="--")
+# plt.ylim(0,5)
+plt.ylim(-0.5, 6.5)
+handles, labels = g.get_legend_handles_labels()
+
+# When creating the legend, only use the first two elements
+# to effectively remove the last two.
+l = plt.legend(
+    handles[0:4], labels[0:4], title="Type of Model", bbox_to_anchor=(1.4, 0.6)
+)
+
 g = sns.boxplot(
     data=data.query("type != 'Empirical network'"),
     y="network",
     x="mean",
     hue="type",
     order=[
-        "Dolphins",
         "Karate Club",
-        "Citation Network",
-        "TV Shows",
+        "Dolphins",
         "Political Books",
-        "Politicians",
+        "Citation Network",
         "Political Blogs",
+        "TV Shows",
+        "Politicians",
     ][::-1],
     # capsize=0.07,
     # hue_order=["Co-evolutionary model", "Network Formation model"],
@@ -407,13 +465,13 @@ sns.stripplot(
     hue="type",
     dodge=True,
     order=[
-        "Dolphins",
         "Karate Club",
-        "Citation Network",
-        "TV Shows",
+        "Dolphins",
         "Political Books",
-        "Politicians",
+        "Citation Network",
         "Political Blogs",
+        "TV Shows",
+        "Politicians",
     ][::-1],
     edgecolor="gray",
     linewidth=1.5,
@@ -426,7 +484,7 @@ sns.stripplot(
 )
 plt.xlabel(r"$O(A,G)$")
 plt.ylabel("")
-plt.xlim(0.0, 0.4)
+plt.xlim(0.0, 0.5)
 # plt.axvline(x=0, color = "black", ls="--")
 plt.ylim(-0.5, 6.5)
 handles, labels = g.get_legend_handles_labels()
@@ -440,7 +498,7 @@ l = plt.legend(
 g.hlines(
     [-0.5, 0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5],
     xmin=0.0,
-    xmax=0.4,
+    xmax=0.5,
     colors="gray",
     linestyles="dotted",
 )
@@ -542,8 +600,8 @@ list_of_names = [
     "Political Books",
     "Citation Network",
     "Political Blogs",
-    "Politicians",
     "TV Shows",
+    "Politicians",
 ]
 
 for name_file, name_list in zip(NAME_DICTIONARY, list_of_names):
@@ -551,29 +609,18 @@ for name_file, name_list in zip(NAME_DICTIONARY, list_of_names):
 
     fig = optuna.visualization.plot_optimization_history(study)
     fig.update_layout(title={"text": ""})
-    fig.write_image(f"../plots/overall/Optimization_History_{name_file}.png")
-    fig.write_image(f"../plots/overall/Optimization_History_{name_file}.pdf")
-    # plt.savefig(
-    #     f"../plots/overall/Optimization_History_{name_file}.png",
-    #     dpi=300,
-    #     bbox_inches="tight",
+    # fig.write_image(f"../plots/overall/Optimization_History_{name_file}.png")
+    # fig.write_image(
+    #     f"../plots/overall/Optimization_History_{name_file}.pdf", format="pdf"
     # )
 
     fig = optuna.visualization.plot_slice(study)
-    # rename_plot(fig, titles=[r"$\beta$", r"$\alpha$", r"$R$", r"$T$", r"$P(D)$"])
     fig.update_layout(
         title={"text": ""},
     )
     titles = [r"$\beta$", r"$\alpha$", r"$R$", r"$T$", r"$P(D)$"]
     for i in range(1, 6):
         fig.update_xaxes(col=i, title=titles[i - 1])
-
-    fig.write_image(f"../plots/overall/Plot_Slice_{name_file}.png")
-    fig.write_image(f"../plots/overall/Plot_Slice_{name_file}.pdf")
-
-    # plt.title("")
-    # plt.savefig(
-    #     f"../plots/overall/Plot_Slice_{name_file}.png",
-    #     dpi=300,
-    #     bbox_inches="tight",
-    # )
+    fig.show()
+    # fig.write_image(f"../plots/overall/Plot_Slice_{name_file}.png")
+    # fig.write_image(f"../plots/overall/Plot_Slice_{name_file}.pdf", format="pdf")

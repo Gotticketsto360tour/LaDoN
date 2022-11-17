@@ -478,7 +478,7 @@ g = sns.lineplot(
     y="negative_ties_dissoluted",
     hue="randomness",
     palette=blue_pallette,
-).set(ylabel=r"$NTD$", xlabel=r"$t$")
+).set(ylabel=r"$NTD$", xlabel=r"$t$", xlim=(0, 10000), ylim=(0, None))
 
 plt.legend(title=r"$R$", bbox_to_anchor=(1.15, 0.6))
 plt.savefig(

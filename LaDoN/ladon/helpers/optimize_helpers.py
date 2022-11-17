@@ -1,14 +1,15 @@
-from statistics import mean
 from typing import Callable, Dict
-from unittest import result
-
 from ladon.config import NAME_DICTIONARY
 from ladon.classes.network import Network, NoOpinionNetwork, ScaleFreeNetwork
 import networkx as nx
 import numpy as np
 import optuna
 import netrd
-from ladon.helpers.helpers import find_average_path, get_main_component
+from ladon.helpers.helpers import (
+    get_main_component,
+    get_shortest_path_distribution,
+    calculate_jsd_for_paths,
+)
 import random
 import pickle as pkl
 import joblib
@@ -79,15 +80,15 @@ def run_single_simulation(
         nx.algorithms.cluster.average_clustering(my_network.graph)
         - (target_dictionary.get("clustering"))
     )
-    network_avg_path = find_average_path(my_network.graph)
 
-    average_path_diff = abs(
-        network_avg_path - target_dictionary.get("average_path")
-    ) / target_dictionary.get("denominator")
+    path_distribution = get_shortest_path_distribution(my_network.graph, 10000)
+    JSD_path = calculate_jsd_for_paths(
+        target_dictionary.get("path_distribution"), path_distribution
+    )
 
     distance_algorithm = netrd.distance.DegreeDivergence()
-    JSD = distance_algorithm.dist(my_network.graph, target)
-    minimize_array = np.array([clustering_diff, average_path_diff, JSD])
+    JSD_degree = distance_algorithm.dist(my_network.graph, target)
+    minimize_array = np.array([clustering_diff, JSD_path, JSD_degree])
     mean = np.mean(minimize_array)
     return mean
 
@@ -101,16 +102,11 @@ def run_optimization(objective: Callable, type: str) -> None:
 
     for name, network in NAME_DICTIONARY.items():
         network = get_main_component(network=network)
-        average_path = find_average_path(network=network)
         print(f"--- NOW RUNNING: {name} ---")
         study = optuna.create_study(study_name=name, direction="minimize")
         target_dictionary = {
             "clustering": nx.algorithms.cluster.average_clustering(network),
-            "assortativity": nx.algorithms.assortativity.degree_assortativity_coefficient(
-                network
-            ),
-            "average_path": average_path,
-            "denominator": average_path + 2,
+            "path_distribution": get_shortest_path_distribution(network, 10000),
         }
         study.optimize(
             lambda trial: objective(

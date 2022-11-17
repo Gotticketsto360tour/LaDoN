@@ -31,12 +31,16 @@ def objective(trial, target, repeats, target_dictionary) -> float:
         "RECORD": False,
     }
 
-    results = [
-        run_single_simulation(dictionary, run, target, target_dictionary, "theoretical")
-        for run in range(repeats)
-    ]
+    results = np.array(
+        [
+            run_single_simulation(
+                dictionary, run, target, target_dictionary, "theoretical"
+            )
+            for run in range(repeats)
+        ]
+    )
 
-    return mean(results)
+    return results.mean()
 
 
 if __name__ == "__main__":

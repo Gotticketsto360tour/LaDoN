@@ -18,6 +18,7 @@ from bokeh.palettes import (
     Viridis8,
     Spectral8,
     Category20_20,
+    RdBu11,
 )
 from bokeh.transform import linear_cmap
 from bokeh.models import EdgesAndLinkedNodes, NodesAndLinkedEdges
@@ -33,6 +34,7 @@ from bokeh.io import export_svg
 
 from ladon.classes.network import Network
 import random
+from selenium.webdriver.firefox.options import Options
 
 output_notebook()
 
@@ -115,7 +117,7 @@ def plot_graph(network: Network, plot_type="community", save_path="", title="") 
         active_scroll="wheel_zoom",
         x_range=Range1d(-10.1, 10.1),
         y_range=Range1d(-10.1, 10.1),
-        title=title,
+        # title=title,
     )
 
     # Create a network graph object
@@ -127,7 +129,7 @@ def plot_graph(network: Network, plot_type="community", save_path="", title="") 
         size=size_by_this_attribute,
         fill_color=linear_cmap(
             color_by_this_attribute,
-            "Blues256",
+            RdBu11,
             -1,
             1,
         ),
@@ -165,11 +167,13 @@ def plot_graph(network: Network, plot_type="community", save_path="", title="") 
 
     if save_path:
         plot.output_backend = "svg"
-        driver = webdriver.Firefox()
+        options = Options()
+        options.headless = True
+        driver = webdriver.Firefox(options=options)
         # driver.maximize_window()
         # driver.set_window_position(1000, 1000)
         # driver.set_window_size(1920, 1080)
-        export_svgs(plot, filename=save_path, webdriver=driver, height=1000, width=1000)
+        export_svgs(plot, filename=save_path, webdriver=driver, height=500, width=500)
 
         # export_svg(
         #     obj=plot,

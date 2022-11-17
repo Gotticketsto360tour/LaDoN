@@ -1,7 +1,7 @@
-from statistics import mean
 from typing import Dict
 from ladon.helpers.optimize_helpers import run_single_simulation, run_optimization
 import networkx as nx
+import numpy as np
 
 
 def objective(
@@ -41,12 +41,14 @@ def objective(
         "RECORD": False,
     }
 
-    results = [
-        run_single_simulation(dictionary, run, target, target_dictionary, "opinion")
-        for run in range(repeats)
-    ]
+    results = np.array(
+        [
+            run_single_simulation(dictionary, run, target, target_dictionary, "opinion")
+            for run in range(repeats)
+        ]
+    )
 
-    return mean(results)
+    return results.mean()
 
 
 if __name__ == "__main__":
