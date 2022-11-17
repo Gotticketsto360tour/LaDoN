@@ -129,5 +129,19 @@ dmypy.json
 .pyre/
 
 *.pkl
+*.gml
+*.txt
+
+
 # data 
-data
+data/
+
+analysis/
+
+
+# plots
+data*
+
+*.pdf
+
+.png
