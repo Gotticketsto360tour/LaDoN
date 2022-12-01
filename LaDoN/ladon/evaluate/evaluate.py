@@ -70,6 +70,167 @@ def find_difference(df: pd.DataFrame):
     return pd.concat(list_of_subsets)
 
 
+def fixed_boxplot(*args, label=None, **kwargs):
+    sns.boxplot(*args, **kwargs, labels=[label])
+
+
+# g.map(fixed_boxplot, 'smoker', 'total_bill')
+# And you can do swarmplot on top
+# g.map(sns.swarmplot, 'smoker', 'total_bill', color='0.25', order=['Yes','No'])
+def rename_plot(g, titles):
+    for ax, title in zip(g.axes.flatten(), titles):
+        ax.set_title(title)
+    return g
+
+
+def rename_axis(g, titles):
+    for ax, title in zip(g.axes.flatten(), titles):
+        ax.set_xticks(title)
+    return g
+
+
+def make_facet_model_plot(variable: str, label: str):
+
+    sns.set_context(
+        "paper",
+        rc={
+            "figure.figsize": (11.7, 8.27),
+            "font.size": 13,
+            "axes.titlesize": 17,
+            "axes.labelsize": 18,
+        },
+        font_scale=1.7,
+    )
+
+    sns.set_theme(
+        font_scale=1.1,
+    )
+    sns.set_style("whitegrid")
+    g = sns.FacetGrid(
+        data=data.query("type != 'Empirical network'"),
+        row="type",
+        size=3,
+        aspect=2.8,
+        hue="type",
+    )
+    g.map(
+        fixed_boxplot,
+        variable,
+        "network",
+        # "type",
+        order=[
+            "Karate Club",
+            "Dolphins",
+            "Political Books",
+            "Citation Network",
+            "Political Blogs",
+            "TV Shows",
+            "Politicians",
+        ],
+        showfliers=False
+        # capsize=0.07,
+        # hue_order=["Co-evolutionary model", "Network Formation model"],
+    )
+    g.map(
+        sns.stripplot,
+        variable,
+        "network",
+        dodge=True,
+        order=[
+            "Karate Club",
+            "Dolphins",
+            "Political Books",
+            "Citation Network",
+            "Political Blogs",
+            "TV Shows",
+            "Politicians",
+        ],
+        edgecolor="gray",
+        linewidth=1.5,
+        jitter=1,
+        # color="black",
+        alpha=0.8,
+        size=5,
+        # hue_order=["Co-evolutionary model", "Network Formation model"],
+        # palette=sns.cubehelix_palette(8, rot=-0.25, light=0.9),
+    )
+    g.set_ylabels("")
+    g.set_xlabels(label)
+    g.set(xlim=(0, None))
+
+    rename_plot(
+        g, ["Co-evolutionary", "Network Formation", "Small-world", "Scale-free"]
+    )
+    return g
+
+
+def make_facet_network_plot(variable: str, label: str):
+    sns.set_context(
+        "paper",
+        rc={
+            "figure.figsize": (11.7, 8.27),
+            "font.size": 13,
+            "axes.titlesize": 17,
+            "axes.labelsize": 18,
+        },
+        font_scale=1.7,
+    )
+
+    sns.set_theme(
+        font_scale=1.8,
+    )
+    sns.set_style("whitegrid")
+    g = sns.FacetGrid(
+        data=data.query("type != 'Empirical network'"),
+        col="network",
+        size=8,
+        aspect=0.4,
+        hue="type",
+        col_order=[
+            "Karate Club",
+            "Dolphins",
+            "Political Books",
+            "Citation Network",
+            "Political Blogs",
+            "TV Shows",
+            "Politicians",
+        ],
+    )
+    g.map(
+        sns.stripplot,
+        "type",
+        variable,
+        dodge=True,
+        edgecolor="gray",
+        linewidth=1.5,
+        jitter=1,
+        # color="black",
+        alpha=0.8,
+        size=9,
+        # hue_order=["Co-evolutionary model", "Network Formation model"],
+        # palette=sns.cubehelix_palette(8, rot=-0.25, light=0.9),
+    )
+    g.tight_layout()
+    g.add_legend(title="Type of Model")
+    g.set_ylabels(label)
+    g.set_xlabels("")
+    g.set_xticklabels("")
+    g.set(ylim=(0, None))
+    rename_plot(
+        g,
+        [
+            "Karate Club",
+            "Dolphins",
+            "Political Books",
+            "Citation Network",
+            "Political Blogs",
+            "TV Shows",
+            "Politicians",
+        ],
+    )
+    return g
+
+
 with open(
     f"../analysis/data/optimization/data_from_all_runs.pkl",
     "rb",
@@ -86,17 +247,19 @@ data = find_difference(data)
 data.query("type != 'Empirical network'").groupby("type").agg(
     clustering_med=("clustering", "median"),
     clustering_iqr=("clustering", lambda x: x.quantile(0.75) - x.quantile(0.25)),
-    average_path_med=("average_path", "median"),
-    average_path_iqr=("average_path", lambda x: x.quantile(0.75) - x.quantile(0.25)),
+    # average_path_med=("average_path", "median"),
+    # average_path_iqr=("average_path", lambda x: x.quantile(0.75) - x.quantile(0.25)),
     JSD_path_med=("JSD_paths", "median"),
     JSD_path_iqr=("JSD_paths", lambda x: x.quantile(0.75) - x.quantile(0.25)),
-    JSD_med=("JSD_degree", "median"),
-    JSD_iqr=("JSD_degree", lambda x: x.quantile(0.75) - x.quantile(0.25)),
+    JSD_degree_med=("JSD_degree", "median"),
+    JSD_degree_iqr=("JSD_degree", lambda x: x.quantile(0.75) - x.quantile(0.25)),
     mean_med=("mean", "median"),
     mean_iqr=("mean", lambda x: x.quantile(0.75) - x.quantile(0.25)),
-).reset_index().round(3)
+).reset_index().round(2)
 
 data_melt = data.melt(id_vars=["type", "network", "run", "average_path"])
+
+data_melt["value"] = data_melt["value"].apply(abs)
 
 sns.set_context(
     "paper",
@@ -112,11 +275,12 @@ sns.set_context(
 g = sns.FacetGrid(
     data=data_melt.query("type != 'Empirical network'"),
     col="variable",
-    sharex=False,
+    sharex=True,
     height=4.5,
     aspect=1,
     gridspec_kws={"wspace": 0.2},
     legend_out=True,
+    # hue="network",
 )
 
 g.map(
@@ -136,6 +300,7 @@ g.map(
     "type",
     edgecolor="gray",
     size=2,
+    alpha=0.5,
     jitter=1,
     zorder=0,
     palette=sns.color_palette(n_colors=4),
@@ -144,12 +309,13 @@ g.map(
 g.set_ylabels("")
 g.set_titles("")
 for ax, name in zip(
-    g.axes.flatten(), [r"$\overline{C}$", r"$JSD(D)$", r"$JSD(P)$", r"$O(A,G)$"]
+    g.axes.flatten(), [r"$|\overline{C}|$", r"$JSD(D)$", r"$JSD(P)$", r"$O(A,G)$"]
 ):
     ax.set_xlabel(name)
-# g.axes[0][0].set(xlim=(-0.75, 0.25))
-# g.axes[0][1].set(xlim=(-3, 3))
-g.axes[0][2].set(xlim=(0, 0.65))
+g.axes[0][0].set(xlim=(0, 0.9))
+g.axes[0][1].set(xlim=(0, 0.9))
+g.axes[0][2].set(xlim=(0, 0.9))
+g.axes[0][3].set(xlim=(0, 0.9))
 
 # g.tight_layout()
 
@@ -170,68 +336,16 @@ sns.set_context(
     font_scale=1.7,
 )
 
-g = sns.boxplot(
-    data=data.query("type != 'Empirical network'"),
-    y="network",
-    x="clustering",
-    hue="type",
-    order=[
-        "Karate Club",
-        "Dolphins",
-        "Political Books",
-        "Citation Network",
-        "Political Blogs",
-        "TV Shows",
-        "Politicians",
-    ][::-1],
-    # capsize=0.07,
-    # hue_order=["Co-evolutionary model", "Network Formation model"],
+sns.set_theme(
+    font_scale=1.1,
 )
-sns.stripplot(
-    data=data.query("type != 'Empirical network'"),
-    x="clustering",
-    y="network",
-    hue="type",
-    dodge=True,
-    order=[
-        "Karate Club",
-        "Dolphins",
-        "Political Books",
-        "Citation Network",
-        "Political Blogs",
-        "TV Shows",
-        "Politicians",
-    ][::-1],
-    edgecolor="gray",
-    linewidth=1.5,
-    jitter=1,
-    # color="black",
-    alpha=0.8,
-    size=5,
-    # hue_order=["Co-evolutionary model", "Network Formation model"],
-    # palette=sns.cubehelix_palette(8, rot=-0.25, light=0.9),
-)
-plt.xlabel(r"$\overline{C}$")
-plt.ylabel("")
-plt.axvline(x=0, color="black", ls="--")
-plt.xlim(-0.8, 0.3)
-g.hlines(
-    [-0.5, 0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5],
-    xmin=-0.8,
-    xmax=0.3,
-    colors="gray",
-    linestyles="dotted",
-)
-# plt.ylim(0,5)
-plt.ylim(-0.5, 6.5)
-handles, labels = g.get_legend_handles_labels()
+sns.set_style("whitegrid")
 
-# When creating the legend, only use the first two elements
-# to effectively remove the last two.
-l = plt.legend(
-    handles[0:4], labels[0:4], title="Type of Model", bbox_to_anchor=(1.4, 0.6)
-)
 
+data["clustering"] = data["clustering"].apply(abs)
+
+
+make_facet_model_plot("clustering", r"$|\overline{C}|$")
 plt.savefig(
     "../plots/overall/Model_Evaluation_Average_Clustering.png",
     dpi=300,
@@ -243,268 +357,68 @@ plt.savefig(
     bbox_inches="tight",
 )
 plt.clf()
-
-
-g = sns.boxplot(
-    data=data.query("type != 'Empirical network'"),
-    y="network",
-    x="average_path",
-    hue="type",
-    order=[
-        "Karate Club",
-        "Dolphins",
-        "Political Books",
-        "Citation Network",
-        "Political Blogs",
-        "TV Shows",
-        "Politicians",
-    ][::-1],
-    # capsize=0.07,
-    # hue_order=["Co-evolutionary model", "Network Formation model"],
+make_facet_network_plot("clustering", r"$|\overline{C}|$")
+plt.savefig(
+    "../plots/overall/Model_Evaluation_Average_Clustering_Network.png",
+    dpi=300,
+    bbox_inches="tight",
 )
-sns.stripplot(
-    data=data.query("type != 'Empirical network'"),
-    x="average_path",
-    y="network",
-    hue="type",
-    dodge=True,
-    order=[
-        "Karate Club",
-        "Dolphins",
-        "Political Books",
-        "Citation Network",
-        "Political Blogs",
-        "TV Shows",
-        "Politicians",
-    ][::-1],
-    edgecolor="gray",
-    linewidth=1.5,
-    jitter=1,
-    # color="black",
-    alpha=0.8,
-    size=5,
-    # hue_order=["Co-evolutionary model", "Network Formation model"],
-    # palette=sns.cubehelix_palette(8, rot=-0.25, light=0.9),
+plt.savefig(
+    "../plots/overall/Model_Evaluation_Average_Clustering_Network.pdf",
+    dpi=300,
+    bbox_inches="tight",
 )
-plt.xlabel(r"$APL*$")
-plt.ylabel("")
-plt.axvline(x=0, color="black", ls="--")
-plt.xlim(-3, 3.5)
-g.hlines(
-    [-0.5, 0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5],
-    xmin=-3,
-    xmax=3.5,
-    colors="gray",
-    linestyles="dotted",
-)
-# plt.ylim(0,5)
-plt.ylim(-0.5, 6.5)
-handles, labels = g.get_legend_handles_labels()
+plt.clf()
 
-# When creating the legend, only use the first two elements
-# to effectively remove the last two.
-l = plt.legend(
-    handles[0:4], labels[0:4], title="Type of Model", bbox_to_anchor=(1.4, 0.6)
-)
-
+make_facet_model_plot("JSD_paths", r"$JSD(P)$")
 plt.savefig("../plots/overall/Model_Evaluation_APL.png", dpi=300, bbox_inches="tight")
 plt.savefig("../plots/overall/Model_Evaluation_APL.pdf", dpi=300, bbox_inches="tight")
 plt.clf()
 
-g = sns.boxplot(
-    data=data.query("type != 'Empirical network'"),
-    y="network",
-    x="JSD_degree",
-    hue="type",
-    order=[
-        "Karate Club",
-        "Dolphins",
-        "Political Books",
-        "Citation Network",
-        "Political Blogs",
-        "TV Shows",
-        "Politicians",
-    ][::-1],
-    # capsize=0.07,
-    # hue_order=["Co-evolutionary model", "Network Formation model"],
+make_facet_network_plot("JSD_paths", r"$JSD(P)$")
+plt.savefig(
+    "../plots/overall/Model_Evaluation_APL_Network.png", dpi=300, bbox_inches="tight"
 )
-sns.stripplot(
-    data=data.query("type != 'Empirical network'"),
-    x="JSD_degree",
-    y="network",
-    hue="type",
-    dodge=True,
-    order=[
-        "Karate Club",
-        "Dolphins",
-        "Political Books",
-        "Citation Network",
-        "Political Blogs",
-        "TV Shows",
-        "Politicians",
-    ][::-1],
-    edgecolor="gray",
-    linewidth=1.5,
-    jitter=1,
-    # color="black",
-    alpha=0.8,
-    size=5,
-    # hue_order=["Co-evolutionary model", "Network Formation model"],
-    # palette=sns.cubehelix_palette(8, rot=-0.25, light=0.9),
+plt.savefig(
+    "../plots/overall/Model_Evaluation_APL_Network.pdf", dpi=300, bbox_inches="tight"
 )
-plt.xlabel(r"$JSD(D)$")
-plt.ylabel("")
-plt.xlim(0, 0.8)
-g.hlines(
-    [-0.5, 0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5],
-    xmin=0,
-    xmax=0.8,
-    colors="gray",
-    linestyles="dotted",
-)
-# plt.axvline(x=0, color = "black", ls="--")
-# plt.ylim(0,5)
-plt.ylim(-0.5, 6.5)
-handles, labels = g.get_legend_handles_labels()
+plt.clf()
 
-# When creating the legend, only use the first two elements
-# to effectively remove the last two.
-l = plt.legend(
-    handles[0:4], labels[0:4], title="Type of Model", bbox_to_anchor=(1.4, 0.6)
-)
-
+make_facet_model_plot("JSD_degree", r"$JSD(D)$")
 plt.savefig("../plots/overall/Model_Evaluation_JSD.png", dpi=300, bbox_inches="tight")
 plt.savefig("../plots/overall/Model_Evaluation_JSD.pdf", dpi=300, bbox_inches="tight")
 
 plt.clf()
-
-
-g = sns.boxplot(
-    data=data.query("type != 'Empirical network'"),
-    y="network",
-    x="JSD_paths",
-    hue="type",
-    order=[
-        "Karate Club",
-        "Dolphins",
-        "Political Books",
-        "Citation Network",
-        "Political Blogs",
-        "TV Shows",
-        "Politicians",
-    ][::-1],
-    # capsize=0.07,
-    # hue_order=["Co-evolutionary model", "Network Formation model"],
+make_facet_network_plot("JSD_degree", r"$JSD(D)$")
+plt.savefig(
+    "../plots/overall/Model_Evaluation_JSD_Network.png", dpi=300, bbox_inches="tight"
 )
-sns.stripplot(
-    data=data.query("type != 'Empirical network'"),
-    x="JSD_paths",
-    y="network",
-    hue="type",
-    dodge=True,
-    order=[
-        "Karate Club",
-        "Dolphins",
-        "Political Books",
-        "Citation Network",
-        "Political Blogs",
-        "TV Shows",
-        "Politicians",
-    ][::-1],
-    edgecolor="gray",
-    linewidth=1.5,
-    jitter=1,
-    # color="black",
-    alpha=0.8,
-    size=5,
-    # hue_order=["Co-evolutionary model", "Network Formation model"],
-    # palette=sns.cubehelix_palette(8, rot=-0.25, light=0.9),
-)
-plt.xlabel(r"$JSD(P)$")
-plt.ylabel("")
-plt.xlim(0, 0.8)
-g.hlines(
-    [-0.5, 0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5],
-    xmin=0,
-    xmax=0.8,
-    colors="gray",
-    linestyles="dotted",
-)
-# plt.axvline(x=0, color = "black", ls="--")
-# plt.ylim(0,5)
-plt.ylim(-0.5, 6.5)
-handles, labels = g.get_legend_handles_labels()
-
-# When creating the legend, only use the first two elements
-# to effectively remove the last two.
-l = plt.legend(
-    handles[0:4], labels[0:4], title="Type of Model", bbox_to_anchor=(1.4, 0.6)
+plt.savefig(
+    "../plots/overall/Model_Evaluation_JSD_Network.pdf", dpi=300, bbox_inches="tight"
 )
 
-g = sns.boxplot(
-    data=data.query("type != 'Empirical network'"),
-    y="network",
-    x="mean",
-    hue="type",
-    order=[
-        "Karate Club",
-        "Dolphins",
-        "Political Books",
-        "Citation Network",
-        "Political Blogs",
-        "TV Shows",
-        "Politicians",
-    ][::-1],
-    # capsize=0.07,
-    # hue_order=["Co-evolutionary model", "Network Formation model"],
-)
-sns.stripplot(
-    data=data.query("type != 'Empirical network'"),
-    x="mean",
-    y="network",
-    hue="type",
-    dodge=True,
-    order=[
-        "Karate Club",
-        "Dolphins",
-        "Political Books",
-        "Citation Network",
-        "Political Blogs",
-        "TV Shows",
-        "Politicians",
-    ][::-1],
-    edgecolor="gray",
-    linewidth=1.5,
-    jitter=1,
-    # color="black",
-    alpha=0.8,
-    size=5,
-    # hue_order=["Co-evolutionary model", "Network Formation model"],
-    # palette=sns.cubehelix_palette(8, rot=-0.25, light=0.9),
-)
-plt.xlabel(r"$O(A,G)$")
-plt.ylabel("")
-plt.xlim(0.0, 0.5)
-# plt.axvline(x=0, color = "black", ls="--")
-plt.ylim(-0.5, 6.5)
-handles, labels = g.get_legend_handles_labels()
+plt.clf()
 
-# When creating the legend, only use the first two elements
-# to effectively remove the last two.
-l = plt.legend(
-    handles[0:4], labels[0:4], title="Type of Model", bbox_to_anchor=(1.4, 0.6)
-)
 
-g.hlines(
-    [-0.5, 0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5],
-    xmin=0.0,
-    xmax=0.5,
-    colors="gray",
-    linestyles="dotted",
-)
+make_facet_model_plot("mean", r"$O(A,G)$")
 
 plt.savefig("../plots/overall/Model_Evaluation.png", dpi=300, bbox_inches="tight")
 plt.savefig("../plots/overall/Model_Evaluation.pdf", dpi=300, bbox_inches="tight")
+
+plt.clf()
+sns.set_theme(
+    font_scale=1.9,
+)
+sns.set_style("whitegrid")
+
+make_facet_network_plot("mean", r"$O(A,G)$")
+
+plt.savefig(
+    "../plots/overall/Model_Evaluation_Network.png", dpi=300, bbox_inches="tight"
+)
+plt.savefig(
+    "../plots/overall/Model_Evaluation_Network.pdf", dpi=300, bbox_inches="tight"
+)
 
 plt.clf()
 
@@ -544,7 +458,26 @@ importance_df["network"] = importance_df["network"].apply(
     lambda x: change_network_labels(x)
 )
 
-facet = sns.FacetGrid(importance_df, col="network", height=4)
+sns.set_theme(
+    font_scale=2,
+)
+sns.set_style("whitegrid")
+
+facet = sns.FacetGrid(
+    importance_df,
+    col="network",
+    height=5,
+    aspect=1.1,
+    col_order=[
+        "Karate Club",
+        "Dolphins",
+        "Political Books",
+        "Citation Network",
+        "Political Blogs",
+        "TV Shows",
+        "Politicians",
+    ],
+)
 facet.map(sns.barplot, "variable", "value")
 facet.set_xlabels("")
 facet.set_ylabels("Parameter Importance")
